@@ -1,7 +1,12 @@
 #
 # TODO
 # - XDM Auth broken (can anyone confirm now with new implementation?)
-# - missing dir in Xprint (which one?)
+# - determine which modules can be used by video Xserver only and which
+#   can be shared; review -modules not to require video Xserver, so they
+#   can be used by other Xservers alone (such as Xprt)
+# - -Xprint seem to be Xprt configuration files - if they aren't used by
+#   some (possibly remote) X client, merge them into -Xprt
+# - where to take dtpdmd from?
 #
 # Conditional build:
 %bcond_without	glide	# don't build glide driver
@@ -286,8 +291,8 @@ Pliki XOrg X11 wymagane zarówno po stronie serwera jak i klienta.
 Summary:	Xprint tool
 Summary(pl):	Narzêdzie Xprint
 Group:		X11
-# XXX: this dir doesn't exist
-Requires:	/etc/X11/xserver
+# for /etc/X11/xserver
+Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
 %description Xprint
 Xprint tool.
@@ -502,6 +507,7 @@ Summary:	X print server
 Summary(pl):	X serwer z rozszerzeniem Xprint
 Group:		X11/Servers
 PreReq:		xprint-initrc
+Requires:	%{name}-Xprint = %{epoch}:%{version}-%{release}
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	/usr/X11R6/lib/X11/rgb.txt
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -2479,7 +2485,7 @@ fi
 
 %files Xprint
 %defattr(644,root,root,755)
-# XXX: missing dir
+%dir %{_sysconfdir}/X11/xserver/C
 %dir %{_sysconfdir}/X11/xserver/C/print
 %{_sysconfdir}/X11/xserver/C/print/*
 
