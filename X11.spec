@@ -3,7 +3,7 @@
 # - XDM Auth broken
 # - Review rest of patches
 #
-%define		snap	20040808
+%define		snap	20040812
 #
 Summary:	XOrg X11 Window System servers and basic programs
 Summary(de):	XOrg X11 Window-System-Server und grundlegende Programme
@@ -24,8 +24,8 @@ Epoch:		1
 License:	XFree86 1.0 (?)
 Group:		X11/Xorg
 ######		Unknown group!
-Source0:	http://www.kernel.pl/~adasi/%{name}-%{snap}.tgz
-#Source0-MD5:	ccb4a2256d33fe25d52db571c4058083
+##Source0:	http://www.kernel.pl/~adasi/%{name}-%{snap}.tar.gz
+Source0:	%{name}-%{snap}.tar.gz
 Source7:	ftp://ftp.pld-linux.org/software/xinit/xdm-xinitrc-0.2.tar.bz2
 #Source7-MD5:  	0a15b1c374256b5cad7961807baa3896
 Source8:	xdm.pamd
@@ -89,7 +89,6 @@ Patch20:	X11-config-s3.patch
 Patch21:	X11-XTerm.ad.patch
 Patch22:	X11-xf86Pcih.patch
 Patch23:	X11-dontbuildfonts.patch
-Patch24:	X11-dixsym-missing.patch
 Patch25:	X11-llh.patch
 
 Patch32:	XFree86-xman-manpaths.patch
@@ -101,7 +100,6 @@ Patch44:	XFree86-pkgconfig.patch
 Patch45:	XFree86-spencode-nowarning.patch
 Patch46:	XFree86-lock.patch
 Patch50:	%{name}-xterm-256colors.patch
-Patch52:	XFree86-kernel_headers.patch
 Patch53:	XFree86-stdint.patch
 Patch54:	%{name}-setxkbmap.patch
 Patch55:	%{name}-makefile-fastbuild.patch
@@ -1869,7 +1867,6 @@ X11-libs.
 %patch21 -p0
 %patch22 -p0
 %patch23 -p0
-%patch24 -p0
 %patch25 -p0
 
 rm -f xc/config/cf/host.def
