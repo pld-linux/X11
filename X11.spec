@@ -1384,6 +1384,7 @@ X11-libs м╕стить б╕бл╕отеки сп╕льного використання, котр╕ необх╕дн╕
 Summary:	Modules with X servers extensions
 Summary(pl):	WspСlne dla wszystkich X serwerСw moduЁy rozszerzeЯ
 Group:		X11/Xorg
+Provides:	XFree86-modules = %{epoch}:%{version}-%{release}
 
 %description modules
 Modules with X servers extensions.
