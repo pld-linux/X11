@@ -19,7 +19,7 @@ Summary(uk):	‚¡⁄œ◊¶ €“…∆‘…, –“œ«“¡Õ… ‘¡ ƒœÀ’Õ≈Œ‘¡√¶— ƒÃ— “œ¬œﬁœß ”‘¡Œ√¶ß –¶ƒ X
 Summary(zh_CN):	XOrg X11 ¥∞ø⁄œµÕ≥∑˛ŒÒ∆˜∫Õª˘±æ≥Ã–Ú
 Name:		X11
 Version:	6.7.0
-Release:	0.1
+Release:	0.2
 Epoch:		1
 License:	XFree86 1.0 (?)
 Group:		X11/Xorg
@@ -1918,21 +1918,6 @@ gzip -9nf $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/*
 gunzip $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/README.*
 %endif
 
-# kill some stuff for cleaner build
-# (packaged separately, DRM already in kernel)
-rm -rf $RPM_BUILD_ROOT%{_pkgconfigdir}/{xcursor,xft}.pc \
-	$RPM_BUILD_ROOT%{_libdir}/pkgconfig/fontconfig.pc \
-	$RPM_BUILD_ROOT%{_mandir}/{man3/fontconfig.3x,man1/fc-{cache,list}.1x} \
-	$RPM_BUILD_ROOT%{_libdir}/{libfontconfig.*,libXrender.*,libXcursor.*,libXft.{a,so.2*}} \
-	$RPM_BUILD_ROOT%{_includedir}/{fontconfig,X11/{Xcursor,Xft}} \
-	$RPM_BUILD_ROOT%{_bindir}/{fc-cache,fc-list,xcursor-config,xft-config} \
-	$RPM_BUILD_ROOT/etc/fonts \
-	$RPM_BUILD_ROOT%{_prefix}/src
-
-# skipped from removal - %%exclude is used for these
-# %{_includedir}/X11/extensions/{Xrender.h,render.h,renderproto.h}
-# %{_mandir}/man3/Xft.3x
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -2386,6 +2371,8 @@ fi
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/bdftopcf
+%attr(755,root,root) %{_bindir}/xcursor-config
+%attr(755,root,root) %{_bindir}/xft-config
 %attr(755,root,root) %{_libdir}/libFS.so
 %attr(755,root,root) %{_libdir}/libI810XvMC.so
 %attr(755,root,root) %{_libdir}/libICE.so
@@ -2394,9 +2381,11 @@ fi
 %attr(755,root,root) %{_libdir}/libXRes.so
 %attr(755,root,root) %{_libdir}/libXTrap.so
 %attr(755,root,root) %{_libdir}/libXaw.so
+%attr(755,root,root) %{_libdir}/libXcursor.so
 %attr(755,root,root) %{_libdir}/libXext.so
 %attr(755,root,root) %{_libdir}/libXfont.so
 %attr(755,root,root) %{_libdir}/libXfontcache.so
+%attr(755,root,root) %{_libdir}/libXft.so
 %attr(755,root,root) %{_libdir}/libXi.so
 %attr(755,root,root) %{_libdir}/libXinerama.so
 %attr(755,root,root) %{_libdir}/libXmu.so
@@ -2404,6 +2393,7 @@ fi
 %attr(755,root,root) %{_libdir}/libXp.so
 %attr(755,root,root) %{_libdir}/libXpm.so
 %attr(755,root,root) %{_libdir}/libXrandr.so
+%attr(755,root,root) %{_libdir}/libXrender.so
 %attr(755,root,root) %{_libdir}/libXss.so
 %attr(755,root,root) %{_libdir}/libXt.so
 %attr(755,root,root) %{_libdir}/libXtst.so
@@ -2427,19 +2417,17 @@ fi
 %{_includedir}/X11/PM
 %{_includedir}/X11/SM
 %{_includedir}/X11/Xaw
+%{_includedir}/X11/Xcursor
+%{_includedir}/X11/Xft
 %{_includedir}/X11/Xmu
 %dir %{_includedir}/X11/extensions
 %{_includedir}/X11/extensions/*.h
 %{_includedir}/X11/fonts
 %{_includedir}/xf86*.h
 %{_libx11dir}/config
-
-%exclude %{_includedir}/X11/extensions/Xrender.h
-%exclude %{_includedir}/X11/extensions/render.h
-%exclude %{_includedir}/X11/extensions/renderproto.h
-
 %{_mandir}/man3/[A-FH-Z]*
-%exclude %{_mandir}/man3/Xft.3*
+%{_pkgconfigdir}/xcursor.pc
+%{_pkgconfigdir}/xft.pc
 
 %files Xserver-devel
 %defattr(644,root,root,755)
@@ -2796,9 +2784,12 @@ fi
 %attr(755,root,root) %{_libdir}/libXRes.so.*.*
 %attr(755,root,root) %{_libdir}/libXTrap.so.*.*
 %attr(755,root,root) %{_libdir}/libXaw.so.*.*
+%attr(755,root,root) %{_libdir}/libXcursor.*.*.*
 %attr(755,root,root) %{_libdir}/libXext.so.*.*
 %attr(755,root,root) %{_libdir}/libXfont.so.*.*
 %attr(755,root,root) %{_libdir}/libXfontcache.so.*.*
+%attr(755,root,root) %{_libdir}/libXft.so.?.?
+%attr(755,root,root) %{_libdir}/libXft.so.*.*.*
 %attr(755,root,root) %{_libdir}/libXi.so.*.*
 %attr(755,root,root) %{_libdir}/libXinerama.so.*.*
 %attr(755,root,root) %{_libdir}/libXmu.so.*.*
@@ -2806,6 +2797,7 @@ fi
 %attr(755,root,root) %{_libdir}/libXp.so.*.*
 %attr(755,root,root) %{_libdir}/libXpm.so.*.*
 %attr(755,root,root) %{_libdir}/libXrandr.so.*.*
+%attr(755,root,root) %{_libdir}/libXrender.so.*.*.*
 %attr(755,root,root) %{_libdir}/libXss.so.*.*
 %attr(755,root,root) %{_libdir}/libXt.so.*.*
 %attr(755,root,root) %{_libdir}/libXtst.so.*.*
@@ -2905,9 +2897,11 @@ fi
 %{_libdir}/libXRes.a
 %{_libdir}/libXTrap.a
 %{_libdir}/libXaw.a
+%{_libdir}/libXcursor.a
 %{_libdir}/libXext.a
 %{_libdir}/libXfont.a
 %{_libdir}/libXfontcache.a
+%{_libdir}/libXft.a
 %{_libdir}/libXi.a
 %{_libdir}/libXinerama.a
 %{_libdir}/libXmu.a
@@ -2915,6 +2909,7 @@ fi
 %{_libdir}/libXp.a
 %{_libdir}/libXpm.a
 %{_libdir}/libXrandr.a
+%{_libdir}/libXrender.a
 %{_libdir}/libXss.a
 %{_libdir}/libXt.a
 %{_libdir}/libXtst.a
