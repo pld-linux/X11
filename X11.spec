@@ -1634,7 +1634,7 @@ Xconfigurator, X11-xfs ÔÁ X11-libs. íÏÖÌÉ×Ï, ×ÁÍ ÔÒÅÂÁ ×ÓÔÁÎÏ×ÉÔÉ Ê
 %package -n XcursorTheme-handhelds
 Summary:	Cursors Theme "handhelds"
 Summary(pl):	Motyw kursorów "handhelds"
-Group:		X11
+Group:		Themes
 #Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	XFree86-libs
 Obsoletes:	XFree86-Xcursor-packs-handhelds
@@ -1648,7 +1648,7 @@ Motyw kursorów "handhelds" dla X11.
 %package -n XcursorTheme-redglass
 Summary:	Cursors theme "redglass"
 Summary(pl):	Motyw kursorów "redglass"
-Group:		X11
+Group:		Themes
 #Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	XFree86-libs
 Obsoletes:	XFree86-Xcursor-packs-redglass
@@ -1662,7 +1662,7 @@ Motyw kursorów "redglass" dla X11.
 %package -n XcursorTheme-whiteglass
 Summary:	Cursors theme "whiteglass"
 Summary(pl):	Motyw kursorów "whiteglass"
-Group:		X11
+Group:		Themes
 #Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	XFree86-libs
 Obsoletes:	XFree86-Xcursor-packs-whiteglass
