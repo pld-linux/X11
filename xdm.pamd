@@ -1,9 +1,18 @@
 #%PAM-1.0
-auth       required	/lib/security/pam_pwdb.so md5 shadow 
-auth       required	/lib/security/pam_nologin.so
-account    required	/lib/security/pam_pwdb.so
-password   required	/lib/security/pam_cracklib.so
-password   required	/lib/security/pam_pwdb.so md5 shadow use_authtok
-session    required	/lib/security/pam_pwdb.so
-session    required	/lib/security/pam_env.so
-session    optional	/lib/security/pam_console.so
+auth		required	/lib/security/pam_listfile.so item=user sense=deny file=/etc/security/blacklist onerr=succeed
+auth		required	/lib/security/pam_listfile.so item=user sense=deny file=/etc/security/blacklist.xdm onerr=succeed
+auth		required	/lib/security/pam_unix.so
+auth		required	/lib/security/pam_tally.so file=/var/log/faillog onerr=succeed no_magic_root
+auth		required	/lib/security/pam_shells.so
+auth		required	/lib/security/pam_nologin.so
+account		required	/lib/security/pam_tally.so deny=0 file=/var/log/faillog onerr=succeed no_magic_root
+account		required 	/lib/security/pam_access.so
+account		required	/lib/security/pam_time.so
+account		required	/lib/security/pam_unix.so
+password	required	/lib/security/pam_cracklib.so difok=2 minlen=8 dcredit=2 ocredit=2 retry=3
+password	required	/lib/security/pam_unix.so md5 shadow use_authtok
+password	required	/lib/security/pam_make.so /var/db
+session		required	/lib/security/pam_unix.so
+session		required	/lib/security/pam_env.so
+session		required	/lib/security/pam_limits.so
+session		optional	/lib/security/pam_console.so
