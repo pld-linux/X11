@@ -1530,6 +1530,7 @@ Summary:	Modules with X servers extensions
 Summary(pl):	Wspólne dla wszystkich X serwerów modu³y rozszerzeñ
 Group:		X11/Servers
 Provides:	XFree86-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-module-PEX
 Obsoletes:	XFree86-module-XIE
 Obsoletes:	XFree86-modules
 
