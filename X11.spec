@@ -159,7 +159,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_themesdir	/usr/share/themes
 %define		_wmpropsdir	/usr/share/wm-properties
 %define		_xsessdir	/usr/share/xsessions
-%define		_wmstylesdir	/etc/sysconfig/wmstyles
+%define		_wmstylesdir	/etc/sysconfig/wmstyle
 %define		_libx11dir	%{_prefix}/lib/X11
 %define		_appdefsdir	%{_libx11dir}/app-defaults
 
