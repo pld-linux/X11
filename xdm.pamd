@@ -14,5 +14,5 @@ password	required	/lib/security/pam_unix.so md5 shadow use_authtok
 password	required	/lib/security/pam_make.so /var/db
 session		required	/lib/security/pam_unix.so
 session		required	/lib/security/pam_env.so
-session		required	/lib/security/pam_limits.so
+session		required	/lib/security/pam_limits.so change_uid
 session		optional	/lib/security/pam_console.so
