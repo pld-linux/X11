@@ -1,0 +1,88 @@
+--- xc/lib/Xft/Imakefile.orig	2004-09-14 16:11:54.271230416 +0200
++++ xc/lib/Xft/Imakefile	2004-09-14 16:12:48.437995816 +0200
+@@ -136,7 +136,7 @@
+ 	RemoveFile($@)
+ 	sh config/config-subst $(SUBSTVARS) < xft.pc.in > $@
+ 
+-InstallNonExecFile(xft.pc,$(USRLIBDIR)/pkgconfig)
++InstallNonExecFile(xft.pc,/usr/lib/pkgconfig)
+ 
+ clean::
+ 	RemoveFile(xft.pc)
+--- xc/lib/Xevie/Imakefile.orig	2004-09-14 16:11:54.276229656 +0200
++++ xc/lib/Xevie/Imakefile	2004-09-14 16:13:06.769209048 +0200
+@@ -66,7 +66,7 @@
+ 	RemoveFile($@)
+ 	sh ../Xcursor/config-subst $(SUBSTVARS) < xevie.pc.in > $@
+ 
+-InstallNonExecFile(xevie.pc,$(USRLIBDIR)/pkgconfig)
++InstallNonExecFile(xevie.pc,/usr/lib/pkgconfig)
+ 
+ clean::
+ 	RemoveFile(xevie.pc)
+--- xc/lib/fontconfig/Imakefile.orig	2004-09-14 16:11:54.318223272 +0200
++++ xc/lib/fontconfig/Imakefile	2004-09-14 16:13:25.866305848 +0200
+@@ -151,7 +151,7 @@
+ 	$(CONFIG_SUBST_PROG) $(SUBSTVARS) < fontconfig.pc.in > $@
+ 
+ #if InstallFontconfigLibrary
+-InstallNonExecFile(fontconfig.pc,$(USRLIBDIR)/pkgconfig)
++InstallNonExecFile(fontconfig.pc,/usr/lib/pkgconfig)
+ #endif
+ 
+ clean::
+--- xc/lib/Xdamage/Imakefile.orig	2004-09-14 16:11:54.347218864 +0200
++++ xc/lib/Xdamage/Imakefile	2004-09-14 16:13:41.234969456 +0200
+@@ -61,7 +61,7 @@
+ 	RemoveFile($@)
+ 	sh ../Xcursor/config-subst $(SUBSTVARS) < xdamage.pc.in > $@
+ 
+-InstallNonExecFile(xdamage.pc,$(USRLIBDIR)/pkgconfig)
++InstallNonExecFile(xdamage.pc,/usr/lib/pkgconfig)
+ 
+ clean::
+ 	RemoveFile(xdamage.pc)
+--- xc/lib/Xcursor/Imakefile.orig	2004-09-14 16:11:54.353217952 +0200
++++ xc/lib/Xcursor/Imakefile	2004-09-14 16:13:55.770759680 +0200
+@@ -87,7 +87,7 @@
+ 	RemoveFile($@)
+ 	sh config-subst $(SUBSTVARS) < xcursor.pc.in > $@
+ 
+-InstallNonExecFile(xcursor.pc,$(USRLIBDIR)/pkgconfig)
++InstallNonExecFile(xcursor.pc,/usr/lib/pkgconfig)
+ 
+ clean::
+ 	RemoveFile(xcursor.pc)
+--- xc/lib/Xfixes/Imakefile.orig	2004-09-14 16:11:54.359217040 +0200
++++ xc/lib/Xfixes/Imakefile	2004-09-14 16:14:07.721942824 +0200
+@@ -68,7 +68,7 @@
+ 	RemoveFile($@)
+ 	sh ../Xcursor/config-subst $(SUBSTVARS) < xfixes.pc.in > $@
+ 
+-InstallNonExecFile(xfixes.pc,$(USRLIBDIR)/pkgconfig)
++InstallNonExecFile(xfixes.pc,/usr/lib/pkgconfig)
+ 
+ clean::
+ 	RemoveFile(xfixes.pc)
+--- xc/lib/Xrender/Imakefile.orig	2004-09-14 16:11:54.365216128 +0200
++++ xc/lib/Xrender/Imakefile	2004-09-14 16:14:22.065762232 +0200
+@@ -161,7 +161,7 @@
+ 	RemoveFile($@)
+ 	sh ../Xcursor/config-subst $(SUBSTVARS) < xrender.pc.in > $@
+ 
+-InstallNonExecFile(xrender.pc,$(USRLIBDIR)/pkgconfig)
++InstallNonExecFile(xrender.pc,/usr/lib/pkgconfig)
+ 
+ clean::
+ 	RemoveFile(xrender.pc)
+--- xc/lib/Xcomposite/Imakefile.orig	2004-09-14 16:11:54.371215216 +0200
++++ xc/lib/Xcomposite/Imakefile	2004-09-14 16:14:32.557167296 +0200
+@@ -61,7 +61,7 @@
+ 	RemoveFile($@)
+ 	sh ../Xcursor/config-subst $(SUBSTVARS) < xcomposite.pc.in > $@
+ 
+-InstallNonExecFile(xcomposite.pc,$(USRLIBDIR)/pkgconfig)
++InstallNonExecFile(xcomposite.pc,/usr/lib/pkgconfig)
+ 
+ clean::
+ 	RemoveFile(xcomposite.pc)

@@ -1,0 +1,240 @@
+diff -urN xc.orig/extras/drm/linux/drm_memory_debug.h xc/extras/drm/linux/drm_memory_debug.h
+--- xc.orig/extras/drm/linux/drm_memory_debug.h	2004-08-09 01:27:05.464971184 +0200
++++ xc/extras/drm/linux/drm_memory_debug.h	2004-08-09 01:29:48.315214184 +0200
+@@ -32,7 +32,7 @@
+  */
+ 
+ #define __NO_VERSION__
+-#include <linux/config.h>
++
+ #include "drmP.h"
+ 
+ typedef struct drm_mem_stats {
+diff -urN xc.orig/extras/drm/linux/drm_memory.h xc/extras/drm/linux/drm_memory.h
+--- xc.orig/extras/drm/linux/drm_memory.h	2004-08-09 01:27:05.445974072 +0200
++++ xc/extras/drm/linux/drm_memory.h	2004-08-09 01:29:48.295217224 +0200
+@@ -34,7 +34,7 @@
+  */
+ 
+ #define __NO_VERSION__
+-#include <linux/config.h>
++
+ #include <linux/highmem.h>
+ #include "drmP.h"
+ 
+diff -urN xc.orig/extras/drm/linux/drmP.h xc/extras/drm/linux/drmP.h
+--- xc.orig/extras/drm/linux/drmP.h	2004-08-09 01:27:05.602950208 +0200
++++ xc/extras/drm/linux/drmP.h	2004-08-09 01:29:48.429196856 +0200
+@@ -42,7 +42,7 @@
+  * can build the DRM (part of PI DRI). 4/21/2000 S + B */
+ #include <asm/current.h>
+ #endif /* __alpha__ */
+-#include <linux/config.h>
++
+ #include <linux/module.h>
+ #include <linux/kernel.h>
+ #include <linux/miscdevice.h>
+diff -urN xc.orig/extras/drm/linux/drm_scatter.h xc/extras/drm/linux/drm_scatter.h
+--- xc.orig/extras/drm/linux/drm_scatter.h	2004-08-09 01:27:05.500965712 +0200
++++ xc/extras/drm/linux/drm_scatter.h	2004-08-09 01:29:48.396201872 +0200
+@@ -32,7 +32,7 @@
+  */
+ 
+ #define __NO_VERSION__
+-#include <linux/config.h>
++
+ #include <linux/vmalloc.h>
+ #include "drmP.h"
+ 
+diff -urN xc.orig/extras/drm/linux/ffb_drv.c xc/extras/drm/linux/ffb_drv.c
+--- xc.orig/extras/drm/linux/ffb_drv.c	2004-08-09 01:27:05.610948992 +0200
++++ xc/extras/drm/linux/ffb_drv.c	2004-08-09 01:29:17.416911440 +0200
+@@ -4,7 +4,7 @@
+  * Copyright (C) 2000 David S. Miller (davem@redhat.com)
+  */
+ 
+-#include <linux/config.h>
++
+ #include "ffb.h"
+ #include "drmP.h"
+ 
+diff -urN xc.orig/extras/drm/linux/gamma_drv.c xc/extras/drm/linux/gamma_drv.c
+--- xc.orig/extras/drm/linux/gamma_drv.c	2004-08-09 01:27:05.519962824 +0200
++++ xc/extras/drm/linux/gamma_drv.c	2004-08-09 01:29:17.406912960 +0200
+@@ -29,7 +29,7 @@
+  *    Gareth Hughes <gareth@valinux.com>
+  */
+ 
+-#include <linux/config.h>
++
+ #include "gamma.h"
+ #include "drmP.h"
+ #include "drm.h"
+diff -urN xc.orig/extras/drm/linux/i810_drv.c xc/extras/drm/linux/i810_drv.c
+--- xc.orig/extras/drm/linux/i810_drv.c	2004-08-09 01:27:05.527961608 +0200
++++ xc/extras/drm/linux/i810_drv.c	2004-08-09 01:29:17.410912352 +0200
+@@ -30,7 +30,7 @@
+  *    Gareth Hughes <gareth@valinux.com>
+  */
+ 
+-#include <linux/config.h>
++
+ #include "i810.h"
+ #include "drmP.h"
+ #include "drm.h"
+diff -urN xc.orig/extras/drm/linux/i830_drv.c xc/extras/drm/linux/i830_drv.c
+--- xc.orig/extras/drm/linux/i830_drv.c	2004-08-09 01:27:05.518962976 +0200
++++ xc/extras/drm/linux/i830_drv.c	2004-08-09 01:29:17.406912960 +0200
+@@ -32,7 +32,7 @@
+  *    Keith Whitwell <keith@tungstengraphics.com>
+  */
+ 
+-#include <linux/config.h>
++
+ #include "i830.h"
+ #include "drmP.h"
+ #include "drm.h"
+diff -urN xc.orig/extras/drm/linux/mach64_drv.c xc/extras/drm/linux/mach64_drv.c
+--- xc.orig/extras/drm/linux/mach64_drv.c	2004-08-09 01:27:05.432976048 +0200
++++ xc/extras/drm/linux/mach64_drv.c	2004-08-09 01:29:17.376917520 +0200
+@@ -27,7 +27,7 @@
+  *    Leif Delgass <ldelgass@retinalburn.net>
+  */
+ 
+-#include <linux/config.h>
++
+ #include "mach64.h"
+ #include "drmP.h"
+ #include "drm.h"
+diff -urN xc.orig/extras/drm/linux/mga_drv.c xc/extras/drm/linux/mga_drv.c
+--- xc.orig/extras/drm/linux/mga_drv.c	2004-08-09 01:27:05.501965560 +0200
++++ xc/extras/drm/linux/mga_drv.c	2004-08-09 01:29:17.396914480 +0200
+@@ -29,7 +29,7 @@
+  *    Gareth Hughes <gareth@valinux.com>
+  */
+ 
+-#include <linux/config.h>
++
+ #include "mga.h"
+ #include "drmP.h"
+ #include "drm.h"
+diff -urN xc.orig/extras/drm/linux/r128_drv.c xc/extras/drm/linux/r128_drv.c
+--- xc.orig/extras/drm/linux/r128_drv.c	2004-08-09 01:27:05.572954768 +0200
++++ xc/extras/drm/linux/r128_drv.c	2004-08-09 01:29:17.410912352 +0200
+@@ -29,7 +29,7 @@
+  *    Gareth Hughes <gareth@valinux.com>
+  */
+ 
+-#include <linux/config.h>
++
+ #include "r128.h"
+ #include "drmP.h"
+ #include "drm.h"
+diff -urN xc.orig/extras/drm/linux/radeon_drv.c xc/extras/drm/linux/radeon_drv.c
+--- xc.orig/extras/drm/linux/radeon_drv.c	2004-08-09 01:27:05.482968448 +0200
++++ xc/extras/drm/linux/radeon_drv.c	2004-08-09 01:29:17.396914480 +0200
+@@ -30,7 +30,7 @@
+  */
+ 
+ 
+-#include <linux/config.h>
++
+ #include "radeon.h"
+ #include "drmP.h"
+ #include "drm.h"
+diff -urN xc.orig/extras/drm/linux/savage_drv.c xc/extras/drm/linux/savage_drv.c
+--- xc.orig/extras/drm/linux/savage_drv.c	2004-08-09 01:27:05.509964344 +0200
++++ xc/extras/drm/linux/savage_drv.c	2004-08-09 01:29:17.406912960 +0200
+@@ -22,7 +22,7 @@
+  * DEALINGS IN THE SOFTWARE.
+  */
+ 
+-#include <linux/config.h>
++
+ #include "savage.h"
+ #include "drmP.h"
+ #include "savage_drm.h"
+diff -urN xc.orig/extras/drm/linux/sis_drv.c xc/extras/drm/linux/sis_drv.c
+--- xc.orig/extras/drm/linux/sis_drv.c	2004-08-09 01:27:05.445974072 +0200
++++ xc/extras/drm/linux/sis_drv.c	2004-08-09 01:29:17.377917368 +0200
+@@ -25,7 +25,7 @@
+  *
+  */
+ 
+-#include <linux/config.h>
++
+ #include "sis.h"
+ #include "drmP.h"
+ #include "sis_drm.h"
+diff -urN xc.orig/extras/drm/linux/tdfx_drv.c xc/extras/drm/linux/tdfx_drv.c
+--- xc.orig/extras/drm/linux/tdfx_drv.c	2004-08-09 01:27:05.557957048 +0200
++++ xc/extras/drm/linux/tdfx_drv.c	2004-08-09 01:29:17.410912352 +0200
+@@ -30,7 +30,7 @@
+  *    Gareth Hughes <gareth@valinux.com>
+  */
+ 
+-#include <linux/config.h>
++
+ #include "tdfx.h"
+ #include "drmP.h"
+ 
+diff -urN xc.orig/extras/drm/shared/drm.h xc/extras/drm/shared/drm.h
+--- xc.orig/extras/drm/shared/drm.h	2004-08-09 01:27:05.426976960 +0200
++++ xc/extras/drm/shared/drm.h	2004-08-09 01:29:48.038256288 +0200
+@@ -38,7 +38,7 @@
+ #define _DRM_H_
+ 
+ #if defined(__linux__)
+-#include <linux/config.h>
++
+ #include <asm/ioctl.h>		/* For _IO* macros */
+ #define DRM_IOCTL_NR(n)		_IOC_NR(n)
+ #define DRM_IOC_VOID		_IOC_NONE
+diff -urN xc.orig/extras/drm/shared/via_drv.c xc/extras/drm/shared/via_drv.c
+--- xc.orig/extras/drm/shared/via_drv.c	2004-08-09 01:27:05.365986232 +0200
++++ xc/extras/drm/shared/via_drv.c	2004-08-09 01:29:17.348921776 +0200
+@@ -21,7 +21,7 @@
+  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+  * DEALINGS IN THE SOFTWARE.
+  */
+-#include <linux/config.h>
++
+ #include "via.h"
+ #include "drmP.h"
+ #include "via_drm.h"
+diff -urN xc.orig/programs/Xserver/hw/xfree86/drivers/sis/init301.h xc/programs/Xserver/hw/xfree86/drivers/sis/init301.h
+--- xc.orig/programs/Xserver/hw/xfree86/drivers/sis/init301.h	2004-08-09 01:26:14.000000000 +0200
++++ xc/programs/Xserver/hw/xfree86/drivers/sis/init301.h	2004-08-09 01:29:40.912339592 +0200
+@@ -71,7 +71,7 @@
+ #ifdef SIS_CP
+ #undef SIS_CP
+ #endif
+-#include <linux/config.h>
++
+ #include <linux/version.h>
+ #include <asm/io.h>
+ #include <linux/types.h>
+diff -urN xc.orig/programs/Xserver/hw/xfree86/drivers/sis/init.h xc/programs/Xserver/hw/xfree86/drivers/sis/init.h
+--- xc.orig/programs/Xserver/hw/xfree86/drivers/sis/init.h	2004-08-09 01:26:14.000000000 +0200
++++ xc/programs/Xserver/hw/xfree86/drivers/sis/init.h	2004-08-09 01:29:40.902341112 +0200
+@@ -72,7 +72,7 @@
+ #ifdef SIS_CP
+ #undef SIS_CP
+ #endif
+-#include <linux/config.h>
++
+ #include <linux/version.h>
+ #include <linux/types.h>
+ #include <asm/io.h>
+diff -urN xc.orig/programs/Xserver/hw/xfree86/drivers/sis/osdef.h xc/programs/Xserver/hw/xfree86/drivers/sis/osdef.h
+--- xc.orig/programs/Xserver/hw/xfree86/drivers/sis/osdef.h	2004-08-09 01:26:14.000000000 +0200
++++ xc/programs/Xserver/hw/xfree86/drivers/sis/osdef.h	2004-08-09 01:29:40.941335184 +0200
+@@ -84,7 +84,7 @@
+ /**********************************************************************/
+ 
+ #ifdef LINUX_KERNEL
+-#include <linux/config.h>
++
+ #include <linux/version.h>
+ 
+ #ifdef CONFIG_FB_SIS_300
