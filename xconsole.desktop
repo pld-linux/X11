@@ -1,6 +1,4 @@
 [Desktop Entry]
-WmCommand=
-BinaryPattern=
 Name=X Console
 Name[br]=Letrin X
 Name[ca]=Consola X
@@ -19,8 +17,6 @@ Name[ro]=Consola X
 Name[ru]=XConsole
 Name[sv]=X Konsol
 MiniIcon=mini-sh.xpm
-Protocols=
-MimeType=
 Comment=X Console viewer
 Comment[br]=Diskouezer al letrin X
 Comment[ca]=Visualitzador de la consola X
@@ -44,9 +40,8 @@ Comment[sk]=Konzola pre Xwindow
 Comment[sl]=Konzola za okna X
 Comment[sv]=X Konsolvisare
 Exec=/usr/X11R6/bin/xconsole
-Icon=gnome-xterm.png
+Icon=xterm.png
 TerminalOptions=
-Path=
-Type=Application
 Terminal=0
+Type=Application
 # vi: encoding=utf-8
