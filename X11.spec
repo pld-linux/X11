@@ -1740,6 +1740,8 @@ Provides:	XDM
 Provides:	xdm = %{epoch}:%{version}-%{release}
 Obsoletes:	xdm
 Obsoletes:	gdm
+Obsoletes:	kdm
+Obsoletes:	wdm
 
 %description xdm
 Xdm manages a collection of X displays, which may be on the local host
@@ -1774,6 +1776,8 @@ Requires(postun):	/usr/sbin/groupdel
 Requires(postun):	/usr/sbin/userdel
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	X11-fonts-base
+Provides:	group(xfs)
+Provides:	user(xfs)
 Provides:	xfs = %{epoch}:%{version}-%{release}
 Obsoletes:	xfs
 Obsoletes:	xfsft
@@ -2114,10 +2118,9 @@ fi
 
 %postun xfs
 if [ "$1" = "0" ]; then
-	/usr/sbin/userdel xfs 2>/dev/null
-	/usr/sbin/groupdel xfs 2>/dev/null
+	%userremove xfs
+	%groupremove xfs
 fi
-
 
 %triggerpostun Xserver -- XFree86-Xserver
 if [ -r /etc/X11/XF86Config.rpmsave ]; then
