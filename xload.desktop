@@ -1,8 +1,12 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=X Load
-Icon=xload
+Comment=System load average display for X
+Comment[it]=Mostra in una finestra X il carico medio del sistema
+Comment[pl]=Pokazywanie średniego obciążenia systemu
 Exec=xload
+Icon=xload
 SwallowExec=xload -nolabel -fg green -bg Black -hl red -update 3 -geometry 25x25
 Type=Application
 Categories=Utility;X-X11;
+# vi: encoding=utf-8

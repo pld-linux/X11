@@ -1,9 +1,12 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=X Calc
+Comment=Scientific calculator for X
+Comment[pl]=Kalkulator naukowy dla X
 GenericName=Calculator
 GenericName[pl]=Kalkulator
 Exec=xcalc
 Icon=xcalc
 Type=Application
 Categories=Utility;X-X11
+# vi: encoding=utf-8

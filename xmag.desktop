@@ -1,8 +1,12 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=X Magnifier
+Name[pl]=X Powiększenie
+Comment=Magnify parts of the screen
+Comment[pl]=Powiększenie części ekranu
 GenericName=Desktop Magnifier
 Exec=xmag
 Icon=xmag
 Type=Application
 Categories=Utility;X-X11;
+# vi: encoding=utf-8
