@@ -6,4 +6,5 @@ TryExec=twm
 Name=TWM
 Comment=The Tab Window Manager
 Comment[nl]=De Tab Window Manager
-Comment[sv]=Flikfönsterhanteraren
+Comment[sv]=FlikfĂśnsterhanteraren
+Comment[pl]=Prosty zarządca okien twm
