@@ -85,6 +85,15 @@
  /* You do NOT need SetUID if you only run the server under xdm */
 --- xc/config/cf/X11.tmpl.wiget	2004-09-03 18:18:18.000000000 +0200
 +++ xc/config/cf/X11.tmpl	2004-09-09 16:16:53.172452095 +0200
+@@ -715,7 +715,7 @@
+ #endif
+
+ #ifndef InstallHardcopyDocs
+-#define InstallHardcopyDocs	YES
++#define InstallHardcopyDocs	NO
+ #endif
+
+ #ifndef InstallMiscManPages
 @@ -1398,8 +1398,12 @@
  # define UsbMouseSupport NO
  #endif
