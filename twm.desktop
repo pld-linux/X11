@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=twm
+Name[ko]=twm
+Name[pl]=twm
+Exec=twm
+TryExec=twm
+
+[Window Manager]
+SessionManaged=false
