@@ -234,28 +234,6 @@ diff -Nru xc.orig/config/cf/site.def xc/config/cf/site.def
 diff -urN xc.org/config/cf/xorgsite.def xc/config/cf/xorgsite.def
 --- xc.org/config/cf/xorgsite.def	2004-04-02 23:47:10.000000000 +0200
 +++ xc/config/cf/xorgsite.def	2004-04-19 01:01:24.744961760 +0200
-@@ -69,14 +69,15 @@
-  */
- 
- /*
-- * If you only run the X server under xdm the X servers don't need to be
-- * installed SetUID, and you may comment out the lines below.  If you run
-- * the servers by hand (with xinit or startx), then they do need to be
-- * installed SetUID on most platforms.
-+ * The X servers need to run as root on most OSs.  We're now using a
-+ * wrapper in that case, but we still need to make it known that the
-+ * servers need SetUID.  When only using xdm, this (and the wrapper)
-+ * are not required.  Disabling this automatically disables use of the
-+ * wrapper.
-  *
-- * Consult your system administrator before making the X server setuid.
-+ * If you're only starting the Xservers with xdm set this to NO
-  *
--#define InstallXserverSetUID	NO
-+#define XserverNeedsSetUID	NO
-  */
- 
- 
 @@ -260,8 +261,8 @@
  /*
   * To not build/install the Cyrillic fonts, uncomment the following
