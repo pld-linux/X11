@@ -4,6 +4,7 @@
 # - Review Patch 46   
 # - missing dir in Xprint (which one?)
 #
+%bcond_without	glide	# disable glide :)
 Summary:	XOrg X11 Window System servers and basic programs
 Summary(de):	XOrg X11 Window-System-Server und grundlegende Programme
 Summary(es):	Programas básicos y servidores para el sistema de ventanas XOrg X11
