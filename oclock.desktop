@@ -59,6 +59,6 @@ Comment[zh_TW]=時鐘
 Comment[zu]=Iwashi
 Exec=oclock
 Terminal=0
-Icon=xpm
+Icon=oclock.png
 Type=Application
 # vi: encoding=utf-8
