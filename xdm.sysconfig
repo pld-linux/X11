@@ -1,0 +1,4 @@
+# Customized setings for xdm
+
+# Define nice level for xdm 
+SERVICE_RUN_NICE_LEVEL="+0"
