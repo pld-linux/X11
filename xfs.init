@@ -19,7 +19,7 @@ if [ -f /etc/sysconfig/xfs ] ; then
 	. /etc/sysconfig/xfs
 fi
 
-
+RETVAL=0
 # See how we were called.
 case "$1" in
   start)
@@ -34,26 +34,25 @@ case "$1" in
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/xfs
 	else
 		msg_already_running "X Font Server"
-		exit 1
 	fi
 	;;
   stop)
 	if [ -f /var/lock/subsys/xfs ]; then
 		msg_stopping "X Font Server"
 		killproc xfs
-		RETVAL=$?
 		rm -f /var/lock/subsys/xfs
 	else
 		msg_not_running "X Font Server"
-		exit 1
 	fi
 	;;
   status)
 	status xfs
+	exit $?
 	;;
   restart)
 	$0 stop
 	$0 start
+	exit $?
 	;;
   reload|force-reload)
 	if [ -f /var/lock/subsys/xfs ]; then
@@ -61,13 +60,13 @@ case "$1" in
 		killproc xfs -USR1
 		RETVAL=$?
 	else
-		msg_not_running "X Font Server"
-		exit 1
+		msg_not_running "X Font Server" >&2
+		exit 7
 	fi
 	;;
   *)
 	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
-	exit 1
+	exit 3
 esac
 
 exit $RETVAL

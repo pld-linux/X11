@@ -20,7 +20,7 @@ if [ -f /etc/sysconfig/xdm ] ; then
 	. /etc/sysconfig/xdm
 fi
 
-
+RETVAL=0
 # See how we were called.
 case "$1" in
   start)
@@ -28,38 +28,33 @@ case "$1" in
 	if [ ! -f /var/lock/subsys/xdm ]; then
 		msg_starting "X Display Manager"
 		daemon /usr/X11R6/bin/xdm
-		touch /var/lock/subsys/xdm
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/xdm
 	else
 		msg_already_running "X Display Manager"
-		exit 1
 	fi
 	;;
   stop)
 	if [ -f /var/lock/subsys/xdm ]; then
 		msg_stopping "X Display Manager"
 		killproc xdm
-		RETVAL=$?
 		rm -f /var/lock/subsys/xdm
 	else
 		msg_not_running "X Display Manager"
-		exit 1
 	fi
 	;;
   status)
 	status xdm
+	exit $?
 	;;
-  restart|reload)
+  restart|force-reload)
 	$0 stop
 	$0 start
 	exit $?
 	;;
-  force-reload)
-	$0 stop && $0 start
-	exit $?
-	;;
   *)
-	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
-	exit 1
+	msg_usage "$0 {start|stop|restart|force-reload|status}"
+	exit 3
 esac
 
 exit $RETVAL
