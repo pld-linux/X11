@@ -22,11 +22,11 @@ Release:	0.1
 Epoch:		1
 License:	XFree86 1.0 (?)
 Group:		X11/Xorg
-Source0:	http://freedesktop.org/~xorg/X11R6.8.0/src/%{name}R%{version}-src1.tar.gz
+Source0:	http://freedesktop.org/~xorg/X11R%{version}/src/%{name}R%{version}-src1.tar.gz
 # Source0-md5:	c31a2e1c226e659c2ff29abfe55386e3
-Source1:	http://freedesktop.org/~xorg/X11R6.8.0/src/%{name}R%{version}-src2.tar.gz
+Source1:	http://freedesktop.org/~xorg/X11R%{version}/src/%{name}R%{version}-src2.tar.gz
 # Source1-md5:  4089bb6efb6c5bc73fbcfc23fafcb0c8
-Source2:	http://freedesktop.org/~xorg/X11R6.8.0/src/%{name}R%{version}-src3.tar.gz
+Source2:	http://freedesktop.org/~xorg/X11R%{version}/src/%{name}R%{version}-src3.tar.gz
 # Source2-md5:	488a5ebbbdf48d974efbc3a0bde92bf4
 Source7:	ftp://ftp.pld-linux.org/software/xinit/xdm-xinitrc-0.2.tar.bz2
 # Source7-md5:	0a15b1c374256b5cad7961807baa3896
@@ -2078,10 +2078,6 @@ rm -f $RPM_BUILD_ROOT%{_libx11dir}/config/host.def
 :> $RPM_BUILD_ROOT%{_sysconfdir}/X11/xorg.conf
 
 rm -rf $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/html
-mv $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/PostScript/* $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/
-rm -Rf $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/{PostScript,PDF}
-# resolve conflict with man-pages
-mv -f $RPM_BUILD_ROOT%{_mandir}/man4/{mouse.4,mouse-x.4}
 
 %ifnarch sparc sparc64
 gzip -9nf $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/*
@@ -2323,69 +2319,6 @@ fi
 
 %{_appdefsdir}/Xvidtune
 
-%{_mandir}/man1/Xmark.1*
-%{_mandir}/man1/appres.1*
-%{_mandir}/man1/atobm.1*
-%{_mandir}/man1/bdftopcf.1*
-%{_mandir}/man1/bitmap.1*
-%{_mandir}/man1/bmtoa.1*
-%{_mandir}/man1/cxpm.1*
-%{_mandir}/man1/dga.1*
-%{_mandir}/man1/editres.1*
-%{_mandir}/man1/gtf.1*
-%{_mandir}/man1/iceauth.1*
-%{_mandir}/man1/lbxproxy.1*
-#%{_mandir}/man1/libxrx.1*
-%{_mandir}/man1/lndir.1*
-%{_mandir}/man1/luit.1x*
-%{_mandir}/man1/makestrs.1*
-%{_mandir}/man1/makeg.1*
-%{_mandir}/man1/mergelib.1*
-%{_mandir}/man1/mkdirhier.1*
-%{_mandir}/man1/mkhtmlindex.1*
-%{_mandir}/man1/proxymngr.1*
-%{_mandir}/man1/resize.1*
-%{_mandir}/man1/revpath.1*
-%{_mandir}/man1/rstart.1*
-%{_mandir}/man1/rstartd.1*
-%{_mandir}/man1/setxkbmap.1*
-%{_mandir}/man1/showrgb.1*
-%{_mandir}/man1/smproxy.1*
-%{_mandir}/man1/startx.1*
-%{_mandir}/man1/sxpm.1*
-%{_mandir}/man1/xcmsdb.1*
-%{_mandir}/man1/xconsole.1*
-%{_mandir}/man1/xcursorgen.1*
-%{_mandir}/man1/xcutsel.1*
-%{_mandir}/man1/xdpyinfo.1*
-%{_mandir}/man1/xfindproxy.1*
-%{_mandir}/man1/xfwp.1*
-%{_mandir}/man1/xgamma.1*
-%{_mandir}/man1/xhost.1*
-%{_mandir}/man1/xinit.1*
-%{_mandir}/man1/xkbevd.1*
-%{_mandir}/man1/xkbprint.1*
-%{_mandir}/man1/xlsatoms.1*
-%{_mandir}/man1/xlsclients.1*
-%{_mandir}/man1/xlsfonts.1*
-%{_mandir}/man1/xmodmap.1*
-%{_mandir}/man1/xprop.1*
-%{_mandir}/man1/xrandr.1*
-%{_mandir}/man1/xrdb.1*
-%{_mandir}/man1/xrefresh.1*
-%{_mandir}/man1/xset.1*
-%{_mandir}/man1/xsetmode.1*
-%{_mandir}/man1/xsetpointer.1*
-%{_mandir}/man1/xsetroot.1*
-%{_mandir}/man1/xsm.1*
-%{_mandir}/man1/xstdcmap.1*
-%{_mandir}/man1/xterm.1*
-%{_mandir}/man1/xvidtune.1*
-%{_mandir}/man1/xvinfo.1*
-%{_mandir}/man1/xwd.1*
-%{_mandir}/man1/xwud.1*
-%{_mandir}/man1/xon.1*
-%{_mandir}/man7/*
 /usr/X11R6/man/man1/XDarwin.1x.gz
 /usr/X11R6/man/man1/Xdmx.1x.gz
 /usr/X11R6/man/man1/dmxtodmx.1x.gz
