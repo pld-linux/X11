@@ -21,16 +21,16 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.8.1
-Release:	0.1
+Release:	0.2
 Epoch:		1
 License:	XFree86 1.0 (?)
 Group:		X11
-Source0:	http://freedesktop.org/~xorg/X11R%{version}/src/multiple/%{name}R%{version}-src1.tar.gz
-# Source0-md5:	4dc88cf5edaf000c75e314189f3def62
-Source1:	http://freedesktop.org/~xorg/X11R%{version}/src/multiple/%{name}R%{version}-src2.tar.gz
-# Source1-md5:	ca4af8de1278ea41b8484823ba9db9af
-Source2:	http://freedesktop.org/~xorg/X11R%{version}/src/multiple/%{name}R%{version}-src3.tar.gz
-# Source2-md5:	99789cfa85ad3cf9c98b0e9e18dad90a
+Source0:	ftp://ftp.x.org/pub/X11R%{version}/src/%{name}R%{version}-src1.tar.gz
+# Source0-md5:	e352319d423391ff2c03bb7f81fe8d2b
+Source1:	ftp://ftp.x.org/pub/X11R%{version}/src/%{name}R%{version}-src2.tar.gz
+# Source1-md5:	6ba36becf1133c61a88c92e1d60c19ed
+Source2:	ftp://ftp.x.org/pub/X11R%{version}/src/%{name}R%{version}-src3.tar.gz
+# Source2-md5:	8578e566e909e7c40300f44b6f0e88d3
 Source7:	ftp://ftp.pld-linux.org/software/xinit/xdm-xinitrc-0.2.tar.bz2
 # Source7-md5:	0a15b1c374256b5cad7961807baa3896
 Source8:	xdm.pamd
