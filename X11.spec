@@ -1945,6 +1945,7 @@ X11-libs.
 rm -f xc/config/cf/host.def
 
 %build
+PWD=`pwd`
 %{__make} -S -C xc World \
 	FAST=1 \
 	DEFAULT_OS_CPU_FROB=%{_target_cpu} \
@@ -1955,9 +1956,11 @@ rm -f xc/config/cf/host.def
 	CXXDEBUGFLAGS="" \
 	CDEBUGFLAGS="" \
 	ICONDIR="%{_iconsdir}" \
-	LINUXDIR="/dev/null"
+	LINUXDIR="/dev/null" \
+	TOP="$PWD/xc"
 
 %install
+PWD=`pwd`
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/{pam.d,rc.d/init.d,security/console.apps,sysconfig,xdg} \
 	$RPM_BUILD_ROOT%{_sysconfdir}/X11/fs \
@@ -1983,7 +1986,8 @@ install -d $RPM_BUILD_ROOT/etc/{pam.d,rc.d/init.d,security/console.apps,sysconfi
 	CXXDEBUGFLAGS="" \
 	CDEBUGFLAGS="" \
 	ICONDIR="%{_iconsdir}" \
-	LINUXDIR="/dev/null"
+	LINUXDIR="/dev/null" \
+	TOP="$PWD/xc"
 
 # fix pkgconfig path
 if [ "%{_pkgconfigdir}" != "/usr/lib/pkgconfig" ] ; then
