@@ -2,6 +2,7 @@
 # TODO
 # - XDM Auth broken
 # - Review rest of patches
+# - define HasFontconfig in linux.cf to stop building it here and use just the system one
 #
 Summary:	XOrg X11 Window System servers and basic programs
 Summary(de):	XOrg X11 Window-System-Server und grundlegende Programme
