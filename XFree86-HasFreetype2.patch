@@ -1,0 +1,10 @@
+--- XFree86-4.1.0/xc/config/cf/linux.cf~	Wed Jun 20 18:40:16 2001
++++ XFree86-4.1.0/xc/config/cf/linux.cf	Wed Jun 20 19:56:52 2001
+@@ -790,3 +790,7 @@
+ #ifndef HasZlib
+ #define HasZlib		YES
+ #endif
++
++#ifndef HasFreetype2
++#define HasFreetype2	YES
++#endif
