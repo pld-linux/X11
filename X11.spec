@@ -148,6 +148,7 @@ Requires:	pam >= 0.77.3
 Provides:	XFree86 = %{epoch}:%{version}-%{release}
 Obsoletes:	xpm-progs
 Obsoletes:	xterm
+Obsoletes:	XFree86
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1
 %endif
@@ -292,6 +293,7 @@ Summary:	XOrg X11 files required both on server and client side
 Summary(pl):	Pliki XOrg X11 wymagane zarÛwno po stronie serwera jak i klienta
 Group:		X11/Xorg
 Provides:	XFree86-common = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-common
 
 %description common
 XOrg X11 files required both on server and client side.
@@ -306,6 +308,7 @@ Group:		X11/Xorg
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	DPS
 Provides:	XFree86-DPS = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-DPS
 Obsoletes:	dgs
 
 %description DPS
@@ -323,6 +326,7 @@ Group:		X11/Xorg
 Requires:	%{name}-DPS = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Provides:	XFree86-DPS-devel = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-DPS-devel
 Obsoletes:	dgs-devel
 
 %description DPS-devel
@@ -337,6 +341,7 @@ Summary(pl):	Biblioteki statyczne Display PostScript
 Group:		X11/Xorg
 Requires:	%{name}-DPS-devel = %{epoch}:%{version}-%{release}
 Provides:	XFree86-DPS-static = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-DPS-static
 Obsoletes:	dgs-static
 
 %description DPS-static
@@ -352,6 +357,7 @@ Group:		XFree86/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	X11-OpenGL-libGL
 Provides:	XFree86-OpenGL-core = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-OpenGL-core
 
 %description OpenGL-core
 OpenGL support for X11R6 system.
@@ -365,7 +371,9 @@ Summary(pl):	Wsparcie OpenGL dla systemu X11R6 - biblioteka GL
 Group:		XFree86/Libraries
 Requires:	X11-OpenGL-core = %{epoch}:%{version}-%{release}
 Provides:	XFree86-OpenGL-libGL = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-OpenGL-libGL
 Obsoletes:	X11-driver-firegl
+Obsoletes:	X11-driver-nvidia
 
 %description OpenGL-libGL
 OpenGL support for X11R6 system - GL library.
@@ -382,6 +390,7 @@ Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Requires:	OpenGL-devel-base
 Provides:	OpenGL-devel
 Provides:	XFree86-OpenGL-devel = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-OpenGL-devel
 Obsoletes:	Mesa-devel
 Obsoletes:	glxMesa-devel
 
@@ -399,6 +408,8 @@ Requires:	%{name}-OpenGL-devel = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Provides:	OpenGL-devel-base
 Provides:	XFree86-OpenGL-devel-base = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-OpenGL-devel-base
+Obsoletes:	X11-driver-nvidia-devel
 
 %description OpenGL-devel-base
 Base headers (GL and GLX only) for OpenGL for X11R6.
@@ -414,6 +425,7 @@ Requires:	%{name}-OpenGL-core
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	OpenGL
 Provides:	XFree86-OpenGL-libs = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-OpenGL-libs
 Obsoletes:	Mesa
 
 %description OpenGL-libs
@@ -429,6 +441,7 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-OpenGL-devel = %{epoch}:%{version}-%{release}
 Provides:	OpenGL-static
 Provides:	XFree86-OpenGL-static = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-OpenGL-static
 Obsoletes:	Mesa-static
 
 %description OpenGL-static
@@ -448,6 +461,7 @@ Requires:	/usr/X11R6/lib/X11/rgb.txt
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Requires:	X11-fonts-base
 Provides:	XFree86-Xnest = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-Xnest
 
 %description Xnest
 Xnest is an X Window System server which runs in an X window. Xnest is
@@ -491,6 +505,8 @@ Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	/usr/X11R6/lib/X11/rgb.txt
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Requires:	X11-fonts-base
+Provides:	XFree86-Xprt = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-Xprt
 
 %description Xprt
 Xprt provides an X server with the print extension and special DDX
@@ -512,6 +528,7 @@ Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Requires:	X11-fonts-base
 Requires:	pam
 Provides:	XFree86-Xserver = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-Xserver
 Obsoletes:	X11-Mono
 Obsoletes:	X11-SVGA
 Obsoletes:	X11-VGA16
@@ -568,6 +585,7 @@ Summary(ru):	Û≈“◊≈“ XOrg X11 ƒÃ— ◊…“‘’¡ÃÿŒœ«œ ∆“≈ Õ¬’∆≈“¡
 Summary(uk):	Û≈“◊≈“ XOrg X11 ƒÃ— ◊¶“‘’¡ÃÿŒœ«œ ∆“≈ Õ¬’∆≈“¡
 Group:		X11/Xorg/Servers
 Provides:	XFree86-Xvfb = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-Xvfb
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	/usr/X11R6/lib/X11/rgb.txt
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -656,6 +674,7 @@ Provides:	xrender-devel = 0.8.4
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1-devel
 %endif
+Obsoletes:	XFree86-devel
 Obsoletes:	render
 Obsoletes:	xcursor-devel
 Obsoletes:	xft-devel
@@ -718,6 +737,7 @@ Summary(pl):	Pliki nag≥Ûwkowe do tworzenia sterownikÛw/rozszerzeÒ X serwera XOrg
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Provides:	XFree86-Xserver-devel = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-Xserver-devel
 
 %description Xserver-devel
 Header files for XOrg X11 Xserver drivers and extensions development.
@@ -732,6 +752,7 @@ Summary(pl):	Sterownik do kart Alliance Promotion
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-apm
 
 %description driver-apm
 Alliance Promotion driver.
@@ -745,6 +766,7 @@ Summary(pl):	Sterownik do kart Ark Logic
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-ark
 
 %description driver-ark
 Ark Logic driver.
@@ -758,6 +780,7 @@ Summary(pl):	Sterownik do kart ATI
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-ati
 
 %description driver-ati
 ATI video driver.
@@ -773,6 +796,7 @@ Requires:	OpenGL
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Conflicts:	X11-driver-nvidia
+Obsoletes:	XFree86-driver-r128
 
 %description driver-r128
 ATI Rage 128 video driver.
@@ -789,6 +813,7 @@ Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Requires:	%{name}-driver-ati = %{epoch}:%{version}-%{release}
 Conflicts:	X11-driver-nvidia
+Obsoletes:	XFree86-driver-radeon
 
 %description driver-radeon
 ATI Radeon video driver.
@@ -802,6 +827,7 @@ Summary(pl):	Sterownik do kart na uk≥adach Chips and Technologies
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-chips
 
 %description driver-chips
 Chips and Technologies video driver.
@@ -815,6 +841,7 @@ Summary(pl):	Sterownik do kart Cirrus Logic
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-cirrus
 
 %description driver-cirrus
 Cirrus Logic video driver.
@@ -828,6 +855,7 @@ Summary(pl):	Sterownik do grafiki na uk≥adzie Cyrix MediaGX
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-cyrix
 
 %description driver-cyrix
 Cyrix video driver.
@@ -841,6 +869,7 @@ Summary(pl):	Sterownik korzystaj±cy z framebuffera
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-fbdev
 
 %description driver-fbdev
 Non-accelerated video driver for framebuffer device.
@@ -854,6 +883,7 @@ Summary(pl):	Sterownik do framebuffera DRI na sparc
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-ffb
 
 %description driver-ffb
 Video driver for DRI sparc framebuffer device.
@@ -869,6 +899,7 @@ Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 # dlopens libglide2x.so
 Requires:	Glide_VG
+Obsoletes:	XFree86-driver-glide
 
 %description driver-glide
 Voodoo1 and Voodoo2 video driver.
@@ -884,6 +915,7 @@ Requires:	OpenGL
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Conflicts:	X11-driver-nvidia
+Obsoletes:	XFree86-driver-glint
 
 %description driver-glint
 GLINT/Permedia video driver.
@@ -897,6 +929,7 @@ Summary(pl):	Sterownik do kart Number 9 I128
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-i128
 
 %description driver-i128
 Number 9 I128 video driver.
@@ -910,6 +943,7 @@ Summary(pl):	Sterownik do kart na uk≥adzie Intel i740
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-i740
 
 %description driver-i740
 Intel i740 video driver.
@@ -925,6 +959,7 @@ Requires:	OpenGL
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Conflicts:	X11-driver-nvidia
+Obsoletes:	XFree86-driver-i810
 
 %description driver-i810
 Intel i810/i815/i830 video driver.
@@ -938,6 +973,7 @@ Summary(pl):	Sterownik do kart Integrated Micro Solutions Twin Turbo 128
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-imstt
 
 %description driver-imstt
 Integrated Micro Solutions Twin Turbo 128 driver.
@@ -953,6 +989,7 @@ Requires:	OpenGL
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Conflicts:	X11-driver-nvidia
+Obsoletes:	XFree86-driver-mga
 
 %description driver-mga
 Matrox video driver.
@@ -966,6 +1003,7 @@ Summary(pl):	Sterownik do kart NeoMagic
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-neomagic
 
 %description driver-neomagic
 NeoMagic video driver.
@@ -979,6 +1017,7 @@ Summary(pl):	Sterownik do kart Newport (XL)
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-newport
 
 %description driver-newport
 Newport (XL) adapters video driver (found primarily in SGI Indy and
@@ -994,6 +1033,7 @@ Summary(pl):	Sterownik dla kart na uk≥adach z rodziny GEODE firmy National Semic
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-nsc
 
 %description driver-nsc
 National Semiconductors GEODE family video driver. Supports GXLV (5530
@@ -1010,6 +1050,7 @@ Summary(pl):	Sterownik do kart na uk≥adach firmy nVidia
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-nv
 
 %description driver-nv
 nVidia video driver. Supports Riva128, RivaTNT, GeForce.
@@ -1023,6 +1064,7 @@ Summary(pl):	Sterownik do kart Rendition
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-rendition
 
 %description driver-rendition
 Rendition/Micron video driver.
@@ -1036,6 +1078,7 @@ Summary(pl):	Sterownik do kart na uk≥adach S3 ViRGE i Trio3D
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-s3virge
 
 %description driver-s3virge
 S3 ViRGE/Trio3D video driver.
@@ -1049,6 +1092,7 @@ Summary(pl):	Sterownik do kart na uk≥adach S3 Trio
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-s3
 
 %description driver-s3
 S3 Trio video driver.
@@ -1062,6 +1106,7 @@ Summary(pl):	Sterownik do kart na uk≥adach S3 Savage
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-savage
 
 %description driver-savage
 S3 Savage video driver.
@@ -1075,6 +1120,7 @@ Summary(pl):	Sterownik do kart na uk≥adach Silicon Motion
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-siliconmotion
 
 %description driver-siliconmotion
 Silicon Motion video driver.
@@ -1088,6 +1134,7 @@ Summary(pl):	Sterownik do kart na uk≥adach SiS
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-sis
 
 %description driver-sis
 SiS video driver.
@@ -1101,6 +1148,7 @@ Summary(pl):	Sterownik do monochromatycznego framebuffera BW2 na Sunie
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-sunbw2
 
 %description driver-sunbw2
 sunbw2 - Sun BW2 video driver.
@@ -1114,6 +1162,7 @@ Summary(pl):	Sterownik do kolorowego framebuffera CG14 na Sunie
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-suncg14
 
 %description driver-suncg14
 suncg14 - Sun CG14 video driver.
@@ -1127,6 +1176,7 @@ Summary(pl):	Sterownik do kolorowego framebuffera CG3 na Sunie
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-suncg3
 
 %description driver-suncg3
 suncg3 - Sun CG3 video cards driver.
@@ -1140,6 +1190,7 @@ Summary(pl):	Sterownik do grafiki GX i Turbo GX na Sunie
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-suncg6
 
 %description driver-suncg6
 suncg6 - Sun GX and Turbo GX video driver.
@@ -1153,6 +1204,7 @@ Summary(pl):	Sterownik do kart Sun Creator, Creator 3D, Elite 3D
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-sunffb
 
 %description driver-sunffb
 sunffb - Sun Creator, Creator 3D and Elite 3D video cards driver.
@@ -1166,6 +1218,7 @@ Summary(pl):	Sterownik do kart Sun Leo (ZX)
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-sunleo
 
 %description driver-sunleo
 sunleo - Sun Leo (ZX) video cards driver.
@@ -1179,6 +1232,7 @@ Summary(pl):	Sterownik do kart Sun TCX
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-suntcx
 
 %description driver-suntcx
 suntcx - Sun TCX video cards driver.
@@ -1196,6 +1250,7 @@ Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Requires:	Glide3-DRI
 Requires:	OpenGL
 Conflicts:	X11-driver-nvidia
+Obsoletes:	XFree86-driver-tdfx
 
 %description driver-tdfx
 3Dfx video driver. Supports Voodoo Banshee, Voodoo3, Voodoo4, Voodoo5.
@@ -1213,6 +1268,7 @@ Summary(pl):	Sterownik do kart TGA
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-tga
 
 %description driver-tga
 TGA video driver.
@@ -1226,6 +1282,7 @@ Summary(pl):	Sterownik do kart Trident
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-trident
 
 %description driver-trident
 Trident video driver.
@@ -1239,6 +1296,7 @@ Summary(pl):	Sterownik do kart Tseng Labs
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-tseng
 
 %description driver-tseng
 Tseng Labs video driver.
@@ -1252,6 +1310,7 @@ Summary(pl):	Sterownik do kart VIA CLE266
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-via
 
 %description driver-via
 VIA CLE266 driver.
@@ -1265,6 +1324,7 @@ Summary(pl):	Sterownik do emulacji karty SVGA dostÍpnej pod VMware
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-driver-vmware
 
 %description driver-vmware
 VMware emulated SVGA video driver. Necessary if you run Linux on
@@ -1293,6 +1353,7 @@ Provides:	xcursor
 Provides:	xft
 Provides:	xpm
 Provides:	xrender
+Obsoletes:	XFree86-libs
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1-libs
 %endif
@@ -1387,6 +1448,7 @@ Summary:	Modules with X servers extensions
 Summary(pl):	WspÛlne dla wszystkich X serwerÛw modu≥y rozszerzeÒ
 Group:		X11/Xorg
 Provides:	XFree86-modules = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-modules
 
 %description modules
 Modules with X servers extensions.
@@ -1401,6 +1463,7 @@ Summary(ru):	ı‘…Ã…‘¡ ƒÃ— ÀœŒ∆…«’“¡√…… XOrg X11
 Summary(uk):	ı‘…Ã¶‘¡ ƒÃ— ÀœŒ∆¶«’“’◊¡ŒŒ— XOrg X11
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-setup
 Obsoletes:	X11-xf86cfg
 
 %description setup
@@ -1429,6 +1492,7 @@ Summary(uk):	Û‘¡‘…ﬁŒ¶ ¬¶¬Ã¶œ‘≈À… X11R6
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Provides:	XFree86-static = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-static
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1-devel
 %endif
@@ -1462,6 +1526,7 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	man-config
 Provides:	XFree86-tools = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86-tools
 Obsoletes:	X11R6-contrib
 
 %description tools
@@ -1527,7 +1592,8 @@ Xconfigurator, X11-xfs ‘¡ X11-libs. Ìœ÷Ã…◊œ, ◊¡Õ ‘“≈¬¡ ◊”‘¡Œœ◊…‘…  
 Summary:	Cursors Theme "handhelds"
 Summary(pl):	Motyw kursorÛw "handhelds"
 Group:		X11/Themes
-Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+#Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires:	XFree86-libs
 
 %description -n XcursorTheme-handhelds
 Cursors theme "handhelds" for X11.
@@ -1539,7 +1605,8 @@ Motyw kursorÛw "handhelds" dla X11.
 Summary:	Cursors theme "redglass"
 Summary(pl):	Motyw kursorÛw "redglass"
 Group:		X11/Themes
-Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+#Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires:	XFree86-libs
 
 %description -n XcursorTheme-redglass
 Cursors theme "redglass" for X11.
@@ -1551,7 +1618,8 @@ Motyw kursorÛw "redglass" dla X11.
 Summary:	Cursors theme "whiteglass"
 Summary(pl):	Motyw kursorÛw "whiteglass"
 Group:		X11/Themes
-Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+#Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires:	XFree86-libs
 
 %description -n XcursorTheme-whiteglass
 Cursors theme "whiteglass" for X11.
@@ -1564,6 +1632,7 @@ Summary:	C preprocessor interface to the make utility
 Summary(pl):	Miedzymordzie do make oparte o preprocesor C
 Group:		Development/Building
 Provides:	imake = %{epoch}:%{version}-%{release}
+Obsoletes:	imake
 
 %description imake
 Imake is used to generate Makefiles from a template, a set of cpp
@@ -1585,6 +1654,7 @@ Summary:	sessreg - manage utmp/wtmp entries for non-init clients
 Summary(pl):	Program do zarz±dzania wpisami w utmp/wtmp
 Group:		X11/Xorg
 Provides:	sessreg = %{epoch}:%{version}-%{release}
+Obsoletes:	sessreg
 
 %description sessreg
 sessreg is a simple program for managing utmp/wtmp entries for xdm
@@ -1608,8 +1678,9 @@ Summary(pl):	Twm - podstawowy zarz±dca okien dla X Window System
 Summary(ru):	“œ”‘œ  œÀœŒŒŸ  Õ≈Œ≈ƒ÷≈“
 Summary(uk):	“œ”‘…  ◊¶ÀœŒŒ…  Õ≈Œ≈ƒ÷≈“
 Group:		X11/Window Managers
-Provides:	twm
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Provides:	twm = %{epoch}:%{version}-%{release}
+Obsoletes:	twm
 
 %description twm
 Twm is a window manager for the X Window System. It provides
@@ -1635,6 +1706,7 @@ Summary(pl):	xauth - narzÍdzie do plikÛw X authority
 Group:		X11/Xorg
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	xauth = %{epoch}:%{version}-%{release}
+Obsoletes:	xauth
 
 %description xauth
 The xauth program is used to edit and display the authorization
@@ -1665,6 +1737,7 @@ Requires:	sessreg = %{epoch}:%{version}-%{release}
 Requires:	/usr/X11R6/bin/sessreg
 Provides:	XDM
 Provides:	xdm = %{epoch}:%{version}-%{release}
+Obsoletes:	xdm
 Obsoletes:	gdm
 
 %description xdm
@@ -1701,6 +1774,7 @@ Requires(postun):	/usr/sbin/userdel
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	X11-fonts-base
 Provides:	xfs = %{epoch}:%{version}-%{release}
+Obsoletes:	xfs
 Obsoletes:	xfsft
 
 %description xfs
