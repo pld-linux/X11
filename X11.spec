@@ -2,8 +2,7 @@
 # TODO:
 # - separate XFS to be standalone - is it possible without duplicated files?
 #
-# Conditional build:
-%bcond_without	glide	# don't build glide driver
+%define		snap	20040808
 #
 Summary:	XOrg X11 Window System servers and basic programs
 Summary(de):	XOrg X11 Window-System-Server und grundlegende Programme
@@ -18,17 +17,13 @@ Summary(ru):	âÁÚÏ×ÙÅ ÛÒÉÆÔÙ, ÐÒÏÇÒÁÍÍÙ É ÄÏËÕÍÅÎÔÁÃÉÑ ÄÌÑ ÒÁÂÏÞÅÊ ÓÔÁÎÃÉÉ ÐÏÄ X
 Summary(uk):	âÁÚÏ×¦ ÛÒÉÆÔÉ, ÐÒÏÇÒÁÍÉ ÔÁ ÄÏËÕÍÅÎÔÁÃ¦Ñ ÄÌÑ ÒÏÂÏÞÏ§ ÓÔÁÎÃ¦§ Ð¦Ä X
 Summary(zh_CN):	XOrg X11 ´°¿ÚÏµÍ³·þÎñÆ÷ºÍ»ù±¾³ÌÐò
 Name:		X11
-Version:	6.7.0
-Release:	5
+Version:	6.7.0.%{snap}
+Release:	0.1
 Epoch:		1
 License:	XFree86 1.0 (?)
 Group:		X11/Xorg
-Source0:	http://freedesktop.org/~xorg/X11R%{version}/src/%{name}R%{version}-src1.tar.gz
-# Source0-md5:	22465263bae7a2e9f5ad77e172cf1ab5
-Source1:	http://freedesktop.org/~xorg/X11R%{version}/src/%{name}R%{version}-src2.tar.gz
-# Source1-md5:	6ef4e8f7647a28f080c10ea1bcf01f79
-Source2:	http://freedesktop.org/~xorg/X11R%{version}/src/%{name}R%{version}-src3.tar.gz
-# Source2-md5:	4c7144786522bbce383b21ace72bf669
+######		Unknown group!
+Source0:	http://www.kernel.pl/~adasi/%{name}-%{snap}.tgz
 Source7:	ftp://ftp.pld-linux.org/software/xinit/xdm-xinitrc-0.2.tar.bz2
 # Source7-md5:  0a15b1c374256b5cad7961807baa3896
 Source8:	xdm.pamd
@@ -125,9 +120,6 @@ Patch55:	%{name}-makefile-fastbuild.patch
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
 # Required by xc/programs/Xserver/hw/xfree86/drivers/glide/glide_driver.c
-%ifarch %{ix86} amd64 ia64
-%{?with_glide:BuildRequires:	Glide2x_SDK}
-%endif
 BuildRequires:	bison
 BuildRequires:	ed
 BuildRequires:	expat-devel
@@ -291,6 +283,7 @@ X Window System ÎÁÄÁ¤ ÂÁÚÕ ÄÌÑ ÒÏÚÒÏÂËÉ ÇÒÁÆ¦ÞÎÉÈ ¦ÎÔÅÒÆÅÊÓ¦×
 Summary:	XOrg X11 files required both on server and client side
 Summary(pl):	Pliki XOrg X11 wymagane zarówno po stronie serwera jak i klienta
 Group:		X11/Xorg
+######		Unknown group!
 Provides:	XFree86-common = %{epoch}:%{version}-%{release}
 
 %description common
@@ -303,6 +296,7 @@ Pliki XOrg X11 wymagane zarówno po stronie serwera jak i klienta.
 Summary:	Display PostScript
 Summary(pl):	Display PostScript
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	DPS
 Provides:	XFree86-DPS = %{epoch}:%{version}-%{release}
@@ -320,6 +314,7 @@ wy¶wietlania informacji na ekranie.
 Summary:	Header files for Display PostScript
 Summary(pl):	Pliki nag³ówkowe dla Display PostScript
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-DPS = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Provides:	XFree86-DPS-devel = %{epoch}:%{version}-%{release}
@@ -331,24 +326,12 @@ Header files for develop X-Window Display Postscript.
 %description DPS-devel -l pl
 Pliki nag³ówkowe biblioteki X-Window Display PostScript.
 
-%package DPS-static
-Summary:	Display PostScript static libraries
-Summary(pl):	Biblioteki statyczne Display PostScript
-Group:		X11/Xorg
-Requires:	%{name}-DPS-devel = %{epoch}:%{version}-%{release}
-Provides:	XFree86-DPS-static = %{epoch}:%{version}-%{release}
-Obsoletes:	dgs-static
-
-%description DPS-static
-X-Window Display PostScript static libraries.
-
-%description DPS-static -l pl
-Statyczne biblioteki X-Window Display PostScript.
 
 %package OpenGL-core
 Summary:	OpenGL support for X11R6
 Summary(pl):	Wsparcie OpenGL dla systemu X11R6
 Group:		XFree86/Libraries
+######		Unknown group!
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	X11-OpenGL-libGL
 Provides:	XFree86-OpenGL-core = %{epoch}:%{version}-%{release}
@@ -363,6 +346,7 @@ Wsparcie OpenGL dla systemu X11R6.
 Summary:	OpenGL support for X11R6 - GL library
 Summary(pl):	Wsparcie OpenGL dla systemu X11R6 - biblioteka GL
 Group:		XFree86/Libraries
+######		Unknown group!
 Requires:	X11-OpenGL-core = %{epoch}:%{version}-%{release}
 Provides:	XFree86-OpenGL-libGL = %{epoch}:%{version}-%{release}
 Obsoletes:	X11-driver-firegl
@@ -410,6 +394,7 @@ Podstawowe pliki nag³ówkowe (tylko GL i GLX) OpenGL dla systemu X11R6.
 Summary:	OpenGL libraries for X11R6
 Summary(pl):	Biblioteki OpenGL dla systemu X11R6
 Group:		XFree86/Libraries
+######		Unknown group!
 Requires:	%{name}-OpenGL-core
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	OpenGL
@@ -422,20 +407,6 @@ OpenGL libraries for X11R6 system.
 %description OpenGL-libs -l pl
 Biblioteki OpenGL dla systemu X11R6.
 
-%package OpenGL-static
-Summary:	X11R6 static libraries with OpenGL
-Summary(pl):	Biblioteki statyczne do X11R6 ze wsparciem dla OpenGL
-Group:		X11/Development/Libraries
-Requires:	%{name}-OpenGL-devel = %{epoch}:%{version}-%{release}
-Provides:	OpenGL-static
-Provides:	XFree86-OpenGL-static = %{epoch}:%{version}-%{release}
-Obsoletes:	Mesa-static
-
-%description OpenGL-static
-X11R6 static libraries with OpenGL.
-
-%description OpenGL-static -l pl
-Biblioteki statyczne zawieraj±ce wsparcie dla OpenGL do X11R6.
 
 %package Xnest
 Summary:	XOrg X11 Xnest server
@@ -443,6 +414,7 @@ Summary(pl):	Serwer XOrg X11 Xnest
 Summary(ru):	"÷ÌÏÖÅÎÎÙÊ" ÓÅÒ×ÅÒ XOrg X11
 Summary(uk):	"÷ËÌÁÄÅÎÉÊ" ÓÅÒ×ÅÒ XOrg X11
 Group:		X11/Xorg/Servers
+######		Unknown group!
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	/usr/X11R6/lib/X11/rgb.txt
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -486,6 +458,7 @@ Xnest - ÃÅ ÓÅÒ×ÅÒ X Window System, ÑËÉÊ ÐÒÁÃÀ¤ Õ ×¦ËÎ¦ X. æÁËÔÉÞÎÏ ÃÅ
 Summary:	X print server
 Summary(pl):	X serwer z rozszerzeniem Xprint
 Group:		X11/Xorg/Servers
+######		Unknown group!
 PreReq:		xprint-initrc
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	/usr/X11R6/lib/X11/rgb.txt
@@ -506,6 +479,7 @@ Summary(fr):	Serveur XOrg X11
 Summary(pl):	Serwer XOrg X11
 Summary(tr):	XOrg X11 sunucusu
 Group:		X11/Xorg/Servers
+######		Unknown group!
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	/usr/X11R6/lib/X11/rgb.txt
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -567,6 +541,7 @@ Summary(pl):	Serwer XOrg X11 Xvfb
 Summary(ru):	óÅÒ×ÅÒ XOrg X11 ÄÌÑ ×ÉÒÔÕÁÌØÎÏÇÏ ÆÒÅÊÍÂÕÆÅÒÁ
 Summary(uk):	óÅÒ×ÅÒ XOrg X11 ÄÌÑ ×¦ÒÔÕÁÌØÎÏÇÏ ÆÒÅÊÍÂÕÆÅÒÁ
 Group:		X11/Xorg/Servers
+######		Unknown group!
 Provides:	XFree86-Xvfb = %{epoch}:%{version}-%{release}
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	/usr/X11R6/lib/X11/rgb.txt
@@ -730,6 +705,7 @@ X11.
 Summary:	Alliance Promotion video driver
 Summary(pl):	Sterownik do kart Alliance Promotion
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -743,6 +719,7 @@ Sterownik do kart Alliance Promotion.
 Summary:	Ark Logic video driver
 Summary(pl):	Sterownik do kart Ark Logic
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -756,6 +733,7 @@ Sterownik do kart Ark Logic.
 Summary:	ATI video driver
 Summary(pl):	Sterownik do kart ATI
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -769,6 +747,7 @@ Sterownik do kart ATI.
 Summary:	ATI Rage 128 video driver
 Summary(pl):	Sterownik do kart ATI Rage 128
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	OpenGL
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -784,6 +763,7 @@ Sterownik do kart ATI Rage 128.
 Summary:	ATI Radeon video driver
 Summary(pl):	Sterownik do kart ATI Radeon
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	OpenGL
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -800,6 +780,7 @@ Sterownik do kart ATI Radeon.
 Summary:	Chips and Technologies video driver
 Summary(pl):	Sterownik do kart na uk³adach Chips and Technologies
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -813,6 +794,7 @@ Sterownik do kart na uk³adach Chips and Technologies.
 Summary:	Cirrus Logic video driver
 Summary(pl):	Sterownik do kart Cirrus Logic
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -826,6 +808,7 @@ Sterownik do kart Cirrus Logic.
 Summary:	Cyrix video driver
 Summary(pl):	Sterownik do grafiki na uk³adzie Cyrix MediaGX
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -839,6 +822,7 @@ Sterownik do grafiki na uk³adzie Cyrix MediaGX.
 Summary:	Video driver for framebuffer device
 Summary(pl):	Sterownik korzystaj±cy z framebuffera
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -852,6 +836,7 @@ Nieakcelerowany sterownik korzystaj±cy z framebuffera.
 Summary:	Video driver for DRI sparc framebuffer device
 Summary(pl):	Sterownik do framebuffera DRI na sparc
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -861,25 +846,11 @@ Video driver for DRI sparc framebuffer device.
 %description driver-ffb -l pl
 Sterownik do framebuffera DRI na sparc.
 
-%package driver-glide
-Summary:	3Dfx Voodoo1 and Voodoo2 video driver
-Summary(pl):	Sterownik do kart 3Dfx Voodoo1 i Voodoo2
-Group:		X11/Xorg
-Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
-Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
-# dlopens libglide2x.so
-Requires:	Glide_VG
-
-%description driver-glide
-Voodoo1 and Voodoo2 video driver.
-
-%description driver-glide -l pl
-Sterownik do kart Voodoo1 i Voodoo2 firmy 3Dfx.
-
 %package driver-glint
 Summary:	GLINT/Permedia video driver
 Summary(pl):	Sterownik do kart GLINT i Permedia
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	OpenGL
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -895,6 +866,7 @@ Sterownik do kart GLINT i Permedia.
 Summary:	Number 9 I128 video driver
 Summary(pl):	Sterownik do kart Number 9 I128
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -908,6 +880,7 @@ Sterownik do kart Number 9 I128.
 Summary:	Intel i740 video driver
 Summary(pl):	Sterownik do kart na uk³adzie Intel i740
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -921,6 +894,7 @@ Sterownik do kart na uk³adzie Intel i740.
 Summary:	Intel i810/i815/i830 video driver
 Summary(pl):	Sterownik do grafiki na uk³adach Intel i810/i815/i830
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	OpenGL
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -936,6 +910,7 @@ Sterownik do grafiki na uk³adach Intel i810/i815/i830.
 Summary:	Integrated Micro Solutions Twin Turbo 128 driver
 Summary(pl):	Sterownik do kart Integrated Micro Solutions Twin Turbo 128
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -949,6 +924,7 @@ Sterownik do kart Integrated Micro Solutions Twin Turbo 128.
 Summary:	Matrox video driver
 Summary(pl):	Sterownik do kart Matrox
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	OpenGL
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -964,6 +940,7 @@ Sterownik do kart Matrox.
 Summary:	NeoMagic video driver
 Summary(pl):	Sterownik do kart NeoMagic
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -977,6 +954,7 @@ Sterownik do kart NeoMagic.
 Summary:	Newport (XL) adapters video driver
 Summary(pl):	Sterownik do kart Newport (XL)
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -992,6 +970,7 @@ SGI Indy i Indigo).
 Summary:	National Semiconductors GEODE family video driver
 Summary(pl):	Sterownik dla kart na uk³adach z rodziny GEODE firmy National Semiconductors
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -1008,6 +987,7 @@ SC1400 oraz GX2 (uk³ad towarzysz±cy 5535).
 Summary:	nVidia video driver
 Summary(pl):	Sterownik do kart na uk³adach firmy nVidia
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -1021,6 +1001,7 @@ Sterownik do kart na uk³adach firmy nVidia: Riva128, RivaTNT, GeForce.
 Summary:	Rendition video driver
 Summary(pl):	Sterownik do kart Rendition
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -1034,6 +1015,7 @@ Sterownik do kart Verite firmowanych przez Rendition/Micron.
 Summary:	S3 ViRGE/Trio3D video driver
 Summary(pl):	Sterownik do kart na uk³adach S3 ViRGE i Trio3D
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -1047,6 +1029,7 @@ Sterownik do kart na uk³adach S3 ViRGE i Trio3D.
 Summary:	S3 Trio video driver
 Summary(pl):	Sterownik do kart na uk³adach S3 Trio
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -1060,6 +1043,7 @@ Sterownik do kart na uk³adach S3 Trio.
 Summary:	S3 Savage video driver
 Summary(pl):	Sterownik do kart na uk³adach S3 Savage
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -1073,6 +1057,7 @@ Sterownik do kart na uk³adach S3 Savage.
 Summary:	Silicon Motion video driver
 Summary(pl):	Sterownik do kart na uk³adach Silicon Motion
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -1086,6 +1071,7 @@ Sterownik do kart na uk³adach Lynx firmy Silicon Motion.
 Summary:	SiS video driver
 Summary(pl):	Sterownik do kart na uk³adach SiS
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -1099,6 +1085,7 @@ Sterownik do kart na uk³adach SiS.
 Summary:	sunbw2 - Sun BW2 video driver
 Summary(pl):	Sterownik do monochromatycznego framebuffera BW2 na Sunie
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -1112,6 +1099,7 @@ Sterownik do monochromatycznego framebuffera BW2 na Sunie.
 Summary:	suncg14 - Sun CG14 video driver
 Summary(pl):	Sterownik do kolorowego framebuffera CG14 na Sunie
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -1125,6 +1113,7 @@ Sterownik do kolorowego framebuffera CG14 na Sunie.
 Summary:	suncg3 - Sun CG3 video cards driver
 Summary(pl):	Sterownik do kolorowego framebuffera CG3 na Sunie
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -1138,6 +1127,7 @@ Sterownik do kolorowego framebuffera CG3 na Sunie.
 Summary:	suncg6 - Sun GX and Turbo GX video driver
 Summary(pl):	Sterownik do grafiki GX i Turbo GX na Sunie
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -1151,6 +1141,7 @@ Sterownik do grafiki GX i Turbo GX na Sunie.
 Summary:	sunffb - Sun Creator, Creator 3D and Elite 3D video cards driver
 Summary(pl):	Sterownik do kart Sun Creator, Creator 3D, Elite 3D
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -1164,6 +1155,7 @@ Sterownik do kart Sun Creator, Creator 3D, Elite 3D.
 Summary:	sunleo - Sun Leo (ZX) video cards driver
 Summary(pl):	Sterownik do kart Sun Leo (ZX)
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -1177,6 +1169,7 @@ Sterownik do kart Sun Leo (ZX).
 Summary:	suntcx - Sun TCX video cards driver
 Summary(pl):	Sterownik do kart Sun TCX
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -1190,6 +1183,7 @@ Sterownik do kart Sun TCX.
 Summary:	3Dfx video driver
 Summary(pl):	Sterownik do kart 3Dfx
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 # dlopens libglide3x.so
@@ -1211,6 +1205,7 @@ a Glide_V5-DRI do kart Voodoo4 lub Voodoo5.
 Summary:	TGA video driver
 Summary(pl):	Sterownik do kart TGA
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -1224,6 +1219,7 @@ Sterownik do kart TGA.
 Summary:	Trident video driver
 Summary(pl):	Sterownik do kart Trident
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -1237,6 +1233,7 @@ Sterownik do kart Trident.
 Summary:	Tseng Labs video driver
 Summary(pl):	Sterownik do kart Tseng Labs
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -1250,6 +1247,7 @@ Sterownik do kart firmy Tseng Labs.
 Summary:	VIA CLE266 driver
 Summary(pl):	Sterownik do kart VIA CLE266
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -1263,6 +1261,7 @@ Sterownik do kart VIA CLE266.
 Summary:	VMWare SVGA emulated video driver
 Summary(pl):	Sterownik do emulacji karty SVGA dostêpnej pod VMware
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 
@@ -1284,6 +1283,7 @@ Summary(pt_BR):	Bibliotecas compartilhadas X11R6
 Summary(ru):	òÁÚÄÅÌÑÅÍÙÅ ÂÉÂÌÉÏÔÅËÉ ÄÌÑ X Window System (X11R6.4)
 Summary(uk):	â¦ÂÌ¦ÏÔÅËÉ ÓÐ¦ÌØÎÏÇÏ ×ÉËÏÒÉÓÔÁÎÎÑ ÄÌÑ X Window System (X11R6.4)
 Group:		X11/Xorg
+######		Unknown group!
 Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	grep
 Requires(postun):	fileutils
@@ -1386,6 +1386,7 @@ X11-libs Í¦ÓÔÉÔØ Â¦ÂÌ¦ÏÔÅËÉ ÓÐ¦ÌØÎÏÇÏ ×ÉËÏÒÉÓÔÁÎÎÑ, ËÏÔÒ¦ ÎÅÏÂÈ¦ÄÎ¦
 Summary:	Modules with X servers extensions
 Summary(pl):	Wspólne dla wszystkich X serwerów modu³y rozszerzeñ
 Group:		X11/Xorg
+######		Unknown group!
 Provides:	XFree86-modules = %{epoch}:%{version}-%{release}
 
 %description modules
@@ -1400,6 +1401,7 @@ Summary(pl):	Graficzny konfigurator dla XOrg X11
 Summary(ru):	õÔÉÌÉÔÁ ÄÌÑ ËÏÎÆÉÇÕÒÁÃÉÉ XOrg X11
 Summary(uk):	õÔÉÌ¦ÔÁ ÄÌÑ ËÏÎÆ¦ÇÕÒÕ×ÁÎÎÑ XOrg X11
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Obsoletes:	X11-xf86cfg
 
@@ -1421,36 +1423,6 @@ standardowej 16-kolorowej VGA.
 %description setup -l uk
 õÔÉÌ¦ÔÁ ÄÌÑ ËÏÎÆ¦ÇÕÒÕ×ÁÎÎÑ XOrg X11.
 
-%package static
-Summary:	X11R6 static libraries
-Summary(pl):	Biblioteki statyczne X11R6
-Summary(ru):	óÔÁÔÉÞÅÓËÉÅ ÂÉÂÌÉÏÔÅËÉ X11R6
-Summary(uk):	óÔÁÔÉÞÎ¦ Â¦ÂÌ¦ÏÔÅËÉ X11R6
-Group:		X11/Development/Libraries
-Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
-Provides:	XFree86-static = %{epoch}:%{version}-%{release}
-%ifarch sparc sparc64
-Obsoletes:	X11R6.1-devel
-%endif
-Obsoletes:	xcursor-static
-Obsoletes:	xft-static
-Obsoletes:	xpm-static
-Obsoletes:	xrender-static
-
-%description static
-X11R6 static libraries.
-
-%description static -l pl
-Biblioteki statyczne X11R6.
-
-%description static -l ru
-X11-static ×ËÌÀÞÁÅÔ ÓÔÁÔÉÞÅÓËÉÅ ÂÉÂÌÉÏÔÅËÉ, ÎÅÏÂÈÏÄÉÍÙÅ ÄÌÑ ÒÁÚÒÁÂÏÔËÉ
-ÐÒÏÇÒÁÍÍ, ÒÁÂÏÔÁÀÝÉÈ ËÁË X-ËÌÉÅÎÔÙ. ÓÏÂÒÁÎÎÙÅ ÐÒÏÇÒÁÍÍÙ, ËÏÔÏÒÙÅ ÂÕÄÕÔ
-ÒÁÂÏÔÁÔØ ËÁË X-ËÌÉÅÎÔÙ.
-
-%description static -l uk
-X11-static Í¦ÓÔÉÔØ ÓÔÁÔÉÞÎ¦ Â¦ÂÌ¦ÏÔÅËÉ, ÎÅÏÂÈ¦ÄÎ¦ ÄÌÑ ÒÏÚÒÏÂËÉ
-ÐÒÏÇÒÁÍ, ÑË¦ ÐÒÁÃÀÀÔØ ÑË X-ËÌ¦¤ÎÔÉ.
 
 %package tools
 Summary:	Various tools for XOrg X11
@@ -1458,6 +1430,7 @@ Summary(pl):	Ró¿ne narzêdzia dla XOrg X11
 Summary(ru):	òÁÚÎÏÏÂÒÁÚÎÙÅ ÕÔÉÌÉÔÙ ÄÌÑ XOrg X11
 Summary(uk):	ò¦ÚÎÏÍÁÎ¦ÔÎ¦ ÕÔÉÌ¦ÔÉ ÄÌÑ XOrg X11
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	man-config
@@ -1527,6 +1500,7 @@ Xconfigurator, X11-xfs ÔÁ X11-libs. íÏÖÌÉ×Ï, ×ÁÍ ÔÒÅÂÁ ×ÓÔÁÎÏ×ÉÔÉ Ê
 Summary:	Cursors Theme "handhelds"
 Summary(pl):	Motyw kursorów "handhelds"
 Group:		X11/Themes
+######		Unknown group!
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description -n XcursorTheme-handhelds
@@ -1539,6 +1513,7 @@ Motyw kursorów "handhelds" dla X11.
 Summary:	Cursors theme "redglass"
 Summary(pl):	Motyw kursorów "redglass"
 Group:		X11/Themes
+######		Unknown group!
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description -n XcursorTheme-redglass
@@ -1551,6 +1526,7 @@ Motyw kursorów "redglass" dla X11.
 Summary:	Cursors theme "whiteglass"
 Summary(pl):	Motyw kursorów "whiteglass"
 Group:		X11/Themes
+######		Unknown group!
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description -n XcursorTheme-whiteglass
@@ -1584,6 +1560,7 @@ byæ kompilowane.
 Summary:	sessreg - manage utmp/wtmp entries for non-init clients
 Summary(pl):	Program do zarz±dzania wpisami w utmp/wtmp
 Group:		X11/Xorg
+######		Unknown group!
 Provides:	sessreg = %{epoch}:%{version}-%{release}
 
 %description sessreg
@@ -1633,6 +1610,7 @@ definiowalne przypisania klawiszy i przycisków myszy.
 Summary:	xauth - X authority file utility
 Summary(pl):	xauth - narzêdzie do plików X authority
 Group:		X11/Xorg
+######		Unknown group!
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	xauth = %{epoch}:%{version}-%{release}
 
@@ -1656,6 +1634,7 @@ Summary(pl):	XDM - zarz±dca ekranów z obs³ug± XDMCP i wybieraniem hostów
 Summary(ru):	íÅÎÅÄÖÅÒ ÄÉÓÐÌÅÑ X
 Summary(uk):	íÅÎÅÄÖÅÒ ÄÉÓÐÌÅÀ X
 Group:		X11/Xorg
+######		Unknown group!
 PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{epoch}:%{version}-%{release}
@@ -1690,6 +1669,7 @@ Summary(pl):	Serwer fontów dla XOrg X11
 Summary(ru):	æÏÎÔÓÅÒ×ÅÒ ÄÌÑ X Window System
 Summary(uk):	æÏÎÔÓÅÒ×ÅÒ ÄÌÑ X Window System
 Group:		X11/Xorg
+######		Unknown group!
 PreReq:		rc-scripts
 Requires(pre):	/bin/id
 Requires(pre):	/usr/bin/getgid
@@ -1736,7 +1716,7 @@ X11-xfs Í¦ÓÔÉÔØ ÓÅÒ×ÅÒ ÛÒÉÆÔ¦× ÄÌÑ XOrg X11. Xfs ÔÁËÏÖ ÍÏÖÅ ÎÁÄÁ×ÁÔÉ
 X11-libs.
 
 %prep
-%setup -qc -a1 -a2 -a7
+%setup -qc -a7
 %patch0 -p0
 %patch1 -p1
 %patch2 -p1
@@ -1778,7 +1758,6 @@ X11-libs.
 %patch39 -p0
 %patch40 -p1
 %{!?debug:%patch41 -p1}
-%{!?with_glide:%patch42 -p0}
 %patch43 -p0
 %patch44 -p0
 %patch45 -p1
@@ -1834,8 +1813,8 @@ install -d $RPM_BUILD_ROOT/etc/{pam.d,rc.d/init.d,security/console.apps,sysconfi
 	LINUXDIR="/dev/null"
 
 # fix pkgconfig path
-if [ "%{_pkgconfigdir}" != "/usr/lib/pkgconfig" ] ; then
-	mv $RPM_BUILD_ROOT/usr/lib/pkgconfig/* $RPM_BUILD_ROOT%{_pkgconfigdir}
+if [ "%{_pkgconfigdir}" != "%{_libdir}/pkgconfig" ] ; then
+	mv $RPM_BUILD_ROOT%{_libdir}/pkgconfig/* $RPM_BUILD_ROOT%{_pkgconfigdir}
 fi
 
 # setting default X
@@ -1927,7 +1906,8 @@ rm -f $RPM_BUILD_ROOT%{_libx11dir}/config/host.def
 :> $RPM_BUILD_ROOT%{_sysconfdir}/X11/xorg.conf
 
 rm -rf $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/html
-
+mv $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/PostScript/* $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/
+rm -Rf $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/{PostScript,PDF}
 # resolve conflict with man-pages
 mv -f $RPM_BUILD_ROOT%{_mandir}/man4/{mouse.4,mouse-x.4}
 
@@ -2048,7 +2028,7 @@ fi
 %files
 %defattr(644,root,root,755)
 %ifnarch sparc sparc64
-%doc %{_docdir}/%{name}-%{version}
+%doc %{_docdir}/%{name}-%{version}/
 %doc %{_libx11dir}/doc
 %endif
 
@@ -2234,6 +2214,33 @@ fi
 %{_mandir}/man1/xwud.1*
 %{_mandir}/man1/xon.1*
 %{_mandir}/man7/*
+/usr/X11R6/man/man1/XDarwin.1x.gz
+/usr/X11R6/man/man1/Xdmx.1x.gz
+/usr/X11R6/man/man1/bdftruncate.1x.gz
+/usr/X11R6/man/man1/dmxtodmx.1x.gz
+/usr/X11R6/man/man1/dumpkeymap.1x.gz
+/usr/X11R6/man/man1/fc-cache.1x.gz
+/usr/X11R6/man/man1/fc-list.1x.gz
+/usr/X11R6/man/man1/ucs2any.1x.gz
+/usr/X11R6/man/man1/vdltodmx.1x.gz
+/usr/X11R6/man/man1/xdmxconfig.1x.gz
+/usr/X11R6/man/man1/xdriinfo.1x.gz
+/usr/X11R6/man/man1/xmore.1x.gz
+/usr/X11R6/man/man1/xphelloworld.1x.gz
+/usr/X11R6/man/man1/xplsprinters.1x.gz
+/usr/X11R6/man/man1/xprehashprinterlist.1x.gz
+/usr/X11R6/man/man1/xpsimplehelloworld.1x.gz
+/usr/X11R6/man/man1/xpxthelloworld.1x.gz
+/usr/X11R6/man/man3/libXp.3x.gz
+/usr/X11R6/man/man4/glide.4.gz
+/usr/X11R6/man/man4/newport.4.gz
+/usr/X11R6/man/man4/sunbw2.4.gz
+/usr/X11R6/man/man4/suncg14.4.gz
+/usr/X11R6/man/man4/suncg3.4.gz
+/usr/X11R6/man/man4/suncg6.4.gz
+/usr/X11R6/man/man4/sunffb.4.gz
+/usr/X11R6/man/man4/sunleo.4.gz
+/usr/X11R6/man/man4/suntcx.4.gz
 
 %lang(it) %{_mandir}/it/man1/startx.1*
 %lang(it) %{_mandir}/it/man1/xconsole.1*
@@ -2285,12 +2292,6 @@ fi
 %attr(755,root,root) %{_libdir}/libpsres.so
 %{_includedir}/DPS
 
-%files DPS-static
-%defattr(644,root,root,755)
-%{_libdir}/libdps.a
-%{_libdir}/libdpstk.a
-%{_libdir}/libpsres.a
-
 %files OpenGL-core
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/extensions/libglx.a
@@ -2310,7 +2311,6 @@ fi
 %attr(755,root,root) %{_libdir}/libOSMesa.so
 # Linux OpenGL ABI compatibility symlink
 %attr(755,root,root) /usr/%{_lib}/libGLU.so
-%{_libdir}/libGLw.a
 %dir /usr/include/GL
 /usr/include/GL/GLwDrawA.h
 /usr/include/GL/GLwDrawAP.h
@@ -2346,11 +2346,6 @@ fi
 %{_mandir}/man1/glxinfo.1*
 %{_mandir}/man1/glxgears.1*
 
-%files OpenGL-static
-%defattr(644,root,root,755)
-%{_libdir}/libGL.a
-%{_libdir}/libGLU.a
-%{_libdir}/libOSMesa.a
 
 %files Xnest
 %defattr(644,root,root,755)
@@ -2363,7 +2358,6 @@ fi
 
 %files Xserver
 %defattr(644,root,root,755)
-%attr(4755,root,root) %{_bindir}/Xwrapper
 %attr(755,root,root) %{_bindir}/Xorg
 %attr(755,root,root) %{_bindir}/getconfig*
 %attr(755,root,root) %{_sysconfdir}/X11/X
@@ -2409,7 +2403,6 @@ fi
 %attr(755,root,root) %{_libdir}/libXcursor.so
 %attr(755,root,root) %{_libdir}/libXext.so
 %attr(755,root,root) %{_libdir}/libXfont.so
-%attr(755,root,root) %{_libdir}/libXfontcache.so
 %attr(755,root,root) %{_libdir}/libXft.so
 %attr(755,root,root) %{_libdir}/libXi.so
 %attr(755,root,root) %{_libdir}/libXinerama.so
@@ -2453,6 +2446,11 @@ fi
 %{_mandir}/man3/[A-FH-Z]*
 %{_pkgconfigdir}/xcursor.pc
 %{_pkgconfigdir}/xft.pc
+/usr/lib/pkgconfig/fontconfig.pc
+/usr/lib/pkgconfig/xcomposite.pc
+/usr/lib/pkgconfig/xdamage.pc
+/usr/lib/pkgconfig/xfixes.pc
+/usr/lib/pkgconfig/xrender.pc
 
 %files Xserver-devel
 %defattr(644,root,root,755)
@@ -2503,14 +2501,6 @@ fi
 %{_mandir}/man4/fbdev.4*
 %endif
 
-%ifarch %{ix86} ia64
-%if %{with glide}
-%files driver-glide
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/glide_drv.o
-%{_mandir}/man4/glide.4*
-%endif
-%endif
 
 %files driver-glint
 %defattr(644,root,root,755)
@@ -2543,7 +2533,6 @@ fi
 %attr(755,root,root) %{_libdir}/modules/drivers/i810_drv.o
 # i810_dri alone is built on amd64 - what for?
 %attr(755,root,root) %{_libdir}/modules/dri/i810_dri.so
-%attr(755,root,root) %{_libdir}/modules/dri/i830_dri.so
 %{_mandir}/man4/i810.4*
 %endif
 
@@ -2813,10 +2802,12 @@ fi
 %attr(755,root,root) %{_libdir}/libXcursor.*.*.*
 %attr(755,root,root) %{_libdir}/libXext.so.*.*
 %attr(755,root,root) %{_libdir}/libXfont.so.*.*
-%attr(755,root,root) %{_libdir}/libXfontcache.so.*.*
 %attr(755,root,root) %{_libdir}/libXft.so.*.*
 %attr(755,root,root) %{_libdir}/libXi.so.*.*
 %attr(755,root,root) %{_libdir}/libXinerama.so.*.*
+%attr(755,root,root) %{_libdir}/libXcomposite.so.*.*
+%attr(755,root,root) %{_libdir}/libXdamage.so.*.*
+%attr(755,root,root) %{_libdir}/libXfixes.so.*.*
 %attr(755,root,root) %{_libdir}/libXmu.so.*.*
 %attr(755,root,root) %{_libdir}/libXmuu.so.*.*
 %attr(755,root,root) %{_libdir}/libXp.so.*.*
@@ -2847,7 +2838,6 @@ fi
 %dir %{_libdir}/modules/dri
 %dir %{_libdir}/modules/drivers
 %attr(755,root,root) %{_libdir}/modules/*.a
-%attr(755,root,root) %{_libdir}/modules/codeconv
 %ifnarch amd64
 %attr(755,root,root) %{_libdir}/modules/drivers/linux
 %endif
@@ -2912,41 +2902,6 @@ fi
 %{_mandir}/man1/xorgcfg.1*
 %{_mandir}/man1/xorgconfig.1*
 
-%files static
-%defattr(644,root,root,755)
-%{_libdir}/libFS.a
-%{_libdir}/libI810XvMC.a
-%{_libdir}/libICE.a
-%{_libdir}/libSM.a
-%{_libdir}/libX11.a
-%{_libdir}/libXRes.a
-%{_libdir}/libXTrap.a
-%{_libdir}/libXaw.a
-%{_libdir}/libXcursor.a
-%{_libdir}/libXext.a
-%{_libdir}/libXfont.a
-%{_libdir}/libXfontcache.a
-%{_libdir}/libXft.a
-%{_libdir}/libXi.a
-%{_libdir}/libXinerama.a
-%{_libdir}/libXmu.a
-%{_libdir}/libXmuu.a
-%{_libdir}/libXp.a
-%{_libdir}/libXpm.a
-%{_libdir}/libXrandr.a
-%{_libdir}/libXrender.a
-%{_libdir}/libXss.a
-%{_libdir}/libXt.a
-%{_libdir}/libXtst.a
-%{_libdir}/libXv.a
-%{_libdir}/libXvMC.a
-%{_libdir}/libXxf86dga.a
-%{_libdir}/libXxf86misc.a
-%{_libdir}/libXxf86rush.a
-%{_libdir}/libXxf86vm.a
-%{_libdir}/libfontenc.a
-%{_libdir}/libxkbfile.a
-%{_libdir}/libxkbui.a
 
 %files tools
 %defattr(644,root,root,755)
@@ -3115,7 +3070,6 @@ fi
 
 %attr(755,root,root) %{_libx11dir}/xdm
 %attr(755,root,root) %{_bindir}/xdm
-%attr(755,root,root) %{_bindir}/chooser
 %{_mandir}/man1/xdm.1*
 
 %dir %{_sysconfdir}/X11/xdm
