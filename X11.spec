@@ -1913,7 +1913,7 @@ X11-libs.
 %prep
 %setup -qc -a1 -a2 -a7
 %patch0 -p0
-%patch1 -p0
+%{?with_glide:%patch1 -p0}
 %patch2 -p0
 %patch3 -p0
 %patch4 -p0
