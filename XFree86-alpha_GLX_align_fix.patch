@@ -7,9 +7,9 @@ This patch by Brian Paul.
  	        xfont.o
  
 +#if defined(AlphaArchitecture)
-+     GLX_DEFS = GlxDefines -D__GLX_ALIGN64
++     GLX_DEFS = GlxDefines VidModeExtensionDefines -D__GLX_ALIGN64
 +#else
-      GLX_DEFS = GlxDefines
+      GLX_DEFS = GlxDefines VidModeExtensionDefines
 +#endif
  
  #if BuildXF86DRI
