@@ -28,17 +28,16 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.8.2
-%define	ver	6.8.1
 Release:	0.1
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
-Source0:	http://www.x.org/pub/X11R%{ver}/src/%{name}R%{ver}-src1.tar.gz
-# Source0-md5:	e352319d423391ff2c03bb7f81fe8d2b
-Source1:	http://www.x.org/pub/X11R%{ver}/src/%{name}R%{ver}-src2.tar.gz
-# Source1-md5:	6ba36becf1133c61a88c92e1d60c19ed
-Source2:	http://www.x.org/pub/X11R%{ver}/src/%{name}R%{ver}-src3.tar.gz
-# Source2-md5:	8578e566e909e7c40300f44b6f0e88d3
+Source0:	ftp://ftp.x.org/pub/X11R%{version}/src/%{name}R%{version}-src1.tar.gz
+# Source0-md5:	a9cfa54ae2e65a057b9c6416befeb6ab
+Source1:	ftp://ftp.x.org/pub/X11R%{version}/src/%{name}R%{version}-src2.tar.gz
+# Source1-md5:	b6f011b3131e442b8dab85d443d9a56f
+Source2:	ftp://ftp.x.org/pub/X11R%{version}/src/%{name}R%{version}-src3.tar.gz
+# Source2-md5:	057d20af30569434e2c6693c1ca66e57
 Source7:	ftp://ftp.pld-linux.org/software/xinit/xdm-xinitrc-0.2.tar.bz2
 # Source7-md5:	0a15b1c374256b5cad7961807baa3896
 Source8:	xdm.pamd
@@ -78,7 +77,6 @@ Source51:	xload.png
 Source52:	xmag.png
 Source53:	http://oss.sgi.com/projects/ogl-sample/ABI/glext.h
 # NoSource53-md5: b3e8590b46dbab4341841592147fba26
-Patch0:		%{name}-6.8.2-final.patch
 Patch1:		%{name}-PLD.patch
 Patch2:		%{name}-enableglide.patch
 Patch3:		%{name}-DisableDebug.patch
@@ -88,7 +86,7 @@ Patch6:		%{name}-xterm-utempter.patch
 Patch7:		%{name}-app_defaults_dir.patch
 Patch8:		%{name}-broken-includes.patch
 Patch9:		%{name}-fhs.patch
-Patch10:		%{name}-xdmsecurity.patch
+Patch10:	%{name}-xdmsecurity.patch
 Patch11:	%{name}-xman.patch
 Patch12:	%{name}-xdm-fixes.patch
 Patch13:	%{name}-pic.patch
@@ -1928,7 +1926,6 @@ X11-libs.
 
 %prep
 %setup -qc -a1 -a2 -a7
-%patch0 -p0
 %patch1 -p0
 %{?with_glide:%patch2 -p0}
 %patch3 -p0
@@ -2373,6 +2370,7 @@ fi
 %attr(755,root,root) %{_bindir}/xrandr
 %attr(755,root,root) %{_bindir}/xrdb
 %attr(755,root,root) %{_bindir}/xrefresh
+%attr(755,root,root) %{_bindir}/xrx
 %attr(755,root,root) %{_bindir}/xset
 %attr(755,root,root) %{_bindir}/xsetmode
 %attr(755,root,root) %{_bindir}/xsetpointer
@@ -2445,6 +2443,7 @@ fi
 %{_mandir}/man1/xrandr.1*
 %{_mandir}/man1/xrdb.1*
 %{_mandir}/man1/xrefresh.1*
+%{_mandir}/man1/xrx.1*
 %{_mandir}/man1/xset.1*
 %{_mandir}/man1/xsetmode.1*
 %{_mandir}/man1/xsetpointer.1*
@@ -2598,6 +2597,7 @@ fi
 %files Xprt
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/Xprt
+%{_mandir}/man1/Xprt.1*
 
 %files Xserver
 %defattr(644,root,root,755)
