@@ -25,7 +25,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.8.1
-Release:	3
+Release:	3.1
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -106,6 +106,8 @@ Patch29:	%{name}-radeon-entervt.patch
 Patch30:	http://www.x.org/pub/X11R6.8.1/patches/xorg-681-CAN-2004-0914.patch
 # updated from http://dl.sourceforge.net/i810fb/i810fb-xfree86-420.tar.bz2 : i810fb-xfree420.diff
 Patch31:	%{name}-i810fb.patch
+Patch32:	p_i810-accel.diff
+Patch33:	p_i810dri-memfix.diff
 Patch50:	%{name}-glibc-locale_sync.patch
 # XFree86-tdfx-fix-vtswitch-font-corruption.patch - issue still not fixed,
 # but patch doesn't help either; however, it occurs in text mode only, not
@@ -1950,6 +1952,8 @@ cd xc
 %patch30 -p0
 cd -
 %patch31 -p0
+%patch32 -p0
+%patch33 -p0
 %patch50 -p1
 
 %build
