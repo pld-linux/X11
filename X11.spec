@@ -27,16 +27,17 @@ Summary(ru):	Базовые шрифты, программы и документация для рабочей станции под X
 Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
-Version:	6.8.1
-Release:	5.2
+Version:	6.8.2
+%define	ver	6.8.1
+Release:	0.1
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
-Source0:	http://www.x.org/pub/X11R%{version}/src/%{name}R%{version}-src1.tar.gz
+Source0:	http://www.x.org/pub/X11R%{ver}/src/%{name}R%{ver}-src1.tar.gz
 # Source0-md5:	e352319d423391ff2c03bb7f81fe8d2b
-Source1:	http://www.x.org/pub/X11R%{version}/src/%{name}R%{version}-src2.tar.gz
+Source1:	http://www.x.org/pub/X11R%{ver}/src/%{name}R%{ver}-src2.tar.gz
 # Source1-md5:	6ba36becf1133c61a88c92e1d60c19ed
-Source2:	http://www.x.org/pub/X11R%{version}/src/%{name}R%{version}-src3.tar.gz
+Source2:	http://www.x.org/pub/X11R%{ver}/src/%{name}R%{ver}-src3.tar.gz
 # Source2-md5:	8578e566e909e7c40300f44b6f0e88d3
 Source7:	ftp://ftp.pld-linux.org/software/xinit/xdm-xinitrc-0.2.tar.bz2
 # Source7-md5:	0a15b1c374256b5cad7961807baa3896
@@ -77,7 +78,7 @@ Source51:	xload.png
 Source52:	xmag.png
 Source53:	http://oss.sgi.com/projects/ogl-sample/ABI/glext.h
 # NoSource53-md5: b3e8590b46dbab4341841592147fba26
-Patch0:		%{name}-6.8.2-20050205.patch
+Patch0:		%{name}-6.8.2-final.patch
 Patch1:		%{name}-PLD.patch
 Patch2:		%{name}-enableglide.patch
 Patch3:		%{name}-DisableDebug.patch
@@ -109,6 +110,8 @@ Patch29:	%{name}-radeon-entervt.patch
 # updated from http://dl.sourceforge.net/i810fb/i810fb-xfree86-420.tar.bz2 : i810fb-xfree420.diff
 Patch31:	%{name}-i810fb.patch
 Patch33:	p_i810dri-memfix.diff
+# http://lists.freedesktop.org/pipermail/xorg/2005-February/006126.html
+Patch34:	%{name}-radeon.patch
 Patch50:	%{name}-glibc-locale_sync.patch
 Patch60:	%{name}-oldkeyb.patch
 Patch61:	%{name}-sparc64-asmfix.patch
@@ -1961,6 +1964,7 @@ cd xc
 %patch33 -p0
 cd -
 %patch31 -p0
+%patch34 -p0
 %patch50 -p1
 %ifarch sparc sparc64
 %patch60 -p0
