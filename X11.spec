@@ -21,14 +21,14 @@ Summary(fr):	Serveurs du système XOrg X11 et programmes de base
 Summary(ja):	XOrg X11 window system ¤Î¥µ¡¼¥Ğ¤È´ğËÜÅª¤Ê¥×¥í¥°¥é¥à
 Summary(ko):	X¿¡ ÇÊ¿äÇÑ ±âº»ÀûÀÎ ±Û²Ã°ú ÇÁ·Î±×·¥°ú ¹®¼­µé
 Summary(pl):	XOrg X11 Window System wraz z podstawowymi programami
-Summary(tr):	XOrg X11 Pencereleme Sistemi sunucuları ve temel programlar
 Summary(pt_BR):	Programas básicos e servidores para o sistema de janelas XOrg X11
 Summary(ru):	âÁÚÏ×ÙÅ ÛÒÉÆÔÙ, ĞÒÏÇÒÁÍÍÙ É ÄÏËÕÍÅÎÔÁÃÉÑ ÄÌÑ ÒÁÂÏŞÅÊ ÓÔÁÎÃÉÉ ĞÏÄ X
+Summary(tr):	XOrg X11 Pencereleme Sistemi sunucuları ve temel programlar
 Summary(uk):	âÁÚÏ×¦ ÛÒÉÆÔÉ, ĞÒÏÇÒÁÍÉ ÔÁ ÄÏËÕÍÅÎÔÁÃ¦Ñ ÄÌÑ ÒÏÂÏŞÏ§ ÓÔÁÎÃ¦§ Ğ¦Ä X
 Summary(zh_CN):	XOrg X11 ´°¿ÚÏµÍ³·şÎñÆ÷ºÍ»ù±¾³ÌĞò
 Name:		X11
 Version:	6.8.2
-Release:	0.1
+Release:	1
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -223,17 +223,6 @@ to elastyczn± implementacjê architektury klient/serwer.
 Pakiet ten nie zawiera X serwera który jest po¶rednikiem z Twoj± kart±
 graficzn± (jest on w innym pakiecie).
 
-%description -l tr
-X Window sistemi, çoklu pencere, çoklu istemci ve çeşitli pencere
-stilleriyle geniş özelliklere sahip bir Grafik Kullanıcı Arabirimidir.
-Çoğu UNIX sisteminde çalıştığı gibi istemcileri de birçok pencereleme
-sistemiyle çalışabilir. X protokolu kullanan uygulamaların yerel
-makina veya bilgisayar ağı üzerinden çalıştırılabilmesi esnek bir
-istemci/sunucu ortamı sağlar. Bu paket bir X istasyonu için gerekli
-olan temel yazıtiplerini, programları ve belgeleri sunar. Ekran
-kartınızı sürmek için gerekli olan X sunucusu bu pakete dahil
-değildir.
-
 %description -l pt_BR
 X Window é uma interface gráfica completa com múltiplas janelas,
 múltiplos clientes e diferentes estilos de janelas. É usado na maioria
@@ -266,6 +255,17 @@ xfs É ÂÉÂÌÉÏÔÅËÉ X11-libs. ÷ÏÚÍÏÖÎÏ ĞÒÉÄÅÔÓÑ ÕÓÔÁÎÏ×ÉÔØ ÔÁËÖÅ ÏÄÉÎ ÉÌÉ
 
 îÕ É, ÎÁËÏÎÅÃ, ÅÓÌÉ ×Ù ÓÏÂÉÒÁÅÔÅÓØ ÒÁÚÒÁÂÁÔÙ×ÁÔØ ĞÒÉÌÏÖÅÎÉÑ,
 ÒÁÂÏÔÁÀİÉÅ ËÁË X-ËÌÉÅÎÔÙ, ×ÁÍ ÔÁËÖÅ ÎÁÄÏ ÂÕÄÅÔ ÕÓÔÁÎÏ×ÉÔØ X11-devel.
+
+%description -l tr
+X Window sistemi, çoklu pencere, çoklu istemci ve çeşitli pencere
+stilleriyle geniş özelliklere sahip bir Grafik Kullanıcı Arabirimidir.
+Çoğu UNIX sisteminde çalıştığı gibi istemcileri de birçok pencereleme
+sistemiyle çalışabilir. X protokolu kullanan uygulamaların yerel
+makina veya bilgisayar ağı üzerinden çalıştırılabilmesi esnek bir
+istemci/sunucu ortamı sağlar. Bu paket bir X istasyonu için gerekli
+olan temel yazıtiplerini, programları ve belgeleri sunar. Ekran
+kartınızı sürmek için gerekli olan X sunucusu bu pakete dahil
+değildir.
 
 %description -l uk
 X Window System ÎÁÄÁ¤ ÂÁÚÕ ÄÌÑ ÒÏÚÒÏÂËÉ ÇÒÁÆ¦ŞÎÉÈ ¦ÎÔÅÒÆÅÊÓ¦×
