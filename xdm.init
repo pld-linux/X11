@@ -1,0 +1,47 @@
+#!/bin/sh
+#
+# xdm:		Starts the X Display Manager
+#
+# Version:      @(#) /etc/rc.d/init.d/xdm 1.3
+#
+# chkconfig:	5 95 5
+# description:	Starts and stops the X Display Manager at startup and
+#		shutdown. can run one of several display managers; gdm, kdm,
+#		or xdm, in that order of preferential treatment.
+#
+# config:	/etc/X11/xdm/xdm-config
+# probe:	true
+# hide:		true
+
+. /etc/rc.d/init.d/functions
+
+# See how we were called.
+case "$1" in
+	# Check if the service is already running?
+	if [ ! -f /var/lock/subsys/xdm ]; then
+		show Starting X Display Manager daemon
+		daemon /usr/X11R6/bin/xdm
+	else
+		echo "Starting X Display Manager already is running"
+	fi
+	touch /var/lock/subsys/xdm
+	;;
+  stop)
+	show Shutting down X Display Manager daemon
+	killproc xdm
+	rm -f /var/lock/subsys/xdm
+	;;
+  status)
+	status xdm
+	;;
+  restart|reload)
+	$0 stop
+	$0 start
+	;;
+  *)
+	echo "Usage: $0 {start|stop|status|restart|reload}"
+	exit 1
+esac
+
+exit 0
+
