@@ -246,9 +246,9 @@ NXTerm.JoinSession:			False
 	Shift<Key>F9: string(0x1b) string("[33~")\n\
 	Shift<Key>F10: string(0x1b) string("[34~")\n\
 	Shift<Key>Home: scroll-back(100,page)\n\
-	Shift<Key>End: scroll-forw(100,page)\n
+	Shift<Key>End: scroll-forw(100,page)\n\
 	Shift<Key>KP_Home: scroll-back(100,page)\n\
-	Shift<Key>KP_End: scroll-forw(100,page)\n
+	Shift<Key>KP_End: scroll-forw(100,page)\n\
 	s<Key>F1: string(0x1b) string("[23~")\n\
 	s<Key>F2: string(0x1b) string("[24~")\n\
 	s<Key>F3: string(0x1b) string("[25~")\n\
