@@ -2118,12 +2118,10 @@ mv -f $RPM_BUILD_ROOT%{_mandir}/man4/{mouse.4,mouse-x.4}
 # help rpm to detect deps
 chmod 755 $RPM_BUILD_ROOT%{_libdir}/modules/dri/*.so
 
-%ifnarch sparc sparc64
 gzip -9nf $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/*
 
 # don't gzip README.* files, they are needed by XF86Setup
 gunzip $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/README.*
-%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -2269,10 +2267,8 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%ifnarch sparc sparc64
 %doc %{_docdir}/%{name}-%{version}
 %doc %{_libx11dir}/doc
-%endif
 
 %{_appdefsdir}/UXTerm
 %{_appdefsdir}/XCalc
@@ -2750,7 +2746,7 @@ fi
 %{_mandir}/man4/cyrix.4*
 %endif
 
-%ifarch %{ix86} ia64 amd64 sparc sparc64 mips ppc arm superh
+%ifarch %{ix86} ia64 amd64 alpha sparc sparc64 mips ppc arm superh
 %files driver-fbdev
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/fbdev_drv.o
@@ -2791,7 +2787,7 @@ fi
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} amd64 ia64 sparc64
+%ifarch %{ix86} ia64 amd64 sparc64
 %files driver-i810
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/i810_drv.o
