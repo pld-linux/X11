@@ -8,5 +8,5 @@ GenericName=Desktop Magnifier
 Exec=xmag
 Icon=xmag
 Type=Application
-Categories=Utility;Accessibility;
+Categories=Utility;X-X11;
 # vi: encoding=utf-8

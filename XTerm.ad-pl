@@ -169,6 +169,8 @@ NXTerm.JoinSession:			False
 	<Key>KP_Subtract: string(-)\n\
 	Shift<Key>KP_Home: scroll-back(100,page)\n\
 	Shift<Key>KP_End: scroll-forw(100,page)\n\
+	<Key>KP_Home: string(0x1b) string("[H")\n\
+	<Key>KP_End: string(0x1b) string("[F")\n\
 	Shift<Key>Prior:scroll-back(1,page)\n\
 	Shift<Key>Next:scroll-forw(1,page)\n\
 	<Key>F16: start-extend() select-end(PRIMARY, CUT_BUFFER0, CLIPBOARD)\n\
@@ -177,8 +179,12 @@ NXTerm.JoinSession:			False
 	<Key>R13: scroll-forw(100,page)\n\
 	Ctrl<Key>Home: string(0x1b) string("[1;5H")\n\
 	Shift<Key>Home: string(0x1b) string("[1;2H")\n\
+	~Meta<Key>Home: string(0x1b) string("[H")\n\
+	Meta<Key>Home: string(0x1b) string(0x1b) string("[H")\n\
 	Ctrl<Key>End: string(0x1b) string("[1;5F")\n\
 	Shift<Key>End: string(0x1b) string("[1;2F")\n\
+	~Meta<Key>End: string(0x1b) string("[F")\n\
+	Meta<Key>End: string(0x1b) string(0x1b) string("[F")\n\
 	Ctrl<Key>Insert: string(0x1b) string("[2;5~")\n\
 	Shift<Key>Insert: string(0x1b) string("[2;2~")\n\
 	~Meta<Key>Insert: string(0x1b) string("[2~")\n\
@@ -208,19 +214,15 @@ NXTerm.JoinSession:			False
 	Ctrl Shift<Key>Left: string(0x1b) string("[1;6D")\n\
 	Ctrl<Key>Left: string(0x1b) string("[1;5D")\n\
 	Shift<Key>Left: string(0x1b) string("O2D")\n\
-	Mod5<Key>Left: string(0x1b) string("b")\n\
 	~Meta<Key>Left: string(0x1b) string("OD")\n\
 	Meta<Key>Left: string(0x1b) string(0x1b) string("OD")\n\
 	Ctrl Shift<Key>Right: string(0x1b) string("[1;6C")\n\
 	Ctrl<Key>Right: string(0x1b) string("[1;5C")\n\
 	Shift<Key>Right: string(0x1b) string("O2C")\n\
-	Mod5<Key>Right: string(0x1b) string("f")\n\
 	~Meta<Key>Right: string(0x1b) string("OC")\n\
 	Meta<Key>Right: string(0x1b) string(0x1b) string("OC")\n\
 	~Meta<Key>Return: string(0x0d)\n\
 	Meta<Key>Return: string(0x1b) string(0x0d)\n\
-	Ctrl<Key>Tab: string(0x1b) string(0x09)\n\
-	Mod5<Key>Tab: string(0x1b) string(0x09)\n\
 	~Meta<Key>Tab: string(0x09)\n\
 	Meta<Key>Tab: string(0x1b) string(0x09)\n\
 	~s<Key>F1: string(0x1b) string("[11~")\n\
@@ -258,7 +260,6 @@ NXTerm.JoinSession:			False
 	a<Key>space: string(0x1b) string(" ")\n\
 	a s<Key>question: string(0x1b) string("?")\n\
 	a s<Key>exclam: string(0x1b) string("!")\n\
-	a<Key>`: string(0x1b) string("`")\n\
 	a<Key>1: string(0x1b) string("1")\n\
 	a<Key>2: string(0x1b) string("2")\n\
 	a<Key>3: string(0x1b) string("3")\n\
