@@ -296,6 +296,31 @@ diff -Nru xc.orig/config/cf/xf86site.def xc/config/cf/xf86site.def
  
  /*
   * Uncomment this if your default tools (eg, gcc, ld, as, etc) are
+diff -urN xc.org/config/cf/xf86site.def xc/config/cf/xf86site.def
+--- xc.org/config/cf/xf86site.def	2004-04-18 22:10:56.000000000 +0200
++++ xc/config/cf/xf86site.def	2004-04-18 23:41:55.676970296 +0200
+@@ -218,9 +218,8 @@
+  * Do you want to Build Fonts (Usually you only want to build and install
+  * fonts once, if this is a first time install you will want to build the
+  * fonts)
+- *
+-#define BuildFonts		NO
+  */
++#define BuildFonts		NO
+ 
+ /*
+  * To not build/install the 75dpi fonts, uncomment the following
+@@ -630,9 +629,8 @@
+ /*
+  * For FreeBSD/ELF (FreeBSD 3.0) it is possible to also build and install
+  * a.out compatibility libraries.  To enable that, uncomment this.
+- *
+-#define BuildAoutLibraries	YES
+  */
++#define BuildAoutLibraries	YES
+ 
+ /*
+  * If you have trouble with make bombing out in Xlib, try uncommenting this.
 diff -Nru xc.orig/config/cf/xfree86.cf xc/config/cf/xfree86.cf
 --- xc.orig/config/cf/xfree86.cf	2003-11-21 06:55:07.000000000 +0100
 +++ xc/config/cf/xfree86.cf	2003-12-23 12:09:12.055232544 +0100
