@@ -1,6 +1,8 @@
 #
-# TODO:
-# - separate XFS to be standalone - is it possible without duplicated files?
+# TODO
+# - XDM Auth broken (can anyone confirm now with new implementation?)
+# - Review Patch 46   
+# - missing dir in Xprint (which one?)
 #
 # Conditional build:
 %bcond_without	glide	# don't build glide driver
@@ -18,17 +20,17 @@ Summary(ru):	‚¡⁄œ◊Ÿ≈ €“…∆‘Ÿ, –“œ«“¡ÕÕŸ … ƒœÀ’Õ≈Œ‘¡√…— ƒÃ— “¡¬œﬁ≈  ”‘¡Œ√…… –œƒ X
 Summary(uk):	‚¡⁄œ◊¶ €“…∆‘…, –“œ«“¡Õ… ‘¡ ƒœÀ’Õ≈Œ‘¡√¶— ƒÃ— “œ¬œﬁœß ”‘¡Œ√¶ß –¶ƒ X
 Summary(zh_CN):	XOrg X11 ¥∞ø⁄œµÕ≥∑˛ŒÒ∆˜∫Õª˘±æ≥Ã–Ú
 Name:		X11
-Version:	6.7.0
-Release:	10
+Version:	6.8.1
+Release:	0.1
 Epoch:		1
 License:	XFree86 1.0 (?)
 Group:		X11
-Source0:	http://freedesktop.org/~xorg/X11R%{version}/src/%{name}R%{version}-src1.tar.gz
-# Source0-md5:	22465263bae7a2e9f5ad77e172cf1ab5
-Source1:	http://freedesktop.org/~xorg/X11R%{version}/src/%{name}R%{version}-src2.tar.gz
-# Source1-md5:	6ef4e8f7647a28f080c10ea1bcf01f79
-Source2:	http://freedesktop.org/~xorg/X11R%{version}/src/%{name}R%{version}-src3.tar.gz
-# Source2-md5:	4c7144786522bbce383b21ace72bf669
+Source0:	http://freedesktop.org/~xorg/X11R%{version}/src/multiple/%{name}R%{version}-src1.tar.gz
+# Source0-md5:	4dc88cf5edaf000c75e314189f3def62
+Source1:	http://freedesktop.org/~xorg/X11R%{version}/src/multiple/%{name}R%{version}-src2.tar.gz
+# Source1-md5:	ca4af8de1278ea41b8484823ba9db9af
+Source2:	http://freedesktop.org/~xorg/X11R%{version}/src/multiple/%{name}R%{version}-src3.tar.gz
+# Source2-md5:	99789cfa85ad3cf9c98b0e9e18dad90a
 Source7:	ftp://ftp.pld-linux.org/software/xinit/xdm-xinitrc-0.2.tar.bz2
 # Source7-md5:	0a15b1c374256b5cad7961807baa3896
 Source8:	xdm.pamd
@@ -57,7 +59,7 @@ Source40:	oclock.png
 Source41:	xconsole.png
 Source42:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/XFree86-non-english-Xman-pages.tar.bz2
 # Source42-md5:	a184106bb83cb27c6963944d9243ac3f
-Source44:	XFree86-Xserver-headers
+Source44:	%{name}-Xserver-headers
 Source45:	XFree86-Xserver-headers-links
 Source46:	twm-xsession.desktop
 Source47:	xcalc.desktop
@@ -69,57 +71,36 @@ Source52:	xmag.png
 Source53:	http://oss.sgi.com/projects/ogl-sample/ABI/glext.h
 # NoSource53-md5: a5738dcfa20119fa3e06ce479ca94acf
 Patch0:		%{name}-PLD.patch
-Patch1:		XFree86-HasZlib.patch
-Patch2:		XFree86-DisableDebug.patch
+Patch1:		%{name}-enableglide.patch
+Patch2:		%{name}-DisableDebug.patch
 Patch3:		%{name}-Xwrapper.patch
-Patch4:		XFree86-xfs.patch
-Patch5:		XFree86-xfs-fix.patch
-Patch6:		XFree86-xfs-logger.patch
-Patch7:		XFree86-xterm-utempter.patch
-Patch8:		XFree86-app_defaults_dir.patch
-Patch9:		XFree86-v4l.patch
-Patch10:	XFree86-broken-includes.patch
-Patch11:	XFree86-alpha-pcibus-lemming.patch
-Patch12:	XFree86-fhs.patch
-Patch13:	XFree86-xdmsecurity.patch
-Patch14:	XFree86-xman.patch
-Patch15:	XFree86-HasXdmAuth.patch
-Patch16:	XFree86-xdm-fixes.patch
-Patch17:	XFree86-imake-kernel-version.patch
-Patch18:	XFree86-no-kernel-modules.patch
-Patch19:	XFree86-parallelmake.patch
-Patch20:	XFree86-pic.patch
-Patch21:	XFree86-r128-busmstr2.patch
-Patch22:	XFree86-neomagic_swcursor.patch
-Patch23:	XFree86-mga-busmstr.patch
-Patch24:	XFree86-agpgart-load.patch
-Patch26:	XFree86-HasFreetype2.patch
-Patch27:	XFree86-config-s3.patch
-Patch28:	XFree86-sparc_pci_domains.patch
-Patch29:	XFree86-XTerm.ad.patch
-Patch30:	XFree86-alpha_GLX_align_fix.patch
+Patch4:		%{name}-xfs.patch
+Patch5:		%{name}-xterm-utempter.patch
+Patch6:		%{name}-app_defaults_dir.patch
+Patch7:		%{name}-v4l.patch
+Patch8:		%{name}-broken-includes.patch
+Patch9:		%{name}-fhs.patch
+Patch10:	%{name}-xdmsecurity.patch
+Patch11:	%{name}-xman.patch
+Patch13:	%{name}-xdm-fixes.patch
+Patch14:	%{name}-pic.patch
+Patch15:	%{name}-r128-busmstr2.patch
+Patch16:	%{name}-neomagic_swcursor.patch
+Patch17:	%{name}-mga-busmstr.patch
+Patch18:	%{name}-agpgart-load.patch
+Patch20:	%{name}-config-s3.patch
+Patch21:	%{name}-XTerm.ad.patch
+Patch22:	%{name}-xf86Pcih.patch
+Patch23:	%{name}-dontbuildfonts.patch
+Patch25:	%{name}-llh.patch
 Patch32:	XFree86-xman-manpaths.patch
 Patch33:	XFree86-clearrts.patch
-Patch34:	XFree86-fix-07-s3trio64v2gx+netfinity.patch
-Patch35:	XFree86-i740-driver-update-cvs-20020617.patch
-Patch36:	XFree86-tdfx-disable-dri-on-16Mb-cards-in-hires.patch
-Patch38:	XFree86-tdfx-fix-compiler-warnings.patch
-Patch39:	XFree86-tdfx-fix-vtswitch-font-corruption.patch
 Patch40:	XFree86-Xfont-Type1-large-DoS.patch
-# "strip -g libGLcore.a" leaves empty objects m_debug_*.o, which cause
-# warnings during GLcore loading ("m_debug_*.o: no symbols") - shut up them
-Patch41:	XFree86-GLcore-strip-a-workaround.patch
-Patch42:	%{name}-disable_glide.patch
-Patch43:	XFree86-expat.patch
-Patch44:	XFree86-pkgconfig.patch
-# spencode.o in libspeedo.a is empty - patch like for libGLcore.a
+Patch41:	%{name}-GLcore-strip-a-workaround.patch
+Patch44:	%{name}-pkgconfig.patch
 Patch45:	XFree86-spencode-nowarning.patch
-# Small (maybe buggy) patch to resolve problems with totem 0.97.0
 Patch46:	XFree86-lock.patch
-Patch47:	XFree86-sparc-kbd.patch
 Patch50:	%{name}-xterm-256colors.patch
-Patch52:	XFree86-kernel_headers.patch
-Patch53:	XFree86-stdint.patch
 Patch54:	%{name}-setxkbmap.patch
 Patch55:	%{name}-makefile-fastbuild.patch
 Patch56:	%{name}-xrender-pkgconfig.patch
@@ -303,6 +284,19 @@ XOrg X11 files required both on server and client side.
 %description common -l pl
 Pliki XOrg X11 wymagane zarÛwno po stronie serwera jak i klienta.
 
+%package Xprint
+Summary:	Xprint tool
+Summary(pl):	NarzÍdzie Xprint
+Group:		X11
+# XXX: this dir doesn't exist
+Requires:	/etc/X11/xserver
+
+%description Xprint
+Xprint tool.
+
+%description Xprint -l pl
+NarzÍdzie Xprint.
+
 %package DPS
 Summary:	Display PostScript
 Summary(pl):	Display PostScript
@@ -389,7 +383,7 @@ Summary:	OpenGL libraries for X11R6
 Summary(pl):	Biblioteki OpenGL dla systemu X11R6
 Group:		X11/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Provides:	OpenGL = 1.4
+Provides:	OpenGL = 1.5
 Provides:	OpenGL-GLU = 1.3
 Provides:	OpenGL-GLX = 1.4
 Provides:	XFree86-OpenGL-libs = %{epoch}:%{version}-%{release}
@@ -427,7 +421,7 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-OpenGL-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Requires:	OpenGL-devel-base
-Provides:	OpenGL-devel = 1.4
+Provides:	OpenGL-devel = 1.5
 Provides:	OpenGL-GLU-devel = 1.3
 Provides:	OpenGL-GLX-devel = 1.4
 Provides:	XFree86-OpenGL-devel = %{epoch}:%{version}-%{release}
@@ -447,7 +441,7 @@ Summary:	X11R6 static libraries with OpenGL
 Summary(pl):	Biblioteki statyczne do X11R6 ze wsparciem dla OpenGL
 Group:		X11/Development/Libraries
 Requires:	%{name}-OpenGL-devel = %{epoch}:%{version}-%{release}
-Provides:	OpenGL-static = 1.4
+Provides:	OpenGL-static = 1.5
 Provides:	OpenGL-GLU-static = 1.3
 Provides:	XFree86-OpenGL-static = %{epoch}:%{version}-%{release}
 Obsoletes:	Mesa-static
@@ -681,23 +675,11 @@ Provides:	xcursor-devel = 1.1.2
 Provides:	xft-devel = 2.1.6
 Provides:	xpm-devel
 Provides:	xrender-devel = 0.8.4
-#Provides:	libXrender-devel = 0.8.4
-#Provides:	libXft-devel = 2.1.6
-#Provides:	libXcursor-devel = 1.1.2
-#Provides:	libICE-devel
-#Provides:	libSM-devel
-#Provides:	libX11-devel
-#Provides:	libXau-devel
-#Provides:	libXaw-devel
-#Provides:	libXdmcp-devel
-#Provides:	libXext-devel
-#Provides:	libXfont-devel
-#Provides:	libXi-devel
-#Provides:	libXmu-devel
-#Provides:	libXpm-devel
-#Provides:	libXrandr-devel
-#Provides:	libXt-devel
-#Provides:	libXv-devel
+# don't use package names from xlibs implementation as metapackages
+#Provides:	libXcomposite-devel
+#Provides:	libXdamage-devel
+#Provides:	libXfixes-devel
+#Provides:	libXrender-devel
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1-devel
 %endif
@@ -1442,24 +1424,10 @@ Provides:	xcursor = 1.1.2
 Provides:	xft = 2.1.6
 Provides:	xpm
 Provides:	xrender = 0.8.4
-#Provides:	libXrender = 0.8.4
-#Provides:	libXft = 2.1.6
-#Provides:	libXcursor = 1.1.2
-# Someone should add the versions here, maybe i'll do it later.
-#Provides:	libICE
-#Provides:	libSM
-#Provides:	libX11
-#Provides:	libXau
-#Provides:	libXaw
-#Provides:	libXdmcp
-#Provides:	libXext
-#Provides:	libXfont
-#Provides:	libXi
-#Provides:	libXmu
-#Provides:	libXpm
-#Provides:	libXrandr
-#Provides:	libXt
-#Provides:	libXv
+#Provides:	libXcomposite
+#Provides:	libXdamage
+#Provides:	libXfixes
+#Provides:	libXrender
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1-libs
 %endif
@@ -1946,62 +1914,42 @@ X11-libs.
 %prep
 %setup -qc -a1 -a2 -a7
 %patch0 -p0
-%patch1 -p1
-%patch2 -p1
+%{?with_glide:%patch1 -p0}
+%patch2 -p0
 %patch3 -p0
-%patch4 -p1
+%patch4 -p0
 %patch5 -p0
 %patch6 -p0
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
+%patch7 -p0
+%patch8 -p0
+%patch9 -p0
 %patch10 -p0
-#%patch11 -p0	-- obsoleted???
-%patch12 -p1
-%patch13 -p1
+%patch11 -p0
+%patch13 -p0
 %patch14 -p0
-%patch15 -p1
+%patch15 -p0
 %patch16 -p0
-#%patch17 -p1	-- not ready, is it required?
-%patch18 -p1
-#%patch19 -p1	-- maybe should be updated to allow using make -j
+%patch17 -p0
+%patch18 -p0
 %patch20 -p0
-%patch21 -p1
-%patch22 -p1
-%patch23 -p1
-%patch24 -p1
-%patch26 -p1
-%patch27 -p1
-%ifarch sparc sparc64
-#%patch28 -p1	-- needs update
-%endif
-%patch29 -p0
-%patch30 -p1
+%patch21 -p0
+%patch22 -p0
+%patch23 -p0
+%patch25 -p0
 %patch32 -p1
 %patch33 -p1
-#%patch34 -p1	-- seems not applied (was partially in rc1??? maybe another fix present?)
-#%patch35 -p1	-- obsoleted? (but doesn't look to be applied)
-%patch36 -p0
-#%patch38 -p0	-- causing problems IIRC (but not really needed)
-%patch39 -p0
 %patch40 -p1
-%{!?debug:%patch41 -p1}
-%{!?with_glide:%patch42 -p0}
-%patch43 -p0
+%patch41 -p1
 %patch44 -p0
 %patch45 -p1
-%patch46 -p0
-%patch47 -p1
 %patch50 -p0
-%patch52 -p1
-%patch53 -p0
-%patch54 -p1
 %patch55 -p0
 %patch56 -p0
 
 rm -f xc/config/cf/host.def
 
 %build
+PWD=`pwd`
 %{__make} -S -C xc World \
 	FAST=1 \
 	DEFAULT_OS_CPU_FROB=%{_target_cpu} \
@@ -2012,9 +1960,11 @@ rm -f xc/config/cf/host.def
 	CXXDEBUGFLAGS="" \
 	CDEBUGFLAGS="" \
 	ICONDIR="%{_iconsdir}" \
-	LINUXDIR="/dev/null"
+	LINUXDIR="/dev/null" \
+	TOP="$PWD/xc"
 
 %install
+PWD=`pwd`
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/{pam.d,rc.d/init.d,security/console.apps,sysconfig,xdg} \
 	$RPM_BUILD_ROOT%{_sysconfdir}/X11/fs \
@@ -2040,7 +1990,8 @@ install -d $RPM_BUILD_ROOT/etc/{pam.d,rc.d/init.d,security/console.apps,sysconfi
 	CXXDEBUGFLAGS="" \
 	CDEBUGFLAGS="" \
 	ICONDIR="%{_iconsdir}" \
-	LINUXDIR="/dev/null"
+	LINUXDIR="/dev/null" \
+	TOP="$PWD/xc"
 
 # fix pkgconfig path
 if [ "%{_pkgconfigdir}" != "/usr/lib/pkgconfig" ] ; then
@@ -2481,6 +2432,14 @@ fi
 %{_mandir}/man1/xon.1*
 %{_mandir}/man7/*
 
+# not related to any packaged files
+#%{_mandir}/man1/XDarwin.1*
+#%{_mandir}/man1/dmxtodmx.1*
+#%{_mandir}/man1/dumpkeymap.1*
+#%{_mandir}/man1/ucs2any.1*
+#%{_mandir}/man1/vdltodmx.1*
+#%{_mandir}/man1/xdmxconfig.1*
+
 %lang(it) %{_mandir}/it/man1/startx.1*
 %lang(it) %{_mandir}/it/man1/xconsole.1*
 %lang(it) %{_mandir}/it/man1/xinit.1*
@@ -2509,6 +2468,12 @@ fi
 %dir %{_libdir}
 %dir %{_libx11dir}
 %{_libx11dir}/rgb.txt
+
+%files Xprint
+%defattr(644,root,root,755)
+# XXX: missing dir
+%dir %{_sysconfdir}/X11/xserver/C/print
+%{_sysconfdir}/X11/xserver/C/print/*
 
 %files DPS
 %defattr(644,root,root,755)
@@ -2609,11 +2574,13 @@ fi
 
 %files Xserver
 %defattr(644,root,root,755)
-%attr(4755,root,root) %{_bindir}/Xwrapper
 %attr(755,root,root) %{_bindir}/Xorg
+%attr(755,root,root) %{_bindir}/Xdmx
+%attr(4755,root,root) %{_bindir}/Xwrapper
 %attr(755,root,root) %{_bindir}/getconfig*
 %attr(755,root,root) %{_sysconfdir}/X11/X
 %attr(755,root,root) %{_bindir}/X
+%{_mandir}/man1/Xdmx.1*
 %{_mandir}/man1/Xorg.1*
 %{_mandir}/man1/Xserver.1*
 %{_mandir}/man1/getconfig.1*
@@ -2651,11 +2618,16 @@ fi
 %attr(755,root,root) %{_libdir}/libX11.so
 %attr(755,root,root) %{_libdir}/libXRes.so
 %attr(755,root,root) %{_libdir}/libXTrap.so
+%attr(755,root,root) %{_libdir}/libXau.so
 %attr(755,root,root) %{_libdir}/libXaw.so
+%attr(755,root,root) %{_libdir}/libXcomposite.so
 %attr(755,root,root) %{_libdir}/libXcursor.so
+%attr(755,root,root) %{_libdir}/libXdamage.so
+%attr(755,root,root) %{_libdir}/libXdmcp.so
+%attr(755,root,root) %{_libdir}/libXevie.so
 %attr(755,root,root) %{_libdir}/libXext.so
+%attr(755,root,root) %{_libdir}/libXfixes.so
 %attr(755,root,root) %{_libdir}/libXfont.so
-%attr(755,root,root) %{_libdir}/libXfontcache.so
 %attr(755,root,root) %{_libdir}/libXft.so
 %attr(755,root,root) %{_libdir}/libXi.so
 %attr(755,root,root) %{_libdir}/libXinerama.so
@@ -2678,8 +2650,9 @@ fi
 %attr(755,root,root) %{_libdir}/libxkbfile.so
 %attr(755,root,root) %{_libdir}/libxkbui.so
 #%attr(755,root,root) %{_libdir}/libxrx.so
-%{_libdir}/libXau.a
-%{_libdir}/libXdmcp.a
+%{_libdir}/libXprintAppUtil.a
+%{_libdir}/libXprintUtil.a
+%{_libdir}/libdmx.a
 %{_libdir}/libfntstubs.a
 %{_libdir}/liboldX.a
 %{_libdir}/libxf86config.a
@@ -2691,14 +2664,20 @@ fi
 %{_includedir}/X11/Xcursor
 %{_includedir}/X11/Xft
 %{_includedir}/X11/Xmu
+%{_includedir}/X11/XprintAppUtil
+%{_includedir}/X11/XprintUtil
 %dir %{_includedir}/X11/extensions
 %{_includedir}/X11/extensions/*.h
 %{_includedir}/X11/fonts
 %{_includedir}/xf86*.h
 %{_libx11dir}/config
 %{_mandir}/man1/bdftopcf.1*
-%{_mandir}/man3/[A-FH-Z]*
+%{_mandir}/man3/[A-FH-Zl]*
+%{_pkgconfigdir}/xcomposite.pc
 %{_pkgconfigdir}/xcursor.pc
+%{_pkgconfigdir}/xdamage.pc
+%{_pkgconfigdir}/xevie.pc
+%{_pkgconfigdir}/xfixes.pc
 %{_pkgconfigdir}/xft.pc
 %{_pkgconfigdir}/xrender.pc
 
@@ -2791,7 +2770,7 @@ fi
 %attr(755,root,root) %{_libdir}/modules/drivers/i810_drv.o
 # i810_dri alone is built on amd64 - what for?
 %attr(755,root,root) %{_libdir}/modules/dri/i810_dri.so
-%attr(755,root,root) %{_libdir}/modules/dri/i830_dri.so
+%attr(755,root,root) %{_libdir}/modules/dri/i915_dri.so
 %{_mandir}/man4/i810.4*
 %endif
 
@@ -3066,11 +3045,18 @@ fi
 %attr(755,root,root) %{_libdir}/libX11.so.*.*
 %attr(755,root,root) %{_libdir}/libXRes.so.*.*
 %attr(755,root,root) %{_libdir}/libXTrap.so.*.*
-%attr(755,root,root) %{_libdir}/libXaw.so.*.*
+%attr(755,root,root) %{_libdir}/libXau.so.*.*
+%attr(755,root,root) %{_libdir}/libXaw.so.6.*
+%attr(755,root,root) %{_libdir}/libXaw.so.7.*
+%attr(755,root,root) %{_libdir}/libXaw.so.8.*
+%attr(755,root,root) %{_libdir}/libXcomposite.so.*.*
 %attr(755,root,root) %{_libdir}/libXcursor.so.*.*.*
+%attr(755,root,root) %{_libdir}/libXdamage.so.*.*
+%attr(755,root,root) %{_libdir}/libXdmcp.so.*.*
+%attr(755,root,root) %{_libdir}/libXevie.so.*.*
 %attr(755,root,root) %{_libdir}/libXext.so.*.*
+%attr(755,root,root) %{_libdir}/libXfixes.so.*.*
 %attr(755,root,root) %{_libdir}/libXfont.so.*.*
-%attr(755,root,root) %{_libdir}/libXfontcache.so.*.*
 %attr(755,root,root) %{_libdir}/libXft.so.1.*
 %attr(755,root,root) %{_libdir}/libXft.so.2.*.*
 %attr(755,root,root) %{_libdir}/libXi.so.*.*
@@ -3105,7 +3091,6 @@ fi
 %dir %{_libdir}/modules/dri
 %dir %{_libdir}/modules/drivers
 %attr(755,root,root) %{_libdir}/modules/*.a
-%attr(755,root,root) %{_libdir}/modules/codeconv
 %ifnarch amd64
 %attr(755,root,root) %{_libdir}/modules/drivers/linux
 %endif
@@ -3179,11 +3164,16 @@ fi
 %{_libdir}/libX11.a
 %{_libdir}/libXRes.a
 %{_libdir}/libXTrap.a
+%{_libdir}/libXau.a
 %{_libdir}/libXaw.a
+%{_libdir}/libXcomposite.a
 %{_libdir}/libXcursor.a
+%{_libdir}/libXdamage.a
+%{_libdir}/libXdmcp.a
+%{_libdir}/libXevie.a
 %{_libdir}/libXext.a
+%{_libdir}/libXfixes.a
 %{_libdir}/libXfont.a
-%{_libdir}/libXfontcache.a
 %{_libdir}/libXft.a
 %{_libdir}/libXi.a
 %{_libdir}/libXinerama.a
@@ -3211,7 +3201,10 @@ fi
 %attr(755,root,root) %{_bindir}/beforelight
 %attr(755,root,root) %{_bindir}/ico
 %attr(755,root,root) %{_bindir}/listres
+%attr(755,root,root) %{_bindir}/oclock
+%attr(755,root,root) %{_bindir}/rman
 %attr(755,root,root) %{_bindir}/showfont
+%attr(755,root,root) %{_bindir}/texteroids
 %attr(755,root,root) %{_bindir}/viewres
 %attr(755,root,root) %{_bindir}/x11perf
 %attr(755,root,root) %{_bindir}/x11perfcomp
@@ -3220,30 +3213,37 @@ fi
 %attr(755,root,root) %{_bindir}/xclipboard
 %attr(755,root,root) %{_bindir}/xclock
 %attr(755,root,root) %{_bindir}/xditview
+%attr(755,root,root) %{_bindir}/xdriinfo
 %attr(755,root,root) %{_bindir}/xedit
 %attr(755,root,root) %{_bindir}/xev
 %attr(755,root,root) %{_bindir}/xeyes
 %attr(755,root,root) %{_bindir}/xfd
 %attr(755,root,root) %{_bindir}/xfontsel
 %attr(755,root,root) %{_bindir}/xgc
+%attr(755,root,root) %{_bindir}/xkill
 %attr(755,root,root) %{_bindir}/xload
+%attr(755,root,root) %{_bindir}/xlogo
 %attr(755,root,root) %{_bindir}/xmag
 %attr(755,root,root) %{_bindir}/xman
 %attr(755,root,root) %{_bindir}/xmessage
 %attr(755,root,root) %{_bindir}/xmh
-%attr(755,root,root) %{_bindir}/xwininfo
-%attr(755,root,root) %{_bindir}/oclock
-%attr(755,root,root) %{_bindir}/xlogo
-%attr(755,root,root) %{_bindir}/xkill
-%attr(755,root,root) %{_bindir}/rman
+%attr(755,root,root) %{_bindir}/xmore
+%attr(755,root,root) %{_bindir}/xphelloworld
+%attr(755,root,root) %{_bindir}/xplsprinters
+%attr(755,root,root) %{_bindir}/xprehashprinterlist
+%attr(755,root,root) %{_bindir}/xpsimplehelloworld
+%attr(755,root,root) %{_bindir}/xpxthelloworld
 %attr(755,root,root) %{_bindir}/xtrap*
-%attr(755,root,root) %{_bindir}/texteroids
+%attr(755,root,root) %{_bindir}/xwininfo
 %{_libx11dir}/xedit
 %{_libx11dir}/xman.help
 %{_mandir}/man1/beforelight.1*
 %{_mandir}/man1/ico.1*
 %{_mandir}/man1/listres.1*
+%{_mandir}/man1/oclock.1*
+%{_mandir}/man1/rman.1*
 %{_mandir}/man1/showfont.1*
+%{_mandir}/man1/texteroids.1*
 %{_mandir}/man1/viewres.1*
 %{_mandir}/man1/x11perf.1*
 %{_mandir}/man1/x11perfcomp.1*
@@ -3252,24 +3252,28 @@ fi
 %{_mandir}/man1/xclipboard.1*
 %{_mandir}/man1/xclock.1*
 %{_mandir}/man1/xditview.1*
+%{_mandir}/man1/xdriinfo.1*
+%{_mandir}/man1/xmore.1*
 %{_mandir}/man1/xedit.1*
 %{_mandir}/man1/xev.1*
 %{_mandir}/man1/xeyes.1*
 %{_mandir}/man1/xfd.1*
 %{_mandir}/man1/xfontsel.1*
 %{_mandir}/man1/xgc.1*
+%{_mandir}/man1/xkill.1*
 %{_mandir}/man1/xload.1*
+%{_mandir}/man1/xlogo.1*
 %{_mandir}/man1/xmag.1*
 %{_mandir}/man1/xman.1*
 %{_mandir}/man1/xmessage.1*
 %{_mandir}/man1/xmh.1*
+%{_mandir}/man1/xphelloworld.1*
+%{_mandir}/man1/xplsprinters.1*
+%{_mandir}/man1/xprehashprinterlist.1*
+%{_mandir}/man1/xpsimplehelloworld.1*
+%{_mandir}/man1/xpxthelloworld.1*
+%{_mandir}/man1/xtrap*
 %{_mandir}/man1/xwininfo.1*
-%{_mandir}/man1/xkill.1*
-%{_mandir}/man1/xlogo.1*
-%{_mandir}/man1/oclock.1*
-%{_mandir}/man1/rman.1*
-%{_mandir}/man1/xtr*
-%{_mandir}/man1/texteroids.1*
 
 %lang(it) %{_mandir}/it/man1/xload.1*
 
@@ -3283,6 +3287,10 @@ fi
 %{_appdefsdir}/Editres-color
 %{_appdefsdir}/Viewres
 %{_appdefsdir}/XConsole
+%{_appdefsdir}/XFontSel
+%{_appdefsdir}/XMore
+%{_appdefsdir}/Xditview
+%{_appdefsdir}/Xditview-chrtr
 %{_appdefsdir}/Xedit
 %{_appdefsdir}/Xedit-color
 %{_appdefsdir}/Xfd
@@ -3292,9 +3300,6 @@ fi
 %{_appdefsdir}/Xmessage
 %{_appdefsdir}/Xmessage-color
 %{_appdefsdir}/Xmh
-%{_appdefsdir}/XFontSel
-%{_appdefsdir}/Xditview
-%{_appdefsdir}/Xditview-chrtr
 
 %{_desktopdir}/oclock.desktop
 %{_desktopdir}/xcalc.desktop
