@@ -2249,7 +2249,6 @@ fi
 %{_mandir}/man1/Xmark.1*
 %{_mandir}/man1/appres.1*
 %{_mandir}/man1/atobm.1*
-%{_mandir}/man1/bdftopcf.1*
 %{_mandir}/man1/bitmap.1*
 %{_mandir}/man1/bmtoa.1*
 %{_mandir}/man1/cxpm.1*
@@ -2525,6 +2524,7 @@ fi
 %{_includedir}/X11/fonts
 %{_includedir}/xf86*.h
 %{_libx11dir}/config
+%{_mandir}/man1/bdftopcf.1*
 %{_mandir}/man3/[A-FH-Z]*
 %{_pkgconfigdir}/xcursor.pc
 %{_pkgconfigdir}/xft.pc
