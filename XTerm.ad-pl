@@ -4,6 +4,8 @@
 !   Pierwsza w miarê kompletna wersja
 ! - 04.02.99
 !   Poprawione dzia³anie klawiszy Home, End
+! - 28.10.2001
+!   Poprawione BackSpace (^H zamiast \177)
 
 NXTerm.JoinSession:			False
 *SimpleMenu*BackingStore: 		NotUseful
@@ -199,8 +201,8 @@ NXTerm.JoinSession:			False
 	Meta<Key>Page_Up: string(0x1b) string(0x1b) string("[5~")\n\
 	~Meta<Key>Page_Down: string(0x1b) string("[6~")\n\
 	Meta<Key>Page_Down: string(0x1b) string(0x1b) string("[6~")\n\
-	~Meta<Key>BackSpace: string(\177)\n\
-	Meta<Key>BackSpace: string(0x1b) string(\177)\n\
+	~Meta<Key>BackSpace: string(0x08)\n\
+	Meta<Key>BackSpace: string(0x1b) string(0x08)\n\
 	~Meta<Key>Up: string(0x1b) string("OA")\n\
 	Meta<Key>Up: string(0x1b) string(0x1b) string("OA")\n\
 	~Meta<Key>Down: string(0x1b) string("OB")\n\
