@@ -456,10 +456,10 @@ diff -urN xc.orig/programs/xterm/Imakefile xc/programs/xterm/Imakefile
  #if defined(NetBSDArchitecture) || defined(OpenBSDArchitecture) || \
      (defined(LinuxArchitecture) && \
       (LinuxCLibMajorVersion == 6) && (LinuxCLibMinorVersion < 1))
-@@ -126,7 +132,7 @@
-         DEFINES = $(XKB_DEFINES) $(TERMCAPDEFINES) $(FEATURE_DEFINES) \
- 		  $(SCROLLBAR_RIGHT) $(UTF8_OPTION) $(XRFDEF) $(PATH_DEFINES) \
- 		  $(TRACEDEF) $(XVERSIONDEFS) $(VENDOR_DEFINES)
+@@ -116,7 +116,7 @@
+     XKB_DEFINES = XkbClientDefines
+    PATH_DEFINES = -DPROJECTROOT=$(PROJECTROOT)
+         DEFINES = $(XKB_DEFINES) $(TERMCAPDEFINES) $(FEATURE_DEFINES) $(SCROLLBAR_RIGHT) $(UTF8_OPTION) $(XRFDEF) $(PATH_DEFINES) $(TRACEDEF)
 -       INCLUDES = -I. $(XRFINCLUDES)
 +       INCLUDES = -I. -I/usr/include/ncurses $(XRFINCLUDES)
  
