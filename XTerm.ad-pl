@@ -1,14 +1,16 @@
 ! $autor: Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-! $Ver:   0.02
+! $Ver:   0.03
 ! - 09.04.98
 !   Pierwsza w miarê kompletna wersja
 ! - 04.02.99
 !   Poprawione dzia³anie klawiszy Home, End
 ! - 28.10.2001
 !   Poprawione BackSpace (^H zamiast \177)
+! - 16.11.2002	(GoTaR <gotar@priv0.onet.pl>)
+!   Poprawione b³êdy, dodane meta-? i meta-!
 
 NXTerm.JoinSession:			False
-*SimpleMenu*BackingStore: 		NotUseful
+*SimpleMenu*BackingStore:		NotUseful
 *SimpleMenu*menuLabel.font: 		-misc-*-*-*-*-*-15-*-*-*-*-*-*-2
 *SimpleMenu*menuLabel.vertSpace:	100
 *SimpleMenu*HorizontalMargins:		16
@@ -23,13 +25,14 @@ NXTerm.JoinSession:			False
 *dynamicColors:				True
 
 ! Kolory
-*XTerm*cursorColor:				blue
-*XTerm*background:				black
-*XTerm*foreground:				white
-*XTerm*SimpleMenu.background:			#00aaff
-*XTerm*SimpleMenu.foreground:			black
+*XTerm*cursorColor:			blue
+*XTerm*cursorBlink:			yes
+*XTerm*background:			black
+*XTerm*foreground:			white
+*XTerm*SimpleMenu.background:		#00aaff
+*XTerm*SimpleMenu.foreground:		black
 
-! *VT100.geometry:			80x45
+! *VT100.geometry:			100x40
 *VT100*colorULMode: 			on
 *VT100*underLine:			on
 *VT100*colorBDMode:			on
@@ -174,12 +177,6 @@ NXTerm.JoinSession:			False
 	<Key>KP_Enter: string(\015)\n\
 	<Key>KP_Equal: string(=)\n\
 	<Key>KP_Multiply: string(*)\n\
-	@Num_Lock<Key>KP_Subtract: string(-)\n\
-	<Key>KP_Add: string(+)\n\
-	<Key>KP_Divide: string(/)\n\
-	<Key>KP_Enter: string(\015)\n\
-	<Key>KP_Equal: string(=)\n\
-	<Key>KP_Multiply: string(*)\n\
 	<Key>KP_Subtract: string(-)\n\
 	Shift<Key>Prior:scroll-back(1,page)\n\
 	Shift<Key>Next:scroll-forw(1,page)\n\
@@ -287,4 +284,7 @@ NXTerm.JoinSession:			False
 	a<Key>w: string(0x1b) string("w")\n\
 	a<Key>x: string(0x1b) string("x")\n\
 	a<Key>y: string(0x1b) string("y")\n\
-	a<Key>z: string(0x1b) string("z")
+	a<Key>z: string(0x1b) string("z")\n\
+	a s<Key>/: string(0x1b) string("?")\n\
+	a s<Key>1: string(0x1b) string("!")
+		
