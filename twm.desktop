@@ -1,7 +1,11 @@
 [Desktop Entry]
 Name=twm
+Name[da]=Twm
+Name[gl]=twm
 Name[ko]=twm
+Name[no]=twm
 Name[pl]=twm
+Name[uk]=twm
 Exec=twm
 TryExec=twm
 
