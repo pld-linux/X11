@@ -1,0 +1,27 @@
+--- xc/config/cf/xorgsite.def.wiget	2004-08-21 04:06:44.000000000 +0200
++++ xc/config/cf/xorgsite.def	2004-09-09 16:16:53.193447976 +0200
+@@ -311,20 +311,20 @@
+  * HasGlide2 to YES and set the Glide2IncDir variable. 
+  * HasGlide2 is per default NO.
+  *
+-#define HasGlide2 YES
+  */
++#define	HasGlide2 YES
+ 
+ /*
+  * Set the path to your Glide include files.
+  *
+-#define Glide2IncDir /usr/include/glide
+  */
++#define Glide2IncDir /usr/include/glide
+ 
+ /* 
+  * Have glide 3?
+  *
+-#define HasGlide3 YES
+  */
++#define HasGlide3 YES
+ 
+ /*
+  * Set the path to your Glide 3 include files.
+
