@@ -80,15 +80,6 @@ diff -Nur XFree86-4.0.2.org/xc/programs/Xserver/Imakefile XFree86-4.0.2/xc/progr
  #include <Server.tmpl>
  
  #ifdef XFree86Version
-@@ -264,7 +259,7 @@
-    EXTRASYSLIBS = ServerExtraSysLibs
- #endif
- #if HasPam && HasPamMisc
--        PAMLIBS = PamLibraries PamMiscLibraries
-+        PAMLIBS = -lpam -lpam_misc -ldl PamLibraries PamMiscLibraries
- #endif
- #if !(SystemV4 || defined(SGIArchitecture) || UseRgbTxt)
-        DBMLIBS = DBMLibrary
 @@ -1017,6 +1012,11 @@
  	$(XNESTLIBS) $(LOADABLEEXTS) $(LIBCWRAPPER),$(XNESTSYSLIBS))
  #endif /* XnestServer */
