@@ -8,7 +8,7 @@ diff -Nur XFree86-4.0.2.org/xc/programs/xdm/Imakefile XFree86-4.0.2/xc/programs/
 -		  '-DDEF_CHOOSER="$(XDMDIR)/chooser"' \
 -		  '-DDEF_AUTH_DIR="$(XDMDIR)"' \
 -		  '-DDEF_GREETER_LIB="$(XDMDIR)/libXdmGreet.so"'
-+		  '-DDEF_CHOOSER="$(DIR)/chooser"' \
++		  '-DDEF_CHOOSER="$(BINDIR)/chooser"' \
 +		  '-DDEF_AUTH_DIR="$(XDMVARDIR)"' \
 +		  '-DDEF_GREETER_LIB="$(USRLIBDIR)/libXdmGreet.so"'
  #endif
