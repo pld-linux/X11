@@ -2464,7 +2464,7 @@ fi
 %files Xprint
 %defattr(644,root,root,755)
 # XXX: missing dir
-%dir %{_sysconfdir}/X11/xserver/C/print/
+%dir %{_sysconfdir}/X11/xserver/C/print
 %{_sysconfdir}/X11/xserver/C/print/*
 
 %files DPS
@@ -2614,6 +2614,8 @@ fi
 %attr(755,root,root) %{_libdir}/libXcomposite.so
 %attr(755,root,root) %{_libdir}/libXcursor.so
 %attr(755,root,root) %{_libdir}/libXdamage.so
+%attr(755,root,root) %{_libdir}/libXdmcp.so
+%attr(755,root,root) %{_libdir}/libXevie.so
 %attr(755,root,root) %{_libdir}/libXext.so
 %attr(755,root,root) %{_libdir}/libXfixes.so
 %attr(755,root,root) %{_libdir}/libXfont.so
@@ -2640,7 +2642,9 @@ fi
 %attr(755,root,root) %{_libdir}/libxkbui.so
 #%attr(755,root,root) %{_libdir}/libxrx.so
 %{_libdir}/libXau.a
-%{_libdir}/libXdmcp.a
+%{_libdir}/libXprintAppUtil.a
+%{_libdir}/libXprintUtil.a
+%{_libdir}/libdmx.a
 %{_libdir}/libfntstubs.a
 %{_libdir}/liboldX.a
 %{_libdir}/libxf86config.a
@@ -2652,6 +2656,8 @@ fi
 %{_includedir}/X11/Xcursor
 %{_includedir}/X11/Xft
 %{_includedir}/X11/Xmu
+%{_includedir}/X11/XprintAppUtil
+%{_includedir}/X11/XprintUtil
 %dir %{_includedir}/X11/extensions
 %{_includedir}/X11/extensions/*.h
 %{_includedir}/X11/fonts
@@ -2662,6 +2668,7 @@ fi
 %{_pkgconfigdir}/xcomposite.pc
 %{_pkgconfigdir}/xcursor.pc
 %{_pkgconfigdir}/xdamage.pc
+%{_pkgconfigdir}/xevie.pc
 %{_pkgconfigdir}/xfixes.pc
 %{_pkgconfigdir}/xft.pc
 %{_pkgconfigdir}/xrender.pc
@@ -2755,6 +2762,7 @@ fi
 %attr(755,root,root) %{_libdir}/modules/drivers/i810_drv.o
 # i810_dri alone is built on amd64 - what for?
 %attr(755,root,root) %{_libdir}/modules/dri/i810_dri.so
+%attr(755,root,root) %{_libdir}/modules/dri/i915_dri.so
 %{_mandir}/man4/i810.4*
 %endif
 
@@ -3030,6 +3038,8 @@ fi
 %attr(755,root,root) %{_libdir}/libXcomposite.so.*.*
 %attr(755,root,root) %{_libdir}/libXcursor.so.*.*.*
 %attr(755,root,root) %{_libdir}/libXdamage.so.*.*
+%attr(755,root,root) %{_libdir}/libXdmcp.so.*.*
+%attr(755,root,root) %{_libdir}/libXevie.so.*.*
 %attr(755,root,root) %{_libdir}/libXext.so.*.*
 %attr(755,root,root) %{_libdir}/libXfixes.so.*.*
 %attr(755,root,root) %{_libdir}/libXfont.so.*.*
@@ -3144,7 +3154,8 @@ fi
 %{_libdir}/libXcomposite.a
 %{_libdir}/libXcursor.a
 %{_libdir}/libXdamage.a
-%{_libdir}/libdmx.a
+%{_libdir}/libXdmcp.a
+%{_libdir}/libXevie.a
 %{_libdir}/libXext.a
 %{_libdir}/libXfixes.a
 %{_libdir}/libXfont.a
@@ -3201,7 +3212,7 @@ fi
 %attr(755,root,root) %{_bindir}/xman
 %attr(755,root,root) %{_bindir}/xmessage
 %attr(755,root,root) %{_bindir}/xmh
-#%attr(755,root,root) %{_bindir}/xmore
+%attr(755,root,root) %{_bindir}/xmore
 %attr(755,root,root) %{_bindir}/xphelloworld
 %attr(755,root,root) %{_bindir}/xplsprinters
 %attr(755,root,root) %{_bindir}/xprehashprinterlist
@@ -3227,7 +3238,7 @@ fi
 %{_mandir}/man1/xclock.1*
 %{_mandir}/man1/xditview.1*
 %{_mandir}/man1/xdriinfo.1*
-#%{_mandir}/man1/xmore.1*
+%{_mandir}/man1/xmore.1*
 %{_mandir}/man1/xedit.1*
 %{_mandir}/man1/xev.1*
 %{_mandir}/man1/xeyes.1*
@@ -3261,6 +3272,10 @@ fi
 %{_appdefsdir}/Editres-color
 %{_appdefsdir}/Viewres
 %{_appdefsdir}/XConsole
+%{_appdefsdir}/XFontSel
+%{_appdefsdir}/XMore
+%{_appdefsdir}/Xditview
+%{_appdefsdir}/Xditview-chrtr
 %{_appdefsdir}/Xedit
 %{_appdefsdir}/Xedit-color
 %{_appdefsdir}/Xfd
@@ -3270,9 +3285,6 @@ fi
 %{_appdefsdir}/Xmessage
 %{_appdefsdir}/Xmessage-color
 %{_appdefsdir}/Xmh
-%{_appdefsdir}/XFontSel
-%{_appdefsdir}/Xditview
-%{_appdefsdir}/Xditview-chrtr
 
 %{_desktopdir}/oclock.desktop
 %{_desktopdir}/xcalc.desktop
