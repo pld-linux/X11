@@ -22,14 +22,15 @@ fi
 
 # See how we were called.
 case "$1" in
+  start)
 	# Check if the service is already running?
-	if [ ! -f /var/lock/subsys/xdm ]; then
+	if [ -f /var/lock/subsys/xdm ]; then
+		echo "Starting X Display Manager already is running"
+	else
 		show Starting X Display Manager daemon
 		daemon /usr/X11R6/bin/xdm
-	else
-		echo "Starting X Display Manager already is running"
+		touch /var/lock/subsys/xdm
 	fi
-	touch /var/lock/subsys/xdm
 	;;
   stop)
 	show Stopping X Display Manager daemon
