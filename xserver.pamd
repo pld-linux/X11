@@ -1,6 +1,6 @@
 #%PAM-1.0
-auth		required	/lib/security/pam_listfile.so item=user sense=deny file=/etc/security/blacklist onerr=succeed
-auth		required	/lib/security/pam_listfile.so item=user sense=deny file=/etc/security/blacklist.xserver onerr=succeed
-auth		sufficient	/lib/security/pam_rootok.so
-auth		required	/lib/security/pam_console.so
-account		required	/lib/security/pam_permit.so
+auth		required	pam_listfile.so item=user sense=deny file=/etc/security/blacklist onerr=succeed
+auth		required	pam_listfile.so item=user sense=deny file=/etc/security/blacklist.xserver onerr=succeed
+auth		sufficient	pam_rootok.so
+auth		required	pam_console.so
+account		required	pam_permit.so
