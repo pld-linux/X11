@@ -1,7 +1,7 @@
-diff -Nur XFree86-4.0.2.org/xc/programs/xdm/Imakefile XFree86-4.0.2/xc/programs/xdm/Imakefile
---- XFree86-4.0.2.org/xc/programs/xdm/Imakefile	Wed Nov 29 17:46:07 2000
-+++ XFree86-4.0.2/xc/programs/xdm/Imakefile	Thu Dec 21 13:10:37 2000
-@@ -225,9 +225,9 @@
+diff -urN xc.orig/programs/xdm/Imakefile xc/programs/xdm/Imakefile
+--- xc.orig/programs/xdm/Imakefile	Mon Dec 30 15:54:06 2002
++++ xc/programs/xdm/Imakefile	Mon Dec 30 18:33:35 2002
+@@ -256,9 +256,9 @@
  		  '-DDEF_SYSTEM_SHELL="$(BOURNE_SHELL)"' \
  		  '-DDEF_FAILSAFE_CLIENT="$(BINDIR)/xterm"' \
  		  '-DDEF_XDM_CONFIG="$(XDMDIR)/xdm-config"' \
@@ -11,10 +11,10 @@ diff -Nur XFree86-4.0.2.org/xc/programs/xdm/Imakefile XFree86-4.0.2/xc/programs/
 +		  '-DDEF_CHOOSER="$(BINDIR)/chooser"' \
 +		  '-DDEF_AUTH_DIR="$(XDMVARDIR)"' \
 +		  '-DDEF_GREETER_LIB="$(USRLIBDIR)/libXdmGreet.so"'
- #endif
  
  ComplexProgramTarget_1(xdm,$(LOCAL_LIBRARIES),NullParameter)
-@@ -247,7 +247,7 @@
+ LinkConfDirectory(xdm,.,xdm,.)
+@@ -277,7 +277,7 @@
  #if BuildChooser
  SpecialCObjectRule(chooser, $(ICONFIGFILES), $(SOCK_DEFINES))
  NormalProgramTarget(chooser,$(OBJS3),$(DEPLIBS3),$(LIBS3),NullParameter)
@@ -23,21 +23,25 @@ diff -Nur XFree86-4.0.2.org/xc/programs/xdm/Imakefile XFree86-4.0.2/xc/programs/
  InstallAppDefaults(Chooser)
  #endif
  #if BuildBoth
-diff -Nur XFree86-4.0.2.org/xc/programs/xdm/config/Imakefile XFree86-4.0.2/xc/programs/xdm/config/Imakefile
---- XFree86-4.0.2.org/xc/programs/xdm/config/Imakefile	Mon Jan 31 20:33:43 2000
-+++ XFree86-4.0.2/xc/programs/xdm/config/Imakefile	Thu Dec 21 13:20:54 2000
-@@ -5,9 +5,7 @@
+diff -urN xc.orig/programs/xdm/config/Imakefile xc/programs/xdm/config/Imakefile
+--- xc.orig/programs/xdm/config/Imakefile	Mon Dec 30 15:54:07 2002
++++ xc/programs/xdm/config/Imakefile	Mon Dec 30 18:38:58 2002
+@@ -9,13 +9,7 @@
  
  all:: Xservers.ws xdm-config Xservers Xresources
  
 -#if defined(i386Architecture) && (defined(NetBSDArchitecture) || defined(OpenBSDArchitecture))
 -DEFAULTVT=vt05
 -#endif
+-
+-#if defined(LinuxDistribution) && (LinuxDistribution == LinuxDebian)
+-DEFAULTVT=vt7
+-#endif
 +DEFAULTVT=vt9
  
  #ifndef XdmPixmap
  # define XdmPixmap XFree86.xpm
-@@ -25,7 +23,11 @@
+@@ -39,7 +33,11 @@
  #endif
  
  CppFileTarget(Xservers.ws,Xserv.ws.cpp,-DBINDIR=$(BINDIR) -DDEFAULTVT=$(DEFAULTVT),NullParameter)
@@ -50,10 +54,10 @@ diff -Nur XFree86-4.0.2.org/xc/programs/xdm/config/Imakefile XFree86-4.0.2/xc/pr
  CppFileTarget(Xresources,Xres.cpp,$(XPM_DEFINES),NullParameter)
  
  LinkFile(Xservers,Xservers.$(SERVERSTYPE))
-diff -Nur XFree86-4.0.2.org/xc/programs/xdm/config/Xres.cpp XFree86-4.0.2/xc/programs/xdm/config/Xres.cpp
---- XFree86-4.0.2.org/xc/programs/xdm/config/Xres.cpp	Thu Dec 21 13:06:17 2000
-+++ XFree86-4.0.2/xc/programs/xdm/config/Xres.cpp	Thu Dec 21 13:19:25 2000
-@@ -36,9 +36,7 @@
+diff -urN xc.orig/programs/xdm/config/Xres.cpp xc/programs/xdm/config/Xres.cpp
+--- xc.orig/programs/xdm/config/Xres.cpp	Mon Dec 30 15:54:07 2002
++++ xc/programs/xdm/config/Xres.cpp	Mon Dec 30 18:41:24 2002
+@@ -41,9 +41,7 @@
  /**/#endif
  #endif /* XPM */
  /**/#ifdef COLOR
@@ -64,7 +68,7 @@ diff -Nur XFree86-4.0.2.org/xc/programs/xdm/config/Xres.cpp XFree86-4.0.2/xc/pro
  xlogin*borderWidth: 1
  xlogin*frameWidth: 5
  xlogin*innerFramesWidth: 2
-@@ -47,6 +45,8 @@
+@@ -52,6 +50,8 @@
  xlogin*background: grey
  !xlogin*foreground: darkgreen
  xlogin*greetColor: Blue3
@@ -73,15 +77,3 @@ diff -Nur XFree86-4.0.2.org/xc/programs/xdm/config/Xres.cpp XFree86-4.0.2/xc/pro
  #endif /* XPM */
  xlogin*failColor: red
  *Foreground: black
-diff -Nur XFree86-4.0.2.org/xc/programs/xdm/greeter/Imakefile XFree86-4.0.2/xc/programs/xdm/greeter/Imakefile
---- XFree86-4.0.2.org/xc/programs/xdm/greeter/Imakefile	Wed Jun 14 21:43:32 2000
-+++ XFree86-4.0.2/xc/programs/xdm/greeter/Imakefile	Thu Dec 21 13:20:13 2000
-@@ -77,8 +77,6 @@
-  DEFINES = $(GREETER_DEFINES) $(XDMAUTH_DEFINES) $(RPC_DEFINES) \
- 	   $(KRBIV_DEFINES) $(KRB5_DEFINES) $(PWD_DEFINES) $(PAM_DEFINES)
- 
--SHLIBDIR = $(XDMDIR)
--
- SRCS = greet.c verify.c Login.c
- OBJS = greet.o verify.o Login.o
- 

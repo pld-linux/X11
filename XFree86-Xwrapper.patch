@@ -1,9 +1,9 @@
-diff -urN XFree86-4.1.0.orig/xc/config/cf/Server.tmpl XFree86-4.1.0/xc/config/cf/Server.tmpl
---- XFree86-4.1.0.orig/xc/config/cf/Server.tmpl	Fri Apr 20 17:51:15 2001
-+++ XFree86-4.1.0/xc/config/cf/Server.tmpl	Sun Jun 17 20:17:24 2001
-@@ -31,8 +31,14 @@
- #ifndef MakeDllModules
- #define MakeDllModules NO
+diff -urN xc.orig/config/cf/Server.tmpl xc/config/cf/Server.tmpl
+--- xc.orig/config/cf/Server.tmpl	Mon Dec 30 15:52:30 2002
++++ xc/config/cf/Server.tmpl	Mon Dec 30 17:31:51 2002
+@@ -25,8 +25,14 @@
+ #ifndef DoThreadedServer
+ #define DoThreadedServer NO
  #endif
 +#ifndef XserverNeedsSetUID
 +#define XserverNeedsSetUID NO
@@ -16,36 +16,36 @@ diff -urN XFree86-4.1.0.orig/xc/config/cf/Server.tmpl XFree86-4.1.0/xc/config/cf
 +#define InstallServerSetUID (XserverNeedsSetUID && !UseXserverWrapper)
  #endif
  
- /*
-diff -urN XFree86-4.1.0.orig/xc/config/cf/xf86site.def XFree86-4.1.0/xc/config/cf/xf86site.def
---- XFree86-4.1.0.orig/xc/config/cf/xf86site.def	Sun Jun 17 19:42:08 2001
-+++ XFree86-4.1.0/xc/config/cf/xf86site.def	Sun Jun 17 20:17:24 2001
-@@ -348,13 +348,15 @@
+ #ifdef CrossCompileDir
+diff -urN xc.orig/config/cf/xf86site.def xc/config/cf/xf86site.def
+--- xc.orig/config/cf/xf86site.def	Mon Dec 30 15:52:31 2002
++++ xc/config/cf/xf86site.def	Mon Dec 30 17:37:06 2002
+@@ -69,14 +69,15 @@
   */
  
  /*
 - * If you only run the X server under xdm the X servers don't need to be
 - * installed SetUID, and you may comment out the lines below.  If you run
 - * the servers by hand (with xinit or startx), then they do need to be
-- * installed SetUID on most OSs.
-- * Consult your system administrator before making the X server setuid.
+- * installed SetUID on most platforms.
 + * The X servers need to run as root on most OSs.  We're now using a
 + * wrapper in that case, but we still need to make it known that the
 + * servers need SetUID.  When only using xdm, this (and the wrapper)
 + * are not required.  Disabling this automatically disables use of the
 + * wrapper.
   *
--#define InstallXserverSetUID	NO
+- * Consult your system administrator before making the X server setuid.
 + * If you're only starting the Xservers with xdm set this to NO
-+ *
-+#define XserverNeedsSetUID	NO
+  *
+-#define InstallXserverSetUID	NO
++#define XserverNeedsSetUID    NO
   */
  
- /*
-diff -urN XFree86-4.1.0.orig/xc/config/cf/xfree86.cf XFree86-4.1.0/xc/config/cf/xfree86.cf
---- XFree86-4.1.0.orig/xc/config/cf/xfree86.cf	Sun Jun 17 19:42:08 2001
-+++ XFree86-4.1.0/xc/config/cf/xfree86.cf	Sun Jun 17 20:17:24 2001
-@@ -720,12 +720,15 @@
+ 
+diff -urN xc.orig/config/cf/xfree86.cf xc/config/cf/xfree86.cf
+--- xc.orig/config/cf/xfree86.cf	Mon Dec 30 15:52:31 2002
++++ xc/config/cf/xfree86.cf	Mon Dec 30 17:31:51 2002
+@@ -1104,12 +1104,15 @@
  #endif
  
  /*
@@ -65,12 +65,12 @@ diff -urN XFree86-4.1.0.orig/xc/config/cf/xfree86.cf XFree86-4.1.0/xc/config/cf/
  # endif
  #endif
  
-diff -urN XFree86-4.1.0.orig/xc/programs/Xserver/Imakefile XFree86-4.1.0/xc/programs/Xserver/Imakefile
---- XFree86-4.1.0.orig/xc/programs/Xserver/Imakefile	Fri May 18 19:48:30 2001
-+++ XFree86-4.1.0/xc/programs/Xserver/Imakefile	Sun Jun 17 20:17:24 2001
+diff -urN xc.orig/programs/Xserver/Imakefile xc/programs/Xserver/Imakefile
+--- xc.orig/programs/Xserver/Imakefile	Mon Dec 30 15:53:22 2002
++++ xc/programs/Xserver/Imakefile	Mon Dec 30 17:31:51 2002
 @@ -4,11 +4,6 @@
   */
- XCOMM $XFree86: xc/programs/Xserver/Imakefile,v 3.229 2001/05/18 17:48:30 torrey Exp $
+ XCOMM $XFree86: xc/programs/Xserver/Imakefile,v 3.275 2002/12/21 00:19:11 torrey Exp $
  
 -#ifndef InstallXserverSetUID
 -#define InstallXserverSetUID NO
@@ -80,21 +80,21 @@ diff -urN XFree86-4.1.0.orig/xc/programs/Xserver/Imakefile XFree86-4.1.0/xc/prog
  #include <Server.tmpl>
  
  #ifdef XFree86Version
-@@ -1068,6 +1063,11 @@
- 	$(XNESTLIBS) $(LOADABLEEXTS) $(LIBCWRAPPER),$(XNESTSYSLIBS))
+@@ -1146,6 +1141,11 @@
  #endif /* XnestServer */
  
-+
+ 
 +#if UseXserverWrapper
 +SetUIDProgramTarget(Xwrapper,os/wrapper.o,NullParameter,$(PAMLIBS),NullParameter)
 +InstallProgramWithFlags(Xwrapper,$(BINDIR),$(INSTUIDFLAGS))
 +#endif
- 
- #if XnonServer
++
+ #if defined(XnonServer) && XnonServer
  XCOMM
-diff -urN XFree86-4.1.0.orig/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c
---- XFree86-4.1.0.orig/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c	Tue Nov 14 22:59:24 2000
-+++ XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c	Sun Jun 17 20:17:24 2001
+ XCOMM non server, just compile sources for build test
+diff -urN xc.orig/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c
+--- xc.orig/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c	Mon Dec 30 15:53:52 2002
++++ xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c	Mon Dec 30 17:31:51 2002
 @@ -66,7 +66,10 @@
  	/* check if we're run with euid==0 */
  	if (geteuid() != 0)
@@ -107,35 +107,35 @@ diff -urN XFree86-4.1.0.orig/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx
  	}
  
  	/*
-diff -urN XFree86-4.1.0.orig/xc/programs/Xserver/os/Imakefile XFree86-4.1.0/xc/programs/Xserver/os/Imakefile
---- XFree86-4.1.0.orig/xc/programs/Xserver/os/Imakefile	Mon Apr 23 18:17:12 2001
-+++ XFree86-4.1.0/xc/programs/Xserver/os/Imakefile	Sun Jun 17 20:18:35 2001
-@@ -116,6 +116,7 @@
+diff -urN xc.orig/programs/Xserver/os/Imakefile xc/programs/Xserver/os/Imakefile
+--- xc.orig/programs/Xserver/os/Imakefile	Mon Dec 30 15:53:58 2002
++++ xc/programs/Xserver/os/Imakefile	Mon Dec 30 17:31:52 2002
+@@ -120,6 +120,7 @@
         INCLUDES = -I. -I../include -I$(XINCLUDESRC) -I$(EXTINCSRC) \
- 		  -I$(SERVERSRC)/Xext -I$(FONTINCSRC) \
+ 		  -I$(SERVERSRC)/Xext -I$(FONTINCSRC) -I$(SERVERSRC)/render \
  		  -I$(TOP)/lib/Xau -I../lbx Krb5Includes
 +  EXTRA_DEFINES = -DUSE_PAM
   DEPEND_DEFINES = $(DBM_DEFINES) $(XDMCP_DEFINES) $(EXT_DEFINES) \
  		  $(TRANS_INCLUDES) $(CONNECTION_FLAGS) DependDefines
         LINTLIBS = ../dix/llib-ldix.ln
-@@ -159,6 +160,14 @@
- 	cc -c $(DBM_DEFINES) $(CDEBUGFLAGS) $(ALLDEFINES) $*.c
- #else
+@@ -166,6 +167,14 @@
  SpecialCObjectRule(oscolor,$(ICONFIGFILES),$(DBM_DEFINES))
-+#endif
-+
+ #endif
+ 
 +#if UseXserverWrapper
 +AllTarget(wrapper.o)
 +
 +       WRAPPER_DEFINES = -DXSERVER_PATH=\"/etc/X11/X\"
 +
 +SpecialCObjectRule(wrapper,NullParameter,$(WRAPPER_DEFINES))
- #endif
- 
++#endif
++
  #if HasKrb5
-diff -urN XFree86-4.1.0.orig/xc/programs/Xserver/os/wrapper.c XFree86-4.1.0/xc/programs/Xserver/os/wrapper.c
---- XFree86-4.1.0.orig/xc/programs/Xserver/os/wrapper.c	Thu Jan  1 01:00:00 1970
-+++ XFree86-4.1.0/xc/programs/Xserver/os/wrapper.c	Sun Jun 17 20:17:24 2001
+ LinkSourceFile(k5encode.c,$(XAUTHSRC))
+ #endif
+diff -urN xc.orig/programs/Xserver/os/wrapper.c xc/programs/Xserver/os/wrapper.c
+--- xc.orig/programs/Xserver/os/wrapper.c	Thu Jan  1 01:00:00 1970
++++ xc/programs/Xserver/os/wrapper.c	Mon Dec 30 17:31:52 2002
 @@ -0,0 +1,304 @@
 +/*
 + * X server wrapper.
@@ -441,31 +441,9 @@ diff -urN XFree86-4.1.0.orig/xc/programs/Xserver/os/wrapper.c XFree86-4.1.0/xc/p
 +    exit(1);
 +}
 +
-diff -urN XFree86-4.1.0.orig/xc/programs/xinit/xinit.c XFree86-4.1.0/xc/programs/xinit/xinit.c
---- XFree86-4.1.0.orig/xc/programs/xinit/xinit.c	Mon Apr 16 08:51:46 2001
-+++ XFree86-4.1.0/xc/programs/xinit/xinit.c	Sun Jun 17 20:17:24 2001
-@@ -148,6 +148,7 @@
- #define	OK_EXIT		0
- #define	ERR_EXIT	1
- 
-+char *default_wrapper = BINDIR "/Xwrapper";
- char *default_server = "X";
- char *default_display = ":0";		/* choose most efficient */
- #ifndef __EMX__
-@@ -317,7 +318,10 @@
- 	if (argc == 0 ||
- #ifndef __EMX__
- 	    (**argv != '/' && **argv != '.')) {
--		*sptr++ = default_server;
-+		if (access(default_wrapper, X_OK) == 0)
-+			*sptr++ = default_wrapper;
-+		else
-+			*sptr++ = default_server;
- #else
- 	    (**argv != '/' && **argv != '\\' && **argv != '.' &&
- 	     !(isalpha(**argv) && (*argv)[1]==':'))) {
---- XFree86-4.2.0/xc/programs/xinit/startx.cpp.orig	Fri Nov 30 21:57:48 2001
-+++ XFree86-4.2.0/xc/programs/xinit/startx.cpp	Sun Mar  3 12:52:13 2002
+diff -urN xc.orig/programs/xinit/startx.cpp xc/programs/xinit/startx.cpp
+--- xc.orig/programs/xinit/startx.cpp	Mon Dec 30 15:54:10 2002
++++ xc/programs/xinit/startx.cpp	Mon Dec 30 17:31:52 2002
 @@ -53,7 +53,7 @@
  sysclientrc=XINITDIR/xinitrc
  sysserverrc=XINITDIR/xserverrc
@@ -475,3 +453,26 @@ diff -urN XFree86-4.1.0.orig/xc/programs/xinit/xinit.c XFree86-4.1.0/xc/programs
  defaultclientargs=""
  defaultserverargs=""
  clientargs=""
+diff -urN xc.orig/programs/xinit/xinit.c xc/programs/xinit/xinit.c
+--- xc.orig/programs/xinit/xinit.c	Mon Dec 30 15:54:10 2002
++++ xc/programs/xinit/xinit.c	Mon Dec 30 17:31:52 2002
+@@ -146,6 +146,7 @@
+ #define	OK_EXIT		0
+ #define	ERR_EXIT	1
+ 
++char *default_wrapper = BINDIR "/Xwrapper";
+ char *default_server = "X";
+ char *default_display = ":0";		/* choose most efficient */
+ char *default_client[] = {"xterm", "-geometry", "+1+1", "-n", "login", NULL};
+@@ -332,7 +333,10 @@
+ 	if (argc == 0 ||
+ #ifndef __UNIXOS2__
+ 	    (**argv != '/' && **argv != '.')) {
+-		*sptr++ = default_server;
++		if (access(default_wrapper, X_OK) == 0)
++			*sptr++ = default_wrapper;
++		else
++			*sptr++ = default_server;
+ #else
+ 	    (**argv != '/' && **argv != '\\' && **argv != '.' &&
+ 	     !(isalpha(**argv) && (*argv)[1]==':'))) {

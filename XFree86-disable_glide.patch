@@ -1,11 +1,12 @@
---- xc/config/cf/xfree86.cf~	Wed Oct  2 12:24:39 2002
-+++ xc/config/cf/xfree86.cf	Wed Oct  2 12:22:43 2002
-@@ -308,7 +308,7 @@
+diff -urN xc.orig/config/cf/xfree86.cf xc/config/cf/xfree86.cf
+--- xc.orig/config/cf/xfree86.cf	Mon Dec 30 15:52:31 2002
++++ xc/config/cf/xfree86.cf	Mon Dec 30 21:56:41 2002
+@@ -343,7 +343,7 @@
  #  define XF86CardDrivers	mga glint nv tga s3 s3virge sis rendition \
- 				neomagic i740 savage \
+ 				neomagic i740 tdfx savage \
  				cirrus vmware tseng trident chips apm \
--				GlideDriver fbdev i128 \
-+				fbdev i128 \
- 				ati AgpGartDrivers DevelDrivers ark cyrix \
- 				siliconmotion \
- 				vesa vga XF86OSCardDrivers XF86ExtraCardDrivers
+-				GlideDriver fbdev i128 nsc \
++				fbdev i128 nsc \
+ 				ati i810 AgpGartDrivers DevelDrivers ark \
+ 				cyrix siliconmotion \
+ 				vesa vga \

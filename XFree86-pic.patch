@@ -1,13 +1,26 @@
---- XFree86-4.0.1Z/xc/config/cf/Library.tmpl.pic	Wed Dec 13 16:19:03 2000
-+++ XFree86-4.0.1Z/xc/config/cf/Library.tmpl	Wed Dec 13 16:19:28 2000
-@@ -147,8 +147,8 @@
- #  define _NormalCleanDir() LibCleanDir(unshared)
- # else
- #  define _NormalLibMkdir() $(_NULLCMD_)
--#  define _NormalObjCompile(options) NormalLibObjCompile(options)
+diff -urN xc.orig/config/cf/Library.tmpl xc/config/cf/Library.tmpl
+--- xc.orig/config/cf/Library.tmpl	Mon Dec 30 15:52:30 2002
++++ xc/config/cf/Library.tmpl	Mon Dec 30 19:33:30 2002
+@@ -212,9 +212,9 @@
+ #  if !DoSharedLib &&  defined(IncludeNormalLibInSharedObject)
+ #   define _NormalObjCompile(options) NormalRelocLibObjCompile(options)
+ #  else
+-#   define _NormalObjCompile(options) NormalLibObjCompile(options)
++#   define _NormalObjCompile(options) NormalLibObjCompile(options $(PICFLAGS))
+ #  endif
 -#  define _NormalObjCplusplusCompile(options) NormalLibObjCplusplusCompile(options)
-+#  define _NormalObjCompile(options) NormalLibObjCompile(options $(PICFLAGS))
 +#  define _NormalObjCplusplusCompile(options) NormalLibObjCplusplusCompile(options $(PICFLAGS))
  #  define _NormalCleanDir() $(_NULLCMD_)
  # endif
  #endif
+@@ -227,8 +227,8 @@
+ #  define _SharedObjCompile(options) NormalSharedLibObjCompile(options)
+ #  define _SharedObjCplusplusCompile(options) NormalSharedLibObjCplusplusCompile(options)
+ #else
+-# define _SharedObjCompile(options) NormalLibObjCompile(options)
+-# define _SharedObjCplusplusCompile(options) NormalLibObjCplusplusCompile(options)
++# define _SharedObjCompile(options) NormalLibObjCompile(options $(PICFLAGS))
++# define _SharedObjCplusplusCompile(options) NormalLibObjCplusplusCompile(options $(PICFLAGS))
+ #endif
+ #endif
+ 
