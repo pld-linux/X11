@@ -31,4 +31,5 @@ Path=
 Type=Application
 Terminal=0
 Categories=TerminalEmulator;X-X11
+Encoding=UTF-8
 # vi: encoding=utf-8

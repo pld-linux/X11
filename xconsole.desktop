@@ -45,4 +45,5 @@ TerminalOptions=
 Terminal=0
 Type=Application
 Categories=Utility;X-X11
+Encoding=UTF-8
 # vi: encoding=utf-8
