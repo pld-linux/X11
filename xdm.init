@@ -2,7 +2,7 @@
 #
 # xdm:		Starts the X Display Manager
 #
-# Version:      @(#) /etc/rc.d/init.d/xdm 1.3
+# Version:	@(#) /etc/rc.d/init.d/xdm 1.3
 #
 # chkconfig:	5 95 5
 # description:	Starts and stops the X Display Manager at startup and
@@ -17,25 +17,33 @@
 
 # Get service config
 if [ -f /etc/sysconfig/xdm ] ; then
-        . /etc/sysconfig/xdm
+	. /etc/sysconfig/xdm
 fi
+
 
 # See how we were called.
 case "$1" in
   start)
 	# Check if the service is already running?
-	if [ -f /var/lock/subsys/xdm ]; then
-		msg_already_running "X Display Manager"
-	else
+	if [ ! -f /var/lock/subsys/xdm ]; then
 		msg_starting "X Display Manager"
 		daemon /usr/X11R6/bin/xdm
 		touch /var/lock/subsys/xdm
+	else
+		msg_already_running "X Display Manager"
+		exit 1
 	fi
 	;;
   stop)
-	msg_stopping "X Display Manager"
-	killproc xdm
-	rm -f /var/lock/subsys/xdm
+	if [ -f /var/lock/subsys/xdm ]; then
+		msg_stopping "X Display Manager"
+		killproc xdm
+		RETVAL=$?
+		rm -f /var/lock/subsys/xdm
+	else
+		msg_not_running "X Display Manager"
+		exit 1
+	fi
 	;;
   status)
 	status xdm
@@ -43,10 +51,15 @@ case "$1" in
   restart|reload)
 	$0 stop
 	$0 start
+	exit $?
+	;;
+  force-reload)
+	$0 stop && $0 start
+	exit $?
 	;;
   *)
-	msg_usage "$0 {start|stop|status|restart|reload}"
+	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
 	exit 1
 esac
 
-exit 0
+exit $RETVAL

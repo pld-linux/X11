@@ -2,7 +2,7 @@
 #
 # xfs:		Starts the X Font Server
 #
-# Version:      $Revision$
+# Version:	$Revision$
 #
 # chkconfig:	345 90 10
 # description:	Starts and stops the X Font Server at boot time and shutdown.
@@ -16,8 +16,9 @@
 
 # Get service config
 if [ -f /etc/sysconfig/xfs ] ; then
-        . /etc/sysconfig/xfs
+	. /etc/sysconfig/xfs
 fi
+
 
 # See how we were called.
 case "$1" in
@@ -29,15 +30,23 @@ case "$1" in
 		daemon xfs \
 			$([ -n "$XFS_PORT" ] && echo "-port $XFS_PORT") \
 			$([ -n "$XFS_OPTIONS" ] && echo "$XFS_OPTIONS")
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/xfs
 	else
 		msg_already_running "X Font Server"
+		exit 1
 	fi
-	touch /var/lock/subsys/xfs
 	;;
   stop)
-	msg_stopping "X Font Server"
-	killproc xfs
-	rm -f /var/lock/subsys/xfs
+	if [ -f /var/lock/subsys/xfs ]; then
+		msg_stopping "X Font Server"
+		killproc xfs
+		RETVAL=$?
+		rm -f /var/lock/subsys/xfs
+	else
+		msg_not_running "X Font Server"
+		exit 1
+	fi
 	;;
   status)
 	status xfs
@@ -46,17 +55,19 @@ case "$1" in
 	$0 stop
 	$0 start
 	;;
-  reload)
+  reload|force-reload)
 	if [ -f /var/lock/subsys/xfs ]; then
 		msg_reloading "X Font Server"
 		killproc xfs -USR1
+		RETVAL=$?
 	else
 		msg_not_running "X Font Server"
+		exit 1
 	fi
 	;;
   *)
-	msg_usage "$0 {start|stop|status|restart|reload}"
+	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
 	exit 1
 esac
 
-exit 0
+exit $RETVAL
