@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=X Magnifier
+GenericName=Desktop Magnifier
+Exec=xmag
+Icon=xmag
+Type=Application
+Categories=Utility;X-X11;

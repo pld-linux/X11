@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=X Load
+Icon=xload
+Exec=xload
+SwallowExec=xload -nolabel -fg green -bg Black -hl red -update 3 -geometry 25x25
+Type=Application
+Categories=Utility;X-X11;
