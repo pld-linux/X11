@@ -1,0 +1,15 @@
+--- XFree86-4.3.0/xc/lib/font/Speedo/module/Imakefile.orig	Wed Feb 13 21:32:47 2002
++++ XFree86-4.3.0/xc/lib/font/Speedo/module/Imakefile	Thu Mar 13 15:48:37 2003
+@@ -14,10 +14,10 @@
+ 		   out_scrn.o out_util.o reset.o set_spcs.o set_trns.o
+ 
+             SRCS = spfuncs.c spfile.c spinfo.c sperr.c spfont.c spglyph.c \
+-		spencode.c bics-unicode.c \
++		bics-unicode.c \
+ 	    	$(SPEEDOSRCS)
+             OBJS = spfuncs.o spfile.o spinfo.o sperr.o spfont.o spglyph.o \
+-		spencode.o bics-unicode.o \
++		bics-unicode.o \
+ 		$(SPEEDOOBJS)
+ 
+ LinkSourceFile(bics-unicode.c,..)
