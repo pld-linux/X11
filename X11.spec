@@ -3,7 +3,7 @@
 # - XDM Auth broken
 # - Review rest of patches
 #
-%define		snap	20040812
+%define		snap	20040815
 #
 Summary:	XOrg X11 Window System servers and basic programs
 Summary(de):	XOrg X11 Window-System-Server und grundlegende Programme
@@ -24,8 +24,8 @@ Epoch:		1
 License:	XFree86 1.0 (?)
 Group:		X11/Xorg
 ######		Unknown group!
-##Source0:	http://www.kernel.pl/~adasi/%{name}-%{snap}.tar.gz
-Source0:	%{name}-%{snap}.tar.gz
+Source0:	http://www.kernel.pl/~adasi/%{name}-%{snap}.tar.gz
+#Source0-md5:	c185990cbd8180bcc6859679bae21325
 Source7:	ftp://ftp.pld-linux.org/software/xinit/xdm-xinitrc-0.2.tar.bz2
 # Source7-md5:	0a15b1c374256b5cad7961807baa3896
 Source8:	xdm.pamd
@@ -54,7 +54,7 @@ Source40:	oclock.png
 Source41:	xconsole.png
 Source42:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/XFree86-non-english-Xman-pages.tar.bz2
 # Source42-md5:	a184106bb83cb27c6963944d9243ac3f
-Source44:	XFree86-Xserver-headers
+Source44:	X11-Xserver-headers
 Source45:	XFree86-Xserver-headers-links
 Source46:	twm-xsession.desktop
 Source47:	xcalc.desktop
