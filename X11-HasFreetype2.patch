@@ -1,0 +1,10 @@
+--- xc.orig/config/cf/linux.cf	2004-08-08 14:36:20.000000000 +0200
++++ xc/config/cf/linux.cf	2004-08-08 15:15:52.515439008 +0200
+@@ -1023,3 +1023,7 @@
+ #ifndef HasZlib
+ #define HasZlib		YES
+ #endif
++
++#ifndef HasFreetype2
++#define HasFreetype2	YES
++#endif

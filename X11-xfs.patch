@@ -1,0 +1,221 @@
+diff -urN xc.orig/programs/xfs/difs/charinfo.c xc/programs/xfs/difs/charinfo.c
+--- xc.orig/programs/xfs/difs/charinfo.c	2004-08-08 14:23:00.000000000 +0200
++++ xc/programs/xfs/difs/charinfo.c	2004-08-08 14:42:16.342943816 +0200
+@@ -499,6 +499,8 @@
+ #define LSBBitLeft(b,c)	((b) >> (c))
+ #define LSBBitRight(b,c)	((b) << (c))
+ 
++	if (srcp) {
++	  
+ 	if (dst_off == src_off)
+ 	{
+ 	    if (srcbpr == dstbpr && src_left_bytes == dst_left_bytes)
+@@ -580,6 +582,7 @@
+ 		srcp += src_extra;
+ 	    }
+ 	}
++	}
+ 	/* skip the amount we just filled in */
+ 	gd += l->length;
+     }
+diff -urN xc.orig/programs/xfs/difs/fonts.c xc/programs/xfs/difs/fonts.c
+--- xc.orig/programs/xfs/difs/fonts.c	2004-08-08 14:23:00.000000000 +0200
++++ xc/programs/xfs/difs/fonts.c	2004-08-08 14:41:58.277690152 +0200
+@@ -114,6 +114,113 @@
+ }
+ 
+ /*
++ * xf86GetPathElem --
++ *      Extract a single element from the font path string starting at
++ *      pnt.  The font path element will be returned, and pnt will be
++ *      updated to point to the start of the next element, or set to
++ *      NULL if there are no more.
++ */
++char *
++xf86GetPathElem(pnt)
++     char **pnt;
++{
++  char *p1;
++ 
++  p1 = *pnt;
++  *pnt = index(*pnt, ',');
++  if (*pnt != NULL) {
++    **pnt = '\0';
++    *pnt += 1;
++  }
++  return(p1);
++}
++
++/*
++ * xf86ValidateFontPath --
++ *      Validates the user-specified font path.  Each element that
++ *      begins with a '/' is checked to make sure the directory exists.
++ *      If the directory exists, the existence of a file named 'fonts.dir'
++ *      is checked.  If either check fails, an error is printed and the
++ *      element is removed from the font path.
++ */
++#define DIR_FILE "/fonts.dir"
++#define CHECK_TYPE(mode, type) ((S_IFMT & (mode)) == (type))
++static char *
++xf86ValidateFontPath(path)
++     char *path;
++{
++  char *tmp_path, *out_pnt, *path_elem, *next, *p1, *dir_elem;
++  struct stat stat_buf;
++  int flag;
++  int dirlen;
++ 
++  tmp_path = (char *)calloc(1,strlen(path)+1);
++  out_pnt = tmp_path;
++  path_elem = NULL;
++  next = path;
++  while (next != NULL) {
++    path_elem = xf86GetPathElem(&next);
++#ifndef __EMX__
++    if (*path_elem == '/') {
++      dir_elem = (char *)calloc(1, strlen(path_elem) + 1);
++      if ((p1 = strchr(path_elem, ':')) != 0)
++#else
++    /* OS/2 must prepend X11ROOT */
++    if (*path_elem == '/') {
++      path_elem = (char*)__XOS2RedirRoot(path_elem);
++      dir_elem = (char*)calloc(1, strlen(path_elem) + 1);
++      if (p1 = strchr(path_elem+2, ':'))
++#endif
++        dirlen = p1 - path_elem;
++      else
++        dirlen = strlen(path_elem);
++      strncpy(dir_elem, path_elem, dirlen);
++      dir_elem[dirlen] = '\0';
++      flag = stat(dir_elem, &stat_buf);
++      if (flag == 0)
++        if (!CHECK_TYPE(stat_buf.st_mode, S_IFDIR))
++          flag = -1;
++      if (flag != 0) {
++	printf("warning!\n");
++	ErrorF("Warning: The directory \"%s\" does not exist.\n", dir_elem);
++	ErrorF("         Entry deleted from font path.\n");
++        continue;
++      }
++      else {
++        p1 = (char *)malloc(strlen(dir_elem)+strlen(DIR_FILE)+1);
++        strcpy(p1, dir_elem);
++        strcat(p1, DIR_FILE);
++        flag = stat(p1, &stat_buf);
++        if (flag == 0)
++          if (!CHECK_TYPE(stat_buf.st_mode, S_IFREG))
++            flag = -1;
++#ifndef __EMX__
++        free(p1);
++#endif
++        if (flag != 0) {
++	  ErrorF("Warning: 'fonts.dir' not found (or not valid) in \"%s\".\n",
++                 dir_elem);
++          ErrorF("          Entry deleted from font path.\n");
++          ErrorF("          (Run 'mkfontdir' on \"%s\").\n", dir_elem);
++          continue;
++        }
++      }
++      free(dir_elem);
++    }
++ 
++    /*
++     * Either an OK directory, or a font server name.  So add it to
++     * the path.
++     */
++    if (out_pnt != tmp_path)
++      *out_pnt++ = ',';
++    strcat(out_pnt, path_elem);
++    out_pnt += strlen(path_elem);
++  }
++  return(tmp_path);
++}
++
++/*
+  * note that the font wakeup queue is not refcounted.  this is because
+  * an fpe needs to be added when it's inited, and removed when it's finally
+  * freed, in order to handle any data that isn't requested, like FS events.
+@@ -754,8 +861,12 @@
+                *end,
+                *p;
+     int         err;
++    char       *fixedpath;
++
++    fixedpath = xf86ValidateFontPath(str);
+ 
+-    len = strlen(str) + 1;
++    len = strlen(fixedpath) + 1;
++    str = fixedpath;
+     paths = p = (char *) ALLOCATE_LOCAL(len);
+     npaths = 0;
+ 
+@@ -775,6 +886,7 @@
+ 
+     err = set_font_path_elements(npaths, paths, badpath);
+ 
++    free(fixedpath);
+     DEALLOCATE_LOCAL(paths);
+ 
+     return err;
+diff -urN xc.orig/programs/xfs/difs/main.c xc/programs/xfs/difs/main.c
+--- xc.orig/programs/xfs/difs/main.c	2004-08-08 14:23:00.000000000 +0200
++++ xc/programs/xfs/difs/main.c	2004-08-08 14:42:22.082071336 +0200
+@@ -63,6 +63,7 @@
+ #include	"dispatch.h"
+ #include	"extentst.h"
+ #include	"difs.h"
++#include	"debug.h"
+ 
+ char       *ConnectionInfo;
+ int         ConnInfoLen;
+@@ -78,6 +79,7 @@
+ static Bool create_connection_block(void);
+ 
+ char       *configfilename;
++int	   debug_level; 
+ extern Bool drone_server;
+ 
+ extern OldListenRec *OldListen;
+@@ -89,6 +91,7 @@
+     int         i, oldumask;
+ 
+     argcGlobal = argc;
++    debug_level = 0;
+     argvGlobal = argv;
+ 
+     configfilename = DEFAULT_CONFIG_FILE;
+diff -urN xc.orig/programs/xfs/include/debug.h xc/programs/xfs/include/debug.h
+--- xc.orig/programs/xfs/include/debug.h	1970-01-01 01:00:00.000000000 +0100
++++ xc/programs/xfs/include/debug.h	2004-08-08 14:42:22.082071336 +0200
+@@ -0,0 +1 @@
++/* debug.h */
+\ Brak znaku nowej linii na koñcu pliku
+diff -urN xc.orig/programs/xfs/os/utils.c xc/programs/xfs/os/utils.c
+--- xc.orig/programs/xfs/os/utils.c	2004-08-08 14:23:00.000000000 +0200
++++ xc/programs/xfs/os/utils.c	2004-08-08 14:42:22.084071032 +0200
+@@ -93,6 +93,7 @@
+ #include <stdlib.h>
+ 
+ extern char *configfilename;
++extern int  debug_level;
+ static Bool dropPriv = FALSE; /* whether or not to drop root privileges */
+ #ifdef DEFAULT_DAEMON
+ static Bool becomeDaemon = TRUE; /* whether to become a daemon or not */
+@@ -219,7 +220,7 @@
+ static void
+ usage(void)
+ {
+-    fprintf(stderr, "usage: %s [-config config_file] [-port tcp_port] [-droppriv] [-daemon] [-nodaemon] [-user user_name] [-ls listen_socket]\n",
++    fprintf(stderr, "usage: %s [-config config_file] [-port tcp_port] [-droppriv] [-daemon] [-nodaemon] [-user user_name] [-ls listen_socket] [-d debug_level]\n",
+ 	    progname);
+     exit(1);
+ }
+@@ -333,6 +334,8 @@
+ 		ProcessLSoption (argv[++i]);
+ 	    else
+ 		usage();
++	} else if (!strcmp(argv[i], "-d") || !strcmp(argv[i], "--debug")) {
++		debug_level = atoi(argv[++i]);
+ 	} else if (!strcmp(argv[i], "-droppriv")) {
+ 	        dropPriv = TRUE;
+ 	} else if (!strcmp(argv[i], "-daemon")) {

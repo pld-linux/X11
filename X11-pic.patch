@@ -1,0 +1,25 @@
+--- xc.orig/config/cf/Library.tmpl	2004-08-08 14:23:13.000000000 +0200
++++ xc/config/cf/Library.tmpl	2004-08-08 15:10:06.794996504 +0200
+@@ -214,9 +214,9 @@
+ #  if !DoSharedLib &&  defined(IncludeSharedObjectInNormalLib)
+ #   define _NormalObjCompile(options) NormalRelocLibObjCompile(options)
+ #  else
+-#   define _NormalObjCompile(options) NormalLibObjCompile(options)
++#   define _NormalObjCompile(options) NormalLibObjCompile(options $(PICFLAGS))
+ #  endif
+-#  define _NormalObjCplusplusCompile(options) NormalLibObjCplusplusCompile(options)
++#  define _NormalObjCplusplusCompile(options) NormalLibObjCplusplusCompile(options $(PICFLAGS))
+ #  define _NormalCleanDir() $(_NULLCMD_)
+ # endif
+ #endif
+@@ -229,8 +229,8 @@
+ #  define _SharedObjCompile(options) NormalSharedLibObjCompile(options)
+ #  define _SharedObjCplusplusCompile(options) NormalSharedLibObjCplusplusCompile(options)
+ #else
+-# define _SharedObjCompile(options) NormalLibObjCompile(options)
+-# define _SharedObjCplusplusCompile(options) NormalLibObjCplusplusCompile(options)
++# define _SharedObjCompile(options) NormalLibObjCompile(options $(PICFLAGS))
++# define _SharedObjCplusplusCompile(options) NormalLibObjCplusplusCompile(options $(PICFLAGS))
+ #endif
+ #endif
+ 

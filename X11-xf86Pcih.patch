@@ -1,0 +1,11 @@
+--- xc/programs/Xserver/hw/xfree86/common/xf86str.h~	2004-08-08 16:26:56.657190928 +0200
++++ xc/programs/Xserver/hw/xfree86/common/xf86str.h	2004-08-08 16:26:56.670188952 +0200
+@@ -42,7 +42,7 @@
+ #include "colormapst.h"
+ #include "xf86Module.h"
+ #include "xf86Opt.h"
+-#include "xf86Pci.h"
++#include "../os-support/bus/xf86Pci.h"
+ 
+ /*
+  * memType is of the size of the addressable memory (machine size)

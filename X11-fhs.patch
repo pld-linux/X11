@@ -1,0 +1,108 @@
+diff -urN xc.orig/lib/dps/csconndi.c xc/lib/dps/csconndi.c
+--- xc.orig/lib/dps/csconndi.c	2004-08-08 14:23:31.000000000 +0200
++++ xc/lib/dps/csconndi.c	2004-08-08 14:52:18.313430392 +0200
+@@ -480,8 +480,8 @@
+ 
+ #ifndef CSDPS_UNIX_PATH
+ #ifdef hpux
+-#define CSDPS_UNIX_DIR      "/usr/spool/sockets/DPSNX"
+-#define CSDPS_UNIX_PATH     "/usr/spool/sockets/DPSNX/"
++#define CSDPS_UNIX_DIR      "/var/spool/sockets/DPSNX"
++#define CSDPS_UNIX_PATH     "/var/spool/sockets/DPSNX/"
+ #else
+ #define CSDPS_UNIX_DIR      "/tmp/.DPSNX-unix"
+ #define CSDPS_UNIX_PATH     "/tmp/.DPSNX-unix/AGENT"
+diff -urN xc.orig/lib/dps/Xlibnet.h xc/lib/dps/Xlibnet.h
+--- xc.orig/lib/dps/Xlibnet.h	2004-08-08 14:23:32.000000000 +0200
++++ xc/lib/dps/Xlibnet.h	2004-08-08 14:52:18.295433128 +0200
+@@ -20,7 +20,7 @@
+ 
+ #ifndef X_UNIX_PATH
+ #ifdef hpux
+-#define X_UNIX_PATH "/usr/spool/sockets/X11/"
++#define X_UNIX_PATH "/var/spool/sockets/X11/"
+ #define OLD_UNIX_PATH "/tmp/.X11-unix/X"
+ #else
+ #define X_UNIX_PATH "/tmp/.X11-unix/X"
+diff -urN xc.orig/lib/xtrans/Xtranssock.c xc/lib/xtrans/Xtranssock.c
+--- xc.orig/lib/xtrans/Xtranssock.c	2004-08-08 14:23:28.000000000 +0200
++++ xc/lib/xtrans/Xtranssock.c	2004-08-08 14:52:18.316429936 +0200
+@@ -216,30 +216,30 @@
+ #ifdef hpux
+ 
+ #if defined(X11_t)
+-#define UNIX_PATH "/usr/spool/sockets/X11/"
+-#define UNIX_DIR "/usr/spool/sockets/X11"
++#define UNIX_PATH "/var/spool/sockets/X11/"
++#define UNIX_DIR "/var/spool/sockets/X11"
+ #define OLD_UNIX_PATH "/tmp/.X11-unix/X"
+ #endif /* X11_t */
+ #if defined(XIM_t)
+-#define UNIX_PATH "/usr/spool/sockets/XIM/"
+-#define UNIX_DIR "/usr/spool/sockets/XIM"
++#define UNIX_PATH "/var/spool/sockets/XIM/"
++#define UNIX_DIR "/var/spool/sockets/XIM"
+ #define OLD_UNIX_PATH "/tmp/.XIM-unix/XIM"
+ #endif /* XIM_t */
+ #if defined(FS_t) || defined(FONT_t)
+-#define UNIX_PATH "/usr/spool/sockets/fontserv/"
+-#define UNIX_DIR "/usr/spool/sockets/fontserv"
++#define UNIX_PATH "/var/spool/sockets/fontserv/"
++#define UNIX_DIR "/var/spool/sockets/fontserv"
+ #endif /* FS_t || FONT_t */
+ #if defined(ICE_t)
+-#define UNIX_PATH "/usr/spool/sockets/ICE/"
+-#define UNIX_DIR "/usr/spool/sockets/ICE"
++#define UNIX_PATH "/var/spool/sockets/ICE/"
++#define UNIX_DIR "/var/spool/sockets/ICE"
+ #endif /* ICE_t */
+ #if defined(TEST_t)
+-#define UNIX_PATH "/usr/spool/sockets/xtrans_test/"
+-#define UNIX_DIR "/usr/spool/sockets/xtrans_test"
++#define UNIX_PATH "/var/spool/sockets/xtrans_test/"
++#define UNIX_DIR "/var/spool/sockets/xtrans_test"
+ #endif
+ #if defined(LBXPROXY_t)
+-#define UNIX_PATH "/usr/spool/sockets/X11/"
+-#define UNIX_DIR  "/usr/spool/sockets/X11"
++#define UNIX_PATH "/var/spool/sockets/X11/"
++#define UNIX_DIR  "/var/spool/sockets/X11"
+ #endif
+ 
+ #else /* !hpux */
+diff -urN xc.orig/programs/rstart/Imakefile xc/programs/rstart/Imakefile
+--- xc.orig/programs/rstart/Imakefile	2004-08-08 14:22:59.000000000 +0200
++++ xc/programs/rstart/Imakefile	2004-08-08 14:52:18.317429784 +0200
+@@ -37,7 +37,7 @@
+ OS=
+ CLIENTNAME=rstart
+ 
+-MYLIBDIR=$(LIBDIR)/rstart
++MYLIBDIR=/etc/X11/rstart
+ ENVPREFIX=RSTART
+ PACKAGEname=rstart
+ 
+diff -urN xc.orig/programs/xbiff/MailboxP.h xc/programs/xbiff/MailboxP.h
+--- xc.orig/programs/xbiff/MailboxP.h	2004-08-08 14:23:00.000000000 +0200
++++ xc/programs/xbiff/MailboxP.h	2004-08-08 14:52:18.317429784 +0200
+@@ -50,7 +50,7 @@
+ #endif
+ 
+ #ifndef MAILBOX_DIRECTORY
+-#define MAILBOX_DIRECTORY "/usr/spool/mail"
++#define MAILBOX_DIRECTORY "/var/mail"
+ #endif
+ 
+ typedef struct {			/* new fields for mailbox widget */
+diff -urN xc.orig/programs/xmh/xmh.man xc/programs/xmh/xmh.man
+--- xc.orig/programs/xmh/xmh.man	2004-08-08 14:22:57.000000000 +0200
++++ xc/programs/xmh/xmh.man	2004-08-08 14:52:18.353424312 +0200
+@@ -1316,7 +1316,7 @@
+ An example of \fI.xmhcheck\fP file format, for the folders ``inbox'' and
+ ``xpert'':
+ .nf
+-inbox	/usr/spool/mail/converse
++inbox	/var/mail/converse
+ xpert	/users/converse/maildrops/xpert
+ .fi
+ .sp

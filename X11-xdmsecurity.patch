@@ -1,0 +1,11 @@
+--- xc.orig/programs/xdm/xdmcp.c	2004-08-08 14:22:57.000000000 +0200
++++ xc/programs/xdm/xdmcp.c	2004-08-08 15:00:03.061777904 +0200
+@@ -1316,7 +1316,7 @@
+     XdmcpHeader	header;
+     ARRAY8	status;
+ 
+-    sprintf (buf, "Session %ld failed for display %.100s: %.100s",
++    snprintf (buf, sizeof(buf), "Session %ld failed for display %.100s: %.100s",
+ 	     (long) sessionID, name, reason);
+     Debug ("Send failed %ld %s\n", (long) sessionID, buf);
+     status.length = strlen (buf);

@@ -1,0 +1,11 @@
+diff -urN xc.orig/config/cf/linux.cf xc/config/cf/linux.cf
+--- xc.orig/config/cf/linux.cf	2004-08-08 14:31:29.134334480 +0200
++++ xc/config/cf/linux.cf	2004-08-08 14:31:49.247276848 +0200
+@@ -1019,3 +1019,7 @@
+ #ifndef XFree86ServerOSDefines
+ # define XFree86ServerOSDefines
+ #endif
++
++#ifndef HasZlib
++#define HasZlib		YES
++#endif

@@ -1,0 +1,76 @@
+--- xc.orig/programs/xdm/config/Imakefile	2004-08-08 14:22:57.000000000 +0200
++++ xc/programs/xdm/config/Imakefile	2004-08-08 15:04:29.403287840 +0200
+@@ -10,13 +10,7 @@
+ 
+ all:: Xservers.ws xdm-config Xservers Xresources
+ 
+-#if (defined(i386Architecture) || defined(AMD64Architecture)) && (defined(KNetBSDArchitecture) || defined(KOpenBSDArchitecture))
+-DEFAULTVT=vt05
+-#endif
+-
+-#if defined(LinuxDistribution) && (LinuxDistribution == LinuxDebian)
+-DEFAULTVT=vt7
+-#endif
++DEFAULTVT=vt9
+ 
+ #ifndef XdmPixmap
+ # define XdmPixmap XVendorStdFilePrefix.xpm
+@@ -42,7 +36,11 @@
+ #endif
+ 
+ CppFileTarget(Xservers.ws,Xserv.ws.cpp,-DBINDIR=$(BINDIR) -DDEFAULTVT=$(DEFAULTVT),NullParameter)
+-CppFileTarget(xdm-config,xdm-conf.cpp,-DXDMDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR) -DSU=$(SU) -DCHOOSERPATH=$(CHOOSERPATH),NullParameter)
++#ifdef LinuxArchitecture
++CppFileTarget(xdm-config,xdm-conf.cpp,$(XPM_DEFINES) -DLINUX=1 -DXDMDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR) -DXDMVARDIR=$(XDMVARDIR) -DCHOOSERPATH="$(BINDIR)/chooser",NullParameter)
++#else
++CppFileTarget(xdm-config,xdm-conf.cpp,$(XPM_DEFINES) -DXDMDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR) -DCHOOSERPATH="$(BINDIR)/chooser",NullParameter)
++#endif /* LinuxArchitecture */
+ CppFileTarget(Xresources,Xres.cpp,$(XPM_DEFINES),NullParameter)
+ 
+ LinkFile(Xservers,Xservers.$(SERVERSTYPE))
+--- xc.orig/programs/xdm/config/Xres.cpp	2004-08-08 14:31:29.000000000 +0200
++++ xc/programs/xdm/config/Xres.cpp	2004-08-08 15:03:33.539780384 +0200
+@@ -41,9 +41,7 @@
+ XHASHendif
+ #endif /* XPM */
+ XHASHifdef COLOR
+-#ifndef XPM
+-xlogin*greetColor: CadetBlue
+-#else
++#ifdef XPM
+ xlogin*borderWidth: 1
+ xlogin*frameWidth: 5
+ xlogin*innerFramesWidth: 2
+@@ -52,6 +50,8 @@
+ xlogin*background: grey
+ !xlogin*foreground: darkgreen
+ xlogin*greetColor: Blue3
++#else
++login*greetColor: CadetBlue
+ #endif /* XPM */
+ xlogin*failColor: red
+ *Foreground: black
+--- xc.orig/programs/xdm/Imakefile	2004-08-08 14:22:57.000000000 +0200
++++ xc/programs/xdm/Imakefile	2004-08-08 15:03:33.517783728 +0200
+@@ -289,9 +289,9 @@
+ 		  '-DDEF_SYSTEM_SHELL="$(BOURNE_SHELL)"' \
+ 		  '-DDEF_FAILSAFE_CLIENT="$(BINDIR)/xterm"' \
+ 		  '-DDEF_XDM_CONFIG="$(XDMDIR)/xdm-config"' \
+-		  '-DDEF_CHOOSER="$(CHOOSERPATH)"' \
+-		  '-DDEF_AUTH_DIR="$(XDMDIR)"' \
+-		  '-DDEF_GREETER_LIB="$(XDMDIR)/libXdmGreet.so"'
++		  '-DDEF_CHOOSER="$(BINDIR)/chooser"' \
++		  '-DDEF_AUTH_DIR="$(XDMVARDIR)"' \
++		  '-DDEF_GREETER_LIB="$(USRLIBDIR)/libXdmGreet.so"'
+ 
+ ComplexProgramTarget_1(xdm,$(LOCAL_LIBRARIES),NullParameter)
+ #ifdef LinkConfDirectory
+@@ -316,7 +316,7 @@
+ #if BuildChooser
+ SpecialCObjectRule(chooser, $(ICONFIGFILES), $(SOCK_DEFINES) $(LIFREQ_FLAGS))
+ NormalProgramTarget(chooser,$(OBJS3),$(DEPLIBS3),$(LIBS3),NullParameter)
+-InstallProgram(chooser,$(XDMDIR))
++InstallProgram(chooser,$(BINDIR))
+ InstallAppDefaults(Chooser)
+ #endif
+ #if BuildBoth

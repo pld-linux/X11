@@ -1,0 +1,23 @@
+--- xc.orig/config/cf/X11.tmpl	2004-08-08 14:31:29.000000000 +0200
++++ xc/config/cf/X11.tmpl	2004-08-08 14:48:48.483329416 +0200
+@@ -1546,7 +1546,7 @@
+ #endif
+ #ifndef XFileSearchPathBase
+ /* avoid SCCS keyword */
+-#define XFileSearchPathBase Concat4($(LIBDIR)/%L/%T/%N%C,%S:$(LIBDIR)/%l/%T/%N%C,%S:$(LIBDIR)/%T/%N%C,%S:$(LIBDIR)/%L/%T/%N%S:$(LIBDIR)/%l/%T/%N%S:$(LIBDIR)/%T/%N%S)
++#define XFileSearchPathBase $(LIBDIR)/%T/%L/%N%C%S:$(LIBDIR)/%T/%l/%N%C%S:$(LIBDIR)/%T/C/%N%C%S:$(LIBDIR)/%T/POSIX/%N%C%S:$(LIBDIR)/%T/%N%C%S:$(LIBDIR)/%T/%L/%N%S:$(LIBDIR)/%T/%l/%N%S:$(LIBDIR)/%T/C/%N%S:$(LIBDIR)/%T/POSIX/%N%S:$(LIBDIR)/%T/%N%S:$(LIBDIR)/%L/%T/%N%C%S:$(LIBDIR)/%l/%T/%N%C%S:$(LIBDIR)/%L/%T/%N%S:$(LIBDIR)/%l/%T/%N%S
+ #endif
+ #ifndef XFileSearchPathDefault
+ #ifdef XAppLoadDir
+@@ -3888,11 +3888,9 @@
+ #if UseConfDirForAppDefaults
+ #if InstallAppDefFiles
+ #define InstallAppDefaultsLong(file,class)				@@\
+-LinkConfDirectory(app-defaults,.,app-defaults,.)			@@\
+ InstallNamedTarget(install,file.ad,$(INSTAPPFLAGS),$(XAPPLOADDIR),class)
+ #else
+ #define InstallAppDefaultsLong(file,class)				@@\
+-LinkConfDirectory(app-defaults,.,app-defaults,.)			@@\
+ InstallNamedTargetNoClobber(install,file.ad,$(INSTAPPFLAGS),$(XAPPLOADDIR),class)
+ #endif /* InstallAppDefFiles */
+ #else /* UseConfDirForAppDefaults */
