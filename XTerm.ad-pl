@@ -23,11 +23,11 @@ NXTerm.JoinSession:			False
 *dynamicColors:				True
 
 ! Kolory
-*cursorColor:				blue
-*background:				black
-*foreground:				white
-*SimpleMenu.background:			#00aaff
-*SimpleMenu.foreground:			black
+*XTerm*cursorColor:				blue
+*XTerm*background:				black
+*XTerm*foreground:				white
+*XTerm*SimpleMenu.background:			#00aaff
+*XTerm*SimpleMenu.foreground:			black
 
 ! *VT100.geometry:			80x45
 *VT100*colorULMode: 			on
