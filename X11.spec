@@ -2118,6 +2118,13 @@ if [ "$1" = "0" ]; then
 	/usr/sbin/groupdel xfs 2>/dev/null
 fi
 
+
+%triggerpostun XServer -- XFree86-Xserver
+if [ -r /etc/X11/XF86Config ]; then
+	cp /etc/X11/XF86Config /etc/X11/xorg.conf
+	sed -i -e "s/xfree86/xorg/g" /etc/X11/xrog.conf
+fi
+
 #--- %files --------------------------
 
 %files
