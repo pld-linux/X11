@@ -1,3 +1,15 @@
+diff -Nru xc.orig/Makefile xc/Makefile
+--- xc.orig/Makefile	2003-11-02 05:38:01.000000000 +0100
++++ xc/Makefile	2003-12-23 12:09:12.071230112 +0100
+@@ -8,7 +8,7 @@
+ # or add "MAKE = make" to this file.
+ 
+ RELEASE = "Release 6.7"
+-SHELL = /bin/sh
++SHELL = /bin/sh -e
+ RM = rm -f
+ MV = mv
+ WORLDOPTS =
 diff -Nru xc.orig/config/cf/Imake.cf xc/config/cf/Imake.cf
 --- xc.orig/config/cf/Imake.cf	2003-12-19 05:40:33.000000000 +0100
 +++ xc/config/cf/Imake.cf	2003-12-23 12:09:11.983243488 +0100
@@ -36,6 +48,15 @@ diff -Nru xc.orig/config/cf/Imake.tmpl xc/config/cf/Imake.tmpl
  #endif
  #ifndef ManDirectoryRoot
  #ifdef ProjectRoot
+@@ -998,7 +994,7 @@
+ #define NoRConst NO /* YES if const for structs of funcs is bad */
+ #endif
+ #ifndef InstPgmFlags
+-#define InstPgmFlags -s
++#define InstPgmFlags
+ #endif
+ #ifndef InstBinFlags
+ #define InstBinFlags -m 0755
 @@ -1140,7 +1136,7 @@
  #define CppCmd /LibDirName/cpp
  #endif
@@ -257,6 +278,16 @@ diff -urN xc.org/config/cf/xorgsite.def xc/config/cf/xorgsite.def
  
  /*
   * Build a server that dynamically loads the modules by setting
+@@ -582,8 +583,8 @@
+ /*
+  * If you want XDMAUTH support (if you have Wraphelp.c), uncomment this.
+  *
+-#define HasXdmAuth		YES
+  */
++#define HasXdmAuth		YES
+ 
+ /*
+  * If you have Linux DECnet support, and want to build XFree86 with support
 @@ -605,8 +606,8 @@
   * To forceably build static libraries in addition to shared libraries,
   * uncomment this.
@@ -279,6 +310,15 @@ diff -Nru xc.orig/config/cf/xorg.cf xc/config/cf/xorg.cf
  #endif
  #ifndef XLogFile
  #define XLogFile		XFree86
+@@ -760,7 +760,7 @@
+ 
+ # ifndef XF86CardDrivers
+ #  define XF86CardDrivers	mga glint nv s3 s3virge sis savage \
+-				trident chips tdfx fbdev ati \
++				trident chips fbdev ati \
+ 				DevelDrivers newport \
+ 				XF86OSCardDrivers XF86ExtraCardDrivers
+ # endif
 diff -Nru xc.orig/config/imake/imake.c xc/config/imake/imake.c
 --- xc.orig/config/imake/imake.c	2003-04-10 13:00:03.000000000 +0200
 +++ xc/config/imake/imake.c	2003-12-23 12:09:12.060231784 +0100
@@ -411,20 +451,9 @@ diff -Nru xc.orig/programs/xinit/Imakefile xc/programs/xinit/Imakefile
  
  LinkConfDirectory(xinit,.,xinit,.)
  
-diff -Nru xc.orig/programs/xterm/xterm.h xc/programs/xterm/xterm.h
---- xc.orig/programs/xterm/xterm.h	2003-12-19 05:51:52.000000000 +0100
-+++ xc/programs/xterm/xterm.h	2003-12-23 12:09:12.000000000 +0100
-@@ -73,7 +73,7 @@
- #endif
- 
- #ifndef DFT_TERMTYPE
--#define DFT_TERMTYPE "xterm"
-+#define DFT_TERMTYPE "xterm-color"
- #endif
- 
- #ifndef X_NOT_POSIX
---- xc/programs/xterm/Imakefile.orig	2004-08-13 12:57:19.000000000 +0000
-+++ xc/programs/xterm/Imakefile	2004-09-10 17:56:10.644328280 +0000
+diff -Nru xc.orig/programs/xterm/Imakefile xc/programs/xterm/Imakefile
+--- xc.orig/programs/xterm/Imakefile	2003-12-19 05:51:51.000000000 +0100
++++ xc/programs/xterm/Imakefile	2003-12-23 12:11:05.000000000 +0100
 @@ -36,6 +36,10 @@
  #define XkbClientLibs /**/
  #endif
@@ -448,9 +477,21 @@ diff -Nru xc.orig/programs/xterm/xterm.h xc/programs/xterm/xterm.h
 @@ -116,7 +122,7 @@
      XKB_DEFINES = XkbClientDefines
     PATH_DEFINES = -DPROJECTROOT=$(PROJECTROOT)
-         DEFINES = $(XKB_DEFINES) $(TERMCAPDEFINES) $(FEATURE_DEFINES) $(SCROLLBAR_RIGHT) $(UTF8_OPTION) $(XRFDEF) $(PATH_DEFINES) $(TRACEDEF)
+         DEFINES = $(XKB_DEFINES) $(TERMCAPDEFINES) $(FEATURE_DEFINES) $(SCROLLBAR_RIGHT) $(UTF8_OPTION) $(XRFDEF) $(PATH_DEFINES) $(TRACEDEF) $(XVERSIONDEFS) $(VENDORDEFINES)
 -       INCLUDES = -I. $(XRFINCLUDES)
 +       INCLUDES = -I. -I/usr/include/ncurses $(XRFINCLUDES)
  
  #ifdef OS2Architecture
          MAINSRC = os2main.c
+diff -Nru xc.orig/programs/xterm/xterm.h xc/programs/xterm/xterm.h
+--- xc.orig/programs/xterm/xterm.h	2003-12-19 05:51:52.000000000 +0100
++++ xc/programs/xterm/xterm.h	2003-12-23 12:09:12.000000000 +0100
+@@ -73,7 +73,7 @@
+ #endif
+ 
+ #ifndef DFT_TERMTYPE
+-#define DFT_TERMTYPE "xterm"
++#define DFT_TERMTYPE "xterm-color"
+ #endif
+ 
+ #ifndef X_NOT_POSIX
