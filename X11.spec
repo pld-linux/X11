@@ -2616,6 +2616,7 @@ fi
 %attr(755,root,root) %{_libdir}/libX11.so
 %attr(755,root,root) %{_libdir}/libXRes.so
 %attr(755,root,root) %{_libdir}/libXTrap.so
+%attr(755,root,root) %{_libdir}/libXau.so
 %attr(755,root,root) %{_libdir}/libXaw.so
 %attr(755,root,root) %{_libdir}/libXcomposite.so
 %attr(755,root,root) %{_libdir}/libXcursor.so
@@ -2647,7 +2648,6 @@ fi
 %attr(755,root,root) %{_libdir}/libxkbfile.so
 %attr(755,root,root) %{_libdir}/libxkbui.so
 #%attr(755,root,root) %{_libdir}/libxrx.so
-%{_libdir}/libXau.a
 %{_libdir}/libXprintAppUtil.a
 %{_libdir}/libXprintUtil.a
 %{_libdir}/libdmx.a
@@ -3040,7 +3040,10 @@ fi
 %attr(755,root,root) %{_libdir}/libX11.so.*.*
 %attr(755,root,root) %{_libdir}/libXRes.so.*.*
 %attr(755,root,root) %{_libdir}/libXTrap.so.*.*
-%attr(755,root,root) %{_libdir}/libXaw.so.*.*
+%attr(755,root,root) %{_libdir}/libXau.so.*.*
+%attr(755,root,root) %{_libdir}/libXaw.so.6.*
+%attr(755,root,root) %{_libdir}/libXaw.so.7.*
+%attr(755,root,root) %{_libdir}/libXaw.so.8.*
 %attr(755,root,root) %{_libdir}/libXcomposite.so.*.*
 %attr(755,root,root) %{_libdir}/libXcursor.so.*.*.*
 %attr(755,root,root) %{_libdir}/libXdamage.so.*.*
@@ -3156,6 +3159,7 @@ fi
 %{_libdir}/libX11.a
 %{_libdir}/libXRes.a
 %{_libdir}/libXTrap.a
+%{_libdir}/libXau.a
 %{_libdir}/libXaw.a
 %{_libdir}/libXcomposite.a
 %{_libdir}/libXcursor.a
