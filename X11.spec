@@ -19,7 +19,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.7.0
-Release:	7
+Release:	8
 Epoch:		1
 License:	XFree86 1.0 (?)
 Group:		X11/Xorg
@@ -122,6 +122,7 @@ Patch52:	XFree86-kernel_headers.patch
 Patch53:	XFree86-stdint.patch
 Patch54:	%{name}-setxkbmap.patch
 Patch55:	%{name}-makefile-fastbuild.patch
+Patch56:	%{name}-xrender-pkgconfig.patch
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
 # Required by xc/programs/Xserver/hw/xfree86/drivers/glide/glide_driver.c
@@ -1872,6 +1873,7 @@ X11-libs.
 %patch53 -p0
 %patch54 -p1
 %patch55 -p0
+%patch56 -p0
 
 rm -f xc/config/cf/host.def
 
@@ -2571,6 +2573,7 @@ fi
 %{_mandir}/man3/[A-FH-Z]*
 %{_pkgconfigdir}/xcursor.pc
 %{_pkgconfigdir}/xft.pc
+%{_pkgconfigdir}/xrender.pc
 
 %files Xserver-devel
 %defattr(644,root,root,755)
