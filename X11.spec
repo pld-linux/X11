@@ -88,6 +88,8 @@ Patch19:	X11-HasFreetype2.patch
 Patch20:	X11-config-s3.patch
 Patch21:	X11-XTerm.ad.patch
 Patch22:	X11-xf86Pcih.patch
+Patch23:	X11-dontbuildfonts.patch
+Patch24:	X11-dixsym-missing.patch
 
 Patch32:	XFree86-xman-manpaths.patch
 Patch33:	XFree86-clearrts.patch
@@ -299,6 +301,7 @@ systemie i wybierania ich w zale¿no¶ci od potrzeb aplikacji.
 Fontconfig é uma biblioteca para configuração e customização do acesso
 a fontes.
 
+
 %package fontconfig-devel
 Summary:        Font configuration and customization library
 Summary(pl):    Biblioteka do konfigurowania fontów
@@ -345,6 +348,14 @@ This package contains static version of fontconfig library.
 
 %description fontconfig-static -l pl
 Ten pakiet zawiera statyczn± wersjê biblioteki fontconfig.
+
+%package Xprint
+Summary:        Xprint tool
+Group:          X11/Xorg
+
+%description Xprint
+empty
+
 
 %package DPS
 Summary:	Display PostScript
@@ -1856,6 +1867,8 @@ X11-libs.
 %patch20 -p0
 %patch21 -p0
 %patch22 -p0
+%patch23 -p0
+
 rm -f xc/config/cf/host.def
 
 %build
@@ -2374,6 +2387,11 @@ fi
 %files fontconfig-static
 %defattr(644,root,root,755)
 %{_libdir}/libfontconfig.a
+
+%files Xprint
+%defattr(644,root,root,755)
+%dir/etc/X11/xserver/C/print/
+/etc/X11/xserver/C/print/*
 
 %files DPS
 %defattr(644,root,root,755)
