@@ -5,7 +5,7 @@
  #ifndef XFileSearchPathBase
  /* avoid SCCS keyword */
 -#define XFileSearchPathBase Concat4($(LIBDIR)/%L/%T/%N%C,%S:$(LIBDIR)/%l/%T/%N%C,%S:$(LIBDIR)/%T/%N%C,%S:$(LIBDIR)/%L/%T/%N%S:$(LIBDIR)/%l/%T/%N%S:$(LIBDIR)/%T/%N%S)
-+#define XFileSearchPathBase Concat4($(LIBDIR)/%T/%L/%N%C,%S:$(LIBDIR)/%T/%l/%N%C,%S:$(LIBDIR)/%T/%N%C,%S:$(LIBDIR)/%T/%L/%N%S:$(LIBDIR)/%T/%l/%N%S:$(LIBDIR)/%T/%N%S:$(LIBDIR)/%L/%T/%N%C,%S:$(LIBDIR)/%l/%T/%N%C,%S:$(LIBDIR)/%L/%T/%N%S:$(LIBDIR)/%l/%T/%N%S)
++#define XFileSearchPathBase $(LIBDIR)/%T/%L/%N%C%S:$(LIBDIR)/%T/%l/%N%C%S:$(LIBDIR)/%T/C/%N%C%S:$(LIBDIR)/%T/POSIX/%N%C%S:$(LIBDIR)/%T/%N%C%S:$(LIBDIR)/%T/%L/%N%S:$(LIBDIR)/%T/%l/%N%S:$(LIBDIR)/%T/C/%N%S:$(LIBDIR)/%T/POSIX/%N%S:$(LIBDIR)/%T/%N%S:$(LIBDIR)/%L/%T/%N%C%S:$(LIBDIR)/%l/%T/%N%C%S:$(LIBDIR)/%L/%T/%N%S:$(LIBDIR)/%l/%T/%N%S
  #endif
  #ifndef XFileSearchPathDefault
  #ifdef XAppLoadDir
