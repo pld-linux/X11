@@ -29,6 +29,7 @@ Source1:	http://freedesktop.org/~xorg/X11R%{version}/src/X11R%{version}-src2.tar
 Source2:	http://freedesktop.org/~xorg/X11R%{version}/src/X11R%{version}-src3.tar.gz
 # Source2-md5:	4c7144786522bbce383b21ace72bf669
 Source7:	ftp://ftp.pld-linux.org/software/xinit/xdm-xinitrc-0.2.tar.bz2
+# Source7-md5:  0a15b1c374256b5cad7961807baa3896
 Source8:	xdm.pamd
 Source9:	xserver.pamd
 Source10:	xdm.init
