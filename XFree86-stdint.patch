@@ -1,0 +1,12 @@
+diff -Nru xc.orig/programs/xdm/genauth.c xc/programs/xdm/genauth.c
+--- xc.orig/programs/xdm/genauth.c	2003-12-19 05:51:15.000000000 +0100
++++ xc/programs/xdm/genauth.c	2003-12-24 09:19:44.000000000 +0100
+@@ -45,6 +45,8 @@
+ #include <time.h>
+ #define Time_t time_t
+ 
++#include <stdint.h>
++
+ #ifdef HASXDMAUTH
+ static unsigned char	key[8];
+ #endif
