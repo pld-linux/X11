@@ -3,7 +3,7 @@
 # - XDM Auth broken
 # - Review rest of patches
 #
-%define		snap	20040816
+%define		snap	20040815
 #
 Summary:	XOrg X11 Window System servers and basic programs
 Summary(de):	XOrg X11 Window-System-Server und grundlegende Programme
@@ -299,6 +299,7 @@ systemie i wybierania ich w zale¿no¶ci od potrzeb aplikacji.
 %description fontconfig -l pt_BR
 Fontconfig é uma biblioteca para configuração e customização do acesso
 a fontes.
+
 
 %package fontconfig-devel
 Summary:        Font configuration and customization library
