@@ -1698,6 +1698,7 @@ Group:		X11/Themes
 ######		Unknown group!
 #Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	XFree86-libs
+Obsoletes:	XFree86-Xcursor-packs-handhelds
 
 %description -n XcursorTheme-handhelds
 Cursors theme "handhelds" for X11.
@@ -1712,6 +1713,7 @@ Group:		X11/Themes
 ######		Unknown group!
 #Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	XFree86-libs
+Obsoletes:	XFree86-Xcursor-packs-redglass
 
 %description -n XcursorTheme-redglass
 Cursors theme "redglass" for X11.
@@ -1726,6 +1728,7 @@ Group:		X11/Themes
 ######		Unknown group!
 #Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	XFree86-libs
+Obsoletes:	XFree86-Xcursor-packs-whiteglass
 
 %description -n XcursorTheme-whiteglass
 Cursors theme "whiteglass" for X11.
