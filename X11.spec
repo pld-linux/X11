@@ -28,7 +28,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.8.1
-Release:	5.1
+Release:	5.2
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -77,7 +77,7 @@ Source51:	xload.png
 Source52:	xmag.png
 Source53:	http://oss.sgi.com/projects/ogl-sample/ABI/glext.h
 # NoSource53-md5: b3e8590b46dbab4341841592147fba26
-Patch0:		%{name}-6.8.2-20050108.patch
+Patch0:		%{name}-6.8.2-20050205.patch
 Patch1:		%{name}-PLD.patch
 Patch2:		%{name}-enableglide.patch
 Patch3:		%{name}-DisableDebug.patch
@@ -105,7 +105,6 @@ Patch24:	%{name}-pkgconfig.patch
 Patch25:	XFree86-spencode-nowarning.patch
 Patch26:	%{name}-xterm-256colors.patch
 Patch27:	%{name}-makefile-fastbuild.patch
-Patch28:	%{name}-sparc-kbd.patch
 Patch29:	%{name}-radeon-entervt.patch
 # updated from http://dl.sourceforge.net/i810fb/i810fb-xfree86-420.tar.bz2 : i810fb-xfree420.diff
 Patch31:	%{name}-i810fb.patch
@@ -1926,9 +1925,7 @@ X11-libs.
 
 %prep
 %setup -qc -a1 -a2 -a7
-cd xc
 %patch0 -p0
-cd -
 %patch1 -p0
 %{?with_glide:%patch2 -p0}
 %patch3 -p0
@@ -1956,7 +1953,6 @@ cd -
 %patch25 -p1
 %patch26 -p0
 %patch27 -p0
-%patch28 -p1
 
 rm -f xc/config/cf/host.def
 
