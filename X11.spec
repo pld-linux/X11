@@ -1,3 +1,4 @@
+render $Revision: 1.37.2.10 $, $Date: 2004-08-16 17:21:53 $
 #
 # TODO 
 # - XDM Auth broken
@@ -300,7 +301,6 @@ systemie i wybierania ich w zale¿no¶ci od potrzeb aplikacji.
 Fontconfig é uma biblioteca para configuração e customização do acesso
 a fontes.
 
-
 %package fontconfig-devel
 Summary:        Font configuration and customization library
 Summary(pl):    Biblioteka do konfigurowania fontów
@@ -311,7 +311,7 @@ Requires:       expat-devel
 Requires:       freetype-devel >= 2.1.5
 Provides:       XFree86-fontconfig-devel
 Obsoletes:      XFree86-fontconfig-devel
-Provides:       fontconfig-devel
+Provides:       fontconfig-devel = 1:2.2.0
 Obsoletes:      fontconfig-devel
 
 %description fontconfig-devel
@@ -722,6 +722,10 @@ Provides:	xcursor-devel
 Provides:	xft-devel = 2.1.6
 Provides:	xpm-devel
 Provides:	xrender-devel = 0.8.4
+Provides:	libXcomposite-devel
+Provides:	libXdamage-devel
+Provides:	libXfixes-devel
+Provides:	libXrender-devel
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1-devel
 %endif
@@ -1387,6 +1391,10 @@ Provides:	xcursor
 Provides:	xft
 Provides:	xpm
 Provides:	xrender
+Provides:	libXcomposite
+Provides:	libXdamage
+Provides:	libXfixes
+Provides:	libXrender
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1-libs
 %endif
@@ -2560,6 +2568,10 @@ fi
 %attr(755,root,root) %{_libdir}/libfontenc.so
 %attr(755,root,root) %{_libdir}/libxkbfile.so
 %attr(755,root,root) %{_libdir}/libxkbui.so
+%attr(755,root,root) %{_libdir}/libXdamage.so
+%attr(755,root,root) %{_libdir}/libXcomposite.so
+%attr(755,root,root) %{_libdir}/libXfixes.so
+%attr(755,root,root) %{_libdir}/libXrender.so
 #%attr(755,root,root) %{_libdir}/libxrx.so
 %{_libdir}/libXau.a
 %{_libdir}/libXdmcp.a
