@@ -1,0 +1,170 @@
+--- xc/programs/Xserver/hw/xfree86/drivers/i810/i810.h.orig	2004-06-22 16:28:46.000000000 +0200
++++ xc/programs/Xserver/hw/xfree86/drivers/i810/i810.h	2004-11-25 14:00:55.000000000 +0100
+@@ -76,6 +76,11 @@
+ #define I810_MAX_SUBPICTURES 2
+ #define I810_TOTAL_SURFACES 9
+ 
++/* tony: i810 Framebuffer Driver - IOCTL's */
++#define I810FB_IOC_AREYOUTHERE         0x46FF
++#define I810FB_IOC_RELEASEGART         0x46FA
++#define I810FB_IOC_CLAIMGART           0x46F9
++  
+ /* Globals */
+ 
+ typedef struct _I810Rec *I810Ptr;
+@@ -146,6 +151,8 @@
+    long BackOffset;
+    int cpp;
+    int MaxClock;
++   int FbDescriptor;
++   int FbGartClaimed;
+ 
+    unsigned int bufferOffset;		/* for I810SelectBuffer */
+    Bool DoneFrontAlloc;
+@@ -218,6 +225,7 @@
+    I810RegRec ModeReg;
+ 
+    XAAInfoRecPtr AccelInfoRec;
++   int AccelValid;
+    xf86CursorInfoPtr CursorInfoRec;
+    CloseScreenProcPtr CloseScreen;
+    ScreenBlockHandlerProcPtr BlockHandler;
+--- xc/programs/Xserver/hw/xfree86/drivers/i810/i810_accel.c.orig	2004-07-30 22:30:52.000000000 +0200
++++ xc/programs/Xserver/hw/xfree86/drivers/i810/i810_accel.c	2004-11-25 14:01:22.000000000 +0100
+@@ -89,6 +89,7 @@
+    pI810->AccelInfoRec = infoPtr = XAACreateInfoRec();
+    if (!infoPtr)
+       return FALSE;
++   pI810->AccelValid = 1;
+ 
+    pI810->bufferOffset = 0;
+    infoPtr->Flags = LINEAR_FRAMEBUFFER | OFFSCREEN_PIXMAPS;
+@@ -193,6 +194,9 @@
+    int last_head = 0;
+    int first = 0;
+ 
++   if (!pI810->AccelValid)
++     return 0;
++
+    /* If your system hasn't moved the head pointer in 2 seconds, I'm going to
+     * call it crashed.
+     */
+--- xc/programs/Xserver/hw/xfree86/drivers/i810/i810_driver.c.orig	2004-08-25 02:30:41.000000000 +0200
++++ xc/programs/Xserver/hw/xfree86/drivers/i810/i810_driver.c	2004-11-25 14:03:53.000000000 +0100
+@@ -668,6 +668,7 @@
+    rgb defaultWeight = { 0, 0, 0 };
+    int mem;
+    Bool enable;
++   char filename[16];
+ 
+    if (pScrn->numEntities != 1)
+       return FALSE;
+@@ -678,6 +679,36 @@
+ 
+    pI810 = I810PTR(pScrn);
+ 
++   /* tony:  try to open fb, then query if fb can release GART, 
++      finally, ask fb to release GART */
++   pI810->FbGartClaimed = 0;
++   i = 0;
++   while (i < 8) {
++       sprintf(filename, "/dev/fb%d", i);
++       if (-1 != (pI810->FbDescriptor = open(filename, O_RDONLY, 0))) {
++          if (!ioctl(pI810->FbDescriptor, I810FB_IOC_AREYOUTHERE, 0)) 
++	       break;
++	  else {
++	       close(pI810->FbDescriptor);
++	       pI810->FbDescriptor = 0;
++	  }      
++       }
++       else {
++	   pI810->FbDescriptor = 0;
++       }
++       ++i;	
++   }
++   if (pI810->FbDescriptor && !pI810->FbGartClaimed) {
++       if (ioctl(pI810->FbDescriptor, I810FB_IOC_CLAIMGART, 0)) {
++	    close(pI810->FbDescriptor);
++	    pI810->FbDescriptor = 0;
++   	    return FALSE;
++       }
++        pI810->FbGartClaimed = 1;
++   }	     
++   /* tony: end */
++   
++
+    pI810->pEnt = xf86GetEntityInfo(pScrn->entityList[0]);
+    if (pI810->pEnt->location.type != BUS_PCI)
+       return FALSE;
+@@ -2379,13 +2410,18 @@
+ {
+    ScrnInfoPtr pScrn = xf86Screens[scrnIndex];
+ 
+-#ifdef XF86DRI
+    I810Ptr pI810 = I810PTR(pScrn);
+-#endif
+ 
+    if (I810_DEBUG & DEBUG_VERBOSE_DRI)
+       ErrorF("\n\nENTER VT\n");
+ 
++   /* tony: claim GART from fb */
++   if (pI810->FbDescriptor && !pI810->FbGartClaimed) {
++   	if (ioctl(pI810->FbDescriptor, I810FB_IOC_CLAIMGART, 0))
++   	    return FALSE;
++        pI810->FbGartClaimed = 1;
++   }	     
++   
+    if (!I810BindGARTMemory(pScrn)) {
+       return FALSE;
+    }
+@@ -2404,6 +2440,10 @@
+    if (!I810ModeInit(pScrn, pScrn->currentMode))
+       return FALSE;
+    I810AdjustFrame(scrnIndex, pScrn->frameX0, pScrn->frameY0, 0);
++
++   if (pI810->AccelInfoRec != NULL) 
++     pI810->AccelValid = 1;
++
+    return TRUE;
+ }
+ 
+@@ -2430,6 +2470,7 @@
+       I810RefreshRing(pScrn);
+       I810Sync(pScrn);
+       pI810->AccelInfoRec->NeedToSync = FALSE;
++      pI810->AccelValid = 0;
+    }
+    I810Restore(pScrn);
+ 
+@@ -2440,6 +2481,13 @@
+       return;
+ #endif
+ 
++   /* tony: give back GART to fb */
++   if (pI810->FbDescriptor && pI810->FbGartClaimed) {
++   	if (ioctl(pI810->FbDescriptor, I810FB_IOC_RELEASEGART, 0))
++   	    return;
++        pI810->FbGartClaimed = 0;
++   }	     
++
+    vgaHWLock(hwp);
+ }
+ 
+@@ -2509,6 +2557,17 @@
+ 
+    pScrn->vtSema = FALSE;
+    pScreen->CloseScreen = pI810->CloseScreen;
++
++   /* tony:  give back GART to fb, close the fb device */
++   if (pI810->FbDescriptor && pI810->FbGartClaimed) {
++       if (ioctl(pI810->FbDescriptor, I810FB_IOC_RELEASEGART, 0))
++           return FALSE;
++       pI810->FbGartClaimed = 0;
++   }	     
++   if (pI810->FbDescriptor) {
++   	close(pI810->FbDescriptor);
++   	pI810->FbDescriptor = 0;
++   }		
+    return (*pScreen->CloseScreen) (scrnIndex, pScreen);
+ }
+ 
