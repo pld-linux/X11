@@ -10,8 +10,6 @@
 #
 # Conditional build:
 %bcond_without	glide	# don't build glide driver
-%bcond_with	glibc_charset	# enforce glibc-compatible locale charset
-				# fetching, experimental
 
 Summary:	XOrg X11 Window System servers and basic programs
 Summary(de):	XOrg X11 Window-System-Server und grundlegende Programme
@@ -104,7 +102,6 @@ Patch24:	XFree86-spencode-nowarning.patch
 Patch25:	%{name}-xterm-256colors.patch
 Patch26:	%{name}-makefile-fastbuild.patch
 Patch27:	%{name}-sparc-kbd.patch
-Patch28:	%{name}-glibc-charset.patch
 Patch29:	%{name}-radeon-entervt.patch
 # tdfx-fix-vtswitch-font-corruption - not applied, needs check
 URL:		http://www.x.org/
@@ -1949,15 +1946,6 @@ X11-libs.
 
 rm -f xc/config/cf/host.def
 
-%if %{with glibc_charset}
-%patch28 -p1
-# strip charset info, it's not welcome there
-cat xc/nls/locale.alias \
-	| sed 's/\.[^ \t@:]*//g' \
-	| awk '{if ($1 != $2":" && $1 != "C:") print}' \
-	| uniq > tmp
-mv tmp xc/nls/locale.alias
-%endif
 %patch29 -p1
 
 %build
