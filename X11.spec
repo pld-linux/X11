@@ -2791,12 +2791,13 @@ fi
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 sparc64
+%ifarch %{ix86} amd64 ia64 sparc64
 %files driver-i810
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/i810_drv.o
-# i810_dri alone is built on amd64 - what for?
+%ifarch %{ix86} ia64 sparc64
 %attr(755,root,root) %{_libdir}/modules/dri/i810_dri.so
+%endif
 %attr(755,root,root) %{_libdir}/modules/dri/i915_dri.so
 %{_mandir}/man4/i810.4*
 %endif
@@ -3117,9 +3118,7 @@ fi
 %dir %{_libdir}/modules/dri
 %dir %{_libdir}/modules/drivers
 %attr(755,root,root) %{_libdir}/modules/*.a
-%ifnarch amd64
 %attr(755,root,root) %{_libdir}/modules/drivers/linux
-%endif
 %ifarch %{ix86} ia64 amd64 sparc sparc64 alpha ppc arm
 %attr(755,root,root) %{_libdir}/modules/drivers/vga_drv.o
 %endif
@@ -3157,9 +3156,7 @@ fi
 %{_mandir}/man4/penmount.4*
 %{_mandir}/man4/tek4957.4*
 %{_mandir}/man4/ur98.4*
-%ifnarch amd64
 %{_mandir}/man4/v4l.4*
-%endif
 %ifarch %{ix86} ia64 amd64 sparc sparc64 alpha ppc arm
 %{_mandir}/man4/vga.4*
 %endif
