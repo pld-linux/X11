@@ -4,8 +4,8 @@
  #endif
  
  #ifndef DefaultGcc2DebugOpt
--#define DefaultGcc2DebugOpt -g
-+#define DefaultGcc2DebugOpt
+-# define DefaultGcc2DebugOpt -g
++# define DefaultGcc2DebugOpt
  #endif
  
  #if HasGcc2 && DebuggableLibraries
