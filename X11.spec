@@ -2496,6 +2496,9 @@ fi
 %dir %{_sysconfdir}/X11/xserver/C
 %dir %{_sysconfdir}/X11/xserver/C/print
 %{_sysconfdir}/X11/xserver/C/print/*
+%lang(en) %dir %{_sysconfdir}/X11/xserver/en_US
+%lang(en) %dir %{_sysconfdir}/X11/xserver/en_US/print
+%lang(en) %{_sysconfdir}/X11/xserver/en_US/print/*
 
 %files DPS
 %defattr(644,root,root,755)
