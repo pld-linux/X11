@@ -25,7 +25,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.8.1
-Release:	2
+Release:	3
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -104,6 +104,7 @@ Patch26:	%{name}-makefile-fastbuild.patch
 Patch27:	%{name}-sparc-kbd.patch
 Patch29:	%{name}-radeon-entervt.patch
 Patch30:	http://www.x.org/pub/X11R6.8.1/patches/xorg-681-CAN-2004-0914.patch
+Patch50:	%{name}-glibc-locale_sync.patch
 # XFree86-tdfx-fix-vtswitch-font-corruption.patch - issue still not fixed,
 # but patch doesn't help either; however, it occurs in text mode only, not
 # with tdfxfb, which is worth using anyway
@@ -1954,6 +1955,8 @@ rm -f xc/config/cf/host.def
 %patch29 -p1
 cd xc
 %patch30 -p0
+cd -
+%patch50 -p1
 
 %build
 PWD=`pwd`
