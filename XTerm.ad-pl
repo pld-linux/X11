@@ -140,7 +140,7 @@ NXTerm.JoinSession:			False
 ! or wherever it will be loaded into xrm from.
 ! To know, why this works, see Xt documentation (appendix B).
 ! On some systems you may want to replace the a (alt) modifiers with
-! m (meta) modifier in fron of some <Key> events.
+! m (meta) modifier in front of some <Key> events.
 *vt100.translations: #override \
 	Alt Ctrl<Btn4Down>: string(0x1b) string("OA")\n\
 	Alt Ctrl<Btn5Down>: string(0x1b) string("OB")\n\
