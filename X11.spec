@@ -392,8 +392,8 @@ Provides:	OpenGL = 1.4
 Provides:	OpenGL-GLU = 1.3
 Provides:	OpenGL-GLX = 1.4
 Provides:	XFree86-OpenGL-libs = %{epoch}:%{version}-%{release}
-Obsoletes:	XFree86-OpenGL-libs
 Obsoletes:	Mesa
+Obsoletes:	XFree86-OpenGL-libs
 
 %description OpenGL-libs
 OpenGL libraries for X11R6 system.
@@ -430,8 +430,9 @@ Provides:	OpenGL-devel = 1.4
 Provides:	OpenGL-GLU-devel = 1.3
 Provides:	OpenGL-GLX-devel = 1.4
 Provides:	XFree86-OpenGL-devel = %{epoch}:%{version}-%{release}
-Obsoletes:	XFree86-OpenGL-devel
 Obsoletes:	Mesa-devel
+Obsoletes:	XFree86-OpenGL-devel
+Obsoletes:	XFree86-OpenGL-doc
 Obsoletes:	glxMesa-devel
 
 %description OpenGL-devel
@@ -448,8 +449,8 @@ Requires:	%{name}-OpenGL-devel = %{epoch}:%{version}-%{release}
 Provides:	OpenGL-static = 1.4
 Provides:	OpenGL-GLU-static = 1.3
 Provides:	XFree86-OpenGL-static = %{epoch}:%{version}-%{release}
-Obsoletes:	XFree86-OpenGL-static
 Obsoletes:	Mesa-static
+Obsoletes:	XFree86-OpenGL-static
 
 %description OpenGL-static
 X11R6 static libraries with OpenGL.
