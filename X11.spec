@@ -2371,6 +2371,9 @@ fi
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/bdftopcf
+%attr(755,root,root) %{_bindir}/ioport
+%attr(755,root,root) %{_bindir}/mmapr
+%attr(755,root,root) %{_bindir}/mmapw
 %attr(755,root,root) %{_bindir}/xcursor-config
 %attr(755,root,root) %{_bindir}/xft-config
 %attr(755,root,root) %{_libdir}/libFS.so
