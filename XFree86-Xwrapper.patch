@@ -464,3 +464,14 @@ diff -urN XFree86-4.1.0.orig/xc/programs/xinit/xinit.c XFree86-4.1.0/xc/programs
  #else
  	    (**argv != '/' && **argv != '\\' && **argv != '.' &&
  	     !(isalpha(**argv) && (*argv)[1]==':'))) {
+--- XFree86-4.2.0/xc/programs/xinit/startx.cpp.orig	Fri Nov 30 21:57:48 2001
++++ XFree86-4.2.0/xc/programs/xinit/startx.cpp	Sun Mar  3 12:52:13 2002
+@@ -53,7 +53,7 @@
+ sysclientrc=XINITDIR/xinitrc
+ sysserverrc=XINITDIR/xserverrc
+ defaultclient=BINDIR/xterm
+-defaultserver=BINDIR/X
++defaultserver=BINDIR/Xwrapper
+ defaultclientargs=""
+ defaultserverargs=""
+ clientargs=""
