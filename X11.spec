@@ -646,7 +646,11 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	imake = %{epoch}:%{version}-%{release}
 Provides:	XFree86-devel = %{epoch}:%{version}-%{release}
+Provides:	render
+Provides:	xcursor-devel
+Provides:	xft-devel
 Provides:	xpm-devel
+Provides:	xrender-devel
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1-devel
 %endif
@@ -1283,7 +1287,10 @@ Requires(post,postun):	grep
 Requires(postun):	fileutils
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Provides:	XFree86-libs = %{epoch}:%{version}-%{release}
+Provides:	xcursor
+Provides:	xft
 Provides:	xpm
+Provides:	xrender
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1-libs
 %endif
