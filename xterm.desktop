@@ -1,8 +1,4 @@
 [Desktop Entry]
-WmCommand=
-BinaryPattern=
-MiniIcon=
-Protocols=
 MimeType=
 Comment=Terminal emulator for X11
 Comment[br]=Termenell X
@@ -30,6 +26,6 @@ TerminalOptions=
 Path=
 Type=Application
 Terminal=false
-Categories=TerminalEmulator;X-X11
+Categories=TerminalEmulator;X-X11;
 Encoding=UTF-8
 # vi: encoding=utf-8
