@@ -9,7 +9,10 @@
 # - where to take dtpdmd from?
 #
 # Conditional build:
-%bcond_without	glide	# don't build glide driver
+%bcond_without	glide		# don't build glide driver
+
+#http://cambuca.ldhs.cetuc.puc-rio.br/multiuser/
+%bcond_with	dualhead	# apply dualhead patch
 
 Summary:	XOrg X11 Window System servers and basic programs
 Summary(de):	XOrg X11 Window-System-Server und grundlegende Programme
@@ -113,6 +116,11 @@ Patch50:	%{name}-glibc-locale_sync.patch
 # XFree86-tdfx-fix-vtswitch-font-corruption.patch - issue still not fixed,
 # but patch doesn't help either; however, it occurs in text mode only, not
 # with tdfxfb, which is worth using anyway
+
+#head-patch
+#ftp://ftp.linux.cz/pub/linux/people/jan_kasprzak/xorg-dualhead/
+Patch100:	ftp://ftp.linux.cz/pub/linux/people/jan_kasprzak/xorg-dualhead/xorg-x11-6.8.1-dualhead.patch
+
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
 # Required by xc/programs/Xserver/hw/xfree86/drivers/glide/glide_driver.c
@@ -1956,6 +1964,7 @@ cd -
 %patch31 -p0
 %patch34 -p0
 %patch50 -p1
+%{?with_dualhead:%patch100 -p1}
 
 %build
 PWD=`pwd`
