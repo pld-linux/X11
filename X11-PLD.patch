@@ -1,0 +1,495 @@
+diff -Nru xc.orig/Makefile xc/Makefile
+--- xc.orig/Makefile	2003-11-02 05:38:01.000000000 +0100
++++ xc/Makefile	2003-12-23 12:09:12.071230112 +0100
+@@ -8,7 +8,7 @@
+ # or add "MAKE = make" to this file.
+ 
+ RELEASE = "Release 6.7"
+-SHELL = /bin/sh
++SHELL = /bin/sh -e
+ RM = rm -f
+ MV = mv
+ WORLDOPTS =
+diff -Nru xc.orig/config/cf/Imake.cf xc/config/cf/Imake.cf
+--- xc.orig/config/cf/Imake.cf	2003-12-19 05:40:33.000000000 +0100
++++ xc/config/cf/Imake.cf	2003-12-23 12:09:11.983243488 +0100
+@@ -784,6 +784,10 @@
+ #   define s390Architecture
+ #  undef __s390__
+ # endif /* s390 */
++# ifdef alpha
++#  define AlphaArchitecture
++#  undef alpha
++# endif /* alpha */
+ # ifdef __alpha
+ #  define AlphaArchitecture
+ #  undef __alpha
+diff -Nru xc.orig/config/cf/Imake.tmpl xc/config/cf/Imake.tmpl
+--- xc.orig/config/cf/Imake.tmpl	2003-11-21 06:55:02.000000000 +0100
++++ xc/config/cf/Imake.tmpl	2003-12-23 12:09:11.992242120 +0100
+@@ -261,7 +261,7 @@
+ 
+ #ifndef BuildHtmlManPages
+ #ifdef RmanCmd
+-#define BuildHtmlManPages YES
++#define BuildHtmlManPages NO
+ #else
+ #define BuildHtmlManPages NO
+ #endif
+@@ -854,11 +854,7 @@
+ #define LintlibDir $(USRLIBDIR)/lint
+ #endif
+ #ifndef SystemManDirectory
+-#if SystemV4
+ #define SystemManDirectory /usr/share/man
+-#else
+-#define SystemManDirectory /usr/man
+-#endif
+ #endif
+ #ifndef ManDirectoryRoot
+ #ifdef ProjectRoot
+@@ -998,7 +994,7 @@
+ #define NoRConst NO /* YES if const for structs of funcs is bad */
+ #endif
+ #ifndef InstPgmFlags
+-#define InstPgmFlags -s
++#define InstPgmFlags
+ #endif
+ #ifndef InstBinFlags
+ #define InstBinFlags -m 0755
+@@ -1140,7 +1136,7 @@
+ #define CppCmd /LibDirName/cpp
+ #endif
+ #ifndef RawCppCmd
+-#define RawCppCmd CppCmd -undef
++#define RawCppCmd CppCmd
+ #endif
+ #ifndef CppNoLineInfoOption
+ #define CppNoLineInfoOption /**/
+diff -Nru xc.orig/config/cf/X11.tmpl xc/config/cf/X11.tmpl
+--- xc.orig/config/cf/X11.tmpl	2003-12-19 05:41:17.000000000 +0100
++++ xc/config/cf/X11.tmpl	2003-12-23 12:09:12.042234520 +0100
+@@ -1262,8 +1262,12 @@
+ # define UsbMouseSupport NO
+ #endif
+ 
++#ifndef EtcX11Directory
++#define EtcX11Directory /etc/X11
++#endif
++
+ #ifndef DefaultFSConfigFile
+-#define DefaultFSConfigFile $(LIBDIR)/fs/config
++#define DefaultFSConfigFile $(ETCX11DIR)/fs/config
+ #endif
+ 
+ /* X-TrueType settings */
+@@ -1389,7 +1393,7 @@
+ #define ConfigDir $(LIBDIR)/config
+ #endif
+ #ifndef DocDir
+-#define DocDir $(LIBDIR)/doc
++#define DocDir $(LIBDIR)/share/doc
+ #endif
+ #ifndef DocHtmlDir
+ #define DocHtmlDir $(DOCDIR)/html
+@@ -1401,31 +1405,31 @@
+ #define DocPdfDir $(DOCDIR)/PDF
+ #endif
+ #ifndef FontDir
+-#define FontDir $(LIBDIR)/fonts
++#define FontDir /usr/share/fonts
+ #endif
+ #ifndef AdmDir
+-#define AdmDir /usr/adm
++#define AdmDir /var/log
+ #endif
+ #ifndef XinitDir
+-#define XinitDir $(LIBDIR)/xinit
++#define XinitDir $(ETCX11DIR)/xinit
+ #endif
+ #ifndef XdmDir
+-#define XdmDir $(LIBDIR)/xdm
++#define XdmDir $(ETCX11DIR)/xdm
+ #endif
+ #ifndef XdmVarDir
+ #define XdmVarDir $(VARLIBDIR)/xdm
+ #endif
+ #ifndef XdmAuthDir
+-#define XdmAuthDir $(LIBDIR)/xdm
++#define XdmAuthDir $(ETCX11DIR)/xdm
+ #endif
+ #ifndef XdmConfigurationSubdirectory		/* under xdm sources */
+ #define XdmConfigurationSubdirectory config
+ #endif
+ #ifndef TwmDir
+-#define TwmDir $(LIBDIR)/twm
++#define TwmDir $(ETCX11DIR)/twm
+ #endif
+ #ifndef XsmDir
+-#define XsmDir $(LIBDIR)/xsm
++#define XsmDir $(ETCX11DIR)/xsm
+ #endif
+ #ifndef NlsDir
+ #define NlsDir $(LIBDIR)/nls
+@@ -1434,23 +1438,20 @@
+ #define XLocaleDir $(LIBDIR)/locale
+ #endif
+ #ifndef LbxproxyDir
+-#define LbxproxyDir $(LIBDIR)/lbxproxy
++#define LbxproxyDir $(ETCX11DIR)/lbxproxy
+ #endif
+ #ifndef LbxproxyConfigSubdir		/* under lbxproxy sources */
+ #define LbxproxyConfigSubdir config
+ #endif
+ #ifndef ProxyManagerDir
+-#define ProxyManagerDir $(LIBDIR)/proxymngr
++#define ProxyManagerDir $(ETCX11DIR)/proxymngr
+ #endif
+ #ifndef ServerConfigDir
+-#define ServerConfigDir $(LIBDIR)/xserver
++#define ServerConfigDir $(ETCX11DIR)/xserver
+ #endif
+ #ifndef XPrintDir
+ #define XPrintDir ServerConfigDir
+ #endif
+-#ifndef EtcX11Directory
+-#define EtcX11Directory /etc/X11
+-#endif
+ #ifndef InstallSecurityConfig
+ #define InstallSecurityConfig YES	/* Install sample security policy */
+ #endif
+@@ -1482,10 +1483,10 @@
+ #define OsNameDefines /* as nothing */
+ #endif
+ #ifndef DefaultUserPath			/* for xdm */
+-#define DefaultUserPath :/bin:/usr/bin:$(BINDIR):/usr/ucb
++#define DefaultUserPath /usr/local/bin:/bin:/usr/bin:$(BINDIR)
+ #endif
+ #ifndef DefaultSystemPath		/* for xdm */
+-#define DefaultSystemPath /etc:/bin:/usr/bin:$(BINDIR):/usr/ucb
++#define DefaultSystemPath /sbin:/bin:/usr/sbin:/usr/bin:$(BINDIR)
+ #endif
+ #ifndef DefaultSystemShell		/* for xdm to set in SHELL */
+ #define DefaultSystemShell BourneShell
+@@ -1614,7 +1615,7 @@
+ 
+      HTMLINDEXCMD = HtmlIndexCmd
+ 
+-       DOCUTILSRC = $(XTOP)/doc/util
++       DOCUTILSRC = $(XTOP)/share/doc/util
+         CLIENTSRC = $(TOP)/clients
+           DEMOSRC = $(TOP)/demos
+        XDOCMACROS = $(DOCUTILSRC)/macros.t
+@@ -1628,7 +1629,7 @@
+         SERVERSRC = $(XTOP)/programs/Xserver
+        CONTRIBSRC = ContribDir
+    UNSUPPORTEDSRC = UnsupportedDir
+-           DOCSRC = $(XTOP)/doc
++           DOCSRC = $(XTOP)/share/doc
+            RGBSRC = $(XTOP)/programs/rgb
+       BDFTOPCFSRC = $(PROGRAMSRC)/bdftopcf
+      MKFONTDIRSRC = $(PROGRAMSRC)/mkfontdir
+diff -Nru xc.orig/config/cf/linux.cf xc/config/cf/linux.cf
+--- xc.orig/config/cf/linux.cf	2003-12-19 05:41:59.000000000 +0100
++++ xc/config/cf/linux.cf	2003-12-23 12:09:12.008239688 +0100
+@@ -333,7 +333,7 @@
+  */
+ #if BuildXF86DRI
+ # if defined(i386Architecture)
+-#  define BuildLibGlxWithoutPIC	YES
++#  define BuildLibGlxWithoutPIC	NO
+ # endif
+ #endif
+ 
+@@ -720,7 +720,7 @@
+ 
+ #define HasVarRun		YES
+ #ifndef VarDbDirectory
+-# define VarDbDirectory		$(VARDIR)/lib
++# define VarDbDirectory		/var/lib
+ #endif
+ 
+ #ifndef XF86OSCardDrivers
+diff -Nru xc.orig/config/cf/site.def xc/config/cf/site.def
+--- xc.orig/config/cf/site.def	2002-02-27 01:51:12.000000000 +0100
++++ xc/config/cf/site.def	2003-12-23 12:09:12.014238776 +0100
+@@ -119,10 +119,14 @@
+ #define HasSentinel	YES
+ */
+ 
+-/*
+ #undef DefaultUserPath
+-#define DefaultUserPath /bin:/usr/bin:$(BINDIR):/usr/ucb:/usr/local/bin
+-*/
++#define DefaultUserPath /usr/local/bin:/bin:/usr/bin:$(BINDIR)
++#undef DefaultSystemPath
++#define DefaultSystemPath /sbin:/bin:/usr/sbin:/usr/bin:$(BINDIR)
++
++
++#define HasPam    YES
++#define HasPamMisc    YES
+ 
+ 
+ /* You do NOT need SetUID if you only run the server under xdm */
+diff -Nru xc.orig/config/cf/xf86site.def xc/config/cf/xf86site.def
+--- xc.orig/config/cf/xf86site.def	2003-09-10 13:00:03.000000000 +0200
++++ xc/config/cf/xf86site.def	2003-12-23 12:09:12.050233304 +0100
+@@ -260,8 +260,8 @@
+ /*
+  * To not build/install the Cyrillic fonts, uncomment the following
+  *
+-#define BuildCyrillicFonts	NO
+  */
++#define BuildCyrillicFonts	YES
+ 
+ /*
+  * To not install the local font directory, uncomment the following
+@@ -307,27 +307,26 @@
+  * HasGlide2 to YES and set the Glide2IncDir variable. 
+  * HasGlide2 is per default NO.
+  *
+-#define HasGlide2 YES
+  */
++#define HasGlide2 YES
+ 
+ /*
+  * Set the path to your Glide include files.
+  *
+-#define Glide2IncDir /usr/include/glide
+  */
++#define Glide2IncDir /usr/include/glide
+ 
+ /* 
+  * Have glide 3?
+  *
+-#define HasGlide3 YES
+  */
++#define HasGlide3 YES
+ 
+ /*
+  * Set the path to your Glide 3 include files.
+  *
+-#define Glide3IncDir /usr/include/glide3
+  */
+-
++#define Glide3IncDir /usr/include/glide3
+ 
+ 
+ /*
+@@ -429,8 +428,8 @@
+  * Some Linux releases don't have a libtermcap.  In this case you may need
+  * to uncomment the following
+  *
+-#define TermcapLibrary		-lncurses
+  */
++#define TermcapLibrary		-lncurses
+ 
+ /*
+  * Build a server that dynamically loads the modules by setting
+@@ -605,8 +604,8 @@
+  * To forceably build static libraries in addition to shared libraries,
+  * uncomment this.
+  *
+-#define ForceNormalLib		YES
+  */
++#define ForceNormalLib		YES
+ 
+ /*
+  * Uncomment this if your default tools (eg, gcc, ld, as, etc) are
+diff -Nru xc.orig/config/cf/xfree86.cf xc/config/cf/xfree86.cf
+--- xc.orig/config/cf/xfree86.cf	2003-11-21 06:55:07.000000000 +0100
++++ xc/config/cf/xfree86.cf	2003-12-23 12:09:12.055232544 +0100
+@@ -128,7 +128,7 @@
+ #define XConfigFile		XF86Config
+ #endif
+ #ifndef XConfigDir
+-#define XConfigDir		$(LIBDIR)
++#define XConfigDir		$(ETCX11DIR)
+ #endif
+ #ifndef XLogFile
+ #define XLogFile		XFree86
+@@ -760,7 +760,7 @@
+ 
+ # ifndef XF86CardDrivers
+ #  define XF86CardDrivers	mga glint nv s3 s3virge sis savage \
+-				trident chips tdfx fbdev ati \
++				trident chips fbdev ati \
+ 				DevelDrivers newport \
+ 				XF86OSCardDrivers XF86ExtraCardDrivers
+ # endif
+diff -Nru xc.orig/config/imake/imake.c xc/config/imake/imake.c
+--- xc.orig/config/imake/imake.c	2003-04-10 13:00:03.000000000 +0200
++++ xc/config/imake/imake.c	2003-12-23 12:09:12.060231784 +0100
+@@ -1057,6 +1057,7 @@
+   static char* suse = "/etc/SuSE-release";
+   static char* redhat = "/etc/redhat-release";
+   static char* debian = "/etc/debian_version";
++  static char* pld = "/etc/pld-release";
+ 
+   fprintf (inFile, "%s\n", "#define LinuxUnknown    0");
+   fprintf (inFile, "%s\n", "#define LinuxSuSE       1");
+@@ -1071,6 +1072,7 @@
+   fprintf (inFile, "%s\n", "#define LinuxTurbo      10");
+   fprintf (inFile, "%s\n", "#define LinuxWare       11");
+   fprintf (inFile, "%s\n", "#define LinuxYggdrasil  12");
++  fprintf (inFile, "%s\n", "#define LinuxPLD        13");
+ 
+ #ifdef CROSSCOMPILE
+   if (CrossCompiling) {
+@@ -1097,6 +1099,11 @@
+      * at the content of /etc/debian_version */
+     return;
+   }
++  if (lstat (pld, &sb) == 0) {
++    fprintf (inFile, "%s\n", "#define DefaultLinuxDistribution LinuxPLD");
++    fprintf (inFile, "%s\n", "#define DefaultLinuxDistName PLD");
++    return;
++  }
+   /* what's the definitive way to tell what any particular distribution is? */
+ 
+   fprintf (inFile, "%s\n", "#define DefaultLinuxDistribution LinuxUnknown");
+diff -Nru xc.orig/programs/Xserver/hw/xfree86/xf86cfg/Imakefile xc/programs/Xserver/hw/xfree86/xf86cfg/Imakefile
+--- xc.orig/programs/Xserver/hw/xfree86/xf86cfg/Imakefile	2003-12-19 05:48:39.000000000 +0100
++++ xc/programs/Xserver/hw/xfree86/xf86cfg/Imakefile	2003-12-23 12:09:12.000000000 +0100
+@@ -107,7 +107,7 @@
+ 
+ #if HasNCurses
+ CURSESLIB = NCursesLibName
+-CURSESDEFINES  = -DHAS_NCURSES
++CURSESDEFINES  = -DHAS_NCURSES -I/usr/include/ncurses
+ #endif
+ 
+ XF86CONFIGFILE = XConfigFile
+diff -Nru xc.orig/programs/xdm/config/Xres.cpp xc/programs/xdm/config/Xres.cpp
+--- xc.orig/programs/xdm/config/Xres.cpp	2003-11-21 07:01:06.000000000 +0100
++++ xc/programs/xdm/config/Xres.cpp	2003-12-23 12:09:12.000000000 +0100
+@@ -71,9 +71,9 @@
+ XHASHendif
+ #ifdef XPM
+-XHASHif PLANES >= 8
+-xlogin*logoFileName: BITMAPDIR/**//XDM_PIXMAP
++XHASHif PLANES > 8
++xlogin*logoFileName: BITMAPDIR/**//xdm-pld-logo.xpm
+ XHASHelse
+-xlogin*logoFileName: BITMAPDIR/**//XDM_BWPIXMAP
++xlogin*logoFileName: BITMAPDIR/**//xdm-pld-logo-bw.xpm
+ XHASHendif
+ xlogin*useShape: true
+ xlogin*logoPadding: 10
+diff -Nru xc.orig/programs/xdm/resource.c xc/programs/xdm/resource.c
+--- xc.orig/programs/xdm/resource.c	2003-09-25 13:06:32.000000000 +0200
++++ xc/programs/xdm/resource.c	2003-12-23 12:09:12.000000000 +0100
+@@ -84,31 +84,31 @@
+  */
+ #ifndef __EMX__
+ #ifndef DEF_SERVER_LINE 
+-#define DEF_SERVER_LINE ":0 local /usr/bin/X11/X :0"
++#define DEF_SERVER_LINE ":0 local /usr/X11R6/bin/X :0"
+ #endif
+ #ifndef XRDB_PROGRAM
+-#define XRDB_PROGRAM "/usr/bin/X11/xrdb"
++#define XRDB_PROGRAM "/usr/X11R6/X11/xrdb"
+ #endif
+ #ifndef DEF_SESSION
+-#define DEF_SESSION "/usr/bin/X11/xterm -ls"
++#define DEF_SESSION "/usr/X11R6/bin/xterm -ls"
+ #endif
+ #ifndef DEF_USER_PATH
+-#define DEF_USER_PATH ":/bin:/usr/bin:/usr/bin/X11:/usr/ucb"
++#define DEF_USER_PATH "/usr/local/bin:/bin:/usr/bin:/usr/X11R6/bin"
+ #endif
+ #ifndef DEF_SYSTEM_PATH
+-#define DEF_SYSTEM_PATH "/etc:/bin:/usr/bin:/usr/bin/X11:/usr/ucb"
++#define DEF_SYSTEM_PATH "/sbin:/bin:/usr/sbin:/usr/bin:/usr/X11R6/bin"
+ #endif
+ #ifndef DEF_SYSTEM_SHELL
+ #define DEF_SYSTEM_SHELL "/bin/sh"
+ #endif
+ #ifndef DEF_FAILSAFE_CLIENT
+-#define DEF_FAILSAFE_CLIENT "/usr/bin/X11/xterm"
++#define DEF_FAILSAFE_CLIENT "/usr/X11R6/bin/xterm"
+ #endif
+ #ifndef DEF_XDM_CONFIG
+-#define DEF_XDM_CONFIG "/usr/lib/X11/xdm/xdm-config"
++#define DEF_XDM_CONFIG "/etc/X11/xdm/xdm-config"
+ #endif
+ #ifndef DEF_CHOOSER
+-#define DEF_CHOOSER "/usr/lib/X11/xdm/chooser"
++#define DEF_CHOOSER "/etc/X11/xdm/chooser"
+ #endif
+ #ifndef DEF_AUTH_NAME
+ #ifdef HASXDMAUTH
+@@ -118,7 +118,7 @@
+ #endif
+ #endif
+ #ifndef DEF_AUTH_DIR
+-#define DEF_AUTH_DIR "/usr/lib/X11/xdm"
++#define DEF_AUTH_DIR "/etc/X11/xdm"
+ #endif
+ #ifndef DEF_USER_AUTH_DIR
+ #define DEF_USER_AUTH_DIR	"/tmp"
+diff -Nru xc.orig/programs/xinit/Imakefile xc/programs/xinit/Imakefile
+--- xc.orig/programs/xinit/Imakefile	2003-11-21 07:01:12.000000000 +0100
++++ xc/programs/xinit/Imakefile	2003-12-23 12:09:12.000000000 +0100
+@@ -46,11 +46,12 @@
+ #endif
+ InstallManPage(startx,$(MANDIR))
+ 
+-#if InstallXinitConfig
+-InstallNonExecFile($(SAMPLECONFIG),$(XINITDIR))
+-#else
+-InstallNonExecFileNoClobber($(SAMPLECONFIG),$(XINITDIR))
+-#endif
++XCOMM Red Hat gets this from a different package
++XCOMM #if InstallXinitConfig
++XCOMM InstallNonExecFile($(SAMPLECONFIG),$(XINITDIR))
++XCOMM #else
++XCOMM InstallNonExecFileNoClobber($(SAMPLECONFIG),$(XINITDIR))
++XCOMM #endif
+ 
+ LinkConfDirectory(xinit,.,xinit,.)
+ 
+diff -Nru xc.orig/programs/xterm/Imakefile xc/programs/xterm/Imakefile
+--- xc.orig/programs/xterm/Imakefile	2003-12-19 05:51:51.000000000 +0100
++++ xc/programs/xterm/Imakefile	2003-12-23 12:11:05.000000000 +0100
+@@ -36,6 +36,10 @@
+ #define XkbClientLibs /**/
+ #endif
+ 
++#if InstallXtermSetUID
++#undef InstallXtermSetUID
++#endif
++
+ #ifndef SpecialCObjectRule
+ #define SpecialCObjectRule(module,ignore,defines) \
+ module.o: ; $(CC) -c defines $(CFLAGS) module.c
+@@ -57,6 +61,8 @@
+          PTYLIB = -lpucc
+ #endif
+ 
++         PTYLIB = -lutil
++
+ #if defined(NetBSDArchitecture) || defined(OpenBSDArchitecture) || \
+     (defined(LinuxArchitecture) && \
+      (LinuxCLibMajorVersion == 6) && (LinuxCLibMinorVersion < 1))
+@@ -116,7 +122,7 @@
+     XKB_DEFINES = XkbClientDefines
+    PATH_DEFINES = -DPROJECTROOT=$(PROJECTROOT)
+         DEFINES = $(XKB_DEFINES) $(TERMCAPDEFINES) $(FEATURE_DEFINES) $(SCROLLBAR_RIGHT) $(UTF8_OPTION) $(XRFDEF) $(PATH_DEFINES) $(TRACEDEF) $(XVERSIONDEFS) $(VENDORDEFINES)
+-       INCLUDES = -I. $(XRFINCLUDES)
++       INCLUDES = -I. -I/usr/include/ncurses $(XRFINCLUDES)
+ 
+ #ifdef OS2Architecture
+         MAINSRC = os2main.c
+diff -Nru xc.orig/programs/xterm/xterm.h xc/programs/xterm/xterm.h
+--- xc.orig/programs/xterm/xterm.h	2003-12-19 05:51:52.000000000 +0100
++++ xc/programs/xterm/xterm.h	2003-12-23 12:09:12.000000000 +0100
+@@ -73,7 +73,7 @@
+ #endif
+ 
+ #ifndef DFT_TERMTYPE
+-#define DFT_TERMTYPE "xterm"
++#define DFT_TERMTYPE "xterm-color"
+ #endif
+ 
+ #ifndef X_NOT_POSIX
