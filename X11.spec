@@ -1,10 +1,9 @@
-render $Revision: 1.37.2.10 $, $Date: 2004-08-16 17:21:53 $
 #
 # TODO 
 # - XDM Auth broken
 # - Review rest of patches
 #
-%define		snap	20040815
+%define		snap	20040816
 #
 Summary:	XOrg X11 Window System servers and basic programs
 Summary(de):	XOrg X11 Window-System-Server und grundlegende Programme
