@@ -1947,7 +1947,7 @@ X11-libs.
 %patch45 -p1
 %patch50 -p0
 %patch55 -p0
-%patch56 -p0
+%patch56 -p1
 
 rm -f xc/config/cf/host.def
 
