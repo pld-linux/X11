@@ -1,0 +1,26 @@
+--- X11-6.8.1/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_io.c	2004-04-23 19:54:08.000000000 +0000
++++ X11-6.8.1_new/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_io.c	2004-10-09 16:00:17.521486684 +0000
+@@ -114,6 +114,10 @@
+ #endif /* KDKBDREP */
+ }
+ 
++#ifdef __sparc__ 
++# define rate rate 
++#endif
++
+ static int
+ KIOCSRATE_ioctl_ok(int rate, int delay) {
+ #ifdef KIOCSRATE
+--- X11-6.8.1/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_kbd.c	2004-04-23 19:54:08.000000000 +0000
++++ X11-6.8.1_new/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_kbd.c	2004-10-09 15:58:57.060022567 +0000
+@@ -142,6 +142,10 @@
+ #endif /* KDKBDREP */
+ }
+ 
++#ifdef __sparc__
++#  define rate rate 
++#endif
++
+ static int
+ KIOCSRATE_ioctl_ok(int rate, int delay) {
+ #ifdef KIOCSRATE
