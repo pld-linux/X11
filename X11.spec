@@ -2407,7 +2407,7 @@ fi
 %{_mandir}/man1/gtf.1*
 %{_mandir}/man1/iceauth.1*
 %{_mandir}/man1/lbxproxy.1*
-#%{_mandir}/man1/libxrx.1*
+%{_mandir}/man1/libxrx.1*
 %{_mandir}/man1/lndir.1*
 %{_mandir}/man1/luit.1x*
 %{_mandir}/man1/makestrs.1*
@@ -2676,7 +2676,7 @@ fi
 %attr(755,root,root) %{_libdir}/libfontenc.so
 %attr(755,root,root) %{_libdir}/libxkbfile.so
 %attr(755,root,root) %{_libdir}/libxkbui.so
-#%attr(755,root,root) %{_libdir}/libxrx.so
+%attr(755,root,root) %{_libdir}/libxrx*.so
 %{_libdir}/libXprintAppUtil.a
 %{_libdir}/libXprintUtil.a
 %{_libdir}/libdmx.a
@@ -3105,7 +3105,7 @@ fi
 %attr(755,root,root) %{_libdir}/libfontenc.so.*.*
 %attr(755,root,root) %{_libdir}/libxkbfile.so.*.*
 %attr(755,root,root) %{_libdir}/libxkbui.so.*.*
-#%attr(755,root,root) %{_libdir}/libxrx.so.*.*
+%attr(755,root,root) %{_libdir}/libxrx*.so.*.*
 
 %files modules
 %defattr(644,root,root,755)
