@@ -1,8 +1,9 @@
 
  config/cf/xorg.cf                                      |    2 +-
  programs/Xserver/fb/fbmmx.c                            |   14 ++++++++------
+ programs/Xserver/hw/xfree86/drivers/ati/radeon_probe.c |    2 +-
  programs/Xserver/hw/xfree86/drivers/ati/radeon_probe.h |    3 ---
- 3 files changed, 9 insertions(+), 10 deletions(-)
+ 4 files changed, 10 insertions(+), 11 deletions(-)
 
 --- X11-6.8.2/xc/config/cf/xorg.cf.orig	2005-03-21 19:11:42.000000000 +0100
 +++ X11-6.8.2/xc/config/cf/xorg.cf	2005-03-21 23:03:46.000000000 +0100
@@ -65,3 +66,14 @@
  /* radeon_driver.c */
  extern void                 RADEONLoaderRefSymLists
  			    FunctionPrototype((void));
+--- X11-6.8.2/xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_probe.c.orig	2004-08-12 03:03:06.000000000 +0200
++++ X11-6.8.2/xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_probe.c	2005-03-31 14:20:34.000000000 +0200
+@@ -51,7 +51,7 @@
+ 
+ #include "radeon_chipset.h"
+ 
+-PciChipsets RADEONPciChipsets[] = {
++static PciChipsets RADEONPciChipsets[] = {
+     { PCI_CHIP_RADEON_QD, PCI_CHIP_RADEON_QD, RES_SHARED_VGA },
+     { PCI_CHIP_RADEON_QE, PCI_CHIP_RADEON_QE, RES_SHARED_VGA },
+     { PCI_CHIP_RADEON_QF, PCI_CHIP_RADEON_QF, RES_SHARED_VGA },
