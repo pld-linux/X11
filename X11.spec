@@ -667,7 +667,7 @@ Requires:	imake = %{epoch}:%{version}-%{release}
 Requires:	fontconfig-devel >= 1:2.2.0
 Provides:	XFree86-devel = %{epoch}:%{version}-%{release}
 Provides:	render
-Provides:	xcursor-devel
+Provides:	xcursor-devel = 1.1.2
 Provides:	xft-devel = 2.1.6
 Provides:	xpm-devel
 Provides:	xrender-devel = 0.8.4
@@ -1349,10 +1349,10 @@ Requires(post,postun):	grep
 Requires(postun):	fileutils
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Provides:	XFree86-libs = %{epoch}:%{version}-%{release}
-Provides:	xcursor
-Provides:	xft
+Provides:	xcursor = 1.1.2
+Provides:	xft = 2.1.6
 Provides:	xpm
-Provides:	xrender
+Provides:	xrender = 0.8.4
 Obsoletes:	XFree86-libs
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1-libs
@@ -1493,6 +1493,10 @@ Summary(uk):	Статичн╕ б╕бл╕отеки X11R6
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Provides:	XFree86-static = %{epoch}:%{version}-%{release}
+Provides:	xcursor-static = 1.1.2
+Provides:	xft-static = 2.1.6
+Provides:	xpm-static
+Provides:	xrender-static = 0.8.4
 Obsoletes:	XFree86-static
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1-devel
