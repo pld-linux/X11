@@ -2129,12 +2129,12 @@ if [ "$1" = "0" ]; then
 fi
 
 %triggerpostun xfs -- xfs
-if [ -r /etc/X11/fs/config.rpmsave ]; then
+if [ -s /etc/X11/fs/config.rpmsave ]; then
 	cp -f /etc/X11/fs/config.rpmsave /etc/X11/fs/config
 fi
 
 %triggerpostun Xserver -- XFree86-Xserver
-if [ -r /etc/X11/XF86Config.rpmsave ]; then
+if [ -s /etc/X11/XF86Config.rpmsave ]; then
 	cp -f /etc/X11/XF86Config.rpmsave /etc/X11/xorg.conf
 	sed -i -e "s/xfree86/xorg/g" /etc/X11/xorg.conf
 fi
