@@ -142,7 +142,7 @@ BuildRequires:	rpmbuild(macros) >= 1.143
 BuildRequires:	tcl-devel
 BuildRequires:	utempter-devel
 BuildRequires:	zlib-devel
-Requires:	%{name}-libs = %{epoch}:%{version}
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	xauth
 Requires:	pam >= 0.77.3
 Provides:	XFree86 = %{epoch}:%{version}-%{release}
