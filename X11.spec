@@ -71,6 +71,7 @@ Source52:	xmag.png
 Source53:	http://oss.sgi.com/projects/ogl-sample/ABI/glext.h
 # NoSource53-md5: a5738dcfa20119fa3e06ce479ca94acf
 Patch0:		%{name}-PLD.patch
+Patch1:		%{name}-enableglide.patch
 Patch2:		%{name}-DisableDebug.patch
 Patch3:		%{name}-Xwrapper.patch
 Patch4:		%{name}-xfs.patch
@@ -1912,6 +1913,7 @@ X11-libs.
 %prep
 %setup -qc -a1 -a2 -a7
 %patch0 -p0
+%patch1 -p0
 %patch2 -p0
 %patch3 -p0
 %patch4 -p0
