@@ -218,7 +218,7 @@
  
  ! Uncomment this to use color for the bold attribute
  !*VT100*colorBDMode: on
-@@ -121,21 +121,181 @@
+@@ -121,21 +121,177 @@
  ! Uncomment this to use the bold/underline colors in preference to other colors
  !*VT100*colorAttrMode: on
  
