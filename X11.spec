@@ -103,6 +103,7 @@ Patch25:	%{name}-xterm-256colors.patch
 Patch26:	%{name}-makefile-fastbuild.patch
 Patch27:	%{name}-sparc-kbd.patch
 Patch29:	%{name}-radeon-entervt.patch
+Patch30:	http://www.x.org/pub/X11R6.8.1/patches/xorg-681-CAN-2004-0914.patch
 # XFree86-tdfx-fix-vtswitch-font-corruption.patch - issue still not fixed,
 # but patch doesn't help either; however, it occurs in text mode only, not
 # with tdfxfb, which is worth using anyway
@@ -1951,6 +1952,8 @@ X11-libs.
 rm -f xc/config/cf/host.def
 
 %patch29 -p1
+cd xc
+%patch30 -p0
 
 %build
 PWD=`pwd`
