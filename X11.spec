@@ -374,6 +374,8 @@ Provides:	XFree86-OpenGL-libGL = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-OpenGL-libGL
 Obsoletes:	X11-driver-firegl
 Obsoletes:	X11-driver-nvidia
+Obsoletes:	XFree86-driver-firegl
+Obsoletes:	XFree86-driver-nvidia
 
 %description OpenGL-libGL
 OpenGL support for X11R6 system - GL library.
