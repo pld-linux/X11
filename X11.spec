@@ -79,36 +79,35 @@ Patch3:		%{name}-Xwrapper.patch
 Patch4:		%{name}-xfs.patch
 Patch5:		%{name}-xterm-utempter.patch
 Patch6:		%{name}-app_defaults_dir.patch
-Patch8:		%{name}-broken-includes.patch
-Patch9:		%{name}-fhs.patch
-Patch10:	%{name}-xdmsecurity.patch
-Patch11:	%{name}-xman.patch
-Patch13:	%{name}-xdm-fixes.patch
-Patch14:	%{name}-pic.patch
-Patch15:	%{name}-r128-busmstr2.patch
-Patch16:	%{name}-neomagic_swcursor.patch
-Patch17:	%{name}-mga-busmstr.patch
-Patch18:	%{name}-agpgart-load.patch
-Patch21:	%{name}-XTerm.ad.patch
-# no longer needed? to check
-#Patch22:	%{name}-xf86Pcih.patch
-Patch23:	%{name}-dontbuildfonts.patch
-Patch25:	%{name}-llh.patch
-Patch32:	XFree86-xman-manpaths.patch
-Patch33:	XFree86-clearrts.patch
-# tdfx-fix-vtswitch-font-corruption - not applied, needs check
-Patch40:	XFree86-Xfont-Type1-large-DoS.patch
-Patch41:	%{name}-GLcore-strip-a-workaround.patch
-Patch44:	%{name}-pkgconfig.patch
-Patch45:	XFree86-spencode-nowarning.patch
-Patch46:	XFree86-lock.patch
-Patch50:	%{name}-xterm-256colors.patch
-Patch54:	%{name}-setxkbmap.patch
-Patch55:	%{name}-makefile-fastbuild.patch
+Patch7:		%{name}-broken-includes.patch
+Patch8:		%{name}-fhs.patch
+Patch9:		%{name}-xdmsecurity.patch
+Patch10:	%{name}-xman.patch
+Patch11:	%{name}-xdm-fixes.patch
+Patch12:	%{name}-pic.patch
+Patch13:	%{name}-r128-busmstr2.patch
+Patch14:	%{name}-neomagic_swcursor.patch
+Patch15:	%{name}-mga-busmstr.patch
+Patch16:	%{name}-agpgart-load.patch
+Patch17:	%{name}-XTerm.ad.patch
+Patch18:	%{name}-dontbuildfonts.patch
+Patch19:	%{name}-llh.patch
+Patch20:	XFree86-xman-manpaths.patch
+Patch21:	XFree86-clearrts.patch
+Patch22:	XFree86-Xfont-Type1-large-DoS.patch
+Patch23:	%{name}-GLcore-strip-a-workaround.patch
+Patch24:	%{name}-pkgconfig.patch
+Patch25:	XFree86-spencode-nowarning.patch
+Patch26:	%{name}-xterm-256colors.patch
+Patch27:	%{name}-makefile-fastbuild.patch
 # cleaner version in XFree86?
-Patch56:	%{name}-sparc-kbd.patch
-Patch57:	%{name}-glibc-charset.patch
-Patch58:	%{name}-radeon-entervt.patch
+Patch28:	%{name}-sparc-kbd.patch
+Patch29:	%{name}-glibc-charset.patch
+Patch30:	%{name}-radeon-entervt.patch
+# XXX: two following currently not applied
+Patch31:	XFree86-lock.patch
+Patch32:	%{name}-setxkbmap.patch
+# tdfx-fix-vtswitch-font-corruption - not applied, needs check
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
 # Required by xc/programs/Xserver/hw/xfree86/drivers/glide/glide_driver.c
@@ -1925,34 +1924,33 @@ X11-libs.
 %patch4 -p0
 %patch5 -p0
 %patch6 -p0
+%patch7 -p0
 %patch8 -p0
 %patch9 -p0
 %patch10 -p0
 %patch11 -p0
+%patch12 -p0
 %patch13 -p0
 %patch14 -p0
 %patch15 -p0
 %patch16 -p0
 %patch17 -p0
 %patch18 -p0
-%patch21 -p0
-#%patch22 -p0
-%patch23 -p0
-%patch25 -p0
-%patch32 -p1
-%patch33 -p1
-%patch40 -p1
-%patch41 -p1
-%patch44 -p0
-%patch45 -p1
-%patch50 -p0
-%patch55 -p0
-%patch56 -p1
+%patch19 -p0
+%patch20 -p1
+%patch21 -p1
+%patch22 -p1
+%patch23 -p1
+%patch24 -p0
+%patch25 -p1
+%patch26 -p0
+%patch27 -p0
+%patch28 -p1
 
 rm -f xc/config/cf/host.def
 
 %if %{with glibc_charset}
-%patch57 -p1
+%patch29 -p1
 # strip charset info, it's not welcome there
 cat xc/nls/locale.alias \
 	| sed 's/\.[^ \t@:]*//g' \
@@ -1960,7 +1958,7 @@ cat xc/nls/locale.alias \
 	| uniq > tmp
 mv tmp xc/nls/locale.alias
 %endif
-%patch58 -p1
+%patch30 -p1
 
 %build
 PWD=`pwd`
