@@ -8,5 +8,5 @@ GenericName[pl]=Kalkulator
 Exec=xcalc
 Icon=xcalc
 Type=Application
-Categories=Utility;Calculator;X-X11;
+Categories=Utility;Calculator;
 # vi: encoding=utf-8

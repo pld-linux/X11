@@ -94,5 +94,5 @@ Exec=xclock
 Icon=xclock.png
 Terminal=false
 Type=Application
-Categories=Utility;Clock;X-X11;
+Categories=Utility;Clock;
 # vi: encoding=utf-8

@@ -88,5 +88,5 @@ Exec=xclipboard
 Icon=xclipboard.png
 Type=Application
 Terminal=false
-Categories=Utility;X-X11;
+Categories=Utility;
 # vi: encoding=utf-8
