@@ -141,7 +141,7 @@ NXTerm.JoinSession:			False
 	Shift<Btn4Down>: scroll-back(1,page)\n\
 	Shift<Btn5Down>: scroll-forw(1,page)\n\
 	Ctrl<Btn4Down>: scroll-back(1,line)\n\
-	Ctrl<Btn5Down>:scroll-forw(1,line)\n\
+	Ctrl<Btn5Down>: scroll-forw(1,line)\n\
 	<Btn4Down>: scroll-back(5,line)\n\
 	<Btn5Down>: scroll-forw(5,line)\n\
 	@Num_Lock<Key>KP_0: string(0)\n\
@@ -201,18 +201,22 @@ NXTerm.JoinSession:			False
 	Meta<Key>Page_Down: string(0x1b) string(0x1b) string("[6~")\n\
 	~Meta<Key>BackSpace: string(0x08)\n\
 	Meta<Key>BackSpace: string(0x1b) string(0x08)\n\
+	Ctrl Shift<Key>Up: string(0x1b) string("[1;6A")\n\
 	Ctrl<Key>Up: string(0x1b) string("[1;5A")\n\
 	Shift<Key>Up: string(0x1b) string("O2A")\n\
 	~Meta<Key>Up: string(0x1b) string("OA")\n\
 	Meta<Key>Up: string(0x1b) string(0x1b) string("OA")\n\
+	Ctrl Shift<Key>Down: string(0x1b) string("[1;6B")\n\
 	Ctrl<Key>Down: string(0x1b) string("[1;5B")\n\
 	Shift<Key>Down: string(0x1b) string("O2B")\n\
 	~Meta<Key>Down: string(0x1b) string("OB")\n\
 	Meta<Key>Down: string(0x1b) string(0x1b) string("OB")\n\
+	Ctrl Shift<Key>Left: string(0x1b) string("[1;6D")\n\
 	Ctrl<Key>Left: string(0x1b) string("[1;5D")\n\
 	Shift<Key>Left: string(0x1b) string("O2D")\n\
 	~Meta<Key>Left: string(0x1b) string("OD")\n\
 	Meta<Key>Left: string(0x1b) string(0x1b) string("OD")\n\
+	Ctrl Shift<Key>Right: string(0x1b) string("[1;6C")\n\
 	Ctrl<Key>Right: string(0x1b) string("[1;5C")\n\
 	Shift<Key>Right: string(0x1b) string("O2C")\n\
 	~Meta<Key>Right: string(0x1b) string("OC")\n\
