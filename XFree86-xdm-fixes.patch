@@ -5,7 +5,7 @@ diff -urN xc.orig/programs/xdm/Imakefile xc/programs/xdm/Imakefile
  		  '-DDEF_SYSTEM_SHELL="$(BOURNE_SHELL)"' \
  		  '-DDEF_FAILSAFE_CLIENT="$(BINDIR)/xterm"' \
  		  '-DDEF_XDM_CONFIG="$(XDMDIR)/xdm-config"' \
--		  '-DDEF_CHOOSER="$(XDMDIR)/chooser"' \
+-		  '-DDEF_CHOOSER="$(CHOOSERPATH)"' \
 -		  '-DDEF_AUTH_DIR="$(XDMDIR)"' \
 -		  '-DDEF_GREETER_LIB="$(XDMDIR)/libXdmGreet.so"'
 +		  '-DDEF_CHOOSER="$(BINDIR)/chooser"' \
@@ -45,11 +45,11 @@ diff -urN xc.orig/programs/xdm/config/Imakefile xc/programs/xdm/config/Imakefile
  #endif
  
  CppFileTarget(Xservers.ws,Xserv.ws.cpp,-DBINDIR=$(BINDIR) -DDEFAULTVT=$(DEFAULTVT),NullParameter)
--CppFileTarget(xdm-config,xdm-conf.cpp,-DXDMDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR) -DSU=$(SU),NullParameter)
+-CppFileTarget(xdm-config,xdm-conf.cpp,-DXDMDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR) -DSU=$(SU) -DCHOOSERPATH=$(CHOOSERPATH),NullParameter)
 +#ifdef LinuxArchitecture
-+CppFileTarget(xdm-config,xdm-conf.cpp,$(XPM_DEFINES) -DLINUX=1 -DXDMDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR) -DXDMVARDIR=$(XDMVARDIR),NullParameter)
++CppFileTarget(xdm-config,xdm-conf.cpp,$(XPM_DEFINES) -DLINUX=1 -DXDMDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR) -DXDMVARDIR=$(XDMVARDIR) -DCHOOSERPATH="$(BINDIR)/chooser",NullParameter)
 +#else
-+CppFileTarget(xdm-config,xdm-conf.cpp,$(XPM_DEFINES) -DXDMDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR),NullParameter)
++CppFileTarget(xdm-config,xdm-conf.cpp,$(XPM_DEFINES) -DXDMDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR) -DCHOOSERPATH="$(BINDIR)/chooser",NullParameter)
 +#endif /* LinuxArchitecture */
  CppFileTarget(Xresources,Xres.cpp,$(XPM_DEFINES),NullParameter)
  
