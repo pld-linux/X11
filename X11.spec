@@ -19,7 +19,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.7.0
-Release:	4
+Release:	5
 Epoch:		1
 License:	XFree86 1.0 (?)
 Group:		X11/Xorg
@@ -157,6 +157,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
 %define		_soundsdir	/usr/share/sounds
+%define		_wallpapersdir	/usr/share/wallpapers
 %define		_themesdir	/usr/share/themes
 %define		_wmpropsdir	/usr/share/wm-properties
 %define		_xsessdir	/usr/share/xsessions
@@ -1815,7 +1816,7 @@ install -d $RPM_BUILD_ROOT/etc/{pam.d,rc.d/init.d,security/console.apps,sysconfi
 	$RPM_BUILD_ROOT/var/{log,lib/xkb} \
 	$RPM_BUILD_ROOT{%{_desktopdir},%{_iconsdir},%{_pixmapsdir}/mini} \
 	$RPM_BUILD_ROOT{%{_wmpropsdir},%{_soundsdir},%{_themesdir}/{Default,ThinIce}} \
-	$RPM_BUILD_ROOT%{_xsessdir} \
+	$RPM_BUILD_ROOT{%{_xsessdir},%{_wallpapersdir}} \
 	$RPM_BUILD_ROOT%{_pkgconfigdir}
 
 %{__make} -C xc	install	install.man \
@@ -2798,6 +2799,7 @@ fi
 %dir %{_pixmapsdir}
 %dir %{_pixmapsdir}/mini
 %dir %{_soundsdir}
+%dir %{_wallpapersdir}
 %dir %{_wmpropsdir}
 %dir %{_xsessdir}
 %attr(755,root,root) %{_libdir}/libFS.so.*.*
