@@ -115,6 +115,7 @@ Patch50:	%{name}-glibc-locale_sync.patch
 Patch60:	%{name}-oldkeyb.patch
 Patch61:	%{name}-sparc64-asmfix.patch
 Patch62:	%{name}-sparc64-v9fix.patch
+Patch63:	%{name}-pci-build.patch
 # XFree86-tdfx-fix-vtswitch-font-corruption.patch - issue still not fixed,
 # but patch doesn't help either; however, it occurs in text mode only, not
 # with tdfxfb, which is worth using anyway
@@ -1970,6 +1971,7 @@ cd -
 %patch60 -p0
 %patch61 -p1
 %patch62 -p1
+%patch63 -p1
 %endif
 %{?with_dualhead:%patch100 -p1}
 #patch101 -p1
