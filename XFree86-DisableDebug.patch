@@ -1,0 +1,11 @@
+--- XFree86-3.9.17/xc/config/cf/xfree86.cf	Thu Dec 30 05:07:26 1999
++++ XFree86-3.9.17.new/xc/config/cf/xfree86.cf	Sat Feb 12 10:37:51 2000
+@@ -992,7 +992,7 @@
+ #endif
+ 
+ #ifndef DefaultGcc2DebugOpt
+-#define DefaultGcc2DebugOpt -g
++#define DefaultGcc2DebugOpt
+ #endif
+ 
+ #if HasGcc2 && DebuggableLibraries
