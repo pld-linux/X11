@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Twm
 Comment=Tab Window Manager
-Comment[pl]=Prosty zarz±dca okien twm
+Comment[pl]=Prosty zarzÄ…dca okien twm
 Exec=twm
 TryExec=twm
 
