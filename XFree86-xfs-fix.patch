@@ -1,0 +1,19 @@
+--- xc/programs/xfs/difs/charinfo.c.fred	Fri Dec 17 08:05:34 1999
++++ xc/programs/xfs/difs/charinfo.c	Mon Dec 20 09:25:58 1999
+@@ -493,6 +493,8 @@
+ #define LSBBitLeft(b,c)	((b) >> (c))
+ #define LSBBitRight(b,c)	((b) << (c))
+ 
++	if (srcp) {
++	  
+ 	if (dst_off == src_off)
+ 	{
+ 	    if (srcbpr == dstbpr && src_left_bytes == dst_left_bytes)
+@@ -573,6 +575,7 @@
+ 		dstp += dst_extra;
+ 		srcp += src_extra;
+ 	    }
++	}
+ 	}
+ 	/* skip the amount we just filled in */
+ 	gd += l->length;
