@@ -1,0 +1,98 @@
+diff -urN xc/programs/xdm~/Imakefile xc/programs/xdm/Imakefile
+--- xc/programs/xdm~/Imakefile	Sat Jun 17 13:48:22 2000
++++ xc/programs/xdm/Imakefile	Thu Sep  7 18:17:08 2000
+@@ -224,9 +224,9 @@
+ 		  '-DDEF_SYSTEM_SHELL="$(BOURNE_SHELL)"' \
+ 		  '-DDEF_FAILSAFE_CLIENT="$(BINDIR)/xterm"' \
+ 		  '-DDEF_XDM_CONFIG="$(XDMDIR)/xdm-config"' \
+-		  '-DDEF_CHOOSER="$(XDMDIR)/chooser"' \
+-		  '-DDEF_AUTH_DIR="$(XDMDIR)"' \
+-		  '-DDEF_GREETER_LIB="$(XDMDIR)/libXdmGreet.so"'
++		  '-DDEF_CHOOSER="$(BIN)/chooser"' \
++		  '-DDEF_AUTH_DIR="$(XDMVARDIR)"' \
++		  '-DDEF_GREETER_LIB="$(USRLIBDIR)/libXdmGreet.so"'
+ #endif
+ 
+ ComplexProgramTarget_1(xdm,$(LOCAL_LIBRARIES),NullParameter)
+@@ -246,7 +246,7 @@
+ #if BuildChooser
+ SpecialCObjectRule(chooser, $(ICONFIGFILES), $(SOCK_DEFINES))
+ NormalProgramTarget(chooser,$(OBJS3),$(DEPLIBS3),$(LIBS3),NullParameter)
+-InstallProgram(chooser,$(XDMDIR))
++InstallProgram(chooser,$(BINDIR))
+ InstallAppDefaults(Chooser)
+ #endif
+ #if BuildBoth
+diff -urN xc/programs/xdm~/config/Imakefile xc/programs/xdm/config/Imakefile
+--- xc/programs/xdm~/config/Imakefile	Mon Jan 31 14:33:43 2000
++++ xc/programs/xdm/config/Imakefile	Thu Sep  7 18:17:08 2000
+@@ -25,7 +25,11 @@
+ #endif
+ 
+ CppFileTarget(Xservers.ws,Xserv.ws.cpp,-DBINDIR=$(BINDIR) -DDEFAULTVT=$(DEFAULTVT),NullParameter)
+-CppFileTarget(xdm-config,xdm-conf.cpp,-DXDMDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR),NullParameter)
++#ifdef LinuxArchitecture
++CppFileTarget(xdm-config,xdm-conf.cpp,$(XPM_DEFINES) -DLINUX=1 -DXDMDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR) -DXDMVARDIR=$(XDMVARDIR),NullParameter)
++#else
++CppFileTarget(xdm-config,xdm-conf.cpp,$(XPM_DEFINES) -DXDMDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR),NullParameter)
++#endif /* LinuxArchitecture */
+ CppFileTarget(Xresources,Xres.cpp,$(XPM_DEFINES),NullParameter)
+ 
+ LinkFile(Xservers,Xservers.$(SERVERSTYPE))
+diff -urN xc/programs/xdm~/config/Xres.cpp xc/programs/xdm/config/Xres.cpp
+--- xc/programs/xdm~/config/Xres.cpp	Sat Mar 13 22:22:24 1999
++++ xc/programs/xdm/config/Xres.cpp	Thu Sep  7 18:23:11 2000
+@@ -5,6 +5,13 @@
+ xlogin*login.translations: #override BS
+ 	Ctrl<Key>R: abort-display()NLBS
+ 	<Key>F1: set-session-argument(failsafe) finish-field()NLBS
++	<Key>Delete: delete-character()NLBS
++	<Key>Left: move-backward-character()NLBS
++	<Key>Right: move-forward-character()NLBS
++	<Key>Home: move-to-begining()NLBS
++	<Key>End: move-to-end()NLBS
++	Ctrl<Key>KP_Enter: set-session-argument(failsafe) finish-field()NLBS
++	<Key>KP_Enter: set-session-argument() finish-field()NLBS
+ 	Ctrl<Key>Return: set-session-argument(failsafe) finish-field()NLBS
+ 	<Key>Return: set-session-argument() finish-field()
+ #ifndef XPM
+@@ -29,9 +36,7 @@
+ /**/#endif
+ #endif /* XPM */
+ /**/#ifdef COLOR
+-#ifndef XPM
+-xlogin*greetColor: CadetBlue
+-#else
++#ifdef XPM
+ xlogin*borderWidth: 1
+ xlogin*frameWidth: 5
+ xlogin*innerFramesWidth: 2
+@@ -40,6 +45,8 @@
+ xlogin*background: grey
+ !xlogin*foreground: darkgreen
+ xlogin*greetColor: Blue3
++#else
++xlogin*greetColor: CadetBlue
+ #endif /* XPM */
+ xlogin*failColor: red
+ *Foreground: black
+@@ -76,6 +83,6 @@
+ Chooser*allowShellResize:	false
+ Chooser*viewport.forceBars:	true
+ Chooser*label.font:		*-new century schoolbook-bold-i-normal-*-240-*
+-Chooser*label.label:		XDMCP Host Menu  from CLIENTHOST
++Chooser*label.label:		XDMCP Host Menu from CLIENTHOST
+ Chooser*list.font:		-*-*-medium-r-normal-*-*-230-*-*-c-*-iso8859-1
+ Chooser*Command.font:		*-new century schoolbook-bold-r-normal-*-180-*
+diff -urN xc/programs/xdm~/greeter/Imakefile xc/programs/xdm/greeter/Imakefile
+--- xc/programs/xdm~/greeter/Imakefile	Wed Jun 14 14:43:32 2000
++++ xc/programs/xdm/greeter/Imakefile	Thu Sep  7 18:17:08 2000
+@@ -76,8 +76,6 @@
+ INCLUDES = -I.. $(KRBIV_INCLUDES) $(KRB5_INCLUDE)
+  DEFINES = $(GREETER_DEFINES) $(XDMAUTH_DEFINES) $(RPC_DEFINES) \
+ 	   $(KRBIV_DEFINES) $(KRB5_DEFINES) $(PWD_DEFINES) $(PAM_DEFINES)
+-
+-SHLIBDIR = $(XDMDIR)
+ 
+ SRCS = greet.c verify.c Login.c
+ OBJS = greet.o verify.o Login.o
