@@ -705,31 +705,22 @@ Obsoletes:	xrender-devel
 %description devel
 Libraries, header files, and documentation for developing programs
 that run as X clients. It includes the base Xlib library as well as
-the Xt and Xaw widget sets. For information on programming with these
-libraries, PLD recommends the series of books on X Programming
-produced by O'Reilly and Associates.
+the Xt and Xaw widget sets.
 
 %description devel -l de
 Libraries, Header-Dateien und Dokumentation zum Entwickeln von
 Programmen, die als X-Clients laufen. Enthält die Xlib-Library und die
-Widget-Sätze Xt und Xaw. Information zum Programmieren mit diesen
-Libraries finden Sie in der Buchreihe zur X-Programmierung von
-O'Reilly and Associates.
+Widget-Sätze Xt und Xaw.
 
 %description devel -l fr
 Bibliothéques, fichiers d'en-tête, et documentation pour développer
 des programmes s'exécutant en clients X. Cela comprend la Bibliothéque
-Xlib de base aussi bien que les ensembles de widgets Xt et Xaw. Pour
-des informations sur la programmation avec ces Bibliothéques, Red Hat
-recommande la série d'ouvrages sur la programmation X editée par
-O'Reilly and Associates.
+Xlib de base aussi bien que les ensembles de widgets Xt et Xaw.
 
 %description devel -l pl
 Pliki nag³ówkowe, dokumentcja dla programistów rozwijaj±cych aplikacje
 klienckie pod X Window. Zawiera podstawow± bibliotekê Xlib a tak¿e Xt
-i Xaw. Wiêcej informacji nt. pisania programów przy u¿yciu tych
-bibliotek mo¿esz znale¼æ w ksi±¿kach wydawnictwa O'Reilly and
-Associates (X Programming) polecanych przez Red Hata.
+i Xaw.
 
 %description devel -l ru
 X11-devel ×ËÌÀŞÁÅÔ ÂÉÂÌÉÏÔÅËÉ, ÈÅÄÅÒÁ É ÄÏËÕÍÅÎÔÁÃÉÀ, ÎÅÏÂÈÏÄÉÍÙÅ ÄÌÑ
