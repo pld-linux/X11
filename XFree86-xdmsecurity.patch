@@ -1,0 +1,11 @@
+--- XFree86-4.0/xc/programs/xdm/xdmcp.c.xdmsecurity.patch	Sat Oct 10 11:25:40 1998
++++ XFree86-4.0/xc/programs/xdm/xdmcp.c	Wed Jun 28 18:30:13 2000
+@@ -1128,7 +1128,7 @@
+     XdmcpHeader	header;
+     ARRAY8	status;
+ 
+-    sprintf (buf, "Session %ld failed for display %s: %s",
++    snprintf (buf, sizeof(buf), "Session %ld failed for display %s: %s",
+ 	     (long) sessionID, name, reason);
+     Debug ("Send failed %ld %s\n", (long) sessionID, buf);
+     status.length = strlen (buf);
