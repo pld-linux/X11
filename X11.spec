@@ -1,8 +1,7 @@
 #
 # TODO
-# - XDM Auth broken
+# - XDM Auth broken (can anyone confirm now with new implementation?)
 # - Review rest of patches
-# - define HasFontconfig in linux.cf to stop building it here and use just the system one
 # - missing dir in Xprint
 #
 Summary:	XOrg X11 Window System servers and basic programs
@@ -69,7 +68,6 @@ Source52:	xmag.png
 Source53:	http://oss.sgi.com/projects/ogl-sample/ABI/glext.h
 # NoSource53-md5: a5738dcfa20119fa3e06ce479ca94acf
 Patch0:		%{name}-PLD.patch
-#Patch1:		%{name}-HasZlib.patch
 Patch2:		%{name}-DisableDebug.patch
 Patch3:		%{name}-Xwrapper.patch
 Patch4:		%{name}-xfs.patch
@@ -80,33 +78,27 @@ Patch8:		%{name}-broken-includes.patch
 Patch9:		%{name}-fhs.patch
 Patch10:	%{name}-xdmsecurity.patch
 Patch11:	%{name}-xman.patch
-Patch12:	%{name}-HasXdmAuth.patch
 Patch13:	%{name}-xdm-fixes.patch
 Patch14:	%{name}-pic.patch
 Patch15:	%{name}-r128-busmstr2.patch
 Patch16:	%{name}-neomagic_swcursor.patch
 Patch17:	%{name}-mga-busmstr.patch
 Patch18:	%{name}-agpgart-load.patch
-Patch19:	%{name}-HasFreetype2.patch
 Patch20:	%{name}-config-s3.patch
 Patch21:	%{name}-XTerm.ad.patch
 Patch22:	%{name}-xf86Pcih.patch
 Patch23:	%{name}-dontbuildfonts.patch
 Patch25:	%{name}-llh.patch
-
 Patch32:	XFree86-xman-manpaths.patch
 Patch33:	XFree86-clearrts.patch
 Patch40:	XFree86-Xfont-Type1-large-DoS.patch
-Patch41:	XFree86-GLcore-strip-a-workaround.patch
-Patch43:	XFree86-expat.patch
+Patch41:	%{name}-GLcore-strip-a-workaround.patch
 Patch44:	XFree86-pkgconfig.patch
 Patch45:	XFree86-spencode-nowarning.patch
 Patch46:	XFree86-lock.patch
 Patch50:	%{name}-xterm-256colors.patch
-Patch53:	XFree86-stdint.patch
 Patch54:	%{name}-setxkbmap.patch
 Patch55:	%{name}-makefile-fastbuild.patch
-
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
 # Required by xc/programs/Xserver/hw/xfree86/drivers/glide/glide_driver.c
@@ -1917,7 +1909,6 @@ X11-libs.
 %prep
 %setup -qc -a1 -a2 -a7
 %patch0 -p0
-#%patch1 -p0
 %patch2 -p0
 %patch3 -p0
 %patch4 -p0
@@ -1928,20 +1919,24 @@ X11-libs.
 %patch9 -p0
 %patch10 -p0
 %patch11 -p0
-# FIXME
-# %patch12 -p0
 %patch13 -p0
 %patch14 -p0
 %patch15 -p0
 %patch16 -p0
 %patch17 -p0
 %patch18 -p0
-%patch19 -p0
 %patch20 -p0
 %patch21 -p0
 %patch22 -p0
 %patch23 -p0
 %patch25 -p0
+%patch32 -p1
+%patch33 -p1
+%patch40 -p1
+%patch41 -p1
+%patch45 -p1
+%patch50 -p0
+%patch55 -p0
 
 rm -f xc/config/cf/host.def
 
