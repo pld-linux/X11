@@ -5,4 +5,5 @@ account    required	/lib/security/pam_pwdb.so
 password   required	/lib/security/pam_cracklib.so
 password   required	/lib/security/pam_pwdb.so md5 shadow use_authtok
 session    required	/lib/security/pam_pwdb.so
+session    required	/lib/security/pam_env.so
 session    optional	/lib/security/pam_console.so
