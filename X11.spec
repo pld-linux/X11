@@ -1828,7 +1828,7 @@ fi
 
 # setting default X
 rm -f $RPM_BUILD_ROOT%{_bindir}/X
-ln -sf X11 $RPM_BUILD_ROOT%{_bindir}/X
+ln -sf Xorg $RPM_BUILD_ROOT%{_bindir}/X
 
 # setting ghost X in /etc/X11 -- xf86config will fix this ...
 ln -sf %{_bindir}/Xorg $RPM_BUILD_ROOT%{_sysconfdir}/X11/X
