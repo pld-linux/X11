@@ -441,7 +441,7 @@
 @@ -8,7 +8,7 @@
  # or add "MAKE = make" to this file.
  
- RELEASE = "Release 6.8"
+ RELEASE = "Release 6.8.2"
 -SHELL = /bin/sh
 +SHELL = /bin/sh -e
  RM = rm -f
