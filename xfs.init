@@ -2,7 +2,7 @@
 #
 # xfs:		Starts the X Font Server
 #
-# Version:      $Release:$
+# Version:      $Revision$
 #
 # chkconfig:	345 90 10
 # description:	Starts and stops the X Font Server at boot time and shutdown.
