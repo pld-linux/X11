@@ -6,7 +6,9 @@
 #
 # Conditional build:
 %bcond_without	glide	# don't build glide driver
-#
+%bcond_with	glibc_charset	# enforce glibc-compatible locale charset
+				# fetching, experimental
+
 Summary:	XOrg X11 Window System servers and basic programs
 Summary(de):	XOrg X11 Window-System-Server und grundlegende Programme
 Summary(es):	Programas básicos y servidores para el sistema de ventanas XOrg X11
@@ -103,6 +105,7 @@ Patch46:	XFree86-lock.patch
 Patch50:	%{name}-xterm-256colors.patch
 Patch54:	%{name}-setxkbmap.patch
 Patch55:	%{name}-makefile-fastbuild.patch
+Patch56:	%{name}-glibc-charset.patch
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
 # Required by xc/programs/Xserver/hw/xfree86/drivers/glide/glide_driver.c
@@ -1945,6 +1948,16 @@ X11-libs.
 %patch55 -p0
 
 rm -f xc/config/cf/host.def
+
+%if %{with glibc_charset}
+%patch56 -p1
+# strip charset info, it's not welcome there
+cat xc/nls/locale.alias \
+	| sed 's/\.[^ \t@:]*//g' \
+	| awk '{if ($1 != $2":" && $1 != "C:") print}' \
+	| uniq > tmp
+mv tmp xc/nls/locale.alias
+%endif
 
 %build
 PWD=`pwd`
