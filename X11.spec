@@ -2973,7 +2973,7 @@ fi
 %files driver-tdfx
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/tdfx_drv.o
-%ifarch %{ix86} ia64 alpha arm ppc
+%ifarch %{ix86} ia64 alpha arm
 %attr(755,root,root) %{_libdir}/modules/dri/tdfx_dri.so
 %endif
 %{_mandir}/man4/tdfx.4*
