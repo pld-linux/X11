@@ -2789,7 +2789,12 @@ fi
 %lang(sk) %dir %{_appdefsdir}/sk
 %lang(zh_CN) %dir %{_appdefsdir}/zh_CN.gb2312
 %lang(zh_TW) %dir %{_appdefsdir}/zh_TW.big5
-%{_libx11dir}/locale
+%dir %{_libx11dir}/locale
+%{_libx11dir}/locale/[!l]*
+%{_libx11dir}/locale/locale.*
+%dir %{_libx11dir}/locale/%{_lib}
+%dir %{_libx11dir}/locale/%{_lib}/common
+%attr(755,root,root) %{_libx11dir}/locale/%{_lib}/common/*.so*
 %dir %{_includedir}
 %dir %{_includedir}/X11
 /usr/include/X11
