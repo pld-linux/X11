@@ -231,10 +231,32 @@ diff -Nru xc.orig/config/cf/site.def xc/config/cf/site.def
  
  
  /* You do NOT need SetUID if you only run the server under xdm */
-diff -Nru xc.orig/config/cf/xf86site.def xc/config/cf/xf86site.def
---- xc.orig/config/cf/xf86site.def	2003-09-10 13:00:03.000000000 +0200
-+++ xc/config/cf/xf86site.def	2003-12-23 12:09:12.050233304 +0100
-@@ -260,8 +260,8 @@
+diff -urN xc.org/config/cf/xorgsite.def xc/config/cf/xorgsite.def
+--- xc.org/config/cf/xorgsite.def	2004-04-02 23:47:10.000000000 +0200
++++ xc/config/cf/xorgsite.def	2004-04-19 01:01:24.744961760 +0200
+@@ -69,14 +69,15 @@
+  */
+ 
+ /*
+- * If you only run the X server under xdm the X servers don't need to be
+- * installed SetUID, and you may comment out the lines below.  If you run
+- * the servers by hand (with xinit or startx), then they do need to be
+- * installed SetUID on most platforms.
++ * The X servers need to run as root on most OSs.  We're now using a
++ * wrapper in that case, but we still need to make it known that the
++ * servers need SetUID.  When only using xdm, this (and the wrapper)
++ * are not required.  Disabling this automatically disables use of the
++ * wrapper.
+  *
+- * Consult your system administrator before making the X server setuid.
++ * If you're only starting the Xservers with xdm set this to NO
+  *
+-#define InstallXserverSetUID	NO
++#define XserverNeedsSetUID	NO
+  */
+ 
+ 
+@@ -260,8 +261,8 @@
  /*
   * To not build/install the Cyrillic fonts, uncomment the following
   *
@@ -244,13 +266,13 @@ diff -Nru xc.orig/config/cf/xf86site.def xc/config/cf/xf86site.def
  
  /*
   * To not install the local font directory, uncomment the following
-@@ -307,27 +307,26 @@
+@@ -307,20 +308,20 @@
   * HasGlide2 to YES and set the Glide2IncDir variable. 
   * HasGlide2 is per default NO.
   *
 -#define HasGlide2 YES
   */
-+#define HasGlide2 YES
++#define	HasGlide2 YES
  
  /*
   * Set the path to your Glide include files.
@@ -268,15 +290,7 @@ diff -Nru xc.orig/config/cf/xf86site.def xc/config/cf/xf86site.def
  
  /*
   * Set the path to your Glide 3 include files.
-  *
--#define Glide3IncDir /usr/include/glide3
-  */
--
-+#define Glide3IncDir /usr/include/glide3
- 
- 
- /*
-@@ -429,8 +428,8 @@
+@@ -429,8 +430,8 @@
   * Some Linux releases don't have a libtermcap.  In this case you may need
   * to uncomment the following
   *
@@ -286,7 +300,17 @@ diff -Nru xc.orig/config/cf/xf86site.def xc/config/cf/xf86site.def
  
  /*
   * Build a server that dynamically loads the modules by setting
-@@ -605,8 +604,8 @@
+@@ -582,8 +583,8 @@
+ /*
+  * If you want XDMAUTH support (if you have Wraphelp.c), uncomment this.
+  *
+-#define HasXdmAuth		YES
+  */
++#define HasXdmAuth		YES
+ 
+ /*
+  * If you have Linux DECnet support, and want to build XFree86 with support
+@@ -605,8 +606,8 @@
   * To forceably build static libraries in addition to shared libraries,
   * uncomment this.
   *
@@ -296,31 +320,6 @@ diff -Nru xc.orig/config/cf/xf86site.def xc/config/cf/xf86site.def
  
  /*
   * Uncomment this if your default tools (eg, gcc, ld, as, etc) are
-diff -urN xc.org/config/cf/xf86site.def xc/config/cf/xf86site.def
---- xc.org/config/cf/xf86site.def	2004-04-18 22:10:56.000000000 +0200
-+++ xc/config/cf/xf86site.def	2004-04-18 23:41:55.676970296 +0200
-@@ -218,9 +218,8 @@
-  * Do you want to Build Fonts (Usually you only want to build and install
-  * fonts once, if this is a first time install you will want to build the
-  * fonts)
-- *
--#define BuildFonts		NO
-  */
-+#define BuildFonts		NO
- 
- /*
-  * To not build/install the 75dpi fonts, uncomment the following
-@@ -630,9 +629,8 @@
- /*
-  * For FreeBSD/ELF (FreeBSD 3.0) it is possible to also build and install
-  * a.out compatibility libraries.  To enable that, uncomment this.
-- *
--#define BuildAoutLibraries	YES
-  */
-+#define BuildAoutLibraries	YES
- 
- /*
-  * If you have trouble with make bombing out in Xlib, try uncommenting this.
 diff -Nru xc.orig/config/cf/xfree86.cf xc/config/cf/xfree86.cf
 --- xc.orig/config/cf/xfree86.cf	2003-11-21 06:55:07.000000000 +0100
 +++ xc/config/cf/xfree86.cf	2003-12-23 12:09:12.055232544 +0100
