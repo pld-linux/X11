@@ -1,5 +1,8 @@
 rm -f glxinfo
-gcc -m32 -o glxinfo -O2 -fno-strength-reduce -fno-strict-aliasing -std=gnu9x -pedantic -Wall -Wpointer-arith -Wundef     -L/home/users/pluto/rpm/BUILD/X11-6.8.2/xc/exports/lib   glxinfo.o -lGLU -lGL -lXext -lX11  -lpthread -lm    -Wl,-rpath-link,/home/users/pluto/rpm/BUILD/X11-6.8.2/xc/exports/lib
+gcc -m32 -o glxinfo -O2 -fno-strength-reduce -fno-strict-aliasing -std=gnu9x -pedantic
+    -Wall -Wpointer-arith -Wundef     -L/home/users/pluto/rpm/BUILD/X11-6.8.2/xc/exports/lib
+    glxinfo.o -lGLU -lGL -lXext -lX11  -lpthread -lm
+    -Wl,-rpath-link,/home/users/pluto/rpm/BUILD/X11-6.8.2/xc/exports/lib
 /usr/bin/../lib/libstdc++.so.6: undefined reference to `_Unwind_DeleteException@GCC_3.0'
 /usr/bin/../lib/libstdc++.so.6: undefined reference to `_Unwind_Resume@GCC_3.0'
 /usr/bin/../lib/libstdc++.so.6: undefined reference to `_Unwind_RaiseException@GCC_3.0'
