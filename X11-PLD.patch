@@ -298,9 +298,9 @@ diff -urN xc.org/config/cf/xorgsite.def xc/config/cf/xorgsite.def
  
  /*
   * Uncomment this if your default tools (eg, gcc, ld, as, etc) are
-diff -Nru xc.orig/config/cf/xfree86.cf xc/config/cf/xfree86.cf
---- xc.orig/config/cf/xfree86.cf	2003-11-21 06:55:07.000000000 +0100
-+++ xc/config/cf/xfree86.cf	2003-12-23 12:09:12.055232544 +0100
+diff -Nru xc.orig/config/cf/xorg.cf xc/config/cf/xorg.cf
+--- xc.orig/config/cf/xorg.cf	2003-11-21 06:55:07.000000000 +0100
++++ xc/config/cf/xorg.cf	2003-12-23 12:09:12.055232544 +0100
 @@ -128,7 +128,7 @@
  #define XConfigFile		XF86Config
  #endif

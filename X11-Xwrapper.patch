@@ -42,9 +42,9 @@ diff -urN xc.orig/config/cf/xorgsite.def xc/config/cf/xorgsite.def
   */
  
  
-diff -urN xc.orig/config/cf/xfree86.cf xc/config/cf/xfree86.cf
---- xc.orig/config/cf/xfree86.cf	Mon Dec 30 15:52:31 2002
-+++ xc/config/cf/xfree86.cf	Mon Dec 30 17:31:51 2002
+diff -urN xc.orig/config/cf/xorg.cf xc/config/cf/xorg.cf
+--- xc.orig/config/cf/xorg.cf	Mon Dec 30 15:52:31 2002
++++ xc/config/cf/xorg.cf	Mon Dec 30 17:31:51 2002
 @@ -1104,12 +1104,15 @@
  #endif
  
