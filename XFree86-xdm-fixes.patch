@@ -96,3 +96,16 @@ diff -urN xc/programs/xdm~/greeter/Imakefile xc/programs/xdm/greeter/Imakefile
  
  SRCS = greet.c verify.c Login.c
  OBJS = greet.o verify.o Login.o
+--- xc/programs/xdm/config/Imakefile~	Thu Nov  9 23:37:34 2000
++++ xc/programs/xdm/config/Imakefile	Thu Nov  9 23:38:18 2000
+@@ -5,9 +5,7 @@
+ 
+ all:: Xservers.ws xdm-config Xservers Xresources
+ 
+-#if defined(i386Architecture) && (defined(NetBSDArchitecture) || defined(OpenBSDArchitecture))
+-DEFAULTVT=vt05
+-#endif
++DEFAULTVT=vt9
+ 
+ #ifndef XdmPixmap
+ # define XdmPixmap XFree86.xpm
