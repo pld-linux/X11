@@ -88,6 +88,6 @@ Comment[zu]=Umboniseli Webhodi eliciphizekayo
 Exec=xclipboard
 Icon=xclipboard.png
 Type=Application
-Terminal=0
+Terminal=false
 Categories=Utility;X-X11
 # vi: encoding=utf-8

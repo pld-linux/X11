@@ -83,6 +83,6 @@ Comment[zu]=Umhleli Wokubhaliweyo
 Exec=xedit
 Icon=xedit.png
 Type=Application
-Terminal=0
+Terminal=false
 Categories=Editors;X-X11
 # vi: encoding=utf-8
