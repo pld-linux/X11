@@ -6,6 +6,11 @@ programs/Xserver/GL/dri/sarea.h
 programs/Xserver/Xext/dgaproc.h
 programs/Xserver/Xext/xvdix.h
 programs/Xserver/Xext/xvmcext.h
+programs/Xserver/cfb/cfb.h
+programs/Xserver/cfb/cfb16.h
+programs/Xserver/cfb/cfb32.h
+programs/Xserver/cfb/cfbmap.h
+programs/Xserver/cfb/cfbunmap.h
 programs/Xserver/fb/fb.h
 programs/Xserver/fb/fbrop.h
 programs/Xserver/hw/xfree86/common/compiler.h
@@ -27,6 +32,7 @@ programs/Xserver/hw/xfree86/common/xisb.h
 programs/Xserver/hw/xfree86/ddc/edid.h
 programs/Xserver/hw/xfree86/ddc/vdif.h
 programs/Xserver/hw/xfree86/ddc/xf86DDC.h
+programs/Xserver/hw/xfree86/fbdevhw/fbdevhw.h
 programs/Xserver/hw/xfree86/i2c/xf86i2c.h
 programs/Xserver/hw/xfree86/int10/xf86int10.h
 programs/Xserver/hw/xfree86/os-support/bus/xf86Pci.h
@@ -44,6 +50,7 @@ programs/Xserver/hw/xfree86/xaa/xaa.h
 programs/Xserver/hw/xfree86/xaa/xaalocal.h
 programs/Xserver/hw/xfree86/xaa/xaarop.h
 programs/Xserver/hw/xfree86/xf86Version.h
+programs/Xserver/hw/xfree86/xf8_32bpp/cfb8_32.h
 programs/Xserver/include/XIstubs.h
 programs/Xserver/include/bstore.h
 programs/Xserver/include/bstorestr.h
@@ -77,6 +84,7 @@ programs/Xserver/include/servermd.h
 programs/Xserver/include/validate.h
 programs/Xserver/include/window.h
 programs/Xserver/include/windowstr.h
+programs/Xserver/mfb/mfb.h
 programs/Xserver/mi/mi.h
 programs/Xserver/mi/mibstore.h
 programs/Xserver/mi/micmap.h
@@ -84,6 +92,8 @@ programs/Xserver/mi/micoord.h
 programs/Xserver/mi/migc.h
 programs/Xserver/mi/miline.h
 programs/Xserver/mi/mipointer.h
+programs/Xserver/mi/mizerarc.h
 programs/Xserver/render/glyphstr.h
+programs/Xserver/render/mipict.h
 programs/Xserver/render/picture.h
 programs/Xserver/render/picturestr.h
