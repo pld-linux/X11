@@ -11,3 +11,4 @@ TryExec=twm
 
 [Window Manager]
 SessionManaged=false
+# vi: encoding=utf-8
