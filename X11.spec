@@ -2502,7 +2502,7 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/Xorg
 %attr(755,root,root) %{_bindir}/Xdmx
-%attr(755,root,root) %{_bindir}/Xwrapper
+%attr(4755,root,root) %{_bindir}/Xwrapper
 %attr(755,root,root) %{_bindir}/getconfig*
 %attr(755,root,root) %{_sysconfdir}/X11/X
 %attr(755,root,root) %{_bindir}/X
