@@ -121,6 +121,7 @@ Patch62:	%{name}-sparc64-v9fix.patch
 #head-patch
 #ftp://ftp.linux.cz/pub/linux/people/jan_kasprzak/xorg-dualhead/
 Patch100:	ftp://ftp.linux.cz/pub/linux/people/jan_kasprzak/xorg-dualhead/xorg-x11-6.8.1-dualhead.patch
+Patch101:	%{name}-gcc4.patch
 
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
@@ -1969,6 +1970,7 @@ cd -
 %patch62 -p1
 %endif
 %{?with_dualhead:%patch100 -p1}
+%patch101 -p1
 
 %build
 PWD=`pwd`
