@@ -5,8 +5,8 @@
 # Version:	@(#) /etc/rc.d/init.d/xdm 1.3
 #
 # chkconfig:	5 95 5
-# description:	Starts and stops the X Display Manager at startup and
-#		shutdown. can run one of several display managers; gdm, kdm,
+# description:	Starts and stops the X Display Manager at startup and \
+#		shutdown. can run one of several display managers; gdm, kdm, \
 #		or xdm, in that order of preferential treatment.
 #
 # config:	/etc/X11/xdm/xdm-config
