@@ -1,0 +1,53 @@
+--- XFree86-4.0.2/xc/config/imake/imake.c.orig	Fri Dec 22 14:48:51 2000
++++ XFree86-4.0.2/xc/config/imake/imake.c	Fri Dec 22 14:48:46 2000
+@@ -265,6 +265,7 @@
+ #if defined(linux) || defined(__GNU__)
+ #include <limits.h>
+ #include <stdio.h>
++#include <linux/version.h>
+ #endif
+ #ifdef __QNX__
+ #include <unix.h>
+@@ -1225,35 +1226,15 @@
+ 		fprintf(inFile, "#define DefaultOSName %s\n", buf);
+ # endif
+ 
+-# ifdef DEFAULT_OS_MAJOR_REV
+-	parse_utsname(&name, DEFAULT_OS_MAJOR_REV, buf,
+-		      "Bad DEFAULT_OS_MAJOR_REV syntax %s");
+-#  ifdef DEFAULT_OS_MAJOR_REV_FROB
+-	DEFAULT_OS_MAJOR_REV_FROB(buf, sizeof buf);
+-#  endif
+-	fprintf(inFile, "#define DefaultOSMajorVersion %s\n",
+-		*buf ? trim_version(buf) : "0");
+-# endif
++	fprintf(inFile, "#define DefaultOSMajorVersion %d\n",
++		LINUX_VERSION_CODE >> 16);
+ 
+-# ifdef DEFAULT_OS_MINOR_REV
+-	parse_utsname(&name, DEFAULT_OS_MINOR_REV, buf,
+-		      "Bad DEFAULT_OS_MINOR_REV syntax %s");
+-#  ifdef DEFAULT_OS_MINOR_REV_FROB
+-	DEFAULT_OS_MINOR_REV_FROB(buf, sizeof buf);
+-#  endif
+-	fprintf(inFile, "#define DefaultOSMinorVersion %s\n",
+-		*buf ? trim_version(buf) : "0");
+-# endif
++	fprintf(inFile, "#define DefaultOSMinorVersion %d\n",
++		(LINUX_VERSION_CODE >> 8) & 0xFF);
++
++	fprintf(inFile, "#define DefaultOSTeenyVersion %d\n",
++		LINUX_VERSION_CODE & 0xFF);
+ 
+-# ifdef DEFAULT_OS_TEENY_REV
+-	parse_utsname(&name, DEFAULT_OS_TEENY_REV, buf,
+-		      "Bad DEFAULT_OS_TEENY_REV syntax %s");
+-#  ifdef DEFAULT_OS_TEENY_REV_FROB
+-	DEFAULT_OS_TEENY_REV_FROB(buf, sizeof buf);
+-#  endif
+-	fprintf(inFile, "#define DefaultOSTeenyVersion %s\n",
+-		*buf ? trim_version(buf) : "0");
+-# endif
+ # ifdef DEFAULT_MACHINE_ARCHITECTURE
+ 	parse_utsname(&name, DEFAULT_MACHINE_ARCHITECTURE, buf, 
+ 		      "Bad DEFAULT_MACHINE_ARCHITECTURE %s");
