@@ -103,7 +103,9 @@ Patch25:	%{name}-xterm-256colors.patch
 Patch26:	%{name}-makefile-fastbuild.patch
 Patch27:	%{name}-sparc-kbd.patch
 Patch29:	%{name}-radeon-entervt.patch
-# tdfx-fix-vtswitch-font-corruption - not applied, needs check
+# XFree86-tdfx-fix-vtswitch-font-corruption.patch - issue still not fixed,
+# but patch doesn't help either; however, it occurs in text mode only, not
+# with tdfxfb, which is worth using anyway
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
 # Required by xc/programs/Xserver/hw/xfree86/drivers/glide/glide_driver.c
