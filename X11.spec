@@ -70,7 +70,7 @@ Source53:	http://oss.sgi.com/projects/ogl-sample/ABI/glext.h
 Patch0:		%{name}-PLD.patch
 Patch1:		XFree86-HasZlib.patch
 Patch2:		XFree86-DisableDebug.patch
-Patch3:		XFree86-Xwrapper.patch
+Patch3:		%{name}-Xwrapper.patch
 Patch4:		XFree86-xfs.patch
 Patch5:		XFree86-xfs-fix.patch
 Patch6:		XFree86-xfs-logger.patch
@@ -2183,7 +2183,7 @@ fi
 %{_mandir}/man1/gtf.1*
 %{_mandir}/man1/iceauth.1*
 %{_mandir}/man1/lbxproxy.1*
-%{_mandir}/man1/libxrx.1*
+#%{_mandir}/man1/libxrx.1*
 %{_mandir}/man1/lndir.1*
 %{_mandir}/man1/luit.1x*
 %{_mandir}/man1/makestrs.1*
@@ -2248,10 +2248,10 @@ fi
 %lang(pl) %{_mandir}/pl/man1/xwd.1*
 
 # to be separated
-%attr(755,root,root) %{_bindir}/fonttosfnt
+#%attr(755,root,root) %{_bindir}/fonttosfnt
 %attr(755,root,root) %{_bindir}/mkfontdir
 %attr(755,root,root) %{_bindir}/mkfontscale
-%{_mandir}/man1/fonttosfnt.1*
+#%{_mandir}/man1/fonttosfnt.1*
 %{_mandir}/man1/mkfontdir.1*
 %{_mandir}/man1/mkfontscale.1*
 
@@ -2371,7 +2371,7 @@ fi
 %{_mandir}/man1/Xorg.1*
 %{_mandir}/man1/Xserver.1*
 %{_mandir}/man1/getconfig.1*
-%{_mandir}/man5/XF86Config.5*
+%{_mandir}/man5/xorg.conf.5*
 %{_mandir}/man5/getconfig.5*
 
 %{_libx11dir}/Cards
@@ -2421,7 +2421,7 @@ fi
 %attr(755,root,root) %{_libdir}/libfontenc.so
 %attr(755,root,root) %{_libdir}/libxkbfile.so
 %attr(755,root,root) %{_libdir}/libxkbui.so
-%attr(755,root,root) %{_libdir}/libxrx.so
+#%attr(755,root,root) %{_libdir}/libxrx.so
 %{_libdir}/libXau.a
 %{_libdir}/libXdmcp.a
 %{_libdir}/libfntstubs.a
@@ -2823,7 +2823,7 @@ fi
 %attr(755,root,root) %{_libdir}/libfontenc.so.*.*
 %attr(755,root,root) %{_libdir}/libxkbfile.so.*.*
 %attr(755,root,root) %{_libdir}/libxkbui.so.*.*
-%attr(755,root,root) %{_libdir}/libxrx.so.*.*
+#%attr(755,root,root) %{_libdir}/libxrx.so.*.*
 
 %files modules
 %defattr(644,root,root,755)
@@ -2892,13 +2892,13 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/pcitweak
 %attr(755,root,root) %{_bindir}/scanpci
-%attr(755,root,root) %{_bindir}/xf86cfg
-%attr(755,root,root) %{_bindir}/xf86config
-%{_appdefsdir}/XF86Cfg
+%attr(755,root,root) %{_bindir}/xorgcfg
+%attr(755,root,root) %{_bindir}/xorgconfig
+%{_appdefsdir}/XOrgCfg
 %{_mandir}/man1/pcitweak.1*
 %{_mandir}/man1/scanpci.1*
-%{_mandir}/man1/xf86cfg.1*
-%{_mandir}/man1/xf86config.1*
+%{_mandir}/man1/xorgcfg.1*
+%{_mandir}/man1/xorgconfig.1*
 
 %files static
 %defattr(644,root,root,755)
