@@ -1950,10 +1950,10 @@ rm -f xc/config/cf/host.def
 %patch29 -p1
 cd xc
 %patch30 -p0
-cd -
-%patch31 -p0
 %patch32 -p0
 %patch33 -p0
+cd -
+%patch31 -p0
 %patch50 -p1
 
 %build
