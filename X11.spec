@@ -19,7 +19,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.7.0
-Release:	5
+Release:	6
 Epoch:		1
 License:	XFree86 1.0 (?)
 Group:		X11/Xorg
@@ -1463,6 +1463,7 @@ Summary(ru):	Утилита для конфигурации XOrg X11
 Summary(uk):	Утил╕та для конф╕гурування XOrg X11
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
+Provides:	XFree86-setup = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-setup
 Obsoletes:	X11-xf86cfg
 
