@@ -20,6 +20,7 @@ Summary(zh_CN):	Xorg 窗口系统服务器和基本程序
 Name:		Xorg
 Version:	6.7.0
 Release:	0.1
+Epoch:		0
 License:	XFree86 1.0 (?)
 Group:		X11/Xorg
 Source0:	http://freedesktop.org/~xorg/X11R%{version}/src/X11R%{version}-src1.tar.gz
