@@ -17,14 +17,15 @@
  # if defined(UseInstalled)
 --- X11-6.8.2/xc/programs/Xserver/fb/fbmmx.c.orig	2004-07-22 21:24:50.000000000 +0200
 +++ X11-6.8.2/xc/programs/Xserver/fb/fbmmx.c	2005-02-15 10:32:50.573357352 +0100
-@@ -23,6 +23,7 @@
-  * Based on work by Owen Taylor
-  */
- 
-+#include <mmintrin.h>
- #include "fb.h"
+@@ -27,6 +27,8 @@
  
  #ifdef USE_GCC34_MMX
+ 
++#include <mmintrin.h>
++
+ #ifdef RENDER
+ 
+ #include "picturestr.h"
 @@ -33,10 +34,10 @@
  #include "mipict.h"
  #include "fbpict.h"
