@@ -1,0 +1,10 @@
+# Customized setings for xfs
+
+# Specifies the TCP port number on which the server will listen for
+# connections. The default port number is 7100.
+XFS_PORT="-1"
+
+XFS_OPTIONS=
+
+# Define nice level for xfs
+SERVICE_RUN_NICE_LEVEL="+0"
