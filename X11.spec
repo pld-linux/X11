@@ -2114,13 +2114,13 @@ rm -rf $RPM_BUILD_ROOT
 
 #--- %post{un}, %preun, %verifyscript, %trigge ----------
 
-%post   DPS -p /sbin/ldconfig
+%post	DPS -p /sbin/ldconfig
 %postun DPS -p /sbin/ldconfig
 
-%post   OpenGL-libGL -p /sbin/ldconfig
+%post	OpenGL-libGL -p /sbin/ldconfig
 %postun OpenGL-libGL -p /sbin/ldconfig
 
-%post   OpenGL-libs -p /sbin/ldconfig
+%post	OpenGL-libs -p /sbin/ldconfig
 %postun OpenGL-libs -p /sbin/ldconfig
 
 %post libs
