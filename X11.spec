@@ -79,7 +79,6 @@ Patch3:		%{name}-Xwrapper.patch
 Patch4:		%{name}-xfs.patch
 Patch5:		%{name}-xterm-utempter.patch
 Patch6:		%{name}-app_defaults_dir.patch
-Patch7:		%{name}-v4l.patch
 Patch8:		%{name}-broken-includes.patch
 Patch9:		%{name}-fhs.patch
 Patch10:	%{name}-xdmsecurity.patch
@@ -90,13 +89,14 @@ Patch15:	%{name}-r128-busmstr2.patch
 Patch16:	%{name}-neomagic_swcursor.patch
 Patch17:	%{name}-mga-busmstr.patch
 Patch18:	%{name}-agpgart-load.patch
-Patch20:	%{name}-config-s3.patch
 Patch21:	%{name}-XTerm.ad.patch
-Patch22:	%{name}-xf86Pcih.patch
+# no longer needed? to check
+#Patch22:	%{name}-xf86Pcih.patch
 Patch23:	%{name}-dontbuildfonts.patch
 Patch25:	%{name}-llh.patch
 Patch32:	XFree86-xman-manpaths.patch
 Patch33:	XFree86-clearrts.patch
+# tdfx-fix-vtswitch-font-corruption - not applied, needs check
 Patch40:	XFree86-Xfont-Type1-large-DoS.patch
 Patch41:	%{name}-GLcore-strip-a-workaround.patch
 Patch44:	%{name}-pkgconfig.patch
@@ -105,6 +105,7 @@ Patch46:	XFree86-lock.patch
 Patch50:	%{name}-xterm-256colors.patch
 Patch54:	%{name}-setxkbmap.patch
 Patch55:	%{name}-makefile-fastbuild.patch
+# cleaner version in XFree86?
 Patch56:	%{name}-sparc-kbd.patch
 Patch57:	%{name}-glibc-charset.patch
 Patch58:	%{name}-radeon-entervt.patch
@@ -1924,7 +1925,6 @@ X11-libs.
 %patch4 -p0
 %patch5 -p0
 %patch6 -p0
-%patch7 -p0
 %patch8 -p0
 %patch9 -p0
 %patch10 -p0
@@ -1935,9 +1935,8 @@ X11-libs.
 %patch16 -p0
 %patch17 -p0
 %patch18 -p0
-%patch20 -p0
 %patch21 -p0
-%patch22 -p0
+#%patch22 -p0
 %patch23 -p0
 %patch25 -p0
 %patch32 -p1
