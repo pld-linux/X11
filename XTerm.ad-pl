@@ -1,0 +1,274 @@
+! $autor: Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+! $Ver:   0.02
+! - 09.04.98
+!   Pierwsza w miarê kompletna wersja
+! - 04.02.99
+!   Poprawione dzia³anie klawiszy Home, End
+
+NXTerm.JoinSession:			False
+*SimpleMenu*BackingStore: 		NotUseful
+*SimpleMenu*menuLabel.font: 		-misc-*-*-*-*-*-15-*-*-*-*-*-*-2
+*SimpleMenu*menuLabel.vertSpace:	100
+*SimpleMenu*HorizontalMargins:		16
+*SimpleMenu*Sme.height:			16
+*SimpleMenu*Cursor:			left_ptr
+*saveLines:				1500
+*eightBitInput:				True
+*scrollBar:				True
+*fullCursor:				True
+*reverseWrap:				True
+*titleBar:				True
+*dynamicColors:				True
+
+! Kolory
+*cursorColor:				blue
+*background:				black
+*foreground:				white
+*SimpleMenu.background:			#00aaff
+*SimpleMenu.foreground:			black
+
+! *VT100.geometry:			80x45
+*VT100*colorULMode: 			on
+*VT100*underLine:			on
+*VT100*colorBDMode:			on
+
+*VT100*color0:				black
+*VT100*color1:				red3
+*VT100*color2:				green3
+*VT100*color3:				yellow3
+*VT100*color4:				blue3
+*VT100*color5:				magenta3
+*VT100*color6:				cyan3
+*VT100*color7:				gray90
+*VT100*color8:				gray30
+*VT100*color9:				red
+*VT100*color10:				green
+*VT100*color11:				yellow
+*VT100*color12:				blue
+*VT100*color13:				magenta
+*VT100*color14:				cyan
+*VT100*color15:				white
+*VT100*colorBD: 			white
+*VT100*colorUL:				green
+
+*mainMenu.Label:			Opcje g³ówne
+*mainMenu*securekbd*Label:		Zabezpiecz klawiaturê
+*mainMenu*allowsends*Label:		Allow SendEvents
+*mainMenu*logging*Label:		Log to File
+*mainMenu*redraw*Label:			Od¶wie¿ zawarto¶æ okna
+*mainMenu*suspend*Label:		Wy¶lij sygna³ STOP
+*mainMenu*continue*Label:		Wy¶lij sygna³ CONT
+*mainMenu*interrupt*Label:		Wy¶lij sygna³ INT
+*mainMenu*hangup*Label:			Wy¶lij sygna³ HUP
+*mainMenu*terminate*Label:		Wy¶lij sygna³ TERM
+*mainMenu*kill*Label:			Wy¶lij sygna³ KILL
+*mainMenu*quit*Label:			Koniec
+*mainMenu*eightBit*Label:		8-Bit Controls
+
+*vtMenu.Label:				Opcje terminala
+*vtMenu*scrollbar*Label:		W³±cz pasek przewijania
+*vtMenu*jumpscroll*Label:		Enable Jump Scroll
+*vtMenu*reversevideo*Label:		Zamieñ kolory t³a i fontu
+*vtMenu*autowrap*Label:			Enable Auto Wraparound
+*vtMenu*reversewrap*Label:		Enable Reverse Wraparound
+*vtMenu*autolinefeed*Label:		Enable Auto Linefeed
+*vtMenu*appcursor*Label:		W³acz dla aplikacji klawiaturê kursorów
+*vtMenu*appkeypad*Label:		W³acz dla aplikacji klawiaturê numeryczn±
+*vtMenu*scrollkey*Label:		Przewijaj w dó³ po naci¶niêciu klawisza
+*vtMenu*scrollttyoutput*Label:		Przewijaj w dó³ po dowolnej akcji terminala
+*vtMenu*allow132*Label:			Zezwól na prze³±czanie 80/132 kolumn
+*vtMenu*cursesemul*Label:		W³acz emulacjê kursora
+*vtMenu*visualbell*Label:		W³±cz sygna³ wizualny
+*vtMenu*marginbell*Label:		Enable Margin Bell
+*vtMenu*altscreen*Label:		Show Alternate Screen
+*vtMenu*softreset*Label:		Wykonaj miekki reset
+*vtMenu*hardreset*Label:		Wykonaj pe³ny reset
+*vtMenu*clearsavedlines*Label:		Reset i wyczyszcznie bufora terminala
+*vtMenu*tekshow*Label:			Poka¿ okno Tektronic
+*vtMenu*tekmode*Label:			Prze³±cz w tryb Tek
+*vtMenu*vthide*Label:			Ukryj okno terminala
+
+*font:				-misc-*-bold-*-*-*-15-*-*-*-*-*-*-2
+
+*fontMenu.Label:			Font terminala
+*fontMenu*fontdefault*Label:		Domy¶lny   (iso-8859-2)
+#VT100*font:				-misc-*-bold-*-*-*-15-*-*-*-*-*-*-2
+*fontMenu*font1*Label:			Nieczytelny
+*VT100*font1:				nil2
+*fontMenu*font2*Label:			Bardzo ma³y
+*VT100*font2:				5x7
+*fontMenu*font3*Label:			Ma³y
+*VT100*font3:				6x10
+*fontMenu*font4*Label:			¦redni
+*VT100*font4:				7x13
+*fontMenu*font5*Label:			Du¿y        (iso-8859-2)
+*VT100*font5:				-misc-*-medium-*-*-*-15-*-*-*-*-*-*-2
+*fontMenu*font6*Label:			Bardzo du¿y (iso-8859-2)
+*VT100*font6:				-misc-*-medium-*-*-*-20-*-*-*-*-*-*-2
+*fontMenu*fontescape*Label:		Escape Sequence
+*fontMenu*fontsel*Label:		Zaznaczony
+!fontescape and fontsel overridden by application
+
+*visualBell:				off
+*tekMenu.Label:				Opcje terminala Tektronix
+*tekMenu*tektextlarge*Label:		Large Characters
+*tekMenu*tektext2*Label:		#2 Size Characters
+*tekMenu*tektext3*Label:		#3 Size Characters
+*tekMenu*tektextsmall*Label:		Small Characters
+*tekMenu*tekpage*Label:			PAGE
+*tekMenu*tekreset*Label:		RESET
+*tekMenu*tekcopy*Label:			COPY
+*tekMenu*vtshow*Label:			Poka¿ okno terminala
+*tekMenu*vtmode*Label:			Prze³±cz na tryb terminala
+*tekMenu*tekhide*Label:			Ukryj okno Tektronic
+
+*tek4014*fontLarge:			9x15
+*tek4014*font2:				8x13
+*tek4014*font3:				6x13
+*tek4014*fontSmall:			6x10
+
+! This file causes when loaded using xrdb correct behaviour of xterm
+! is you are using enclosed xterm.tcap and xterm.ti.
+! Some keys would never normally work if they weren't here (like Alt
+! something), some key definitions differ from one termcap/terminfo
+! to the other. You may delete any line if you find out that mc
+! sends exactly that string which is mentioned here.
+! See xterm(1).
+! Either put this into your ~/.Xdefaults, or to app-defaults/XTerm
+! or wherever it will be loaded into xrm from.
+! To know, why this works, see Xt documentation (appendix B).
+! On some systems you may want to replace the a (alt) modifiers with
+! m (meta) modifier in fron of some <Key> events.
+*vt100.translations: #override \
+	@Num_Lock<Key>KP_0: string(0)\n\
+	@Num_Lock<Key>KP_1: string(1)\n\
+	@Num_Lock<Key>KP_2: string(2)\n\
+	@Num_Lock<Key>KP_3: string(3)\n\
+	@Num_Lock<Key>KP_4: string(4)\n\
+	@Num_Lock<Key>KP_5: string(5)\n\
+	@Num_Lock<Key>KP_6: string(6)\n\
+	@Num_Lock<Key>KP_7: string(7)\n\
+	@Num_Lock<Key>KP_8: string(8)\n\
+	@Num_Lock<Key>KP_9: string(9)\n\
+	@Num_Lock<Key>KP_Add: string(+)\n\
+	@Num_Lock<Key>KP_Decimal: string(.)\n\
+	@Num_Lock<Key>KP_Divide: string(/)\n\
+	@Num_Lock<Key>KP_Enter: string(\015)\n\
+	@Num_Lock<Key>KP_Equal: string(=)\n\
+	@Num_Lock<Key>KP_Multiply: string(*)\n\
+	@Num_Lock<Key>KP_Subtract: string(-)\n\
+	<Key>KP_Add: string(+)\n\
+	<Key>KP_Divide: string(/)\n\
+	<Key>KP_Enter: string(\015)\n\
+	<Key>KP_Equal: string(=)\n\
+	<Key>KP_Multiply: string(*)\n\
+	@Num_Lock<Key>KP_Subtract: string(-)\n\
+	<Key>KP_Add: string(+)\n\
+	<Key>KP_Divide: string(/)\n\
+	<Key>KP_Enter: string(\015)\n\
+	<Key>KP_Equal: string(=)\n\
+	<Key>KP_Multiply: string(*)\n\
+	<Key>KP_Subtract: string(-)\n\
+	Shift<Key>Prior:scroll-back(1,page)\n\
+	Shift<Key>Next:scroll-forw(1,page)\n\
+	<Key>F16: start-extend() select-end(PRIMARY, CUT_BUFFER0, CLIPBOARD) \n\
+	<Key>F18: insert-selection(PRIMARY, CLIPBOARD) \n\
+	<Key>F27: scroll-back(100,page) \n\
+	<Key>R13: scroll-forw(100,page) \n\
+	~Meta<Key>Home: string(0x1b) string("[1~") \n\
+	Meta<Key>Home: string(0x1b) string(0x1b) string("[1~") \n\
+	~Meta<Key>End: string(0x1b) string("[4~") \n\
+	Meta<Key>End: string(0x1b) string(0x1b) string("[4~") \n\
+	~Meta<Key>Insert: string(0x1b) string("[2~") \n\
+	Meta<Key>Insert: string(0x1b) string(0x1b) string("[2~") \n\
+	~Meta<Key>Delete: string(0x1b) string("[3~") \n\
+	Meta<Key>Delete: string(0x1b) string(0x1b) string("[3~") \n\
+	~Meta<Key>Page_Up: string(0x1b) string("[5~") \n\
+	Meta<Key>Page_Up: string(0x1b) string(0x1b) string("[5~") \n\
+	~Meta<Key>Page_Down: string(0x1b) string("[6~") \n\
+	Meta<Key>Page_Down: string(0x1b) string(0x1b) string("[6~") \n\
+	~Meta<Key>BackSpace: string(\177) \n\
+	Meta<Key>BackSpace: string(0x1b) string(\177) \n\
+	~Meta<Key>Up: string(0x1b) string("OA") \n\
+	Meta<Key>Up: string(0x1b) string(0x1b) string("OA") \n\
+	~Meta<Key>Down: string(0x1b) string("OB") \n\
+	Meta<Key>Down: string(0x1b) string(0x1b) string("OB") \n\
+	~Meta<Key>Left: string(0x1b) string("OD") \n\
+	Meta<Key>Left: string(0x1b) string(0x1b) string("OD") \n\
+	~Meta<Key>Right: string(0x1b) string("OC") \n\
+	Meta<Key>Right: string(0x1b) string(0x1b) string("OC") \n\
+	~Meta<Key>Return: string(0x0d) \n\
+	Meta<Key>Return: string(0x1b) string(0x0d) \n\
+	~Meta<Key>Tab: string(0x09) \n\
+	Meta<Key>Tab: string(0x1b) string(0x09) \n\
+	~Shift<Key>F1: string(0x1b) string("[11~") \n\
+	~Shift<Key>F2: string(0x1b) string("[12~") \n\
+	~Shift<Key>F3: string(0x1b) string("[13~") \n\
+	~Shift<Key>F4: string(0x1b) string("[14~") \n\
+	~Shift<Key>F5: string(0x1b) string("[15~") \n\
+	~Shift<Key>F6: string(0x1b) string("[17~") \n\
+	~Shift<Key>F7: string(0x1b) string("[18~") \n\
+	~Shift<Key>F8: string(0x1b) string("[19~") \n\
+	~Shift<Key>F9: string(0x1b) string("[20~") \n\
+	~Shift<Key>F10: string(0x1b) string("[21~") \n\
+	<Key>F11: string(0x1b) string("[23~") \n\
+	<Key>F12: string(0x1b) string("[24~") \n\
+	<Key>F13: string(0x1b) string("[25~") \n\
+	<Key>F14: string(0x1b) string("[26~") \n\
+	<Key>F15: string(0x1b) string("[28~") \n\
+	<Key>F16: string(0x1b) string("[29~") \n\
+	<Key>F17: string(0x1b) string("[31~") \n\
+	<Key>F18: string(0x1b) string("[32~") \n\
+	<Key>F19: string(0x1b) string("[33~") \n\
+	<Key>F20: string(0x1b) string("[34~") \n\
+	Shift<Key>F1: string(0x1b) string("[23~") \n\
+	Shift<Key>F2: string(0x1b) string("[24~") \n\
+	Shift<Key>F3: string(0x1b) string("[25~") \n\
+	Shift<Key>F4: string(0x1b) string("[26~") \n\
+	Shift<Key>F5: string(0x1b) string("[28~") \n\
+	Shift<Key>F6: string(0x1b) string("[29~") \n\
+	Shift<Key>F7: string(0x1b) string("[31~") \n\
+	Shift<Key>F8: string(0x1b) string("[32~") \n\
+	Shift<Key>F9: string(0x1b) string("[33~") \n\
+	Shift<Key>F10: string(0x1b) string("[34~") \n\
+	Shift<Key>Home: scroll-back(100,page) \n\
+	Shift<Key>End: scroll-forw(100,page) \n
+	s<Key>F1: string(0x1b) string("[23~") \n\
+	s<Key>F2: string(0x1b) string("[24~") \n\
+	s<Key>F3: string(0x1b) string("[25~") \n\
+	s<Key>F4: string(0x1b) string("[26~") \n\
+	s<Key>F5: string(0x1b) string("[28~") \n\
+	s<Key>F6: string(0x1b) string("[29~") \n\
+	s<Key>F7: string(0x1b) string("[31~") \n\
+	s<Key>F8: string(0x1b) string("[32~") \n\
+	s<Key>F9: string(0x1b) string("[33~") \n\
+	s<Key>F10: string(0x1b) string("[34~") \n\
+	a<Key>Return: string(0x1b) string(0x0d) \n\
+	a<Key>Tab: string(0x1b) string(0x09) \n\
+	a<Key>space: string(0x1b) string(" ") \n\
+	a<Key>a: string(0x1b) string("a") \n\
+	a<Key>b: string(0x1b) string("b") \n\
+	a<Key>c: string(0x1b) string("c") \n\
+	a<Key>d: string(0x1b) string("d") \n\
+	a<Key>e: string(0x1b) string("e") \n\
+	a<Key>f: string(0x1b) string("f") \n\
+	a<Key>g: string(0x1b) string("g") \n\
+	a<Key>h: string(0x1b) string("h") \n\
+	a<Key>i: string(0x1b) string("i") \n\
+	a<Key>j: string(0x1b) string("j") \n\
+	a<Key>k: string(0x1b) string("k") \n\
+	a<Key>l: string(0x1b) string("l") \n\
+	a<Key>m: string(0x1b) string("m") \n\
+	a<Key>n: string(0x1b) string("n") \n\
+	a<Key>o: string(0x1b) string("o") \n\
+	a<Key>p: string(0x1b) string("p") \n\
+	a<Key>q: string(0x1b) string("q") \n\
+	a<Key>r: string(0x1b) string("r") \n\
+	a<Key>s: string(0x1b) string("s") \n\
+	a<Key>t: string(0x1b) string("t") \n\
+	a<Key>u: string(0x1b) string("u") \n\
+	a<Key>v: string(0x1b) string("v") \n\
+	a<Key>w: string(0x1b) string("w") \n\
+	a<Key>x: string(0x1b) string("x") \n\
+	a<Key>y: string(0x1b) string("y") \n\
+	a<Key>z: string(0x1b) string("z")
