@@ -104,6 +104,8 @@ Patch26:	%{name}-makefile-fastbuild.patch
 Patch27:	%{name}-sparc-kbd.patch
 Patch29:	%{name}-radeon-entervt.patch
 Patch30:	http://www.x.org/pub/X11R6.8.1/patches/xorg-681-CAN-2004-0914.patch
+# updated from http://dl.sourceforge.net/i810fb/i810fb-xfree86-420.tar.bz2 : i810fb-xfree420.diff
+Patch31:	%{name}-i810fb.patch
 Patch50:	%{name}-glibc-locale_sync.patch
 # XFree86-tdfx-fix-vtswitch-font-corruption.patch - issue still not fixed,
 # but patch doesn't help either; however, it occurs in text mode only, not
@@ -1947,6 +1949,7 @@ rm -f xc/config/cf/host.def
 cd xc
 %patch30 -p0
 cd -
+%patch31 -p0
 %patch50 -p1
 
 %build
