@@ -2791,8 +2791,7 @@ fi
 %attr(755,root,root) %{_libdir}/libXext.so.*.*
 %attr(755,root,root) %{_libdir}/libXfont.so.*.*
 %attr(755,root,root) %{_libdir}/libXfontcache.so.*.*
-%attr(755,root,root) %{_libdir}/libXft.so.?.?
-%attr(755,root,root) %{_libdir}/libXft.so.*.*.*
+%attr(755,root,root) %{_libdir}/libXft.so.*.*
 %attr(755,root,root) %{_libdir}/libXi.so.*.*
 %attr(755,root,root) %{_libdir}/libXinerama.so.*.*
 %attr(755,root,root) %{_libdir}/libXmu.so.*.*
