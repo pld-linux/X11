@@ -4,7 +4,7 @@
 # connections. The default port number is 7100.
 XFS_PORT="-1"
 
-XFS_OPTIONS=
+XFS_OPTIONS="-daemon"
 
 # Define nice level for xfs
 SERVICE_RUN_NICE_LEVEL="+0"
