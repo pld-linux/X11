@@ -30,7 +30,7 @@ case "$1" in
 			$([ -n "$XFS_PORT" ] && echo "-port $XFS_PORT") \
 			$([ -n "$XFS_OPTIONS" ] && echo "$XFS_OPTIONS")
 	else
-		msg_Already_Running "X Font Server"
+		msg_already_running "X Font Server"
 	fi
 	touch /var/lock/subsys/xfs
 	;;
@@ -51,11 +51,11 @@ case "$1" in
 		msg_reloading "X Font Server"
 		killproc xfs -USR1
 	else
-		msg_Not_Running "X Font Server"
+		msg_not_running "X Font Server"
 	fi
 	;;
   *)
-	msg_Usage "$0 {start|stop|status|restart|reload}"
+	msg_usage "$0 {start|stop|status|restart|reload}"
 	exit 1
 esac
 
