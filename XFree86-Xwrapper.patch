@@ -111,13 +111,13 @@ diff -urN XFree86-4.1.0.orig/xc/programs/Xserver/os/Imakefile XFree86-4.1.0/xc/p
 --- XFree86-4.1.0.orig/xc/programs/Xserver/os/Imakefile	Mon Apr 23 18:17:12 2001
 +++ XFree86-4.1.0/xc/programs/Xserver/os/Imakefile	Sun Jun 17 20:18:35 2001
 @@ -116,6 +116,7 @@
- #endif
-         DEFINES = -DXSERV_t -DTRANS_SERVER $(CONNECTION_FLAGS) $(MEM_DEFINES) $(XDMAUTHDEFS) $(RPCDEFS) $(SIGNAL_DEFINES) $(OS_DEFINES) $(KRB5_DEFINES) $(RGB_DEFINES)
-        INCLUDES = -I.  -I../include -I$(XINCLUDESRC) -I$(EXTINCSRC) -I$(TOP)/lib/Xau -I../lbx Krb5Includes
+        INCLUDES = -I. -I../include -I$(XINCLUDESRC) -I$(EXTINCSRC) \
+ 		  -I$(SERVERSRC)/Xext -I$(FONTINCSRC) \
+ 		  -I$(TOP)/lib/Xau -I../lbx Krb5Includes
 +  EXTRA_DEFINES = -DUSE_PAM
-  DEPEND_DEFINES = $(DBM_DEFINES) $(XDMCP_DEFINES) $(EXT_DEFINES) $(TRANS_INCLUDES) $(CONNECTION_FLAGS) DependDefines
+  DEPEND_DEFINES = $(DBM_DEFINES) $(XDMCP_DEFINES) $(EXT_DEFINES) \
+ 		  $(TRANS_INCLUDES) $(CONNECTION_FLAGS) DependDefines
         LINTLIBS = ../dix/llib-ldix.ln
- 
 @@ -159,6 +160,14 @@
  	cc -c $(DBM_DEFINES) $(CDEBUGFLAGS) $(ALLDEFINES) $*.c
  #else

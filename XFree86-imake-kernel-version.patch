@@ -2,11 +2,11 @@ diff -ur XFree86-4.0.2/xc/config/imake/Imakefile XFree86-4.0.2.new/xc/config/ima
 --- XFree86-4.0.2/xc/config/imake/Imakefile	Sat Aug 14 12:49:01 1999
 +++ XFree86-4.0.2.new/xc/config/imake/Imakefile	Sat Dec 23 17:48:28 2000
 @@ -15,10 +15,14 @@
- INCLUDES = -I$(TOP)/include $(TOP_X_INCLUDES)/X11
- CPP_PROGRAM = CppCmd
  CPP_DEFINES = -DCPP_PROGRAM="\"$(CPP_PROGRAM)\""
--DEFINES = $(SIGNAL_DEFINES) $(BOOTSTRAPCFLAGS) $(CPP_DEFINES)
-+DEFINES = $(SIGNAL_DEFINES) $(BOOTSTRAPCFLAGS) $(CPP_DEFINES) -DDEFAULT_OS_CPU_FROB="\"$(DEFAULT_OS_CPU_FROB)\""
+ GCC_COMMAND = $(CC) -fmerge-constants -xc /dev/null -S -o /dev/null 2> /dev/null 1> /dev/null
+ GCC_DEFINES = -DHAS_MERGE_CONSTANTS=`if $(GCC_COMMAND); then echo 1; else echo 0; fi`
+-DEFINES = $(SIGNAL_DEFINES) $(BOOTSTRAPCFLAGS) $(CPP_DEFINES) $(GCC_DEFINES)
++DEFINES = $(SIGNAL_DEFINES) $(BOOTSTRAPCFLAGS) $(CPP_DEFINES) $(GCC_DEFINES) -DDEFAULT_OS_CPU_FROB="\"$(DEFAULT_OS_CPU_FROB)\""
  
  #if defined(MacIIArchitecture) || defined(SequentArchitecture) || defined(i386ScoArchitecture)
  XBSDLIB = /**/
