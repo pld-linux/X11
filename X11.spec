@@ -124,9 +124,6 @@ Patch54:	%{name}-setxkbmap.patch
 Patch55:	%{name}-makefile-fastbuild.patch
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
-#%ifarch %{ix86} alpha amd64 ia64
-#%{?with_tdfx:BuildRequires:	Glide3-DRI-devel}
-#%endif
 # Required by xc/programs/Xserver/hw/xfree86/drivers/glide/glide_driver.c
 %ifarch %{ix86} amd64 ia64
 %{?with_glide:BuildRequires:	Glide2x_SDK}
