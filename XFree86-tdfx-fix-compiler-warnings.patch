@@ -1,0 +1,362 @@
+--- xc/lib/GL/mesa/src/drv/tdfx/tdfx_context.c.tdfx-fix-compiler-warnings	Sat Feb 16 00:51:27 2002
++++ xc/lib/GL/mesa/src/drv/tdfx/tdfx_context.c	Sun Feb 17 06:26:13 2002
+@@ -353,7 +353,7 @@
+    FxI32 result[2];
+ 
+    if ( TDFX_DEBUG & DEBUG_VERBOSE_DRI ) {
+-      fprintf( stderr, "%s( %p )\n", __FUNCTION__, fxMesa );
++      fprintf( stderr, "%s( %p )\n", __FUNCTION__, (void *) fxMesa );
+    }
+ 
+ #if DEBUG_LOCKING
+@@ -457,7 +457,7 @@
+ void tdfxDestroyContext( tdfxContextPtr fxMesa )
+ {
+    if ( TDFX_DEBUG & DEBUG_VERBOSE_DRI ) {
+-      fprintf( stderr, "%s( %p )\n", __FUNCTION__, fxMesa );
++      fprintf( stderr, "%s( %p )\n", __FUNCTION__, (void *) fxMesa );
+    }
+ 
+    if ( fxMesa ) {
+@@ -547,8 +547,8 @@
+       }
+    }         
+ 
+-#define GET_FUNCTION(PTR, NAME)						\
+-   tmesa->Glide.PTR = dlsym(libHandle, NAME);				\
++#define GET_FUNCTION(PTR, NAME, TYPEOF)						\
++   tmesa->Glide.PTR = (TYPEOF) dlsym(libHandle, NAME);				\
+    if (!tmesa->Glide.PTR) {						\
+       char err[1000];							\
+       sprintf(err, "couldn't find Glide function %s in %s.",		\
+@@ -556,111 +556,195 @@
+       __driMesaMessage(err);						\
+    }
+ 
+-   GET_FUNCTION(grDrawPoint, "grDrawPoint");
+-   GET_FUNCTION(grDrawLine, "grDrawLine");
+-   GET_FUNCTION(grDrawTriangle, "grDrawTriangle");
+-   GET_FUNCTION(grVertexLayout, "grVertexLayout");
+-   GET_FUNCTION(grDrawVertexArray, "grDrawVertexArray");
+-   GET_FUNCTION(grDrawVertexArrayContiguous, "grDrawVertexArrayContiguous");
+-   GET_FUNCTION(grBufferClear, "grBufferClear");
+-   /*GET_FUNCTION(grBufferSwap, "grBufferSwap");*/
+-   GET_FUNCTION(grRenderBuffer, "grRenderBuffer");
+-   GET_FUNCTION(grErrorSetCallback, "grErrorSetCallback");
+-   GET_FUNCTION(grFinish, "grFinish");
+-   GET_FUNCTION(grFlush, "grFlush");
+-   GET_FUNCTION(grSstWinOpen, "grSstWinOpen");
+-   GET_FUNCTION(grSstWinClose, "grSstWinClose");
++   GET_FUNCTION(grDrawPoint, "grDrawPoint", void (*)(const void *));
++   GET_FUNCTION(grDrawLine, "grDrawLine",  void (*)(const void *, const void * ));
++   GET_FUNCTION(grDrawTriangle, "grDrawTriangle", ( const void *a, const void *b, const void *c ));
++   GET_FUNCTION(grVertexLayout, "grVertexLayout", (FxU32 param, FxI32 offset, FxU32 mode));
++   GET_FUNCTION(grDrawVertexArray, "grDrawVertexArray", (FxU32 mode, FxU32 Count, void *pointers));
++   GET_FUNCTION(grDrawVertexArrayContiguous, "grDrawVertexArrayContiguous",
++                (FxU32 mode, FxU32 Count, void *pointers, FxU32 stride));
++   GET_FUNCTION(grBufferClear, "grBufferClear", ( GrColor_t color, GrAlpha_t alpha, FxU32 depth ));
++   /*GET_FUNCTION(grBufferSwap, "grBufferSwap", ( FxU32 swap_interval ));*/
++   GET_FUNCTION(grRenderBuffer, "grRenderBuffer", ( GrBuffer_t buffer ));
++   GET_FUNCTION(grErrorSetCallback, "grErrorSetCallback", ( GrErrorCallbackFnc_t fnc ));
++   GET_FUNCTION(grFinish, "grFinish", (void));
++   GET_FUNCTION(grFlush, "grFlush", (void));
++   GET_FUNCTION(grSstWinOpen, "grSstWinOpen", (FxU32 hWnd,
++                               GrScreenResolution_t screen_resolution,
++                               GrScreenRefresh_t    refresh_rate,
++                               GrColorFormat_t      color_format,
++                               GrOriginLocation_t   origin_location,
++                               int                  nColBuffers,
++                               int                  nAuxBuffers));
++   GET_FUNCTION(grSstWinClose, "grSstWinClose", ( GrContext_t context ));
+ #if 0
+    /* Not in V3 lib, and not used anyway. */
+-   GET_FUNCTION(grSetNumPendingBuffers, "grSetNumPendingBuffers");
++   GET_FUNCTION(grSetNumPendingBuffers, "grSetNumPendingBuffers", (FxI32 NumPendingBuffers));
+ #endif
+-   GET_FUNCTION(grSelectContext, "grSelectContext");
+-   GET_FUNCTION(grSstOrigin, "grSstOrigin");
+-   GET_FUNCTION(grSstSelect, "grSstSelect");
+-   GET_FUNCTION(grAlphaBlendFunction, "grAlphaBlendFunction");
+-   GET_FUNCTION(grAlphaCombine, "grAlphaCombine");
+-   GET_FUNCTION(grAlphaControlsITRGBLighting, "grAlphaControlsITRGBLighting");
+-   GET_FUNCTION(grAlphaTestFunction, "grAlphaTestFunction");
+-   GET_FUNCTION(grAlphaTestReferenceValue, "grAlphaTestReferenceValue");
+-   GET_FUNCTION(grChromakeyMode, "grChromakeyMode");
+-   GET_FUNCTION(grChromakeyValue, "grChromakeyValue");
+-   GET_FUNCTION(grClipWindow, "grClipWindow");
+-   GET_FUNCTION(grColorCombine, "grColorCombine");
+-   GET_FUNCTION(grColorMask, "grColorMask");
+-   GET_FUNCTION(grCullMode, "grCullMode");
+-   GET_FUNCTION(grConstantColorValue, "grConstantColorValue");
+-   GET_FUNCTION(grDepthBiasLevel, "grDepthBiasLevel");
+-   GET_FUNCTION(grDepthBufferFunction, "grDepthBufferFunction");
+-   GET_FUNCTION(grDepthBufferMode, "grDepthBufferMode");
+-   GET_FUNCTION(grDepthMask, "grDepthMask");
+-   GET_FUNCTION(grDisableAllEffects, "grDisableAllEffects");
+-   GET_FUNCTION(grDitherMode, "grDitherMode");
+-   GET_FUNCTION(grFogColorValue, "grFogColorValue");
+-   GET_FUNCTION(grFogMode, "grFogMode");
+-   GET_FUNCTION(grFogTable, "grFogTable");
+-   GET_FUNCTION(grLoadGammaTable, "grLoadGammaTable");
+-   GET_FUNCTION(grSplash, "grSplash");
+-   GET_FUNCTION(grGet, "grGet");
+-   GET_FUNCTION(grGetString, "grGetString");
+-   GET_FUNCTION(grQueryResolutions, "grQueryResolutions");
+-   GET_FUNCTION(grReset, "grReset");
+-   GET_FUNCTION(grGetProcAddress, "grGetProcAddress");
+-   GET_FUNCTION(grEnable, "grEnable");
+-   GET_FUNCTION(grDisable, "grDisable");
+-   GET_FUNCTION(grCoordinateSpace, "grCoordinateSpace");
+-   GET_FUNCTION(grDepthRange, "grDepthRange");
++   GET_FUNCTION(grSelectContext, "grSelectContext", ( GrContext_t context ));
++   GET_FUNCTION(grSstOrigin, "grSstOrigin", (GrOriginLocation_t  origin));
++   GET_FUNCTION(grSstSelect, "grSstSelect", ( int which_sst ));
++   GET_FUNCTION(grAlphaBlendFunction, "grAlphaBlendFunction",
++                                (GrAlphaBlendFnc_t rgb_sf,
++                                GrAlphaBlendFnc_t rgb_df,
++                                GrAlphaBlendFnc_t alpha_sf,
++                                GrAlphaBlendFnc_t alpha_df));
++   GET_FUNCTION(grAlphaCombine, "grAlphaCombine",
++                          (GrCombineFunction_t function,
++                          GrCombineFactor_t factor,
++                          GrCombineLocal_t local, GrCombineOther_t other,
++                          FxBool invert));
++   GET_FUNCTION(grAlphaControlsITRGBLighting, "grAlphaControlsITRGBLighting",
++                          ( FxBool enable ));
++   GET_FUNCTION(grAlphaTestFunction, "grAlphaTestFunction", ( GrCmpFnc_t function ));
++   GET_FUNCTION(grAlphaTestReferenceValue, "grAlphaTestReferenceValue",
++                          ( GrAlpha_t value ));
++   GET_FUNCTION(grChromakeyMode, "grChromakeyMode", ( GrChromakeyMode_t mode ));
++   GET_FUNCTION(grChromakeyValue, "grChromakeyValue", ( GrColor_t value ));
++   GET_FUNCTION(grClipWindow, "grClipWindow", ( FxU32 minx, FxU32 miny, FxU32 maxx, FxU32 maxy ));
++   GET_FUNCTION(grColorCombine, "grColorCombine",
++                           ( GrCombineFunction_t function,
++                           GrCombineFactor_t factor,
++                           GrCombineLocal_t local,
++                           GrCombineOther_t other,
++                           FxBool invert ));
++   GET_FUNCTION(grColorMask, "grColorMask", ( FxBool rgb, FxBool a ));
++   GET_FUNCTION(grCullMode, "grCullMode", ( GrCullMode_t mode ));
++   GET_FUNCTION(grConstantColorValue, "grConstantColorValue", ( GrColor_t value ));
++   GET_FUNCTION(grDepthBiasLevel, "grDepthBiasLevel", ( FxI32 level ));
++   GET_FUNCTION(grDepthBufferFunction, "grDepthBufferFunction", ( GrCmpFnc_t function ));
++   GET_FUNCTION(grDepthBufferMode, "grDepthBufferMode", ( GrDepthBufferMode_t mode ));
++   GET_FUNCTION(grDepthMask, "grDepthMask", ( FxBool mask ));
++   GET_FUNCTION(grDisableAllEffects, "grDisableAllEffects", ( void ));
++   GET_FUNCTION(grDitherMode, "grDitherMode", ( GrDitherMode_t mode ));
++   GET_FUNCTION(grFogColorValue, "grFogColorValue", ( GrColor_t fogcolor ));
++   GET_FUNCTION(grFogMode, "grFogMode", ( GrFogMode_t mode ));
++   GET_FUNCTION(grFogTable, "grFogTable", ( const GrFog_t ft[] ));
++   GET_FUNCTION(grLoadGammaTable, "grLoadGammaTable", ( FxU32 nentries, FxU32 *red, FxU32 *green, FxU32 *blue));
++   GET_FUNCTION(grSplash, "grSplash", (float x, float y, float width, float height, FxU32 frame));
++   GET_FUNCTION(grGet, "grGet", ( FxU32 pname, FxU32 plength, FxI32 *params ));
++   GET_FUNCTION(grGetString, "grGetString", ( FxU32 pname ));
++   GET_FUNCTION(grQueryResolutions, "grQueryResolutions",
++                                ( const GrResolution *resTemplate,
++                                GrResolution *output ));
++   GET_FUNCTION(grReset, "grReset", ( FxU32 what ));
++   GET_FUNCTION(grGetProcAddress, "grGetProcAddress", ( char *procName ));
++   GET_FUNCTION(grEnable, "grEnable", ( GrEnableMode_t mode ));
++   GET_FUNCTION(grDisable, "grDisable", ( GrEnableMode_t mode ));
++   GET_FUNCTION(grCoordinateSpace, "grCoordinateSpace", ( GrCoordinateSpaceMode_t mode ));
++   GET_FUNCTION(grDepthRange, "grDepthRange", ( FxFloat n, FxFloat f ));
+ #if defined(__linux__) || defined(__FreeBSD__) 
+-   GET_FUNCTION(grStippleMode, "grStippleMode");
+-   GET_FUNCTION(grStipplePattern, "grStipplePattern");
++   GET_FUNCTION(grStippleMode, "grStippleMode", ( GrStippleMode_t mode ));
++   GET_FUNCTION(grStipplePattern, "grStipplePattern", ( GrStipplePattern_t mode ));
+ #endif /* __linux__ || __FreeBSD__ */
+-   GET_FUNCTION(grViewport, "grViewport");
+-   GET_FUNCTION(grTexCalcMemRequired, "grTexCalcMemRequired");
+-   GET_FUNCTION(grTexTextureMemRequired, "grTexTextureMemRequired");
+-   GET_FUNCTION(grTexMinAddress, "grTexMinAddress");
+-   GET_FUNCTION(grTexMaxAddress, "grTexMaxAddress");
+-   GET_FUNCTION(grTexNCCTable, "grTexNCCTable");
+-   GET_FUNCTION(grTexSource, "grTexSource");
+-   GET_FUNCTION(grTexClampMode, "grTexClampMode");
+-   GET_FUNCTION(grTexCombine, "grTexCombine");
+-   GET_FUNCTION(grTexDetailControl, "grTexDetailControl");
+-   GET_FUNCTION(grTexFilterMode, "grTexFilterMode");
+-   GET_FUNCTION(grTexLodBiasValue, "grTexLodBiasValue");
+-   GET_FUNCTION(grTexDownloadMipMap, "grTexDownloadMipMap");
+-   GET_FUNCTION(grTexDownloadMipMapLevel, "grTexDownloadMipMapLevel");
+-   GET_FUNCTION(grTexDownloadMipMapLevelPartial, "grTexDownloadMipMapLevelPartial");
+-   GET_FUNCTION(grTexDownloadTable, "grTexDownloadTable");
+-   GET_FUNCTION(grTexDownloadTablePartial, "grTexDownloadTablePartial");
+-   GET_FUNCTION(grTexMipMapMode, "grTexMipMapMode");
+-   GET_FUNCTION(grTexMultibase, "grTexMultibase");
+-   GET_FUNCTION(grTexMultibaseAddress, "grTexMultibaseAddress");
+-   GET_FUNCTION(grLfbLock, "grLfbLock");
+-   GET_FUNCTION(grLfbUnlock, "grLfbUnlock");
+-   GET_FUNCTION(grLfbConstantAlpha, "grLfbConstantAlpha");
+-   GET_FUNCTION(grLfbConstantDepth, "grLfbConstantDepth");
+-   GET_FUNCTION(grLfbWriteColorSwizzle, "grLfbWriteColorSwizzle");
+-   GET_FUNCTION(grLfbWriteColorFormat, "grLfbWriteColorFormat");
+-   GET_FUNCTION(grLfbWriteRegion, "grLfbWriteRegion");
+-   GET_FUNCTION(grLfbReadRegion, "grLfbReadRegion");
+-   GET_FUNCTION(grGlideInit, "grGlideInit");
+-   GET_FUNCTION(grGlideShutdown, "grGlideShutdown");
+-   GET_FUNCTION(grGlideGetState, "grGlideGetState");
+-   GET_FUNCTION(grGlideSetState, "grGlideSetState");
+-   GET_FUNCTION(grGlideGetVertexLayout, "grGlideGetVertexLayout");
+-   GET_FUNCTION(grGlideSetVertexLayout, "grGlideSetVertexLayout");
++   GET_FUNCTION(grViewport, "grViewport", ( FxI32 x, FxI32 y, FxI32 width, FxI32 height ));
++   GET_FUNCTION(grTexCalcMemRequired, "grTexCalcMemRequired",
++                                (GrLOD_t lodmin, GrLOD_t lodmax,
++                                GrAspectRatio_t aspect, GrTextureFormat_t fmt));
++   GET_FUNCTION(grTexTextureMemRequired, "grTexTextureMemRequired",
++                                ( FxU32 evenOdd, GrTexInfo *info ));
++   GET_FUNCTION(grTexMinAddress, "grTexMinAddress", ( GrChipID_t tmu ));
++   GET_FUNCTION(grTexMaxAddress, "grTexMaxAddress", ( GrChipID_t tmu ));
++   GET_FUNCTION(grTexNCCTable, "grTexNCCTable", ( GrNCCTable_t table ));
++   GET_FUNCTION(grTexSource, "grTexSource",
++                        ( GrChipID_t tmu, FxU32 startAddress,
++                        FxU32 evenOdd, GrTexInfo *info ));
++   GET_FUNCTION(grTexClampMode, "grTexClampMode", ( GrChipID_t tmu,
++                           GrTextureClampMode_t s_clampmode,
++                           GrTextureClampMode_t t_clampmode ));
++   GET_FUNCTION(grTexCombine, "grTexCombine", ( GrChipID_t tmu,
++                         GrCombineFunction_t rgb_function,
++                         GrCombineFactor_t rgb_factor,
++                         GrCombineFunction_t alpha_function,
++                         GrCombineFactor_t alpha_factor,
++                         FxBool rgb_invert,
++                         FxBool alpha_invert));
++   GET_FUNCTION(grTexDetailControl, "grTexDetailControl",
++                               ( GrChipID_t tmu, int lod_bias,
++                               FxU8 detail_scale, float detail_max ));
++   GET_FUNCTION(grTexFilterMode, "grTexFilterMode", ( GrChipID_t tmu,
++                            GrTextureFilterMode_t minfilter_mode,
++                            GrTextureFilterMode_t magfilter_mode ));
++   GET_FUNCTION(grTexLodBiasValue, "grTexLodBiasValue", (GrChipID_t tmu, float bias ));
++   GET_FUNCTION(grTexDownloadMipMap, "grTexDownloadMipMap",
++                                ( GrChipID_t tmu, FxU32 startAddress,
++                                FxU32 evenOdd, GrTexInfo *info ));
++   GET_FUNCTION(grTexDownloadMipMapLevel, "grTexDownloadMipMapLevel",
++                                     ( GrChipID_t        tmu, 
++                                     FxU32             startAddress,
++                                     GrLOD_t           thisLod,
++                                     GrLOD_t           largeLod,
++                                     GrAspectRatio_t   aspectRatio,
++                                     GrTextureFormat_t format,
++                                     FxU32             evenOdd,
++                                     void              *data ));
++   GET_FUNCTION(grTexDownloadMipMapLevelPartial, "grTexDownloadMipMapLevelPartial",
++                                              ( GrChipID_t        tmu,
++                                              FxU32             startAddress,
++                                              GrLOD_t           thisLod,
++                                              GrLOD_t           largeLod,
++                                              GrAspectRatio_t   aspectRatio,
++                                              GrTextureFormat_t format,
++                                              FxU32             evenOdd,
++                                              void              *data,
++                                              int               start,
++                                              int               end ));
++   GET_FUNCTION(grTexDownloadTable, "grTexDownloadTable", ( GrTexTable_t type, void *data ));
++   GET_FUNCTION(grTexDownloadTablePartial, "grTexDownloadTablePartial", 
++                ( GrTexTable_t type, void *data, int start, int end ));
++   GET_FUNCTION(grTexMipMapMode, "grTexMipMapMode", ( GrChipID_t tmu,
++                GrMipMapMode_t mode, FxBool lodBlend ));
++   GET_FUNCTION(grTexMultibase, "grTexMultibase", ( GrChipID_t tmu, FxBool enable ));
++   GET_FUNCTION(grTexMultibaseAddress, "grTexMultibaseAddress",
++                                       ( GrChipID_t tmu, FxBool enable ));
++   GET_FUNCTION(grLfbLock, "grLfbLock", ( GrLock_t type, GrBuffer_t buffer,
++                        GrLfbWriteMode_t writeMode,
++                        GrOriginLocation_t origin, FxBool pixelPipeline,
++                        GrLfbInfo_t *info ));
++   GET_FUNCTION(grLfbUnlock, "grLfbUnlock", ( GrLock_t type, GrBuffer_t buffer ));
++   GET_FUNCTION(grLfbConstantAlpha, "grLfbConstantAlpha", ( GrAlpha_t alpha ));
++   GET_FUNCTION(grLfbConstantDepth, "grLfbConstantDepth", ( FxU32 depth ));
++   GET_FUNCTION(grLfbWriteColorSwizzle, "grLfbWriteColorSwizzle", (FxBool swizzleBytes, FxBool swapWords));
++   GET_FUNCTION(grLfbWriteColorFormat, "grLfbWriteColorFormat", (GrColorFormat_t colorFormat));
++   GET_FUNCTION(grLfbWriteRegion, "grLfbWriteRegion",
++                               ( GrBuffer_t dst_buffer,
++                               FxU32 dst_x, FxU32 dst_y,
++                               GrLfbSrcFmt_t src_format,
++                               FxU32 src_width, FxU32 src_height,
++                               FxBool pixelPipeline,
++                               FxI32 src_stride, void *src_data ));
++   GET_FUNCTION(grLfbReadRegion, "grLfbReadRegion",
++                              ( GrBuffer_t src_buffer,
++                              FxU32 src_x, FxU32 src_y,
++                              FxU32 src_width, FxU32 src_height,
++                              FxU32 dst_stride, void *dst_data ));
++   GET_FUNCTION(grGlideInit, "grGlideInit", ( void ));
++   GET_FUNCTION(grGlideShutdown, "grGlideShutdown", ( void ));
++   GET_FUNCTION(grGlideGetState, "grGlideGetState", ( void *state ));
++   GET_FUNCTION(grGlideSetState, "grGlideSetState", ( const void *state ));
++   GET_FUNCTION(grGlideGetVertexLayout, "grGlideGetVertexLayout", ( void *layout ));
++   GET_FUNCTION(grGlideSetVertexLayout, "grGlideSetVertexLayout", ( const void *layout ));
+ 
+    /* Glide utility functions */
+-   GET_FUNCTION(guFogGenerateExp, "guFogGenerateExp");
+-   GET_FUNCTION(guFogGenerateExp2, "guFogGenerateExp2");
+-   GET_FUNCTION(guFogGenerateLinear, "guFogGenerateLinear");
++   GET_FUNCTION(guFogGenerateExp, "guFogGenerateExp", ( GrFog_t *fogtable, float density ));
++   GET_FUNCTION(guFogGenerateExp2, "guFogGenerateExp2", ( GrFog_t *fogtable, float density ));
++   GET_FUNCTION(guFogGenerateLinear, "guFogGenerateLinear", (GrFog_t *fogtable, float nearZ, float farZ ));
+ 
+    /* DRI functions */
+-   GET_FUNCTION(grDRIOpen, "grDRIOpen");
+-   GET_FUNCTION(grDRIPosition, "grDRIPosition");
+-   /*GET_FUNCTION(grDRILostContext, "grDRILostContext");*/
+-   GET_FUNCTION(grDRIImportFifo, "grDRIImportFifo");
+-   GET_FUNCTION(grDRIInvalidateAll, "grDRIInvalidateAll");
+-   GET_FUNCTION(grDRIResetSAREA, "grDRIResetSAREA");
+-   GET_FUNCTION(grDRIBufferSwap, "grDRIBufferSwap");
++   GET_FUNCTION(grDRIOpen, "grDRIOpen", ( char *pFB, char *pRegs, int deviceID,
++                      int width, int height,
++                      int mem, int cpp, int stride,
++                      int fifoOffset, int fifoSize,
++                      int fbOffset, int backOffset, int depthOffset,
++                      int textureOffset, int textureSize,
++                      volatile int *fifoPtr, volatile int *fifoRead ));
++   GET_FUNCTION(grDRIPosition, "grDRIPosition", ( int x, int y, int w, int h,
++                          int numClip, XF86DRIClipRectPtr pClip ));
++   /*GET_FUNCTION(grDRILostContext, "grDRILostContext", ( void ));*/
++   GET_FUNCTION(grDRIImportFifo, "grDRIImportFifo", ( int fifoPtr, int fifoRead ));
++   GET_FUNCTION(grDRIInvalidateAll, "grDRIInvalidateAll", ( void ));
++   GET_FUNCTION(grDRIResetSAREA, "grDRIResetSAREA", ( void ));
++   GET_FUNCTION(grDRIBufferSwap, "grDRIBufferSwap", ( FxU32 swapInterval ));
+ 
+    /*
+     * Extension functions:
+@@ -668,22 +752,24 @@
+     * not found.
+     */
+    /* PIXEXT extension */
+-   tmesa->Glide.grStencilFunc = dlsym(libHandle, "grStencilFunc");
+-   tmesa->Glide.grStencilMask = dlsym(libHandle, "grStencilMask");
+-   tmesa->Glide.grStencilOp = dlsym(libHandle, "grStencilOp");
+-   tmesa->Glide.grBufferClearExt = dlsym(libHandle, "grBufferClearExt");
+-   tmesa->Glide.grColorMaskExt = dlsym(libHandle, "grColorMaskExt");
++   tmesa->Glide.grStencilFunc = (void (*)( GrCmpFnc_t func, GrStencil_t ref, GrStencil_t mask )) dlsym(libHandle, "grStencilFunc");
++   tmesa->Glide.grStencilMask = (void (*)( GrStencil_t mask )) dlsym(libHandle, "grStencilMask");
++   tmesa->Glide.grStencilOp = (void (*)( GrStencilOp_t fail, GrStencilOp_t zfail,
++                           GrStencilOp_t zpass )) dlsym(libHandle, "grStencilOp");
++   tmesa->Glide.grBufferClearExt = (void (*)( GrColor_t color, GrAlpha_t alpha,
++                                FxU32 depth, GrStencil_t stencil )) dlsym(libHandle, "grBufferClearExt");
++   tmesa->Glide.grColorMaskExt = (void (*)( FxBool, FxBool, FxBool, FxBool )) dlsym(libHandle, "grColorMaskExt");
+    /* COMBINE extension */
+-   tmesa->Glide.grColorCombineExt = dlsym(libHandle, "grColorCombineExt");
+-   tmesa->Glide.grTexColorCombineExt = dlsym(libHandle, "grTexColorCombineExt");
+-   tmesa->Glide.grAlphaCombineExt = dlsym(libHandle, "grAlphaCombineExt");
+-   tmesa->Glide.grTexAlphaCombineExt = dlsym(libHandle, "grTexAlphaCombineExt");
+-   tmesa->Glide.grAlphaBlendFunctionExt = dlsym(libHandle, "grAlphaBlendFunctionExt");
+-   tmesa->Glide.grConstantColorValueExt = dlsym(libHandle, "grConstantColorValueExt");
++   tmesa->Glide.grColorCombineExt = (void (*)) dlsym(libHandle, "grColorCombineExt");
++   tmesa->Glide.grTexColorCombineExt = (void (*)) dlsym(libHandle, "grTexColorCombineExt");
++   tmesa->Glide.grAlphaCombineExt = (void (*)) dlsym(libHandle, "grAlphaCombineExt");
++   tmesa->Glide.grTexAlphaCombineExt = (void (*)) dlsym(libHandle, "grTexAlphaCombineExt");
++   tmesa->Glide.grAlphaBlendFunctionExt = (void (*)) dlsym(libHandle, "grAlphaBlendFunctionExt");
++   tmesa->Glide.grConstantColorValueExt = (void (*)) dlsym(libHandle, "grConstantColorValueExt");
+    /* Texus 2 */
+-   tmesa->Glide.txImgQuantize = dlsym(libHandle, "txImgQuantize");
+-   tmesa->Glide.txImgDequantizeFXT1 = dlsym(libHandle, "_txImgDequantizeFXT1");
+-   tmesa->Glide.txErrorSetCallback = dlsym(libHandle, "txErrorSetCallback");
++   tmesa->Glide.txImgQuantize = (void (*)) dlsym(libHandle, "txImgQuantize");
++   tmesa->Glide.txImgDequantizeFXT1 = (void (*)) dlsym(libHandle, "_txImgDequantizeFXT1");
++   tmesa->Glide.txErrorSetCallback = (void (*)) dlsym(libHandle, "txErrorSetCallback");
+    
+    return GL_TRUE;
+ }
