@@ -20,14 +20,3 @@
  
  clean::
  	RemoveFile(xft.pc)
---- xc/lib/fontconfig/Imakefile~	Fri Jan  3 19:54:11 2003
-+++ xc/lib/fontconfig/Imakefile	Tue Jan 14 03:12:17 2003
-@@ -83,7 +83,7 @@
- 	RemoveFile($@)
- 	sh config/config-subst $(SUBSTVARS) < fontconfig.pc.in > $@
- 
--InstallNonExecFile(fontconfig.pc,$(USRLIBDIR)/pkgconfig)
-+InstallNonExecFile(fontconfig.pc,/usr/lib/pkgconfig)
- 
- clean::
- 	RemoveFile(fontconfig.pc)

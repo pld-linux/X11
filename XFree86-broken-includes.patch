@@ -1,11 +1,11 @@
---- XFree86-4.0/xc/include/Xarch.h.broken	Fri May  5 17:24:13 2000
-+++ XFree86-4.0/xc/include/Xarch.h	Fri May  5 17:24:43 2000
+--- xc/include/Xarch.h.orig	Tue Jun 10 13:03:11 2003
++++ xc/include/Xarch.h	Thu Jun 12 20:20:05 2003
 @@ -40,7 +40,7 @@
  
  #else
  
 -#ifdef SVR4
 +#if defined(SVR4) && !defined(linux)
- #if defined(NCR) || defined(Mips)
+ #if defined(NCR) || defined(Mips) || defined(__sgi)
  #include <sys/endian.h>
  #else
