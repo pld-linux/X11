@@ -1,5 +1,14 @@
 --- XFree86-4.0/xc/config/cf/X11.tmpl	Wed Jun  7 07:29:47 2000
 +++ XFree86-4.0/xc/config/cf/X11.tmpl	Wed Jun  7 07:35:17 2000
+@@ -1016,7 +1016,7 @@
+ #endif
+ #ifndef XFileSearchPathBase
+ /* avoid SCCS keyword */
+-#define XFileSearchPathBase Concat4($(LIBDIR)/%L/%T/%N%C,%S:$(LIBDIR)/%l/%T/%N%C,%S:$(LIBDIR)/%T/%N%C,%S:$(LIBDIR)/%L/%T/%N%S:$(LIBDIR)/%l/%T/%N%S:$(LIBDIR)/%T/%N%S)
++#define XFileSearchPathBase Concat4($(LIBDIR)/%T/%L/%N%C,%S:$(LIBDIR)/%T/%l/%N%C,%S:$(LIBDIR)/%T/%N%C,%S:$(LIBDIR)/%T/%L/%N%S:$(LIBDIR)/%T/%l/%N%S:$(LIBDIR)/%T/%N%S:$(LIBDIR)/%L/%T/%N%C,%S:$(LIBDIR)/%l/%T/%N%C,%S:$(LIBDIR)/%L/%T/%N%S:$(LIBDIR)/%l/%T/%N%S)
+ #endif
+ #ifndef XFileSearchPathDefault
+ #ifdef XAppLoadDir
 @@ -2199,11 +2199,9 @@
  #ifndef InstallAppDefaultsLong
  #if InstallAppDefFiles
