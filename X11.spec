@@ -672,24 +672,23 @@ Provides:	xcursor-devel = 1.1.2
 Provides:	xft-devel = 2.1.6
 Provides:	xpm-devel
 Provides:	xrender-devel = 0.8.4
-Provides:	libXrender-devel = 0.8.4
-Provides:	libXft-devel = 2.1.6
-Provides:	libXcursor-devel = 1.1.2
-Provides:	libICE-devel
-Provides:	libSM-devel
-Provides:	libX11-devel
-Provides:	libXau-devel
-Provides:	libXaw-devel
-Provides:	libXdmcp-devel
-Provides:	libXext-devel
-Provides:	libXfixes-devel
-Provides:	libXfont-devel
-Provides:	libXi-devel
-Provides:	libXmu-devel
-Provides:	libXpm-devel
-Provides:	libXrandr-devel
-Provides:	libXt-devel
-Provides:	libXv-devel
+#Provides:	libXrender-devel = 0.8.4
+#Provides:	libXft-devel = 2.1.6
+#Provides:	libXcursor-devel = 1.1.2
+#Provides:	libICE-devel
+#Provides:	libSM-devel
+#Provides:	libX11-devel
+#Provides:	libXau-devel
+#Provides:	libXaw-devel
+#Provides:	libXdmcp-devel
+#Provides:	libXext-devel
+#Provides:	libXfont-devel
+#Provides:	libXi-devel
+#Provides:	libXmu-devel
+#Provides:	libXpm-devel
+#Provides:	libXrandr-devel
+#Provides:	libXt-devel
+#Provides:	libXv-devel
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1-devel
 %endif
@@ -1372,25 +1371,24 @@ Provides:	xcursor = 1.1.2
 Provides:	xft = 2.1.6
 Provides:	xpm
 Provides:	xrender = 0.8.4
-Provides:	libXrender = 0.8.4
-Provides:	libXft = 2.1.6
-Provides:	libXcursor = 1.1.2
+#Provides:	libXrender = 0.8.4
+#Provides:	libXft = 2.1.6
+#Provides:	libXcursor = 1.1.2
 # Someone should add the versions here, maybe i'll do it later.
-Provides:	libICE
-Provides:	libSM
-Provides:	libX11
-Provides:	libXau
-Provides:	libXaw
-Provides:	libXdmcp
-Provides:	libXext
-Provides:	libXfixes
-Provides:	libXfont
-Provides:	libXi
-Provides:	libXmu
-Provides:	libXpm
-Provides:	libXrandr
-Provides:	libXt
-Provides:	libXv
+#Provides:	libICE
+#Provides:	libSM
+#Provides:	libX11
+#Provides:	libXau
+#Provides:	libXaw
+#Provides:	libXdmcp
+#Provides:	libXext
+#Provides:	libXfont
+#Provides:	libXi
+#Provides:	libXmu
+#Provides:	libXpm
+#Provides:	libXrandr
+#Provides:	libXt
+#Provides:	libXv
 Obsoletes:	XFree86-libs
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1-libs
