@@ -1,4 +1,4 @@
-# Customized setings for xfs
+# Customized settings for xfs
 
 # Specifies the TCP port number on which the server will listen for
 # connections. The default port number is 7100.
