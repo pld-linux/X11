@@ -68,7 +68,7 @@ Source41:	xconsole.png
 Source42:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/XFree86-non-english-Xman-pages.tar.bz2
 # Source42-md5:	a184106bb83cb27c6963944d9243ac3f
 Source44:	%{name}-Xserver-headers
-Source45:	XFree86-Xserver-headers-links
+Source45:	%{name}-Xserver-headers-links
 Source46:	twm-xsession.desktop
 Source47:	xcalc.desktop
 Source48:	xload.desktop
