@@ -15,7 +15,7 @@
 . /etc/rc.d/init.d/functions
 
 # Get service config
-if [ -f /etc/sysconfig/xfs ] ; then
+if [ -f /etc/sysconfig/xfs ]; then
 	. /etc/sysconfig/xfs
 fi
 

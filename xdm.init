@@ -16,7 +16,7 @@
 . /etc/rc.d/init.d/functions
 
 # Get service config
-if [ -f /etc/sysconfig/xdm ] ; then
+if [ -f /etc/sysconfig/xdm ]; then
 	. /etc/sysconfig/xdm
 fi
 
