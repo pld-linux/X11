@@ -46,11 +46,11 @@ diff -Nur xc/programs/xfs.org/os/utils.c xc/programs/xfs/os/utils.c
  static void
  usage(void)
  {
--    fprintf(stderr, "usage: %s [-config config_file] [-port tcp_port] [-droppriv] [-daemon] [-nodaemon] [-user user_name]\n",
-+    fprintf(stderr, "usage: %s [-config config_file] [-port tcp_port] [-droppriv] [-daemon] [-nodaemon] [-user user_name] [-d debug_level]\n",
+-    fprintf(stderr, "usage: %s [-config config_file] [-port tcp_port] [-droppriv] [-daemon] [-nodaemon] [-user user_name] [-ls listen_socket]\n",
++    fprintf(stderr, "usage: %s [-config config_file] [-port tcp_port] [-droppriv] [-daemon] [-nodaemon] [-user user_name] [-ls listen_socket] [-d debug_level]\n",
  	    progname);
      exit(1);
- 
+ }
 @@ -295,6 +296,8 @@
  		ProcessLSoption (argv[++i]);
  	    else
