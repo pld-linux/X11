@@ -666,7 +666,7 @@ Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	imake = %{epoch}:%{version}-%{release}
 Requires:	fontconfig-devel >= 1:2.2.0
 Provides:	XFree86-devel = %{epoch}:%{version}-%{release}
-Provides:	render
+Provides:	render = 0.8
 Provides:	xcursor-devel = 1.1.2
 Provides:	xft-devel = 2.1.6
 Provides:	xpm-devel
