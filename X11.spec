@@ -1987,8 +1987,8 @@ install -d $RPM_BUILD_ROOT/etc/{pam.d,rc.d/init.d,security/console.apps,sysconfi
 	LINUXDIR="/dev/null"
 
 # fix pkgconfig path
-if [ "%{_pkgconfigdir}" != "/usr/lib/pkgconfig" ] ; then
-	mv $RPM_BUILD_ROOT/usr/lib/pkgconfig/* $RPM_BUILD_ROOT%{_pkgconfigdir}
+if [ "%{_pkgconfigdir}" != "%{_libdir}/pkgconfig" ] ; then
+	mv $RPM_BUILD_ROOT%{_libdir}/pkgconfig/* $RPM_BUILD_ROOT%{_pkgconfigdir}
 fi
 
 # setting default X
