@@ -648,9 +648,9 @@ Requires:	imake = %{epoch}:%{version}-%{release}
 Provides:	XFree86-devel = %{epoch}:%{version}-%{release}
 Provides:	render
 Provides:	xcursor-devel
-Provides:	xft-devel
+Provides:	xft-devel >= 2.1.2
 Provides:	xpm-devel
-Provides:	xrender-devel
+Provides:	xrender-devel >= 0.8.3
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1-devel
 %endif
