@@ -120,6 +120,7 @@ Patch47:	XFree86-sparc-kbd.patch
 Patch50:	%{name}-xterm-256colors.patch
 Patch52:	XFree86-kernel_headers.patch
 Patch53:	XFree86-stdint.patch
+Patch54:	%{name}-setxkbmap.patch
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
 %ifarch %{ix86} alpha amd64
@@ -1787,6 +1788,7 @@ X11-libs.
 %patch50 -p0
 %patch52 -p1
 %patch53 -p0
+%patch54 -p1
 
 rm -f xc/config/cf/host.def
 
