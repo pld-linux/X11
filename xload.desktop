@@ -8,5 +8,5 @@ Exec=xload
 Icon=xload
 SwallowExec=xload -nolabel -fg green -bg Black -hl red -update 3 -geometry 25x25
 Type=Application
-Categories=Utility;X-X11;
+Categories=System;Monitor;
 # vi: encoding=utf-8
