@@ -270,7 +270,7 @@
 +! or wherever it will be loaded into xrm from.
 +! To know, why this works, see Xt documentation (appendix B).
 +! On some systems you may want to replace the a (alt) modifiers with
-+! m (meta) modifier in fron of some <Key> events.
++! m (meta) modifier in front of some <Key> events.
 +*vt100.translations: #override \
 +	Alt Ctrl<Btn4Down>: string(0x1b) string("OA")\n\
 +	Alt Ctrl<Btn5Down>: string(0x1b) string("OB")\n\
@@ -376,9 +376,9 @@
 +	Shift<Key>F9: string(0x1b) string("[33~")\n\
 +	Shift<Key>F10: string(0x1b) string("[34~")\n\
 +	Shift<Key>Home: scroll-back(100,page)\n\
-+	Shift<Key>End: scroll-forw(100,page)\n
++	Shift<Key>End: scroll-forw(100,page)\n\
 +	Shift<Key>KP_Home: scroll-back(100,page)\n\
-+	Shift<Key>KP_End: scroll-forw(100,page)\n
++	Shift<Key>KP_End: scroll-forw(100,page)\n\
 +	s<Key>F1: string(0x1b) string("[23~")\n\
 +	s<Key>F2: string(0x1b) string("[24~")\n\
 +	s<Key>F3: string(0x1b) string("[25~")\n\
