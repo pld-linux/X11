@@ -1,0 +1,11 @@
+--- XFree86-4.0.0/xc/programs/Xserver/hw/xfree86/drivers/v4l/v4l.c.cls	Fri Feb 25 21:38:49 2000
++++ XFree86-4.0.0/xc/programs/Xserver/hw/xfree86/drivers/v4l/v4l.c	Sun Mar 12 18:30:45 2000
+@@ -642,6 +642,8 @@
+     if (flags & PROBE_DETECT)
+ 	return FALSE;
+ 
++    drv->refCount++; /* we don't want X to unload us, we're special */
++
+     xf86XVRegisterGenericAdaptorDriver(V4LInit);
+     return TRUE;
+ }
