@@ -39,4 +39,5 @@ Exec=xeyes
 Icon=xeyes.png
 Terminal=0
 Type=Application
+Categories=Amusement;X-X11
 # vi: encoding=utf-8
