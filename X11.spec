@@ -2874,33 +2874,33 @@ fi
 #%%{_mandir}/man1/xtr*
 %{_mandir}/man1/xkbcomp.1*
 %{_mandir}/man4/aiptek.4*
-%{_mandir}/man4/citron*
+%{_mandir}/man4/citron.4*
 %{_mandir}/man4/dmc.4*
-%{_mandir}/man4/dynapro*
+%{_mandir}/man4/dynapro.4*
+%{_mandir}/man4/elographics.4*
 %{_mandir}/man4/fbdevhw.4*
 %{_mandir}/man4/fpit.4*
 %{_mandir}/man4/js_x.4*
 %{_mandir}/man4/kbd.4*
-%{_mandir}/man4/keyboard*
-%{_mandir}/man4/microtouch*
+%{_mandir}/man4/keyboard.4*
+%{_mandir}/man4/microtouch.4*
 %{_mandir}/man4/mouse-x.4*
+%{_mandir}/man4/mutouch.4*
 %{_mandir}/man4/palmax.4*
 %{_mandir}/man4/penmount.4*
 %{_mandir}/man4/tek4957.4*
 %{_mandir}/man4/ur98.4*
 %ifnarch amd64
-%{_mandir}/man4/v4l*
+%{_mandir}/man4/v4l.4*
 %endif
-%ifarch %{ix86} sparc sparc64 alpha ppc arm amd64
-%{_mandir}/man4/vga*
+%ifarch %{ix86} ia64 amd64 sparc sparc64 alpha ppc arm
+%{_mandir}/man4/vga.4*
 %endif
-%ifarch %{ix86} sparc sparc64 amd64
-%{_mandir}/man4/vesa*
+%ifarch %{ix86} ia64 amd64 sparc sparc64
+%{_mandir}/man4/vesa.4*
 %endif
-%{_mandir}/man4/void*
-%{_mandir}/man4/wacom*
-%{_mandir}/man4/elographics*
-%{_mandir}/man4/mutouch*
+%{_mandir}/man4/void.4*
+%{_mandir}/man4/wacom.4*
 
 %files setup
 %defattr(644,root,root,755)
