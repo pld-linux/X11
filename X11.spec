@@ -4,7 +4,9 @@
 # - Review Patch 46   
 # - missing dir in Xprint (which one?)
 #
-%bcond_without	glide	# disable glide :)
+# Conditional build:
+%bcond_without	glide	# don't build glide driver
+#
 Summary:	XOrg X11 Window System servers and basic programs
 Summary(de):	XOrg X11 Window-System-Server und grundlegende Programme
 Summary(es):	Programas básicos y servidores para el sistema de ventanas XOrg X11
@@ -1984,8 +1986,8 @@ install -d $RPM_BUILD_ROOT/etc/{pam.d,rc.d/init.d,security/console.apps,sysconfi
 	LINUXDIR="/dev/null"
 
 # fix pkgconfig path
-if [ "%{_pkgconfigdir}" != "%{_libdir}/pkgconfig" ] ; then
-	mv $RPM_BUILD_ROOT%{_libdir}/pkgconfig/* $RPM_BUILD_ROOT%{_pkgconfigdir}
+if [ "%{_pkgconfigdir}" != "/usr/lib/pkgconfig" ] ; then
+	mv $RPM_BUILD_ROOT/usr/lib/pkgconfig/* $RPM_BUILD_ROOT%{_pkgconfigdir}
 fi
 
 # setting default X
