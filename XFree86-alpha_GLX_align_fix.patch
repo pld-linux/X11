@@ -1,0 +1,16 @@
+This patch by Brian Paul.
+
+--- XFree86-4.1.0/xc/lib/GL/glx/Imakefile~	Wed Jun 20 16:32:13 2001
++++ XFree86-4.1.0/xc/lib/GL/glx/Imakefile	Wed Jun 20 16:33:55 2001
+@@ -87,7 +87,11 @@
+ 		vertarr.o \
+ 	        xfont.o
+ 
++#if defined(AlphaArchitecture)
++     GLX_DEFS = GlxDefines -D__GLX_ALIGN64
++#else
+      GLX_DEFS = GlxDefines
++#endif
+ 
+ #if BuildXF86DRI
+      DRI_INCS = -I$(GLXLIBSRC)/dri
