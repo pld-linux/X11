@@ -471,3 +471,15 @@
  RM = rm -f
  MV = mv
  WORLDOPTS =
+--- xc/config/cf/X11.tmpl.orig	2004-09-13 18:37:30.000000000 +0200
++++ xc/config/cf/X11.tmpl	2004-09-13 22:24:31.449334056 +0200
+@@ -2801,7 +2801,7 @@
+ #endif
+ 
+ #ifndef SharedLibXdmcp
+-#define SharedLibXdmcp		NO
++#define SharedLibXdmcp		YES
+ #endif
+ #ifndef NormalLibXdmcp
+ #define NormalLibXdmcp (!SharedLibXdmcp | ForceNormalLib)
+
