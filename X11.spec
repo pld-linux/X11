@@ -144,7 +144,7 @@ BuildRequires:	tcl-devel
 BuildRequires:	utempter-devel
 BuildRequires:	zlib-devel
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires:	xauth
+Requires:	%{name}-xauth = %{epoch}:%{version}-%{release}
 Requires:	pam >= 0.77.3
 Provides:	XFree86 = %{epoch}:%{version}-%{release}
 Obsoletes:	xpm-progs
@@ -664,7 +664,7 @@ Summary(tr):	X11R6 ile geliЧtirme iГin gerekli dosyalar
 Summary(uk):	Б╕бл╕отеки програм╕ста, хедери та документац╕я по програмуванню X11R6
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires:	imake = %{epoch}:%{version}-%{release}
+Requires:	%{name}-imake = %{epoch}:%{version}-%{release}
 Requires:	fontconfig-devel >= 1:2.2.0
 Provides:	XFree86-devel = %{epoch}:%{version}-%{release}
 Provides:	render = 0.8
@@ -1777,7 +1777,7 @@ Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	pam >= 0.71
-Requires:	sessreg = %{epoch}:%{version}-%{release}
+Requires:	%{name}-sessreg = %{epoch}:%{version}-%{release}
 Requires:	/usr/X11R6/bin/sessreg
 Provides:	XDM
 Provides:	xdm = %{epoch}:%{version}-%{release}
