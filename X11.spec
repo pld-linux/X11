@@ -352,25 +352,23 @@ X-Window Display PostScript static libraries.
 Statyczne biblioteki X-Window Display PostScript.
 
 %package OpenGL-core
-Summary:	OpenGL support for X11R6
-Summary(pl):	Wsparcie OpenGL dla systemu X11R6
-Group:		X11/Libraries
-Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires:	X11-OpenGL-libGL
+Summary:	OpenGL support extension modules for Xserver
+Summary(pl):	Modu³y rozszerzeñ X serwera obs³uguj±ce OpenGL
+Group:		X11/Xserver
+Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Provides:	XFree86-OpenGL-core = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-OpenGL-core
 
 %description OpenGL-core
-OpenGL support for X11R6 system.
+OpenGL support extension modules for Xserver.
 
 %description OpenGL-core -l pl
-Wsparcie OpenGL dla systemu X11R6.
+Modu³y rozszerzeñ X serwera obs³uguj±ce OpenGL.
 
 %package OpenGL-libGL
 Summary:	OpenGL support for X11R6 - GL library
 Summary(pl):	Wsparcie OpenGL dla systemu X11R6 - biblioteka GL
 Group:		X11/Libraries
-Requires:	X11-OpenGL-core = %{epoch}:%{version}-%{release}
 Provides:	XFree86-OpenGL-libGL = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-OpenGL-libGL
 Obsoletes:	X11-driver-firegl
@@ -422,7 +420,6 @@ Podstawowe pliki nag³ówkowe (tylko GL i GLX) OpenGL dla systemu X11R6.
 Summary:	OpenGL libraries for X11R6
 Summary(pl):	Biblioteki OpenGL dla systemu X11R6
 Group:		X11/Libraries
-Requires:	%{name}-OpenGL-core
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	OpenGL
 Provides:	XFree86-OpenGL-libs = %{epoch}:%{version}-%{release}
@@ -566,7 +563,7 @@ pour de nombreux autres circuits et cartes. Essayez ce serveur si vous
 avez des problèmes.
 
 %description Xserver -l pl
-Jest to podstawowy Xserwer wy¶wietlaj±cy obraz na karcie graficznej.
+Jest to podstawowy X serwer wy¶wietlaj±cy obraz na karcie graficznej.
 Do dzia³ania wymaga odpowiedniego sterownika - sam pakiet zawiera
 tylko odpowiedni dla kart VGA oraz SVGA zgodnych z VESA (bez
 akceleracji). Inne sterowniki mo¿na znale¼æ w pakietach X11-driver-*.
@@ -1761,7 +1758,7 @@ granting access to other users).
 
 %description xauth -l pl
 Program xauth s³u¿y do edycji i wy¶wietlania informacji
-autoryzacyjnych u¿ywanych przy ³±czeniu z Xserwerem. Ten program
+autoryzacyjnych u¿ywanych przy ³±czeniu z X serwerem. Ten program
 przewa¿nie jest u¿ywany do wyci±gania rekordów autoryzacji z jednej
 maszyny i do³±czania ich na innej (w celu umo¿liwienia zdalnego
 logowania lub udostêpnienia innym u¿ytkownikom).
