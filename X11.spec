@@ -18,17 +18,17 @@ Summary(ru):	Базовые шрифты, программы и документация для рабочей станции под X
 Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
-Version:	6.8.0
-Release:	0.1
+Version:	6.7.0
+Release:	9
 Epoch:		1
 License:	XFree86 1.0 (?)
 Group:		X11
 Source0:	http://freedesktop.org/~xorg/X11R%{version}/src/%{name}R%{version}-src1.tar.gz
-# Source0-md5:	c31a2e1c226e659c2ff29abfe55386e3
+# Source0-md5:	22465263bae7a2e9f5ad77e172cf1ab5
 Source1:	http://freedesktop.org/~xorg/X11R%{version}/src/%{name}R%{version}-src2.tar.gz
-# Source1-md5:	4089bb6efb6c5bc73fbcfc23fafcb0c8
+# Source1-md5:	6ef4e8f7647a28f080c10ea1bcf01f79
 Source2:	http://freedesktop.org/~xorg/X11R%{version}/src/%{name}R%{version}-src3.tar.gz
-# Source2-md5:	488a5ebbbdf48d974efbc3a0bde92bf4
+# Source2-md5:	4c7144786522bbce383b21ace72bf669
 Source7:	ftp://ftp.pld-linux.org/software/xinit/xdm-xinitrc-0.2.tar.bz2
 # Source7-md5:	0a15b1c374256b5cad7961807baa3896
 Source8:	xdm.pamd
