@@ -23,7 +23,7 @@ Summary(uk):	âÁÚÏ×¦ ÛÒÉÆÔÉ, ÐÒÏÇÒÁÍÉ ÔÁ ÄÏËÕÍÅÎÔÁÃ¦Ñ ÄÌÑ ÒÏÂÏÞÏ§ ÓÔÁÎÃ¦§ Ð¦Ä X
 Summary(zh_CN):	XOrg X11 ´°¿ÚÏµÍ³·þÎñÆ÷ºÍ»ù±¾³ÌÐò
 Name:		X11
 Version:	6.8.1
-Release:	1
+Release:	2
 Epoch:		1
 License:	XFree86 1.0 (?)
 Group:		X11
@@ -107,6 +107,7 @@ Patch54:	%{name}-setxkbmap.patch
 Patch55:	%{name}-makefile-fastbuild.patch
 Patch56:	%{name}-sparc-kbd.patch
 Patch57:	%{name}-glibc-charset.patch
+Patch58:	%{name}-radeon-entervt.patch
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
 # Required by xc/programs/Xserver/hw/xfree86/drivers/glide/glide_driver.c
@@ -1960,6 +1961,7 @@ cat xc/nls/locale.alias \
 	| uniq > tmp
 mv tmp xc/nls/locale.alias
 %endif
+%patch58 -p1
 
 %build
 PWD=`pwd`
