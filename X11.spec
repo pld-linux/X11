@@ -24,7 +24,6 @@ Epoch:		1
 License:	XFree86 1.0 (?)
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Source0:	http://freedesktop.org/~xorg/X11R%{version}/src/%{name}R%{version}-src1.tar.gz
 # Source0-md5:	22465263bae7a2e9f5ad77e172cf1ab5
 Source1:	http://freedesktop.org/~xorg/X11R%{version}/src/%{name}R%{version}-src2.tar.gz
@@ -296,7 +295,6 @@ Summary:	XOrg X11 files required both on server and client side
 Summary(pl):	Pliki XOrg X11 wymagane zarÛwno po stronie serwera jak i klienta
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Provides:	XFree86-common = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-common
 
@@ -310,7 +308,6 @@ Pliki XOrg X11 wymagane zarÛwno po stronie serwera jak i klienta.
 Summary:	Display PostScript
 Summary(pl):	Display PostScript
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	DPS
@@ -331,7 +328,6 @@ Summary:	Header files for Display PostScript
 Summary(pl):	Pliki nag≥Ûwkowe dla Display PostScript
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	%{name}-DPS = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Provides:	XFree86-DPS-devel = %{epoch}:%{version}-%{release}
@@ -349,7 +345,6 @@ Summary:	Display PostScript static libraries
 Summary(pl):	Biblioteki statyczne Display PostScript
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	%{name}-DPS-devel = %{epoch}:%{version}-%{release}
 Provides:	XFree86-DPS-static = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-DPS-static
@@ -364,13 +359,8 @@ Statyczne biblioteki X-Window Display PostScript.
 %package OpenGL-core
 Summary:	OpenGL support for X11R6
 Summary(pl):	Wsparcie OpenGL dla systemu X11R6
-<<<<<<< X11.spec
-Group:		XFree86/Libraries
-######		Unknown group!
-######		Unknown group!
-=======
 Group:		X11/Libraries
->>>>>>> 1.53
+######		Unknown group!
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	X11-OpenGL-libGL
 Provides:	XFree86-OpenGL-core = %{epoch}:%{version}-%{release}
@@ -385,13 +375,8 @@ Wsparcie OpenGL dla systemu X11R6.
 %package OpenGL-libGL
 Summary:	OpenGL support for X11R6 - GL library
 Summary(pl):	Wsparcie OpenGL dla systemu X11R6 - biblioteka GL
-<<<<<<< X11.spec
-Group:		XFree86/Libraries
-######		Unknown group!
-######		Unknown group!
-=======
 Group:		X11/Libraries
->>>>>>> 1.53
+######		Unknown group!
 Requires:	X11-OpenGL-core = %{epoch}:%{version}-%{release}
 Provides:	XFree86-OpenGL-libGL = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-OpenGL-libGL
@@ -443,13 +428,8 @@ Podstawowe pliki nag≥Ûwkowe (tylko GL i GLX) OpenGL dla systemu X11R6.
 %package OpenGL-libs
 Summary:	OpenGL libraries for X11R6
 Summary(pl):	Biblioteki OpenGL dla systemu X11R6
-<<<<<<< X11.spec
-Group:		XFree86/Libraries
-######		Unknown group!
-######		Unknown group!
-=======
 Group:		X11/Libraries
->>>>>>> 1.53
+######		Unknown group!
 Requires:	%{name}-OpenGL-core
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	OpenGL
@@ -485,7 +465,6 @@ Summary(pl):	Serwer XOrg X11 Xnest
 Summary(ru):	"˜Ãœ÷≈ŒŒŸ " ”≈“◊≈“ XOrg X11
 Summary(uk):	"˜ÀÃ¡ƒ≈Œ… " ”≈“◊≈“ XOrg X11
 Group:		X11/Xorg/Servers
-######		Unknown group!
 ######		Unknown group!
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	/usr/X11R6/lib/X11/rgb.txt
@@ -532,7 +511,7 @@ Summary:	X print server
 Summary(pl):	X serwer z rozszerzeniem Xprint
 Group:		X11/Xorg/Servers
 ######		Unknown group!
-######		Unknown group!
+
 PreReq:		xprint-initrc
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	/usr/X11R6/lib/X11/rgb.txt
@@ -555,7 +534,6 @@ Summary(fr):	Serveur XOrg X11
 Summary(pl):	Serwer XOrg X11
 Summary(tr):	XOrg X11 sunucusu
 Group:		X11/Xorg/Servers
-######		Unknown group!
 ######		Unknown group!
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	/usr/X11R6/lib/X11/rgb.txt
@@ -619,7 +597,6 @@ Summary(pl):	Serwer XOrg X11 Xvfb
 Summary(ru):	Û≈“◊≈“ XOrg X11 ƒÃ— ◊…“‘’¡ÃÿŒœ«œ ∆“≈ Õ¬’∆≈“¡
 Summary(uk):	Û≈“◊≈“ XOrg X11 ƒÃ— ◊¶“‘’¡ÃÿŒœ«œ ∆“≈ Õ¬’∆≈“¡
 Group:		X11/Xorg/Servers
-######		Unknown group!
 ######		Unknown group!
 Provides:	XFree86-Xvfb = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-Xvfb
@@ -806,7 +783,6 @@ Summary:	Alliance Promotion video driver
 Summary(pl):	Sterownik do kart Alliance Promotion
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-driver-apm
@@ -821,7 +797,6 @@ Sterownik do kart Alliance Promotion.
 Summary:	Ark Logic video driver
 Summary(pl):	Sterownik do kart Ark Logic
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -838,7 +813,6 @@ Summary:	ATI video driver
 Summary(pl):	Sterownik do kart ATI
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-driver-ati
@@ -853,7 +827,6 @@ Sterownik do kart ATI.
 Summary:	ATI Rage 128 video driver
 Summary(pl):	Sterownik do kart ATI Rage 128
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires:	OpenGL
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
@@ -871,7 +844,6 @@ Sterownik do kart ATI Rage 128.
 Summary:	ATI Radeon video driver
 Summary(pl):	Sterownik do kart ATI Radeon
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires:	OpenGL
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
@@ -891,7 +863,6 @@ Summary:	Chips and Technologies video driver
 Summary(pl):	Sterownik do kart na uk≥adach Chips and Technologies
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-driver-chips
@@ -906,7 +877,6 @@ Sterownik do kart na uk≥adach Chips and Technologies.
 Summary:	Cirrus Logic video driver
 Summary(pl):	Sterownik do kart Cirrus Logic
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -939,7 +909,6 @@ Summary:	Video driver for framebuffer device
 Summary(pl):	Sterownik korzystaj±cy z framebuffera
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-driver-fbdev
@@ -955,7 +924,6 @@ Summary:	Video driver for DRI sparc framebuffer device
 Summary(pl):	Sterownik do framebuffera DRI na sparc
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-driver-ffb
@@ -970,7 +938,6 @@ Sterownik do framebuffera DRI na sparc.
 Summary:	3Dfx Voodoo1 and Voodoo2 video driver
 Summary(pl):	Sterownik do kart 3Dfx Voodoo1 i Voodoo2
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -989,7 +956,6 @@ Summary:	GLINT/Permedia video driver
 Summary(pl):	Sterownik do kart GLINT i Permedia
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	OpenGL
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1007,7 +973,6 @@ Summary:	Number 9 I128 video driver
 Summary(pl):	Sterownik do kart Number 9 I128
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-driver-i128
@@ -1023,7 +988,6 @@ Summary:	Intel i740 video driver
 Summary(pl):	Sterownik do kart na uk≥adzie Intel i740
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-driver-i740
@@ -1038,7 +1002,6 @@ Sterownik do kart na uk≥adzie Intel i740.
 Summary:	Intel i810/i815/i830 video driver
 Summary(pl):	Sterownik do grafiki na uk≥adach Intel i810/i815/i830
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires:	OpenGL
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
@@ -1057,7 +1020,6 @@ Summary:	Integrated Micro Solutions Twin Turbo 128 driver
 Summary(pl):	Sterownik do kart Integrated Micro Solutions Twin Turbo 128
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-driver-imstt
@@ -1072,7 +1034,6 @@ Sterownik do kart Integrated Micro Solutions Twin Turbo 128.
 Summary:	Matrox video driver
 Summary(pl):	Sterownik do kart Matrox
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires:	OpenGL
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
@@ -1091,7 +1052,6 @@ Summary:	NeoMagic video driver
 Summary(pl):	Sterownik do kart NeoMagic
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-driver-neomagic
@@ -1106,7 +1066,6 @@ Sterownik do kart NeoMagic.
 Summary:	Newport (XL) adapters video driver
 Summary(pl):	Sterownik do kart Newport (XL)
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1124,7 +1083,6 @@ SGI Indy i Indigo).
 Summary:	National Semiconductors GEODE family video driver
 Summary(pl):	Sterownik dla kart na uk≥adach z rodziny GEODE firmy National Semiconductors
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1144,7 +1102,6 @@ Summary:	nVidia video driver
 Summary(pl):	Sterownik do kart na uk≥adach firmy nVidia
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-driver-nv
@@ -1159,7 +1116,6 @@ Sterownik do kart na uk≥adach firmy nVidia: Riva128, RivaTNT, GeForce.
 Summary:	Rendition video driver
 Summary(pl):	Sterownik do kart Rendition
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1176,7 +1132,6 @@ Summary:	S3 ViRGE/Trio3D video driver
 Summary(pl):	Sterownik do kart na uk≥adach S3 ViRGE i Trio3D
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-driver-s3virge
@@ -1191,7 +1146,6 @@ Sterownik do kart na uk≥adach S3 ViRGE i Trio3D.
 Summary:	S3 Trio video driver
 Summary(pl):	Sterownik do kart na uk≥adach S3 Trio
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1208,7 +1162,7 @@ Summary:	S3 Savage video driver
 Summary(pl):	Sterownik do kart na uk≥adach S3 Savage
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
+
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-driver-savage
@@ -1224,7 +1178,7 @@ Summary:	Silicon Motion video driver
 Summary(pl):	Sterownik do kart na uk≥adach Silicon Motion
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
+
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-driver-siliconmotion
@@ -1239,7 +1193,6 @@ Sterownik do kart na uk≥adach Lynx firmy Silicon Motion.
 Summary:	SiS video driver
 Summary(pl):	Sterownik do kart na uk≥adach SiS
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1256,7 +1209,6 @@ Summary:	sunbw2 - Sun BW2 video driver
 Summary(pl):	Sterownik do monochromatycznego framebuffera BW2 na Sunie
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-driver-sunbw2
@@ -1271,7 +1223,6 @@ Sterownik do monochromatycznego framebuffera BW2 na Sunie.
 Summary:	suncg14 - Sun CG14 video driver
 Summary(pl):	Sterownik do kolorowego framebuffera CG14 na Sunie
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1288,7 +1239,6 @@ Summary:	suncg3 - Sun CG3 video cards driver
 Summary(pl):	Sterownik do kolorowego framebuffera CG3 na Sunie
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-driver-suncg3
@@ -1303,7 +1253,6 @@ Sterownik do kolorowego framebuffera CG3 na Sunie.
 Summary:	suncg6 - Sun GX and Turbo GX video driver
 Summary(pl):	Sterownik do grafiki GX i Turbo GX na Sunie
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1320,7 +1269,6 @@ Summary:	sunffb - Sun Creator, Creator 3D and Elite 3D video cards driver
 Summary(pl):	Sterownik do kart Sun Creator, Creator 3D, Elite 3D
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-driver-sunffb
@@ -1335,7 +1283,6 @@ Sterownik do kart Sun Creator, Creator 3D, Elite 3D.
 Summary:	sunleo - Sun Leo (ZX) video cards driver
 Summary(pl):	Sterownik do kart Sun Leo (ZX)
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1352,7 +1299,6 @@ Summary:	suntcx - Sun TCX video cards driver
 Summary(pl):	Sterownik do kart Sun TCX
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-driver-suntcx
@@ -1367,7 +1313,6 @@ Sterownik do kart Sun TCX.
 Summary:	3Dfx video driver
 Summary(pl):	Sterownik do kart 3Dfx
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1392,7 +1337,6 @@ Summary:	TGA video driver
 Summary(pl):	Sterownik do kart TGA
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-driver-tga
@@ -1407,7 +1351,6 @@ Sterownik do kart TGA.
 Summary:	Trident video driver
 Summary(pl):	Sterownik do kart Trident
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1424,7 +1367,6 @@ Summary:	Tseng Labs video driver
 Summary(pl):	Sterownik do kart Tseng Labs
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-driver-tseng
@@ -1440,7 +1382,6 @@ Summary:	VIA CLE266 driver
 Summary(pl):	Sterownik do kart VIA CLE266
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-driver-via
@@ -1455,7 +1396,6 @@ Sterownik do kart VIA CLE266.
 Summary:	VMWare SVGA emulated video driver
 Summary(pl):	Sterownik do emulacji karty SVGA dostÍpnej pod VMware
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1479,7 +1419,6 @@ Summary(pt_BR):	Bibliotecas compartilhadas X11R6
 Summary(ru):	Ú¡⁄ƒ≈Ã—≈ÕŸ≈ ¬…¬Ã…œ‘≈À… ƒÃ— X Window System (X11R6.4)
 Summary(uk):	‚¶¬Ã¶œ‘≈À… ”–¶ÃÿŒœ«œ ◊…Àœ“…”‘¡ŒŒ— ƒÃ— X Window System (X11R6.4)
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	grep
@@ -1604,7 +1543,6 @@ Summary:	Modules with X servers extensions
 Summary(pl):	WspÛlne dla wszystkich X serwerÛw modu≥y rozszerzeÒ
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Provides:	XFree86-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-modules
 
@@ -1620,7 +1558,6 @@ Summary(pl):	Graficzny konfigurator dla XOrg X11
 Summary(ru):	ı‘…Ã…‘¡ ƒÃ— ÀœŒ∆…«’“¡√…… XOrg X11
 Summary(uk):	ı‘…Ã¶‘¡ ƒÃ— ÀœŒ∆¶«’“’◊¡ŒŒ— XOrg X11
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Provides:	XFree86-setup = %{epoch}:%{version}-%{release}
@@ -1687,7 +1624,6 @@ Summary(pl):	RÛøne narzÍdzia dla XOrg X11
 Summary(ru):	Ú¡⁄Œœœ¬“¡⁄ŒŸ≈ ’‘…Ã…‘Ÿ ƒÃ— XOrg X11
 Summary(uk):	Ú¶⁄ŒœÕ¡Œ¶‘Œ¶ ’‘…Ã¶‘… ƒÃ— XOrg X11
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
@@ -1760,7 +1696,6 @@ Summary:	Cursors Theme "handhelds"
 Summary(pl):	Motyw kursorÛw "handhelds"
 Group:		X11/Themes
 ######		Unknown group!
-######		Unknown group!
 #Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	XFree86-libs
 
@@ -1775,7 +1710,6 @@ Summary:	Cursors theme "redglass"
 Summary(pl):	Motyw kursorÛw "redglass"
 Group:		X11/Themes
 ######		Unknown group!
-######		Unknown group!
 #Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	XFree86-libs
 
@@ -1789,7 +1723,6 @@ Motyw kursorÛw "redglass" dla X11.
 Summary:	Cursors theme "whiteglass"
 Summary(pl):	Motyw kursorÛw "whiteglass"
 Group:		X11/Themes
-######		Unknown group!
 ######		Unknown group!
 #Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	XFree86-libs
@@ -1826,7 +1759,6 @@ byÊ kompilowane.
 Summary:	sessreg - manage utmp/wtmp entries for non-init clients
 Summary(pl):	Program do zarz±dzania wpisami w utmp/wtmp
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 Provides:	sessreg = %{epoch}:%{version}-%{release}
 Obsoletes:	sessreg
@@ -1880,7 +1812,6 @@ Summary:	xauth - X authority file utility
 Summary(pl):	xauth - narzÍdzie do plikÛw X authority
 Group:		X11/Xorg
 ######		Unknown group!
-######		Unknown group!
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	xauth = %{epoch}:%{version}-%{release}
 Obsoletes:	xauth
@@ -1905,7 +1836,6 @@ Summary(pl):	XDM - zarz±dca ekranÛw z obs≥ug± XDMCP i wybieraniem hostÛw
 Summary(ru):	Ì≈Œ≈ƒ÷≈“ ƒ…”–Ã≈— X
 Summary(uk):	Ì≈Œ≈ƒ÷≈“ ƒ…”–Ã≈¿ X
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
@@ -1944,7 +1874,6 @@ Summary(pl):	Serwer fontÛw dla XOrg X11
 Summary(ru):	ÊœŒ‘”≈“◊≈“ ƒÃ— X Window System
 Summary(uk):	ÊœŒ‘”≈“◊≈“ ƒÃ— X Window System
 Group:		X11/Xorg
-######		Unknown group!
 ######		Unknown group!
 PreReq:		rc-scripts
 Requires(pre):	/bin/id
