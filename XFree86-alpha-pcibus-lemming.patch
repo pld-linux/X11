@@ -1,0 +1,11 @@
+--- xc/programs/Xserver/hw/xfree86/os-support/bus/Pci.c.lemming	Mon Jul  3 02:10:01 2000
++++ xc/programs/Xserver/hw/xfree86/os-support/bus/Pci.c	Mon Jul  3 02:10:29 2000
+@@ -289,7 +289,7 @@
+   if (!pciInitialized)
+     pciInit();
+ 
+-  if ((bus < pciNumBuses || inProbe) &&  pciBusInfo[bus] &&
++  if ((bus < pciNumBuses) &&  pciBusInfo[bus] &&
+ 	pciBusInfo[bus]->funcs.pciReadLong) {
+     CARD32 rv = (*pciBusInfo[bus]->funcs.pciReadLong)(tag, offset);
+ 

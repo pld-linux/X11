@@ -1,6 +1,6 @@
-diff -urN XFree86-4.0.1.orig/xc/config/cf/Server.tmpl XFree86-4.0.1/xc/config/cf/Server.tmpl
---- XFree86-4.0.1.orig/xc/config/cf/Server.tmpl	Fri Feb 18 17:23:07 2000
-+++ XFree86-4.0.1/xc/config/cf/Server.tmpl	Mon Jul 10 04:01:04 2000
+diff -Nur XFree86-4.0.2.org/xc/config/cf/Server.tmpl XFree86-4.0.2/xc/config/cf/Server.tmpl
+--- XFree86-4.0.2.org/xc/config/cf/Server.tmpl	Fri Feb 18 17:23:07 2000
++++ XFree86-4.0.2/xc/config/cf/Server.tmpl	Thu Dec 21 08:47:33 2000
 @@ -31,8 +31,14 @@
  #ifndef MakeDllModules
  #define MakeDllModules NO
@@ -17,10 +17,10 @@ diff -urN XFree86-4.0.1.orig/xc/config/cf/Server.tmpl XFree86-4.0.1/xc/config/cf
  #endif
  
  /*
-diff -urN XFree86-4.0.1.orig/xc/config/cf/xf86site.def XFree86-4.0.1/xc/config/cf/xf86site.def
---- XFree86-4.0.1.orig/xc/config/cf/xf86site.def	Mon Jul 10 03:59:05 2000
-+++ XFree86-4.0.1/xc/config/cf/xf86site.def	Mon Jul 10 04:01:04 2000
-@@ -305,13 +305,15 @@
+diff -Nur XFree86-4.0.2.org/xc/config/cf/xf86site.def XFree86-4.0.2/xc/config/cf/xf86site.def
+--- XFree86-4.0.2.org/xc/config/cf/xf86site.def	Thu Dec 21 09:01:05 2000
++++ XFree86-4.0.2/xc/config/cf/xf86site.def	Thu Dec 21 08:47:33 2000
+@@ -348,13 +348,15 @@
   */
  
  /*
@@ -42,10 +42,10 @@ diff -urN XFree86-4.0.1.orig/xc/config/cf/xf86site.def XFree86-4.0.1/xc/config/c
   */
  
  /*
-diff -urN XFree86-4.0.1.orig/xc/config/cf/xfree86.cf XFree86-4.0.1/xc/config/cf/xfree86.cf
---- XFree86-4.0.1.orig/xc/config/cf/xfree86.cf	Mon Jul 10 03:59:05 2000
-+++ XFree86-4.0.1/xc/config/cf/xfree86.cf	Mon Jul 10 04:01:04 2000
-@@ -550,12 +550,15 @@
+diff -Nur XFree86-4.0.2.org/xc/config/cf/xfree86.cf XFree86-4.0.2/xc/config/cf/xfree86.cf
+--- XFree86-4.0.2.org/xc/config/cf/xfree86.cf	Thu Dec 21 09:01:06 2000
++++ XFree86-4.0.2/xc/config/cf/xfree86.cf	Thu Dec 21 08:47:33 2000
+@@ -585,12 +585,15 @@
  #endif
  
  /*
@@ -65,12 +65,12 @@ diff -urN XFree86-4.0.1.orig/xc/config/cf/xfree86.cf XFree86-4.0.1/xc/config/cf/
  # endif
  #endif
  
-diff -urN XFree86-4.0.1.orig/xc/programs/Xserver/Imakefile XFree86-4.0.1/xc/programs/Xserver/Imakefile
---- XFree86-4.0.1.orig/xc/programs/Xserver/Imakefile	Sat Jun 17 20:42:16 2000
-+++ XFree86-4.0.1/xc/programs/Xserver/Imakefile	Mon Jul 10 04:01:33 2000
+diff -Nur XFree86-4.0.2.org/xc/programs/Xserver/Imakefile XFree86-4.0.2/xc/programs/Xserver/Imakefile
+--- XFree86-4.0.2.org/xc/programs/Xserver/Imakefile	Wed Dec 13 00:58:58 2000
++++ XFree86-4.0.2/xc/programs/Xserver/Imakefile	Thu Dec 21 08:54:16 2000
 @@ -4,11 +4,6 @@
   */
- XCOMM $XFree86: xc/programs/Xserver/Imakefile,v 3.184 2000/06/17 00:03:10 martin Exp $
+ XCOMM $XFree86: xc/programs/Xserver/Imakefile,v 3.205 2000/12/11 20:29:31 dawes Exp $
  
 -#ifndef InstallXserverSetUID
 -#define InstallXserverSetUID NO
@@ -80,17 +80,18 @@ diff -urN XFree86-4.0.1.orig/xc/programs/Xserver/Imakefile XFree86-4.0.1/xc/prog
  #include <Server.tmpl>
  
  #ifdef XFree86Version
-@@ -257,6 +252,7 @@
-         SYSLIBS = $(ZLIB) MathLibrary Krb5Libraries DBMLibrary $(USB) \
- 	$(EXTRASYSLIBS)
+@@ -264,7 +259,7 @@
+    EXTRASYSLIBS = ServerExtraSysLibs
  #endif
-+	PAMLIBS = -lpam -lpam_misc -ldl
-            CBRT = mi/LibraryTargetName(cbrt)
-         STDDIRS = include dix os mi $(XPDDXDIR) $(EXTDIRS)
- 
-@@ -1012,6 +1008,11 @@
- 	$(XVFBLIBS) $(LOADABLEEXTS) $(LIBCWRAPPER),$(XVFBSYSLIBS))
- #endif /* XVirtualFramebufferServer */
+ #if HasPam && HasPamMisc
+-        PAMLIBS = PamLibraries PamMiscLibraries
++        PAMLIBS = -lpam -lpam_misc -ldl PamLibraries PamMiscLibraries
+ #endif
+ #if !(SystemV4 || defined(SGIArchitecture) || UseRgbTxt)
+        DBMLIBS = DBMLibrary
+@@ -1017,6 +1012,11 @@
+ 	$(XNESTLIBS) $(LOADABLEEXTS) $(LIBCWRAPPER),$(XNESTSYSLIBS))
+ #endif /* XnestServer */
  
 +
 +#if UseXserverWrapper
@@ -98,12 +99,12 @@ diff -urN XFree86-4.0.1.orig/xc/programs/Xserver/Imakefile XFree86-4.0.1/xc/prog
 +InstallProgramWithFlags(Xwrapper,$(BINDIR),$(INSTUIDFLAGS))
 +#endif
  
- CFBDIRS = $(CFB8DIR) $(CFB16DIR) $(CFB24DIR) $(CFB32DIR)
- IPLANDIRS = $(IPLAN2P2DIR) $(IPLAN2P4DIR) $(IPLAN2P8DIR)
-diff -urN XFree86-4.0.1.orig/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c XFree86-4.0.1/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c
---- XFree86-4.0.1.orig/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c	Fri Feb 25 19:28:11 2000
-+++ XFree86-4.0.1/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c	Mon Jul 10 04:01:04 2000
-@@ -65,7 +65,10 @@
+ #if XnonServer
+ XCOMM
+diff -Nur XFree86-4.0.2.org/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c XFree86-4.0.2/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c
+--- XFree86-4.0.2.org/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c	Wed Nov 29 17:43:28 2000
++++ XFree86-4.0.2/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c	Thu Dec 21 08:47:33 2000
+@@ -66,7 +66,10 @@
  	/* check if we're run with euid==0 */
  	if (geteuid() != 0)
  	{
@@ -115,18 +116,18 @@ diff -urN XFree86-4.0.1.orig/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx
  	}
  
  	/*
-diff -urN XFree86-4.0.1.orig/xc/programs/Xserver/os/Imakefile XFree86-4.0.1/xc/programs/Xserver/os/Imakefile
---- XFree86-4.0.1.orig/xc/programs/Xserver/os/Imakefile	Fri May  5 19:47:29 2000
-+++ XFree86-4.0.1/xc/programs/Xserver/os/Imakefile	Mon Jul 10 04:01:33 2000
-@@ -110,6 +110,7 @@
-   ERROR_DEFINES = ServerErrorDefines
+diff -Nur XFree86-4.0.2.org/xc/programs/Xserver/os/Imakefile XFree86-4.0.2/xc/programs/Xserver/os/Imakefile
+--- XFree86-4.0.2.org/xc/programs/Xserver/os/Imakefile	Tue Dec  5 01:59:14 2000
++++ XFree86-4.0.2/xc/programs/Xserver/os/Imakefile	Thu Dec 21 08:47:33 2000
+@@ -113,6 +113,7 @@
+ #endif
          DEFINES = -DXSERV_t -DTRANS_SERVER $(CONNECTION_FLAGS) $(MEM_DEFINES) $(XDMAUTHDEFS) $(RPCDEFS) $(SIGNAL_DEFINES) $(OS_DEFINES) $(KRB5_DEFINES) $(RGB_DEFINES)
         INCLUDES = -I.  -I../include -I$(XINCLUDESRC) -I$(EXTINCSRC) -I$(TOP)/lib/Xau -I../lbx Krb5Includes
 +	EXTRA_DEFINES = -DUSE_PAM
   DEPEND_DEFINES = $(DBM_DEFINES) $(XDMCP_DEFINES) $(EXT_DEFINES) $(TRANS_INCLUDES) $(CONNECTION_FLAGS)
         LINTLIBS = ../dix/llib-ldix.ln
  
-@@ -153,6 +154,14 @@
+@@ -156,6 +157,14 @@
  	cc -c $(DBM_DEFINES) $(CDEBUGFLAGS) $(ALLDEFINES) $*.c
  #else
  SpecialCObjectRule(oscolor,$(ICONFIGFILES),$(DBM_DEFINES))
@@ -141,9 +142,9 @@ diff -urN XFree86-4.0.1.orig/xc/programs/Xserver/os/Imakefile XFree86-4.0.1/xc/p
  #endif
  
  #if HasKrb5
-diff -urN XFree86-4.0.1.orig/xc/programs/Xserver/os/wrapper.c XFree86-4.0.1/xc/programs/Xserver/os/wrapper.c
---- XFree86-4.0.1.orig/xc/programs/Xserver/os/wrapper.c	Thu Jan  1 01:00:00 1970
-+++ XFree86-4.0.1/xc/programs/Xserver/os/wrapper.c	Mon Jul 10 04:01:33 2000
+diff -Nur XFree86-4.0.2.org/xc/programs/Xserver/os/wrapper.c XFree86-4.0.2/xc/programs/Xserver/os/wrapper.c
+--- XFree86-4.0.2.org/xc/programs/Xserver/os/wrapper.c	Thu Jan  1 01:00:00 1970
++++ XFree86-4.0.2/xc/programs/Xserver/os/wrapper.c	Thu Dec 21 08:47:33 2000
 @@ -0,0 +1,304 @@
 +/*
 + * X server wrapper.
@@ -449,10 +450,10 @@ diff -urN XFree86-4.0.1.orig/xc/programs/Xserver/os/wrapper.c XFree86-4.0.1/xc/p
 +    exit(1);
 +}
 +
-diff -urN XFree86-4.0.1.orig/xc/programs/xinit/xinit.c XFree86-4.0.1/xc/programs/xinit/xinit.c
---- XFree86-4.0.1.orig/xc/programs/xinit/xinit.c	Wed Apr  5 20:14:08 2000
-+++ XFree86-4.0.1/xc/programs/xinit/xinit.c	Mon Jul 10 04:01:04 2000
-@@ -143,6 +143,7 @@
+diff -Nur XFree86-4.0.2.org/xc/programs/xinit/xinit.c XFree86-4.0.2/xc/programs/xinit/xinit.c
+--- XFree86-4.0.2.org/xc/programs/xinit/xinit.c	Tue Nov  7 00:06:04 2000
++++ XFree86-4.0.2/xc/programs/xinit/xinit.c	Thu Dec 21 08:47:33 2000
+@@ -147,6 +147,7 @@
  #define	OK_EXIT		0
  #define	ERR_EXIT	1
  
@@ -460,7 +461,7 @@ diff -urN XFree86-4.0.1.orig/xc/programs/xinit/xinit.c XFree86-4.0.1/xc/programs
  char *default_server = "X";
  char *default_display = ":0";		/* choose most efficient */
  #ifndef __EMX__
-@@ -312,7 +313,10 @@
+@@ -316,7 +317,10 @@
  	if (argc == 0 ||
  #ifndef __EMX__
  	    (**argv != '/' && **argv != '.')) {

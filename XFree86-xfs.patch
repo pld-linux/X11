@@ -1,0 +1,238 @@
+diff -Nur XFree86-4.0.2.org/xc/programs/xfs/difs/fonts.c XFree86-4.0.2/xc/programs/xfs/difs/fonts.c
+--- XFree86-4.0.2.org/xc/programs/xfs/difs/fonts.c	Thu Dec 14 20:54:53 2000
++++ XFree86-4.0.2/xc/programs/xfs/difs/fonts.c	Thu Dec 21 09:26:42 2000
+@@ -108,6 +108,113 @@
+ }
+ 
+ /*
++ * xf86GetPathElem --
++ *      Extract a single element from the font path string starting at
++ *      pnt.  The font path element will be returned, and pnt will be
++ *      updated to point to the start of the next element, or set to
++ *      NULL if there are no more.
++ */
++char *
++xf86GetPathElem(pnt)
++     char **pnt;
++{
++  char *p1;
++ 
++  p1 = *pnt;
++  *pnt = index(*pnt, ',');
++  if (*pnt != NULL) {
++    **pnt = '\0';
++    *pnt += 1;
++  }
++  return(p1);
++}
++
++/*
++ * xf86ValidateFontPath --
++ *      Validates the user-specified font path.  Each element that
++ *      begins with a '/' is checked to make sure the directory exists.
++ *      If the directory exists, the existence of a file named 'fonts.dir'
++ *      is checked.  If either check fails, an error is printed and the
++ *      element is removed from the font path.
++ */
++#define DIR_FILE "/fonts.dir"
++#define CHECK_TYPE(mode, type) ((S_IFMT & (mode)) == (type))
++static char *
++xf86ValidateFontPath(path)
++     char *path;
++{
++  char *tmp_path, *out_pnt, *path_elem, *next, *p1, *dir_elem;
++  struct stat stat_buf;
++  int flag;
++  int dirlen;
++ 
++  tmp_path = (char *)calloc(1,strlen(path)+1);
++  out_pnt = tmp_path;
++  path_elem = NULL;
++  next = path;
++  while (next != NULL) {
++    path_elem = xf86GetPathElem(&next);
++#ifndef __EMX__
++    if (*path_elem == '/') {
++      dir_elem = (char *)calloc(1, strlen(path_elem) + 1);
++      if ((p1 = strchr(path_elem, ':')) != 0)
++#else
++    /* OS/2 must prepend X11ROOT */
++    if (*path_elem == '/') {
++      path_elem = (char*)__XOS2RedirRoot(path_elem);
++      dir_elem = (char*)calloc(1, strlen(path_elem) + 1);
++      if (p1 = strchr(path_elem+2, ':'))
++#endif
++        dirlen = p1 - path_elem;
++      else
++        dirlen = strlen(path_elem);
++      strncpy(dir_elem, path_elem, dirlen);
++      dir_elem[dirlen] = '\0';
++      flag = stat(dir_elem, &stat_buf);
++      if (flag == 0)
++        if (!CHECK_TYPE(stat_buf.st_mode, S_IFDIR))
++          flag = -1;
++      if (flag != 0) {
++	printf("warning!\n");
++	ErrorF("Warning: The directory \"%s\" does not exist.\n", dir_elem);
++	ErrorF("         Entry deleted from font path.\n");
++        continue;
++      }
++      else {
++        p1 = (char *)malloc(strlen(dir_elem)+strlen(DIR_FILE)+1);
++        strcpy(p1, dir_elem);
++        strcat(p1, DIR_FILE);
++        flag = stat(p1, &stat_buf);
++        if (flag == 0)
++          if (!CHECK_TYPE(stat_buf.st_mode, S_IFREG))
++            flag = -1;
++#ifndef __EMX__
++        free(p1);
++#endif
++        if (flag != 0) {
++	  ErrorF("Warning: 'fonts.dir' not found (or not valid) in \"%s\".\n",
++                 dir_elem);
++          ErrorF("          Entry deleted from font path.\n");
++          ErrorF("          (Run 'mkfontdir' on \"%s\").\n", dir_elem);
++          continue;
++        }
++      }
++      free(dir_elem);
++    }
++ 
++    /*
++     * Either an OK directory, or a font server name.  So add it to
++     * the path.
++     */
++    if (out_pnt != tmp_path)
++      *out_pnt++ = ',';
++    strcat(out_pnt, path_elem);
++    out_pnt += strlen(path_elem);
++  }
++  return(tmp_path);
++}
++
++/*
+  * note that the font wakeup queue is not refcounted.  this is because
+  * an fpe needs to be added when it's inited, and removed when it's finally
+  * freed, in order to handle any data that isn't requested, like FS events.
+@@ -744,8 +851,12 @@
+                *end,
+                *p;
+     int         err;
++    char       *fixedpath;
++
++    fixedpath = xf86ValidateFontPath(str);
+ 
+-    len = strlen(str) + 1;
++    len = strlen(fixedpath) + 1;
++    str = fixedpath;
+     paths = p = (char *) ALLOCATE_LOCAL(len);
+     npaths = 0;
+ 
+@@ -765,6 +876,7 @@
+ 
+     err = set_font_path_elements(npaths, paths, badpath);
+ 
++    free(fixedpath);
+     DEALLOCATE_LOCAL(paths);
+ 
+     return err;
+diff -Nur XFree86-4.0.2.org/xc/programs/xfs/difs/main.c XFree86-4.0.2/xc/programs/xfs/difs/main.c
+--- XFree86-4.0.2.org/xc/programs/xfs/difs/main.c	Sat Dec  9 05:02:14 2000
++++ XFree86-4.0.2/xc/programs/xfs/difs/main.c	Thu Dec 21 09:40:53 2000
+@@ -56,12 +56,18 @@
+ #include	"dispatch.h"
+ #include	"extentst.h"
+ #include	"difs.h"
++#include <unistd.h>
++#include <pwd.h>
++#include <sys/types.h>
+ 
+ char       *ConnectionInfo;
+ int         ConnInfoLen;
+ 
+ Cache       serverCache;
+ 
++int         droppriv;  /* whether or not to drop root privileges at startup */
++int         becomeDaemon; /* whether or not to become a daemon */
++
+ #ifndef DEFAULT_CONFIG_FILE
+ #define DEFAULT_CONFIG_FILE "/usr/lib/X11/fs/config"
+ #endif
+@@ -84,13 +90,39 @@
+ 
+     argcGlobal = argc;
+     argvGlobal = argv;
+-
++    droppriv = 0;
++    becomeDaemon =0;
++    
+     configfilename = DEFAULT_CONFIG_FILE;
+ 
+     /* init stuff */
+     ProcessCmdLine(argc, argv);
+     InitErrors();
+ 
++     /* become xfs user, if possible */
++     if ((geteuid() == 0) && droppriv) {
++       pwent = getpwnam("xfs");
++       if (pwent) {
++ 	if (setgid(pwent->pw_gid)) {
++ 	  ErrorF("fatal: couldn't set groupid to xfs user's group\n");
++ 	  exit(1);
++ 	}
++ 
++ 	if (setgroups(0, 0)) {
++ 	  ErrorF("fatal: couldn't drop supplementary groups\n");
++ 	  exit(1);
++ 	}
++ 
++ 	if (setuid(pwent->pw_uid)) {
++ 	  ErrorF("fatal: couldn't set userid to xfs user\n");
++ 	  exit(1);
++ 	}
++       }
++     } else if (droppriv) {
++       ErrorF("fatal: droppriv flag specified, but xfs not run as root\n");
++       exit(1);
++     }
++
+     /*
+      * do this first thing, to get any options that only take effect at
+      * startup time.  it is read again each time the server resets
+@@ -99,6 +131,10 @@
+ 	ErrorF("fatal: couldn't read config file\n");
+ 	exit(1);
+     }
++
++    /* become a daemon if explicitly requested to do so. */
++    if (becomeDaemon)
++      daemon(0, 0);
+ 
+     /* make sure at least world write access is disabled */
+     if (((oldumask = umask(022)) & 002) == 002)
+diff -Nur XFree86-4.0.2.org/xc/programs/xfs/os/error.c XFree86-4.0.2/xc/programs/xfs/os/error.c
+--- XFree86-4.0.2.org/xc/programs/xfs/os/error.c	Tue Dec  5 01:59:41 2000
++++ XFree86-4.0.2/xc/programs/xfs/os/error.c	Thu Dec 21 09:26:42 2000
+@@ -81,6 +81,7 @@
+ Bool        log_open = FALSE;
+ #endif
+ char        ErrorFile[PATH_MAX];
++int         log_open = 0;
+ 
+ static void
+ abort_server(void)
+diff -Nur XFree86-4.0.2.org/xc/programs/xfs/os/utils.c XFree86-4.0.2/xc/programs/xfs/os/utils.c
+--- XFree86-4.0.2.org/xc/programs/xfs/os/utils.c	Tue Dec  5 01:59:41 2000
++++ XFree86-4.0.2/xc/programs/xfs/os/utils.c	Thu Dec 21 09:26:42 2000
+@@ -317,6 +317,10 @@
+ 		userId = argv[++i];
+ 	    else
+ 		usage();
++	} else if (!strcmp(argv[i], "-droppriv")) {
++	        droppriv = 1;
++	} else if (!strcmp(argv[i], "-daemon")) {
++	        becomeDaemon = 1;
+ 	} else if (!strcmp(argv[i], "-cf") || !strcmp(argv[i], "-config")) {
+ 	    if (argv[i + 1])
+ 		configfilename = argv[++i];

@@ -1,14 +1,14 @@
 --- XFree86-4.0.1/xc/programs/xman/vendor.h.foo	Mon Aug 14 15:13:05 2000
 +++ XFree86-4.0.1/xc/programs/xman/vendor.h	Mon Aug 14 15:13:38 2000
-@@ -60,7 +60,7 @@
+@@ -63,7 +63,7 @@
+ # define MANCONF "/etc/manpath.config"
+ #else
+ # if (defined(BSD) && (BSD >= 199103)) || defined(linux)
+-#  define MANCONF "/etc/man.conf"
++#  define MANCONF "/etc/man.config"
+ # endif
  #endif
  
- #if (defined(BSD) && (BSD >= 199103)) || defined(linux)
--# define MANCONF "/etc/man.conf"
-+# define MANCONF "/etc/man.config"
- #endif
- 
- /*
 --- XFree86-4.0.1/xc/programs/xman/xman.man.foo	Mon Aug 14 15:13:11 2000
 +++ XFree86-4.0.1/xc/programs/xman/xman.man	Mon Aug 14 15:13:24 2000
 @@ -90,8 +90,8 @@
