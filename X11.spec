@@ -19,7 +19,7 @@ Summary(uk):	âÁÚÏ×¦ ÛÒÉÆÔÉ, ÐÒÏÇÒÁÍÉ ÔÁ ÄÏËÕÍÅÎÔÁÃ¦Ñ ÄÌÑ ÒÏÂÏÞÏ§ ÓÔÁÎÃ¦§ Ð¦Ä X
 Summary(zh_CN):	XOrg X11 ´°¿ÚÏµÍ³·þÎñÆ÷ºÍ»ù±¾³ÌÐò
 Name:		X11
 Version:	6.7.0
-Release:	6
+Release:	7
 Epoch:		1
 License:	XFree86 1.0 (?)
 Group:		X11/Xorg
@@ -2129,9 +2129,27 @@ if [ "$1" = "0" ]; then
 fi
 
 %triggerpostun xfs -- xfs
-if [ -s /etc/X11/fs/config.rpmsave ]; then
-	cp -f /etc/X11/fs/config.rpmsave /etc/X11/fs/config
+#if [ -s /etc/X11/fs/config.rpmsave ]; then
+#	cp -f /etc/X11/fs/config.rpmsave /etc/X11/fs/config
+#fi
+if [ -n "`/usr/bin/getgid xfs`" ]; then
+	if [ "`/usr/bin/getgid xfs`" != "56" ]; then
+		echo "Error: group xfs doesn't have GID=56. Correct this before installing xfs." 1>&2
+		exit 1
+	fi
+else
+	/usr/sbin/groupadd -g 56 -r -f xfs
 fi
+if [ -n "`/bin/id -u xfs 2>/dev/null`" ]; then
+	if [ "`/bin/id -u xfs`" != "56" ]; then
+		echo "Error: user xfs doesn't have UID=56. Correct this before installing xfs." 1>&2
+		exit 1
+	fi
+else
+	/usr/sbin/useradd -u 56 -r -d /etc/X11/fs -s /bin/false -c "X Font Server" -g xfs xfs 1>&2
+fi
+/sbin/chkconfig --add xfs
+/etc/rc.d/init.d/xfs start >&2
 
 %triggerpostun Xserver -- XFree86-Xserver
 if [ -s /etc/X11/XF86Config.rpmsave ]; then
