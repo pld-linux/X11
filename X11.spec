@@ -566,6 +566,7 @@ Summary(pl):	Serwer XOrg X11 Xvfb
 Summary(ru):	Сервер XOrg X11 для виртуального фреймбуфера
 Summary(uk):	Сервер XOrg X11 для в╕ртуального фреймбуфера
 Group:		X11/Xorg/Servers
+Provides:	XFree86-Xvfb = %{epoch}:%{version}-%{release}
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	/usr/X11R6/lib/X11/rgb.txt
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
