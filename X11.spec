@@ -1845,6 +1845,7 @@ Requires:	/usr/X11R6/bin/sessreg
 Provides:	XDM
 Provides:	xdm = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-xdm
+Obsoletes:	entrance
 Obsoletes:	gdm
 Obsoletes:	kdm
 Obsoletes:	wdm
