@@ -3,7 +3,7 @@
 # - XDM Auth broken
 # - Review rest of patches
 #
-%define		snap	20040815
+%define		snap	20040816
 #
 Summary:	XOrg X11 Window System servers and basic programs
 Summary(de):	XOrg X11 Window-System-Server und grundlegende Programme
@@ -24,8 +24,8 @@ Epoch:		1
 License:	XFree86 1.0 (?)
 Group:		X11/Xorg
 ######		Unknown group!
-Source0:	http://www.kernel.pl/~adasi/%{name}-%{snap}.tar.gz
-#Source0-md5:	c185990cbd8180bcc6859679bae21325
+Source0:	http://ep09.pld-linux.org/~havner/%{name}-%{snap}.tar.gz
+# Source0-md5:	0a56a91efd0ac26efb53acfbfb0be152
 Source7:	ftp://ftp.pld-linux.org/software/xinit/xdm-xinitrc-0.2.tar.bz2
 # Source7-md5:	0a15b1c374256b5cad7961807baa3896
 Source8:	xdm.pamd
@@ -2333,7 +2333,7 @@ fi
 /usr/X11R6/man/man1/vdltodmx.1x.gz
 /usr/X11R6/man/man1/xdmxconfig.1x.gz
 /usr/X11R6/man/man1/xdriinfo.1x.gz
-/usr/X11R6/man/man1/xmore.1x.gz
+#/usr/X11R6/man/man1/xmore.1x.gz
 /usr/X11R6/man/man1/xphelloworld.1x.gz
 /usr/X11R6/man/man1/xplsprinters.1x.gz
 /usr/X11R6/man/man1/xprehashprinterlist.1x.gz
@@ -2571,7 +2571,6 @@ fi
 %attr(755,root,root) %{_libdir}/libXdamage.so
 %attr(755,root,root) %{_libdir}/libXcomposite.so
 %attr(755,root,root) %{_libdir}/libXfixes.so
-%attr(755,root,root) %{_libdir}/libXrender.so
 #%attr(755,root,root) %{_libdir}/libxrx.so
 %{_libdir}/libXau.a
 %{_libdir}/libXdmcp.a
@@ -3121,7 +3120,7 @@ fi
 %attr(755,root,root) %{_bindir}/xtrap*
 %attr(755,root,root) %{_bindir}/texteroids
 %attr(755,root,root) %{_bindir}/xdriinfo
-%attr(755,root,root) %{_bindir}/xmore
+#%attr(755,root,root) %{_bindir}/xmore
 %attr(755,root,root) %{_bindir}/xphelloworld
 %attr(755,root,root) %{_bindir}/xplsprinters
 %attr(755,root,root) %{_bindir}/xprehashprinterlist
