@@ -26,6 +26,6 @@ TerminalOptions=
 Path=
 Type=Application
 Terminal=false
-Categories=TerminalEmulator;X-X11;
+Categories=TerminalEmulator;
 Encoding=UTF-8
 # vi: encoding=utf-8
