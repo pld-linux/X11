@@ -28,14 +28,6 @@ Source1:	http://freedesktop.org/~xorg/X11R%{version}/src/X11R%{version}-src2.tar
 # Source1-md5:	6ef4e8f7647a28f080c10ea1bcf01f79
 Source2:	http://freedesktop.org/~xorg/X11R%{version}/src/X11R%{version}-src3.tar.gz
 # Source2-md5:	4c7144786522bbce383b21ace72bf669
-Source3:	http://freedesktop.org/~xorg/X11R%{version}/src/X11R%{version}-src4.tar.gz
-# Source3-md5:	4f2ed6fe4378fe60b58b8b4c8487cab0
-Source4:	http://freedesktop.org/~xorg/X11R%{version}/src/X11R%{version}-src5.tar.gz
-# Source4-md5:	87177e6e6ac5b2d7de6a032ee8641ec1
-Source5:	http://freedesktop.org/~xorg/X11R%{version}/src/X11R%{version}-src6.tar.gz
-# Source5-md5:	f52fe308e14525e3fa1eeb9dcd6d83a6
-Source6:	http://freedesktop.org/~xorg/X11R%{version}/src/X11R%{version}-src7.tar.gz
-# Source6-md5:	69aa33d9faa5d324c84943c2025f9d8e
 Source7:	ftp://ftp.pld-linux.org/software/xinit/xdm-xinitrc-0.2.tar.bz2
 Source8:	xdm.pamd
 Source9:	xserver.pamd
@@ -1731,7 +1723,7 @@ System. Також вам прийдеться встановити наступн╕ пакети: Xorg,
 #--- %prep ---------------------------
 
 %prep
-%setup -qc -a1 -a2 -a3 -a4 -a5 -a6 -a7
+%setup -qc -a1 -a2 -a7
 %patch0 -p0
 %patch1 -p1
 %patch2 -p1
