@@ -67,7 +67,7 @@ Source50:	xcalc.png
 Source51:	xload.png
 Source52:	xmag.png
 Source53:	http://oss.sgi.com/projects/ogl-sample/ABI/glext.h
-# NoSource53-md5: bf9b05a66798796b53ed1a050049b2ee
+# NoSource53-md5: a5738dcfa20119fa3e06ce479ca94acf
 Patch0:		%{name}-PLD.patch
 Patch1:		XFree86-HasZlib.patch
 Patch2:		XFree86-DisableDebug.patch
