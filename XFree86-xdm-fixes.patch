@@ -1,20 +1,19 @@
-diff -Nur XFree86-4.0.2.org/xc/programs/xdm/Imakefile XFree86-4.0.2/xc/programs/xdm/Imakefile
---- XFree86-4.0.2.org/xc/programs/xdm/Imakefile	Wed Nov 29 17:46:07 2000
-+++ XFree86-4.0.2/xc/programs/xdm/Imakefile	Thu Dec 21 13:10:37 2000
-@@ -225,9 +225,9 @@
+--- XFree86-4.3.0/xc/programs/xdm/Imakefile.orig	Sat Dec  7 21:31:04 2002
++++ XFree86-4.3.0/xc/programs/xdm/Imakefile	Wed May 14 22:07:20 2003
+@@ -256,9 +256,9 @@
  		  '-DDEF_SYSTEM_SHELL="$(BOURNE_SHELL)"' \
  		  '-DDEF_FAILSAFE_CLIENT="$(BINDIR)/xterm"' \
  		  '-DDEF_XDM_CONFIG="$(XDMDIR)/xdm-config"' \
 -		  '-DDEF_CHOOSER="$(XDMDIR)/chooser"' \
 -		  '-DDEF_AUTH_DIR="$(XDMDIR)"' \
 -		  '-DDEF_GREETER_LIB="$(XDMDIR)/libXdmGreet.so"'
-+		  '-DDEF_CHOOSER="$(BINDIR)/chooser"' \
-+		  '-DDEF_AUTH_DIR="$(XDMVARDIR)"' \
-+		  '-DDEF_GREETER_LIB="$(USRLIBDIR)/libXdmGreet.so"'
- #endif
++ 		  '-DDEF_CHOOSER="$(BINDIR)/chooser"' \
++ 		  '-DDEF_AUTH_DIR="$(XDMVARDIR)"' \
++ 		  '-DDEF_GREETER_LIB="$(USRLIBDIR)/libXdmGreet.so"'
  
  ComplexProgramTarget_1(xdm,$(LOCAL_LIBRARIES),NullParameter)
-@@ -247,7 +247,7 @@
+ LinkConfDirectory(xdm,.,xdm,.)
+@@ -277,7 +277,7 @@
  #if BuildChooser
  SpecialCObjectRule(chooser, $(ICONFIGFILES), $(SOCK_DEFINES))
  NormalProgramTarget(chooser,$(OBJS3),$(DEPLIBS3),$(LIBS3),NullParameter)
@@ -73,15 +72,3 @@ diff -Nur XFree86-4.0.2.org/xc/programs/xdm/config/Xres.cpp XFree86-4.0.2/xc/pro
  #endif /* XPM */
  xlogin*failColor: red
  *Foreground: black
-diff -Nur XFree86-4.0.2.org/xc/programs/xdm/greeter/Imakefile XFree86-4.0.2/xc/programs/xdm/greeter/Imakefile
---- XFree86-4.0.2.org/xc/programs/xdm/greeter/Imakefile	Wed Jun 14 21:43:32 2000
-+++ XFree86-4.0.2/xc/programs/xdm/greeter/Imakefile	Thu Dec 21 13:20:13 2000
-@@ -77,8 +77,6 @@
-  DEFINES = $(GREETER_DEFINES) $(XDMAUTH_DEFINES) $(RPC_DEFINES) \
- 	   $(KRBIV_DEFINES) $(KRB5_DEFINES) $(PWD_DEFINES) $(PAM_DEFINES)
- 
--SHLIBDIR = $(XDMDIR)
--
- SRCS = greet.c verify.c Login.c
- OBJS = greet.o verify.o Login.o
- 

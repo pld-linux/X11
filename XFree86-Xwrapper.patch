@@ -17,32 +17,30 @@ diff -urN XFree86-4.1.0.orig/xc/config/cf/Server.tmpl XFree86-4.1.0/xc/config/cf
  #endif
  
  /*
-diff -urN XFree86-4.1.0.orig/xc/config/cf/xf86site.def XFree86-4.1.0/xc/config/cf/xf86site.def
---- XFree86-4.1.0.orig/xc/config/cf/xf86site.def	Sun Jun 17 19:42:08 2001
-+++ XFree86-4.1.0/xc/config/cf/xf86site.def	Sun Jun 17 20:17:24 2001
-@@ -348,13 +348,15 @@
+--- XFree86-4.3.0/xc/config/cf/xf86site.def.orig	Wed May 14 16:38:12 2003
++++ XFree86-4.3.0/xc/config/cf/xf86site.def	Wed May 14 16:40:08 2003
+@@ -69,14 +69,15 @@
   */
  
  /*
 - * If you only run the X server under xdm the X servers don't need to be
 - * installed SetUID, and you may comment out the lines below.  If you run
 - * the servers by hand (with xinit or startx), then they do need to be
-- * installed SetUID on most OSs.
-- * Consult your system administrator before making the X server setuid.
+- * installed SetUID on most platforms.
 + * The X servers need to run as root on most OSs.  We're now using a
 + * wrapper in that case, but we still need to make it known that the
 + * servers need SetUID.  When only using xdm, this (and the wrapper)
 + * are not required.  Disabling this automatically disables use of the
 + * wrapper.
   *
--#define InstallXserverSetUID	NO
+- * Consult your system administrator before making the X server setuid.
 + * If you're only starting the Xservers with xdm set this to NO
-+ *
+  *
+-#define InstallXserverSetUID	NO
 +#define XserverNeedsSetUID	NO
   */
  
- /*
-diff -urN XFree86-4.1.0.orig/xc/config/cf/xfree86.cf XFree86-4.1.0/xc/config/cf/xfree86.cf
+ 
 --- XFree86-4.1.0.orig/xc/config/cf/xfree86.cf	Sun Jun 17 19:42:08 2001
 +++ XFree86-4.1.0/xc/config/cf/xfree86.cf	Sun Jun 17 20:17:24 2001
 @@ -720,12 +720,15 @@
