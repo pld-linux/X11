@@ -104,9 +104,6 @@ Patch27:	%{name}-makefile-fastbuild.patch
 Patch28:	%{name}-sparc-kbd.patch
 Patch29:	%{name}-glibc-charset.patch
 Patch30:	%{name}-radeon-entervt.patch
-# XXX: two following currently not applied
-Patch31:	XFree86-lock.patch
-Patch32:	%{name}-setxkbmap.patch
 # tdfx-fix-vtswitch-font-corruption - not applied, needs check
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
