@@ -48,7 +48,7 @@ case "$1" in
 	;;
   reload)
 	if [ -f /var/lock/subsys/xfs ]; then
-		msg_Reloading "X Font Server"
+		msg_reloading "X Font Server"
 		killproc xfs -USR1
 		deltext;
 		ok;
