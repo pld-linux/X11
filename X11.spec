@@ -116,6 +116,7 @@ Patch60:	%{name}-oldkeyb.patch
 Patch61:	%{name}-sparc64-asmfix.patch
 Patch62:	%{name}-sparc64-v9fix.patch
 Patch63:	%{name}-pci-build.patch
+Patch64:	%{name}-glxinfo-link.patch
 # XFree86-tdfx-fix-vtswitch-font-corruption.patch - issue still not fixed,
 # but patch doesn't help either; however, it occurs in text mode only, not
 # with tdfxfb, which is worth using anyway
@@ -1967,14 +1968,13 @@ cd -
 %patch34 -p0
 %patch35 -p0
 %patch50 -p1
-%ifarch sparc sparc64
 %patch60 -p0
 %patch61 -p1
 %patch62 -p1
 %patch63 -p1
-%endif
+%patch64 -p1
 %{?with_dualhead:%patch100 -p1}
-#patch101 -p1
+%patch101 -p1
 
 %build
 PWD=`pwd`
