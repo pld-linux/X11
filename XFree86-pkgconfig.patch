@@ -1,0 +1,33 @@
+--- xc/lib/Xcursor/Imakefile~	Thu Sep 26 09:52:01 2002
++++ xc/lib/Xcursor/Imakefile	Tue Jan 14 01:38:12 2003
+@@ -69,7 +69,7 @@
+ 	RemoveFile($@)
+ 	sh config-subst $(SUBSTVARS) < xcursor.pc.in > $@
+ 
+-InstallNonExecFile(xcursor.pc,$(USRLIBDIR)/pkgconfig)
++InstallNonExecFile(xcursor.pc,/usr/lib/pkgconfig)
+ 
+ clean::
+ 	RemoveFile(xcursor.pc)
+--- xc/lib/Xft/Imakefile~	Thu Nov 14 22:01:18 2002
++++ xc/lib/Xft/Imakefile	Tue Jan 14 03:09:43 2003
+@@ -132,7 +132,7 @@
+ 	RemoveFile($@)
+ 	sh config/config-subst $(SUBSTVARS) < xft.pc.in > $@
+ 
+-InstallNonExecFile(xft.pc,$(USRLIBDIR)/pkgconfig)
++InstallNonExecFile(xft.pc,/usr/lib/pkgconfig)
+ 
+ clean::
+ 	RemoveFile(xft.pc)
+--- xc/lib/fontconfig/Imakefile~	Fri Jan  3 19:54:11 2003
++++ xc/lib/fontconfig/Imakefile	Tue Jan 14 03:12:17 2003
+@@ -83,7 +83,7 @@
+ 	RemoveFile($@)
+ 	sh config/config-subst $(SUBSTVARS) < fontconfig.pc.in > $@
+ 
+-InstallNonExecFile(fontconfig.pc,$(USRLIBDIR)/pkgconfig)
++InstallNonExecFile(fontconfig.pc,/usr/lib/pkgconfig)
+ 
+ clean::
+ 	RemoveFile(fontconfig.pc)
