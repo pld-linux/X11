@@ -111,6 +111,7 @@ Patch29:	%{name}-radeon-entervt.patch
 Patch31:	%{name}-i810fb.patch
 Patch33:	p_i810dri-memfix.diff
 Patch50:	%{name}-glibc-locale_sync.patch
+Patch60:	%{name}-oldkeyb.patch
 # XFree86-tdfx-fix-vtswitch-font-corruption.patch - issue still not fixed,
 # but patch doesn't help either; however, it occurs in text mode only, not
 # with tdfxfb, which is worth using anyway
@@ -1963,6 +1964,9 @@ cd xc
 cd -
 %patch31 -p0
 %patch50 -p1
+%ifarch sparc sparc64
+%patch60 -p0
+%endif
 %{?with_dualhead:%patch100 -p1}
 
 %build
