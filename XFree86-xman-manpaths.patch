@@ -1,0 +1,11 @@
+--- XFree86-4.2.0/xc/programs/xman/vendor.h.orig	Sun Mar 17 01:50:17 2002
++++ XFree86-4.2.0/xc/programs/xman/vendor.h	Sun Mar 17 01:54:57 2002
+@@ -77,7 +77,7 @@
+ #  define SYSMANPATH "/usr/catman/u_man:/usr/catman/a_man"
+ #elif defined(__bsdi__)
+ #  define SYSMANPATH "/usr/share/man:/usr/contrib/man:/usr/contrib/isode/man:/usr/local/man"
+-#elif defined(__OpenBSD__)
++#elif defined(__OpenBSD__) || defined(linux)
+ #  define SYSMANPATH "/usr/share/man:/usr/local/man:/usr/X11R6/man"
+ #elif defined(SVR4) || defined(__osf__) || (defined(BSD) && (BSD >= 199103))
+ #  define SYSMANPATH "/usr/share/man"
