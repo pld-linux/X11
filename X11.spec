@@ -1972,7 +1972,7 @@ cd -
 %patch62 -p1
 %endif
 %{?with_dualhead:%patch100 -p1}
-%patch101 -p1
+#patch101 -p1
 
 %build
 PWD=`pwd`
