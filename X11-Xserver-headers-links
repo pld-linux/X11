@@ -1,0 +1,13 @@
+ln -sf ../hw/xfree86/common/xf86Module.h programs/Xserver/include/xf86Module.h
+ln -sf ../hw/xfree86/common/xf86Opt.h programs/Xserver/include/xf86Opt.h
+ln -sf ../hw/xfree86/os-support/xf86_libc.h programs/Xserver/include/xf86_libc.h
+ln -sf ../hw/xfree86/os-support/xf86_ansic.h programs/Xserver/include/xf86_ansic.h
+ln -sf ../hw/xfree86/xf86Version.h programs/Xserver/include/xf86Version.h
+ln -sf ../hw/xfree86/common/compiler.h programs/Xserver/include/compiler.h
+#ln -sf ../os/osdep.h programs/Xserver/include/osdep.h
+ln -sf ../../../../lib/GL/dri/xf86dri.h programs/Xserver/GL/dri/xf86dri.h
+ln -sf ../../../../lib/GL/dri/xf86dristr.h programs/Xserver/GL/dri/xf86dristr.h
+install -d programs/Xserver/hw/xfree86/os-support/linux/drm/kernel
+ln -sf ../../../shared/drm/kernel/drm.h programs/Xserver/hw/xfree86/os-support/linux/drm/kernel/drm.h
+ln -sf ../xf86Version.h programs/Xserver/hw/xfree86/common/xf86Version.h
+ln -sf ../os-support/bus/xf86Pci.h programs/Xserver/hw/xfree86/common/xf86Pci.h
