@@ -1,0 +1,13 @@
+--- XFree86-4.0.1Z/xc/config/cf/Library.tmpl.pic	Wed Dec 13 16:19:03 2000
++++ XFree86-4.0.1Z/xc/config/cf/Library.tmpl	Wed Dec 13 16:19:28 2000
+@@ -147,8 +147,8 @@
+ #  define _NormalCleanDir() LibCleanDir(unshared)
+ # else
+ #  define _NormalLibMkdir() $(_NULLCMD_)
+-#  define _NormalObjCompile(options) NormalLibObjCompile(options)
+-#  define _NormalObjCplusplusCompile(options) NormalLibObjCplusplusCompile(options)
++#  define _NormalObjCompile(options) NormalLibObjCompile(options $(PICFLAGS))
++#  define _NormalObjCplusplusCompile(options) NormalLibObjCplusplusCompile(options $(PICFLAGS))
+ #  define _NormalCleanDir() $(_NULLCMD_)
+ # endif
+ #endif

@@ -1,0 +1,572 @@
+--- XFree86-4.0.1/xc/config/cf/Imake.rules.pmake	Wed Oct 25 13:16:57 2000
++++ XFree86-4.0.1/xc/config/cf/Imake.rules	Wed Oct 25 15:51:01 2000
+@@ -1027,7 +1027,7 @@
+ 	MoveToBakFile($@)						@@\
+ 	LinkRule($@,$(LDOPTIONS),objects,libs $(LDLIBS) syslibs) @@\
+ 									@@\
+-Concat(load,server):							@@\
++Concat(load,server): subdirs objects libs				@@\
+ 	MoveToBakFile(ProgramTargetName(server))			@@\
+ 	LinkRule(ProgramTargetName(server),$(LDOPTIONS),objects,libs $(LDLIBS) syslibs) @@\
+ 									@@\
+@@ -2633,6 +2633,10 @@
+ #endif
+ 
+ 
++#ifndef SubdirsTarget
++#define SubdirsTarget	all
++#endif
++
+ /*
+  * LangNamedTargetSubdirs - recursively make a series of steps
+  */
+@@ -2662,7 +2666,7 @@
+ 
+ #ifndef LangMakeSubdirs
+ #define LangMakeSubdirs(lang,dirs)					@@\
+-LangNamedMakeSubdirs(lang,all,dirs)
++LangNamedMakeSubdirs(lang,SubdirsTarget,dirs)
+ #endif /* LangMakeSubdirs */
+ 
+ 
+@@ -2696,8 +2700,19 @@
+ 
+ #ifndef MakeSubdirs
+ #define MakeSubdirs(dirs)						@@\
+-NamedMakeSubdirs(all,dirs)
++NamedMakeSubdirs(SubdirsTarget,dirs)
+ #endif /* MakeSubdirs */
++
++#ifndef MakeSubdirsDep
++#define MakeSubdirsDep(dirs,dep)					@@\
++all:: dep								@@\
++	@MakeFlagsToShellFlags(ik,set +e); \				@@\
++	for i in dirs ;\						@@\
++	do \								@@\
++		echo "making" all "in $(CURRENT_DIR)/$$i..."; \		@@\
++		MakeNamedTargetSubdir ($$i,PassCDebugFlags,all);\	@@\
++	done
++#endif /* MakeSubdirsDep */
+ 
+ 
+ /*
+--- XFree86-4.0.1/xc/lib/GL/Imakefile.pmake	Sun Sep 24 15:50:59 2000
++++ XFree86-4.0.1/xc/lib/GL/Imakefile	Wed Oct 25 15:51:38 2000
+@@ -3,6 +3,8 @@
+ #include <Threads.tmpl>
+ 
+ #define IHaveSubdirs
++#undef SubdirsTarget
++#define SubdirsTarget all.subdirs
+ 
+ #define PassCDebugFlags
+ 
+@@ -292,11 +294,11 @@
+ 
+ 
+ #if NormalLibGlx
+-NormalDepLibraryTarget($(LIBNAME),$(GLXSUBDIRS) $(DONES),$(UOBJS))
++NormalDepLibraryTarget($(LIBNAME),all.subdirs,$(UOBJS))
+ InstallLibrary($(LIBNAME),$(USRLIBDIR))
+ #endif
+ #if SharedLibGlx
+-SharedDepLibraryTarget($(LIBNAME),$(SOREV),$(GLXSUBDIRS) $(DONES),$(OBJS) $(THREADOBJS),.,.)
++SharedDepLibraryTarget($(LIBNAME),$(SOREV),all.subdirs,$(OBJS) $(THREADOBJS),.,.)
+ InstallSharedLibrary($(LIBNAME),$(SOREV),$(SHLIBDIR))
+ #if LinkGLToUsrLib && AlternateUsrLibDir
+ install::
+@@ -308,11 +310,11 @@
+ #endif
+ #endif
+ #if DebugLibGlx
+-DebuggedDepLibraryTarget($(LIBNAME),$(GLXSUBDIRS) $(DONES),$(DOBJS))
++DebuggedDepLibraryTarget($(LIBNAME),all.subdirs,$(DOBJS))
+ InstallLibrary($(LIBNAME)_d,$(USRLIBDIR))
+ #endif
+ #if ProfileLibGlx
+-ProfiledDepLibraryTarget($(LIBNAME),$(GLXSUBDIRS) $(DONES),$(POBJS))
++ProfiledDepLibraryTarget($(LIBNAME),all.subdirs,$(POBJS))
+ InstallLibrary($(LIBNAME)_p,$(USRLIBDIR))
+ #endif
+ 
+@@ -320,7 +322,11 @@
+ 
+ #if BuildXF86DRI && !GlxUseSGISI && (!GlxBuiltInMesa || !defined(GlxDriverUsesMesa))
+ OSMESASUBDIRS = mesa/src/OSmesa
+-MakeSubdirs($(OSMESASUBDIRS))
++#if SharedLibGlx
++MakeSubdirsDep($(OSMESASUBDIRS),lib$(LIBNAME).so.$(SOREV))
++#else
++MakeSubdirsDep($(OSMESASUBDIRS),lib$(LIBNAME).a)
++#endif
+ #endif
+ 
+ 
+@@ -339,7 +345,11 @@
+ 
+ DRIVERSUBDIRS = mesa/src/drv
+ 
+-MakeSubdirs($(DRIVERSUBDIRS))
++#if SharedLibGlx
++MakeSubdirsDep($(DRIVERSUBDIRS),lib$(LIBNAME).so.$(SOREV))
++#else
++MakeSubdirsDep($(DRIVERSUBDIRS),lib$(LIBNAME).a)
++#endif
+ 
+ #endif
+ 
+--- XFree86-4.0.1/xc/lib/font/Imakefile.pmake	Tue Sep 19 14:46:06 2000
++++ XFree86-4.0.1/xc/lib/font/Imakefile	Wed Oct 25 15:54:16 2000
+@@ -3,6 +3,8 @@
+ #include <Server.tmpl>
+ 
+ #define	IHaveSubdirs
++#undef SubdirsTarget
++#define SubdirsTarget all.subdirs
+ 
+ #define DoNormalLib NormalLibFont
+ #define DoSharedLib SharedLibFont
+@@ -119,31 +121,30 @@
+ #define _LinkBuildLibrary(lib) LinkBuildLibrary(lib)
+ 
+ #if NormalLibFont
+-NormalDepLibraryTarget($(LIBNAME),$(SUBDIRS) $(DONES),$(STATIC_OBJS))
++NormalDepLibraryTarget($(LIBNAME),all.subdirs,$(STATIC_OBJS))
+ InstallLibrary($(LIBNAME),$(USRLIBDIR))
+ #endif /* NormalLibFont */
+ 
+ #if SharedLibFont
+-SharedDepLibraryTarget($(LIBNAME),$(SOREV),$(SUBDIRS) $(DONES),$(SHARED_OBJS),.,.)
++SharedDepLibraryTarget($(LIBNAME),$(SOREV),all.subdirs,$(SHARED_OBJS),.,.)
+ InstallSharedLibrary($(LIBNAME),$(SOREV),$(SHLIBDIR))
+ #endif /* SharedLibFont */
+ 
+ #if DebugLibFont
+-DebuggedDepLibraryTarget(Xfont,$(SUBDIRS) $(DONES),$(DEBUG_OBJS))
++DebuggedDepLibraryTarget(Xfont,all.subdirs,$(DEBUG_OBJS))
+ InstallLibrary($(LIBNAME)_d,$(USRLIBDIR))
+ #endif /* DebugLibFont */
+ 
+ #if ProfileLibFont
+-ProfiledDepLibraryTarget(Xfont,$(SUBDIRS) $(DONES),$(PROFILE_OBJS))
++ProfiledDepLibraryTarget(Xfont,all.subdirs,$(PROFILE_OBJS))
+ InstallLibrary($(LIBNAME)_p,$(USRLIBDIR))
+ #endif /* ProfileLibFont */
+ 
+ #if BuildServer && DoLoadableServer
+-NormalDepLibraryTarget(fontbase,$(BASEDIRS) $(BASEDONES),$(BASELIBOBJS))
+-NormalDepRelocatableTarget(fontbase,$(BASEDIRS) $(BASEDONES),$(BASEOBJS))
++NormalDepLibraryTarget(fontbase,all.subdirs,$(BASELIBOBJS))
++NormalDepRelocatableTarget(fontbase,all.subdirs,$(BASEOBJS))
+ #endif
+ 
+-
+-ForceSubdirs($(SUBDIRS))
++MakeSubdirs($(SUBDIRS))
+ 
+ DependSubdirs($(SUBDIRS))
+--- XFree86-4.0.1/xc/lib/lbxutil/Imakefile.pmake	Sat Apr 17 11:08:13 1999
++++ XFree86-4.0.1/xc/lib/lbxutil/Imakefile	Wed Oct 25 15:51:01 2000
+@@ -8,6 +8,8 @@
+ #include <Server.tmpl>
+ 
+ #define	IHaveSubdirs
++#undef SubdirsTarget
++#define SubdirsTarget all.subdirs
+ 
+ SUBDIRS = lbx_zlib delta image
+ 
+@@ -22,9 +24,9 @@
+ #undef _LinkBuildLibrary
+ #define _LinkBuildLibrary(lib) LinkBuildLibrary(lib)
+ 
+-NormalDepLibraryTarget(lbxutil,$(SUBDIRS) $(DONES),$(OBJS))
++NormalDepLibraryTarget(lbxutil,all.subdirs,$(OBJS))
+ 
+-ForceSubdirs($(SUBDIRS))
++MakeSubdirs($(SUBDIRS))
+ 
+ DependSubdirs($(SUBDIRS))
+ 
+--- XFree86-4.0.1/xc/programs/Xserver/GL/mesa/src/Imakefile.pmake	Sun Sep 24 15:51:22 2000
++++ XFree86-4.0.1/xc/programs/Xserver/GL/mesa/src/Imakefile	Wed Oct 25 15:51:01 2000
+@@ -4,6 +4,8 @@
+ #include <Server.tmpl>
+ 
+ #define IHaveSubdirs
++#undef SubdirsTarget
++#define SubdirsTarget all.subdirs
+ 
+       SUBDIRS = X
+ 
+@@ -367,9 +369,9 @@
+ 
+ ModuleObjectRule()
+ 
+-DepLibraryModuleTarget(GLcore,$(SUBDIRS) $(DONES) $(OBJS),$(OBJS) $(XOBJS))
++DepLibraryModuleTarget(GLcore,all.subdirs $(OBJS),$(OBJS) $(XOBJS))
+ InstallLibraryModule(GLcore,$(MODULEDIR),extensions)
+-ForceSubdirs($(SUBDIRS))
++MakeSubdirs($(SUBDIRS))
+ 
+ #else
+ MakeSubdirs($(SUBDIRS))
+--- XFree86-4.0.1/xc/programs/Xserver/GL/Imakefile.pmake	Fri Aug 25 00:20:08 2000
++++ XFree86-4.0.1/xc/programs/Xserver/GL/Imakefile	Wed Oct 25 15:51:01 2000
+@@ -4,6 +4,8 @@
+ #include <Server.tmpl>
+ 
+ #define IHaveSubdirs
++#undef SubdirsTarget
++#define SubdirsTarget all.subdirs
+ 
+ #if GlxUseSGISI
+  CORE_SUBDIR = /* opengl */
+@@ -42,10 +44,10 @@
+ 
+ ModuleObjectRule()
+ 
+-DepLibraryModuleTarget(glx,$(SUBDIRS) $(DONES) $(MOBJS),$(OBJS))
++DepLibraryModuleTarget(glx,all.subdirs $(MOBJS),$(OBJS))
+ 
+ InstallLibraryModule(glx,$(MODULEDIR),extensions)
+-ForceSubdirs($(SUBDIRS))
++MakeSubdirs($(SUBDIRS))
+ 
+ DependSubdirs($(SUBDIRS))
+ MakeLintLibSubdirs($(SUBDIRS))
+--- XFree86-4.0.1/xc/programs/Xserver/PEX5/Imakefile.pmake	Sat Aug 14 12:49:24 1999
++++ XFree86-4.0.1/xc/programs/Xserver/PEX5/Imakefile	Wed Oct 25 15:51:01 2000
+@@ -5,6 +5,8 @@
+ #include <Server.tmpl>
+ 
+ #define IHaveSubdirs
++#undef SubdirsTarget
++#define SubdirsTarget all.subdirs
+ 
+ #ifndef PexDipexCDebugFlags
+ #define PexDipexCDebugFlags ServerCDebugFlags 
+@@ -58,9 +60,9 @@
+ 
+ ModuleObjectRule()
+ 
+-DepLibraryModuleTarget(pex5,$(SUBDIRS) $(DONES) $(MOBJS),$(OBJS))
++DepLibraryModuleTarget(pex5,all.subdirs $(MOBJS),$(OBJS))
+ InstallLibraryModule(pex5,$(MODULEDIR),extensions)
+-ForceSubdirs($(SUBDIRS))
++MakeSubdirs($(SUBDIRS))
+ 
+ #else
+ MakeSubdirs($(SUBDIRS)) 
+--- XFree86-4.0.1/xc/programs/Xserver/XIE/dixie/Imakefile.pmake	Fri Aug 25 00:20:11 2000
++++ XFree86-4.0.1/xc/programs/Xserver/XIE/dixie/Imakefile	Wed Oct 25 15:54:12 2000
+@@ -10,6 +10,8 @@
+ DONES = request/DONE import/DONE process/DONE export/DONE 
+ 
+ #define	IHaveSubdirs
++#undef SubdirsTarget
++#define SubdirsTarget all.subdirs
+ 
+ 
+ #if HasParallelMake
+@@ -20,9 +22,9 @@
+ $(DONES): $(SUBDIRS)
+ #endif
+ 
+-DepLibraryModuleTarget(dixie,$(SUBDIRS) $(DONES),$(OBJS))
++DepLibraryModuleTarget(dixie,all.subdirs,$(OBJS))
+ 
+-ForceSubdirs($(SUBDIRS))
++MakeSubdirs($(SUBDIRS))
+ 
+ DependSubdirs($(SUBDIRS))
+ 
+--- XFree86-4.0.1/xc/programs/Xserver/XIE/mixie/Imakefile.pmake	Fri Aug 25 00:20:11 2000
++++ XFree86-4.0.1/xc/programs/Xserver/XIE/mixie/Imakefile	Wed Oct 25 15:54:48 2000
+@@ -15,6 +15,8 @@
+ #endif
+ 
+ #define	IHaveSubdirs
++#undef SubdirsTarget
++#define SubdirsTarget all.subdirs
+ 
+ 
+ #if HasParallelMake
+@@ -25,9 +27,9 @@
+ $(DONES): $(SUBDIRS)
+ #endif
+ 
+-DepLibraryModuleTarget(mixie,$(SUBDIRS) $(DONES),$(OBJS))
++DepLibraryModuleTarget(mixie,all.subdirs,$(OBJS))
+ 
+-ForceSubdirs($(SUBDIRS))
++MakeSubdirs($(SUBDIRS))
+ 
+ DependSubdirs($(SUBDIRS))
+ 
+--- XFree86-4.0.1/xc/programs/Xserver/XIE/Imakefile.pmake	Sat Aug 14 12:49:24 1999
++++ XFree86-4.0.1/xc/programs/Xserver/XIE/Imakefile	Wed Oct 25 15:51:01 2000
+@@ -5,6 +5,8 @@
+ #include <Server.tmpl>
+ 
+ #define IHaveSubdirs
++#undef SubdirsTarget
++#define SubdirsTarget all.subdirs
+ 
+ 
+      SUBDIRS = dixie mixie
+@@ -53,9 +55,9 @@
+ #endif
+ 
+ ModuleObjectRule()
+-DepLibraryModuleTarget(xie,$(SUBDIRS) $(DONES) $(MOBJS),$(OBJS))
++DepLibraryModuleTarget(xie,all.subdirs $(MOBJS),$(OBJS))
+ InstallLibraryModule(xie,$(MODULEDIR),extensions)
+-ForceSubdirs($(SUBDIRS))
++MakeSubdirs($(SUBDIRS))
+ 
+ DependTarget()
+ 
+--- XFree86-4.0.1/xc/programs/Xserver/hw/xfree86/drivers/Imakefile.pmake	Fri Oct 20 16:59:00 2000
++++ XFree86-4.0.1/xc/programs/Xserver/hw/xfree86/drivers/Imakefile	Wed Oct 25 15:51:01 2000
+@@ -46,7 +46,9 @@
+ 
+ NormalLibraryObjectRule()
+ 
++#if !DoLoadableServer
+ ForceSubdirs($(SUBDIRS))
++#endif
+ 
+ DependSubdirs($(SUBDIRS))
+ 
+--- XFree86-4.0.1/xc/programs/Xserver/hw/xfree86/input/Imakefile.pmake	Sun Mar  5 20:26:46 2000
++++ XFree86-4.0.1/xc/programs/Xserver/hw/xfree86/input/Imakefile	Wed Oct 25 15:51:01 2000
+@@ -3,6 +3,8 @@
+ #define IHaveModules
+ #include <Server.tmpl>
+ #define IHaveSubdirs
++#undef SubdirsTarget
++#define SubdirsTarget all.subdirs
+ 
+ #if JoystickSupport
+ JOYSTICKDIR = joystick
+@@ -33,7 +35,7 @@
+ $(DONES): $(SUBDIRS)
+ #endif
+ #if !DoLoadableServer
+-NormalDepLibraryTarget(idriver,$(SUBDIRS) $(DONES) idriver.list,$(OBJS))
++NormalDepLibraryTarget(idriver,all.subdirs idriver.list,$(OBJS))
+ #endif
+ #else
+ #if !DoLoadableServer
+@@ -51,7 +53,7 @@
+ 
+ NormalLibraryObjectRule()
+ 
+-ForceSubdirs($(SUBDIRS))
++MakeSubdirs($(SUBDIRS))
+ 
+ DependSubdirs($(SUBDIRS))
+ 
+--- XFree86-4.0.1/xc/programs/Xserver/hw/xfree86/os-support/Imakefile.pmake	Thu Aug 10 19:40:34 2000
++++ XFree86-4.0.1/xc/programs/Xserver/hw/xfree86/os-support/Imakefile	Wed Oct 25 15:51:01 2000
+@@ -9,6 +9,8 @@
+ #include <Server.tmpl>
+ 
+ #define IHaveSubdirs
++#undef SubdirsTarget
++#define SubdirsTarget all.subdirs
+ 
+ #if defined(i386Architecture) || defined(ia64Architecture) || \
+ 	(defined(LinuxArchitecture) && defined(AlphaArchitecture)) || \
+@@ -123,13 +125,13 @@
+ $(DONES): $(SUBDIRS)
+ #endif
+ 
+-NormalDepLibraryTarget(xf86_os,$(SUBDIRS) $(DONES),$(OBJS))
++NormalDepLibraryTarget(xf86_os,all.subdirs,$(OBJS))
+ 
+ #if !HasSnprintf
+ LinkSourceFile(snprintf.c,$(LIBSRC)/misc)
+ #endif
+ 
+-ForceSubdirs($(SUBDIRS))
++MakeSubdirs($(SUBDIRS))
+ 
+ DependSubdirs($(SUBDIRS))
+ 
+--- XFree86-4.0.1/xc/programs/Xserver/hw/xfree86/xaa/Imakefile.pmake	Wed Sep 20 04:05:41 2000
++++ XFree86-4.0.1/xc/programs/Xserver/hw/xfree86/xaa/Imakefile	Wed Oct 25 15:51:01 2000
+@@ -4,6 +4,8 @@
+ #include <Server.tmpl>
+ 
+ #define IHaveSubdirs
++#undef SubdirsTarget
++#define SubdirsTarget all.subdirs
+ 
+ EXPSRCS = lsb_first/?*.c msb_first/?*.c lsb_fixed/?*.c msb_fixed/?*.c
+ 
+@@ -52,14 +54,14 @@
+ ObjectFromSpecialSource(xaaSeg, xaaLine, -DPOLYSEGMENT)
+ ObjectFromSpecialSource(xaaDashSeg, xaaDashLine, -DPOLYSEGMENT)
+ 
+-DepLibraryModuleTarget(xaa, $(OBJS) $(SUBDIRS) $(DONES), $(OBJS) $(EXPOBJS))
++DepLibraryModuleTarget(xaa, $(OBJS) all.subdirs, $(OBJS) $(EXPOBJS))
+ 
+ InstallLibraryModule(xaa,$(MODULEDIR),.)
+ 
+ DependTarget()
+ 
+ 
+-ForceSubdirs($(SUBDIRS))
++MakeSubdirs($(SUBDIRS))
+ DependSubdirs($(SUBDIRS))
+ 
+ 
+--- XFree86-4.0.1/xc/programs/Xserver/Imakefile.pmake	Wed Oct 25 15:51:01 2000
++++ XFree86-4.0.1/xc/programs/Xserver/Imakefile	Wed Oct 25 15:51:01 2000
+@@ -662,7 +662,7 @@
+ MakeMutex($(XF86SERVERSUBDIRS) $(XF86SERVERLIBS) $(XF86SERVERSYSLIBS))
+ #endif
+ #if ForceServerRemake
+-$(XF86SERVERLIBS) $(XF86SERVERSYSLIBS):: $(XF86SERVERSUBDIRS)
++$(XF86SERVEROBJS) $(XF86SERVERLIBS) $(XF86SERVERSYSLIBS):: all.subdirs
+ 	@if [ -f $@ ]; then touch $@; fi
+ #endif
+ SetUIDServerTarget(XFree86,$(XF86SERVERSUBDIRS),$(XF86SERVEROBJS),$(XF86SERVERLIBS),$(XF86SERVERSYSLIBS))
+@@ -724,7 +724,7 @@
+ MakeMutex($(FBDEVDIRS) $(FBDEVOBJS) $(FBDEVLIBS) $(FBDEVSYSLIBS))
+ #endif
+ #if ForceServerRemake
+-$(FBDEVOBJS) $(XFBDEV) $(FBDEVLIBS) $(FBDEVSYSLIBS):: $(FBDEVDIRS)
++$(FBDEVOBJS) $(FBDEVLIBS) $(FBDEVSYSLIBS):: all.subdirs
+ 	@if [ -f $@ ]; then touch $@; fi
+ #endif
+ ServerTarget(Xfbdev,$(FBDEVDIRS),$(FBDEVOBJS),$(FBDEVLIBS),$(FBDEVSYSLIBS))
+@@ -749,7 +749,7 @@
+ MakeMutex($(SAVAGEDIRS) $(SAVAGEOBJS) $(SAVAGELIBS) $(SAVAGESYSLIBS))
+ #endif
+ #if ForceServerRemake
+-$(SAVAGEOBJS) $(XSAVAGE) $(SAVAGELIBS) $(SAVAGESYSLIBS):: $(SAVAGEDIRS)
++$(SAVAGEOBJS) $(SAVAGELIBS) $(SAVAGESYSLIBS):: all.subdirs
+ 	@if [ -f $@ ]; then touch $@; fi
+ #endif
+ ServerTarget(Xsavage,$(SAVAGEDIRS),$(SAVAGEOBJS),$(SAVAGELIBS),$(SAVAGESYSLIBS))
+@@ -804,7 +804,7 @@
+ MakeMutex($(TRIDENTDIRS) $(TRIDENTLIBS) $(TRIDENTSYSLIBS))
+ #endif
+ #if ForceServerRemake
+-$(TRIDENTOBJS) $(TRIDENTLIBS) $(TRIDENTSYSLIBS):: $(TRIDENTDIRS)
++$(TRIDENTOBJS) $(TRIDENTLIBS) $(TRIDENTSYSLIBS):: all.subdirs
+ 	@if [ -f $@ ]; then touch $@; fi
+ #endif
+ ServerTarget(Xtrident,$(TRIDENTDIRS),$(TRIDENTOBJS),$(TRIDENTLIBS),$(TRIDENTSYSLIBS))
+@@ -829,7 +829,7 @@
+ MakeMutex($(SIS530DIRS) $(SIS530OBJS) $(SIS530LIBS) $(SIS530SYSLIBS))
+ #endif
+ #if ForceServerRemake
+-$(SIS530OBJS) $(SIS530LIBS) $(SIS530SYSLIBS):: $(SIS530DIRS)
++$(SIS530OBJS) $(SIS530LIBS) $(SIS530SYSLIBS):: all.subdirs
+ 	@if [ -f $@ ]; then touch $@; fi
+ #endif
+ ServerTarget(Xsis530,$(SIS530DIRS),$(SIS530OBJS),$(SIS530LIBS),$(SIS530SYSLIBS))
+@@ -854,7 +854,7 @@
+ MakeMutex($(TRIODIRS) $(TRIOOBJS) $(TRIOLIBS) $(TRIOSYSLIBS))
+ #endif
+ #if ForceServerRemake
+-$(TRIOOBJS) $(TRIOLIBS) $(TRIOSYSLIBS):: $(TRIODIRS)
++$(TRIOOBJS) $(TRIOLIBS) $(TRIOSYSLIBS):: all.subdirs
+ 	@if [ -f $@ ]; then touch $@; fi
+ #endif
+ ServerTarget(Xtrio,$(TRIODIRS),$(TRIOOBJS),$(TRIOLIBS),$(TRIOSYSLIBS))
+@@ -885,7 +885,7 @@
+ MakeMutex($(TS300DIRS) $(TS300OBJS) $(TS300LIBS) $(TS300SYSLIBS))
+ #endif
+ #if ForceServerRemake
+-$(TS300OBJS) $(TS300LIBS) $(TS300SYSLIBS):: $(TS300DIRS)
++$(TS300OBJS) $(TS300LIBS) $(TS300SYSLIBS):: all.subdirs
+ 	@if [ -f $@ ]; then touch $@; fi
+ #endif
+ ServerTarget(Xts300,$(TS300DIRS),$(TS300OBJS),$(TS300LIBS),$(TS300SYSLIBS))
+@@ -909,7 +909,7 @@
+ MakeMutex($(ITSYDIRS) $(ITSYOBJS) $(ITSYLIBS) $(ITSYSYSLIBS))
+ #endif
+ #if ForceServerRemake
+-$(ITSYOBJS) $(ITSYLIBS) $(ITSYSYSLIBS):: $(ITSYDIRS)
++$(ITSYOBJS) $(ITSYLIBS) $(ITSYSYSLIBS):: all.subdirs
+ 	@if [ -f $@ ]; then touch $@; fi
+ #endif
+ ServerTarget(Xitsy,$(ITSYDIRS),$(ITSYOBJS),$(ITSYLIBS),$(ITSYSYSLIBS))
+@@ -973,7 +973,7 @@
+ MakeMutex($(XPSUBDIRS) $(XPOBJS) $(XPLIBS) $(XPSYSLIBS))
+ #endif
+ #if ForceServerRemake
+-$(XPOBJS) $(XPLIBS) $(XPSYSLIBS):: $(XPSUBDIRS)
++$(XPOBJS) $(XPLIBS) $(LOADABLEEXTS) $(LIBCWRAPPER) $(XPSYSLIBS):: all.subdirs
+ 	@if [ -f $@ ]; then touch $@; fi
+ #endif
+ ServerTarget(Xprt,$(XPSUBDIRS),$(XPOBJS),$(XPLIBS) $(LOADABLEEXTS) $(LIBCWRAPPER),$(XPSYSLIBS))
+@@ -1005,7 +1005,7 @@
+ MakeMutex($(XNESTDIRS) $(XNESTOBJS) $(XNESTLIBS) $(XNESTSYSLIBS))
+ #endif
+ #if ForceServerRemake
+-$(XNESTOBJS) $(XNESTLIBS) $(XNESTSYSLIBS):: $(XNESTDIRS)
++$(XNESTOBJS) $(XNESTLIBS) $(LOADABLEEXTS) $(LIBCWRAPPER) $(XNESTSYSLIBS):: all.subdirs
+ 	@if [ -f $@ ]; then touch $@; fi
+ #endif
+ ServerTarget(Xnest,$(XNESTDIRS),$(XNESTOBJS), \
+@@ -1070,7 +1070,7 @@
+ MakeMutex($(XVFBDIRS) $(XVFBOBJS) $(XVFB) $(XVFBLIBS) $(XVFBSYSLIBS))
+ #endif
+ #if ForceServerRemake
+-$(XVFBOBJS) $(XVFB) $(XVFBLIBS) $(XVFBSYSLIBS):: $(XVFBDIRS)
++$(XVFBOBJS) $(XVFB) $(XVFBLIBS) $(LOADABLEEXTS) $(LIBCWRAPPER) $(XVFBSYSLIBS):: all.subdirs
+ 	@if [ -f $@ ]; then touch $@; fi
+ #endif
+ ServerTarget(Xvfb,$(XVFBDIRS),$(XVFBOBJS), \
+@@ -1130,11 +1130,13 @@
+ #endif
+ 
+ #define IHaveSubdirs
++#undef SubdirsTarget
++#define SubdirsTarget all.subdirs
+ 
+ DependSubdirs($(SUBDIRS))
+ MakeLintLibSubdirs($(SUBDIRS))
+ LintSubdirs($(SUBDIRS))
+ 
+-ForceSubdirs($(DEPDIRS) $(SUBDIRS))
++MakeSubdirs($(DEPDIRS) $(SUBDIRS))
+ 
+ InstallManPage(Xserver,$(MANDIR))
+--- XFree86-4.0.1/xc/programs/xkbcomp/Imakefile.pmake	Mon Jan 31 20:33:45 2000
++++ XFree86-4.0.1/xc/programs/xkbcomp/Imakefile	Wed Oct 25 15:51:01 2000
+@@ -48,7 +48,7 @@
+ 
+ LinkBuildBinary(ProgramTargetName(xkbcomp))
+ 
+-MakeSubdirs($(SUBDIRS))
++MakeSubdirsDep($(SUBDIRS),$(BUILDBINDIR)/xkbcomp)
+ 
+ #ifdef OS2Architecture
+ all::
+--- XFree86-4.0.1/xc/Makefile.pmake	Wed Mar 22 22:23:30 2000
++++ XFree86-4.0.1/xc/Makefile	Wed Oct 25 15:51:01 2000
+@@ -63,6 +63,7 @@
+ 	$(MAKE_CMD) $(MFLAGS) Makefiles
+ 	$(MAKE_CMD) $(MFLAGS) clean BOOTSTRAPSUBDIRS=
+ 	$(MAKE_CMD) $(MFLAGS) includes
++	$(MAKE) -C $(CONFIGSRC)/util gccmakedep
+ 	$(MAKE_CMD) $(MFLAGS) depend
+ 	$(MAKE_CMD) $(MFLAGS) $(WORLDOPTS) World
+ 	@echo ""
+@@ -88,7 +89,8 @@
+ 
+ depend.bootstrap: $(DEPENDSRC)/Makefile.proto
+ 	cd $(DEPENDSRC) && $(RM) -r Makefile Makefile.dep makedepend *.o bootstrap
+-	cd $(DEPENDSRC) && $(MAKE) -f Makefile.proto bootstrap
++	cd $(IMAKESRC) && mkdir X11 && cd X11 && ln -s ../../../include/* .
++	cd $(DEPENDSRC) && $(MAKE) -f Makefile.proto makedepend
+ 
+ $(IMAKESRC)/Makefile.proto: depend.bootstrap
+ 	$(IMAKE_CMD) -s $(IMAKESRC)/Makefile.proto -f $(IMAKESRC)/Imakefile -DTOPDIR=$(IMAKETOP) -DCURDIR=$(IMAKESRC) -DBootStrap
