@@ -6,7 +6,7 @@ diff -ur X11-6.8.1/xc/include/Xmd.h X11-modified/xc/include/Xmd.h
  #define WORD64				/* 64-bit architecture */
  #endif
 +
-+#if defined(__sparc_v9__)
++#if defined(__sparc__) && defined(__arch64__)
 +#define __sparc64__
 +#endif
 +
