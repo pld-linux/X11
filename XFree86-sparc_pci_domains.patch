@@ -1,0 +1,1728 @@
+This patch by David S. Miller.
+
+--- XFree86-4.1.0/xc/config/cf/linux.cf.~1~	Sun Jun  3 19:44:40 2001
++++ XFree86-4.1.0/xc/config/cf/linux.cf	Sun Jun  3 19:44:48 2001
+@@ -720,7 +720,7 @@
+ # endif
+ # define LinuxMachineDefines	-D__sparc__
+ # define ServerOSDefines	XFree86ServerOSDefines -DDDXTIME -DPART_NET
+-# define ServerExtraDefines	-DGCCUSESGAS XFree86ServerDefines
++# define ServerExtraDefines	-DHAVE_DOMAINS -DGCCUSESGAS XFree86ServerDefines
+ # define AsVISOption		-Av9a
+ # ifdef Sparc64Architecture
+ #  define AsOutputArchSize	64
+--- XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/common/xf86.h.~1~	Sun Jun  3 19:44:40 2001
++++ XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/common/xf86.h	Sun Jun  3 19:44:48 2001
+@@ -121,10 +121,18 @@
+ resPtr xf86ReallocatePciResources(int entityIndex, resPtr pRes);
+ resPtr xf86SetOperatingState(resList list, int entityIndex, int mask);
+ void xf86EnterServerState(xf86State state);
+-resRange xf86GetBlock(long type, memType size,
++resRange xf86GetBlock(long type,
++#ifdef HAVE_DOMAINS
++		      int domain,
++#endif
++		      memType size,
+ 		      memType window_start, memType window_end,
+ 		      memType align_mask, resPtr avoid);
+-resRange xf86GetSparse(long type,  memType fixed_bits,
++resRange xf86GetSparse(long type,
++#ifdef HAVE_DOMAINS
++		       int domain,
++#endif
++		       memType fixed_bits,
+ 		       memType decode_mask, memType address_mask,
+ 		       resPtr avoid);
+ memType xf86ChkConflict(resRange *rgp, int entityIndex);
+--- XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/common/xf86Bus.c.~1~	Sun Jun  3 19:44:40 2001
++++ XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/common/xf86Bus.c	Sun Jun  3 19:44:48 2001
+@@ -393,6 +393,9 @@
+     resPtr res = Acc;
+ 
+     while (res) {
++	/* NOTE: Assumes that entities live inside of a single
++	 * domain.
++	 */
+ 	if (res->entityIndex == entityIndex &&
+ 	    (type & ResAccMask & res->res_type))
+ 	{
+@@ -895,6 +898,14 @@
+     memType val,tmp,prev;
+     int i;
+     
++#ifdef HAVE_DOMAINS
++    /* A resource cannot conflict with a range in a different
++     * domain.
++     */
++    if (pRes->res_domain != range->domain)
++	return 0;
++#endif
++
+     switch (pRes->res_type & ResExtMask) {
+     case ResBlock:
+ 	if (range->rBegin < pRes->block_end &&
+@@ -953,6 +964,14 @@
+     memType val, tmp, prev;
+     int i;
+     
++#ifdef HAVE_DOMAINS
++    /* A resource cannot conflict with a range in a different
++     * domain.
++     */
++    if (pRes->res_domain != range->domain)
++	return 0;
++#endif
++
+     switch (pRes->res_type & ResExtMask) {
+     case ResSparse:
+ 	tmp = pRes->sparse_mask & range->rMask;
+@@ -1020,7 +1039,7 @@
+  * depending on the types of the resource ranges and their locations
+  */
+ static Bool
+-needCheck(resPtr pRes, long type, int entityIndex, xf86State state)
++needCheck(resPtr pRes, long type, int domain, int entityIndex, xf86State state)
+ {
+     /* the same entity shouldn't conflict with itself */
+     ScrnInfoPtr pScrn;
+@@ -1031,6 +1050,14 @@
+     if (!(pRes->res_type & type & ResPhysMask)) 
+         return FALSE;
+ 
++#ifdef HAVE_DOMAINS
++    /* A resource cannot conflict with something in a different
++     * domain.
++     */
++    if (pRes->res_domain != domain)
++	return FALSE;
++#endif
++
+     /*
+      * Resources set by BIOS (ResBios) are allowed to conflict
+      * with resources marked (ResBios).
+@@ -1111,7 +1138,11 @@
+     memType ret;
+     
+     while(pRes) {
+-	if (!needCheck(pRes,rgp->type, entityIndex ,state)) { 
++	int domain = 0;
++#ifdef HAVE_DOMAINS
++	domain = rgp->domain;
++#endif
++	if (!needCheck(pRes,rgp->type,domain,entityIndex,state)) { 
+ 	    pRes = pRes->next;                    
+ 	    continue;                             
+ 	}
+@@ -1274,16 +1305,20 @@
+     while (1) {
+ 	while (list) {
+ 	    if ((list->res_type & ResPhysMask) == type) {
++		int domain = 0;
++#ifdef HAVE_DOMAINS
++		domain = list->res_domain;
++#endif
+ 		switch (list->res_type & ResExtMask) {
+ 		case ResBlock:
+-		    xf86ErrorFVerb(verb, "\t[%d] %d\t0x%08x - 0x%08x (0x%x)",
+-				   i, list->entityIndex, list->block_begin,
++		    xf86ErrorFVerb(verb, "\t[%d] %d %x\t0x%08x - 0x%08x (0x%x)",
++				   i, list->entityIndex, domain, list->block_begin,
+ 				   list->block_end,
+ 				   list->block_end - list->block_begin + 1);
+ 		    break;
+ 		case ResSparse:
+-		    xf86ErrorFVerb(verb, "\t[%d] %d\t0x%08x - 0x%08x ",
+-				   i, list->entityIndex,
++		    xf86ErrorFVerb(verb, "\t[%d] %d %x\t0x%08x - 0x%08x ",
++				   i, list->entityIndex, domain,
+ 				   list->sparse_base,list->sparse_mask);
+ 		    break;
+ 		default:
+@@ -1408,6 +1443,9 @@
+ 	if (pRes != target
+ 	    && ((pRes->res_type & ResPhysMask) ==
+ 		(target->res_type & ResPhysMask))
++#ifdef HAVE_DOMAINS
++	    && pRes->res_domain == target->res_domain
++#endif
+ 	    && pRes->block_begin <= target->block_end
+ 	    && pRes->block_end >= target->block_begin) {
+ 	    /* Possibly ignore estimated resources */
+@@ -1460,12 +1498,16 @@
+ #define ALIGN(x,a) ((x) + a) &~(a)
+ 
+ resRange 
+-xf86GetBlock(long type, memType size,
++xf86GetBlock(long type,
++#ifdef HAVE_DOMAINS
++	 int domain,
++#endif
++	 memType size,
+ 	 memType window_start, memType window_end,
+ 	 memType align_mask, resPtr avoid)
+ {
+     memType min, max, tmp;
+-    resRange r = {ResEnd,0,0};
++    resRange r = _END;
+     resPtr res_range = ResRange;
+     
+     if (!size) return r;
+@@ -1478,7 +1520,11 @@
+     type = (type & ~(ResExtMask | ResBios | ResEstimated)) | ResBlock;
+     
+     while (res_range) {
+-	if (type & res_range->res_type & ResPhysMask) {
++	if ((type & res_range->res_type & ResPhysMask)
++#ifdef HAVE_DOMAINS
++	    && (domain == res_range->res_domain)
++#endif
++		) {
+ 	    if (res_range->block_begin > window_start)
+ 		min = res_range->block_begin;
+ 	    else
+@@ -1490,7 +1536,7 @@
+ 	    min = ALIGN(min,align_mask);
+ 	    /* do not produce an overflow! */
+ 	    while (min < max && (max - min) >= (size - 1)) {
+-		RANGE(r,min,min + size - 1,type);
++		RANGE(r,min,min + size - 1,type,domain);
+ 		tmp = ChkConflict(&r,Acc,SETUP);
+ 		if (!tmp) {
+ 		    tmp = ChkConflict(&r,avoid,SETUP);
+@@ -1503,7 +1549,7 @@
+ 	}
+ 	res_range = res_range->next;
+     }
+-    RANGE(r,0,0,ResEnd);
++    RANGE(r,0,0,ResEnd,domain);
+     return r;
+ }
+ 
+@@ -1557,10 +1603,14 @@
+ }
+ 
+ resRange
+-xf86GetSparse(long type,  memType fixed_bits,
++xf86GetSparse(long type,
++#ifdef HAVE_DOMAINS
++	  int domain,
++#endif
++	  memType fixed_bits,
+ 	  memType decode_mask, memType address_mask, resPtr avoid)
+ {
+-    resRange r = {ResEnd,0,0};
++    resRange r = _END;
+     memType new_mask;
+     memType mask1;
+     memType base;
+@@ -1602,7 +1652,7 @@
+      */
+     while (1) {
+ 	base = make_base(counter,new_mask) | fixed_bits;
+-	RANGE(r,base,address_mask,type);
++	RANGE(r,base,address_mask,type,domain);
+ 	conflict = ChkConflict(&r,Acc,SETUP);
+ 	if (!conflict) {
+ 	    conflict = ChkConflict(&r,avoid,SETUP);
+@@ -1617,7 +1667,7 @@
+ 	if (counter > max_counter) break;
+     }
+     if (!new_mask && (new_mask == decode_mask)) {
+-	RANGE(r,0,0,ResEnd);
++	RANGE(r,0,0,ResEnd,domain);
+ 	return r;
+     }
+     /*
+@@ -1640,7 +1690,7 @@
+ 	counter1 = 0;
+ 	while (1) {
+ 	    base = make_base(counter1,mask1);
+-	    RANGE(r,base,address_mask,type);
++	    RANGE(r,base,address_mask,type,domain);
+ 	    conflict = ChkConflict(&r,Acc,SETUP);
+ 	    if (!conflict) {
+ 		conflict = ChkConflict(&r,avoid,SETUP);
+@@ -1655,7 +1705,7 @@
+ 	counter ++;
+ 	if (counter > max_counter) break;
+     }
+-    RANGE(r,0,0,ResEnd);
++    RANGE(r,0,0,ResEnd,domain);
+     return r;
+ }
+ 
+@@ -2686,6 +2736,9 @@
+     int i = 0;
+     
+     new.type = (range.type & ~ResExtMask) | ResSparse;
++#ifdef HAVE_DOMAINS
++    new.domain = range.domain;
++#endif
+ 
+     while (1) {
+ 	if (val & 0x01) {
+@@ -2726,7 +2779,11 @@
+     
+     if (list1) {
+ 	list = list1;
+-	if (range.type & list->res_type & ResPhysMask) {
++	if ((range.type & list->res_type & ResPhysMask)
++#ifdef HAVE_DOMAINS
++	    && (range.domain == list->res_domain)
++#endif
++		) {
+ 	    switch (range.type & ResExtMask) {
+ 	    case ResBlock:
+ 		if ((list->res_type & ResExtMask) == ResBlock) {
+@@ -2736,21 +2793,21 @@
+ 		    else if (range.rBegin < list->block_begin
+ 			     && range.rEnd > list->block_end) {
+ 			RANGE(range1, range.rBegin, list->block_begin - 1,
+-			      range.type);
++			      range.type, range.domain);
+ 			RANGE(range2, list->block_end + 1, range.rEnd,
+-			      range.type);
++			      range.type, range.domain);
+ 			return (x_isSubsetOf(range1,list->next,list2) &&
+ 				x_isSubsetOf(range2,list->next,list2));
+ 		    }
+ 		    else if (range.rBegin >= list->block_begin
+ 			     && range.rBegin <= list->block_end) {
+ 			RANGE(range1, list->block_end + 1, range.rEnd,
+-			      range.type);
++			      range.type, range.domain);
+ 			return (x_isSubsetOf(range1,list->next,list2));
+ 		    } else if (range.rEnd >= list->block_begin
+ 			       && range.rEnd <= list->block_end) {
+ 			RANGE(range1,range.rBegin, list->block_begin - 1,
+-			      range.type);
++			      range.type, range.domain);
+ 			return (x_isSubsetOf(range1,list->next,list2));
+ 		    } 
+ 		}
+@@ -2791,7 +2848,7 @@
+ 				  | ((~list->sparse_base & list->sparse_mask)
+ 				     & ~range.rMask)) & range1.rMask,
+ 				  ((range.rMask | list->sparse_mask) & ~test)
+-				  | (1 << i), range.type);
++				  | (1 << i), range.type, range.domain);
+ 			    return (x_isSubsetOf(range1,list->next,list2));
+ 			}
+ 		    }
+@@ -2885,7 +2942,11 @@
+     resPtr new = NULL;
+     
+     while (list) {
+-	    if (Range.type & list->res_type & ResPhysMask) {
++	    if ((Range.type & list->res_type & ResPhysMask)
++#ifdef HAVE_DOMAINS
++		&& (Range.domain == list->res_domain)
++#endif
++		    ) {
+ 		switch (Range.type & ResExtMask) {
+ 		case ResBlock:
+ 		    switch (list->res_type & ResExtMask) {
+@@ -2900,6 +2961,9 @@
+ 			    range.rEnd = list->block_end;
+ 			if (range.rEnd > range.rBegin) {
+ 			    range.type = Range.type;
++#ifdef HAVE_DOMAINS
++			    range.domain = Range.domain;
++#endif
+ 			    new = xf86AddResToList(new,&range,-1);
+ 			}
+ 			break;
+@@ -2917,7 +2981,7 @@
+ 				  | (~range.rMask & list->sparse_base)
+ 				  | (~list->sparse_mask & range.rBase),
+ 				  range.rMask | list->sparse_mask,
+-				  Range.type);
++				  Range.type, Range.domain);
+ 			    new = xf86AddResToList(new,&range,-1);
+ 			}
+ 			break;
+@@ -2956,11 +3020,11 @@
+     switch (Range.type & ResExtMask) {
+     case ResBlock:
+ 	if (Range.rBegin > 0) {
+-	    RANGE(range, 0, Range.rBegin - 1, Range.type);
++	    RANGE(range, 0, Range.rBegin - 1, Range.type,Range.domain);
+ 	    new = xf86AddResToList(new,&range,-1);
+ 	}
+ 	if (Range.rEnd < (memType)~0) {
+-	    RANGE(range,Range.rEnd + 1, (memType)~0, Range.type);
++	    RANGE(range,Range.rEnd + 1, (memType)~0, Range.type, Range.domain);
+ 	    new = xf86AddResToList(new,&range,-1);
+ 	}
+ 	break;
+@@ -2968,7 +3032,7 @@
+ 	tmp = Range.rMask;
+ 	for (i = 0; i < sizeof(memType); i++) {
+ 	    if (tmp & 0x1) {
+-		RANGE(range,(~Range.rMask & range.rMask),(1 << i), Range.type);
++		RANGE(range,(~Range.rMask & range.rMask),(1 << i), Range.type, Range.domain);
+ 		new = xf86AddResToList(new,&range,-1);
+ 	    }
+ 	}
+@@ -2991,6 +3055,21 @@
+     }
+     return ret;
+ }
++
++#ifdef HAVE_DOMAINS
++resPtr
++xf86ExtractDomainFromList(resPtr list, unsigned int domain)
++{
++    resPtr ret = NULL;
++    
++    while (list) {
++	if (list->res_domain == domain)
++	    ret = xf86AddResToList(ret,&(list->val),list->entityIndex);
++	list = list->next;
++    }
++    return ret;
++}
++#endif
+ 
+ /*------------------------------------------------------------*/
+ static void CheckGenericGA(void);
+--- XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/common/xf86Bus.h.~1~	Sun Jun  3 19:44:40 2001
++++ XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/common/xf86Bus.h	Sun Jun  3 19:44:48 2001
+@@ -123,6 +123,9 @@
+ Bool xf86IsSubsetOf(resRange range, resPtr list);
+ Bool xf86IsListSubsetOf(resPtr list, resPtr BaseList);
+ resPtr xf86ExtractTypeFromList(resPtr list, unsigned long type);
++#ifdef HAVE_DOMAINS
++resPtr xf86ExtractDomainFromList(resPtr list, unsigned int domain);
++#endif
+ resPtr findIntersect(resRange Range, resPtr list);
+ resPtr xf86FindIntersect(resRange Range, resPtr list);
+ void RemoveOverlaps(resPtr target, resPtr list, Bool pow2Alignment,
+--- XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/common/xf86Resources.h~	Tue Jul 31 23:17:31 2001
++++ XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/common/xf86Resources.h	Tue Jul 31 23:17:33 2001
+@@ -6,78 +6,84 @@
+ 
+ #include "xf86str.h"
+ 
+-#define _END {ResEnd,0,0}
++#ifdef HAVE_DOMAINS
++#define DEFAULT_DOMAIN	0,
++#else
++#define DEFAULT_DOMAIN	/**/
++#endif
++
++#define _END {ResEnd, DEFAULT_DOMAIN 0,0}
+ 
+ #define _VGA_EXCLUSIVE \
+-		{ResExcMemBlock | ResBios | ResBus, 0x000A0000, 0x000AFFFF},\
+-		{ResExcMemBlock | ResBios | ResBus, 0x000B0000, 0x000B7FFF},\
+-		{ResExcMemBlock | ResBios | ResBus, 0x000B8000, 0x000BFFFF},\
+-		{ResExcIoBlock  | ResBios | ResBus,     0x03B0,     0x03BB},\
+-		{ResExcIoBlock  | ResBios | ResBus,     0x03C0,     0x03DF}
++		{ResExcMemBlock | ResBios | ResBus, DEFAULT_DOMAIN 0x000A0000, 0x000AFFFF},\
++		{ResExcMemBlock | ResBios | ResBus, DEFAULT_DOMAIN 0x000B0000, 0x000B7FFF},\
++		{ResExcMemBlock | ResBios | ResBus, DEFAULT_DOMAIN 0x000B8000, 0x000BFFFF},\
++		{ResExcIoBlock  | ResBios | ResBus, DEFAULT_DOMAIN     0x03B0,     0x03BB},\
++		{ResExcIoBlock  | ResBios | ResBus, DEFAULT_DOMAIN     0x03C0,     0x03DF}
+ 
+ #define _VGA_SHARED \
+-		{ResShrMemBlock | ResBios | ResBus, 0x000A0000, 0x000AFFFF},\
+-		{ResShrMemBlock | ResBios | ResBus, 0x000B0000, 0x000B7FFF},\
+-		{ResShrMemBlock | ResBios | ResBus, 0x000B8000, 0x000BFFFF},\
+-		{ResShrIoBlock  | ResBios | ResBus,     0x03B0,     0x03BB},\
+-		{ResShrIoBlock  | ResBios | ResBus,     0x03C0,     0x03DF}
++		{ResShrMemBlock | ResBios | ResBus, DEFAULT_DOMAIN 0x000A0000, 0x000AFFFF},\
++		{ResShrMemBlock | ResBios | ResBus, DEFAULT_DOMAIN 0x000B0000, 0x000B7FFF},\
++		{ResShrMemBlock | ResBios | ResBus, DEFAULT_DOMAIN 0x000B8000, 0x000BFFFF},\
++		{ResShrIoBlock  | ResBios | ResBus, DEFAULT_DOMAIN     0x03B0,     0x03BB},\
++		{ResShrIoBlock  | ResBios | ResBus, DEFAULT_DOMAIN     0x03C0,     0x03DF}
+ 
+ #define _VGA_SHARED_MEM \
+-		{ResShrMemBlock | ResBios | ResBus, 0x000A0000, 0x000AFFFF},\
+-		{ResShrMemBlock | ResBios | ResBus, 0x000B0000, 0x000B7FFF},\
+- 		{ResShrMemBlock | ResBios | ResBus, 0x000B8000, 0x000BFFFF}
++		{ResShrMemBlock | ResBios | ResBus, DEFAULT_DOMAIN 0x000A0000, 0x000AFFFF},\
++		{ResShrMemBlock | ResBios | ResBus, DEFAULT_DOMAIN 0x000B0000, 0x000B7FFF},\
++ 		{ResShrMemBlock | ResBios | ResBus, DEFAULT_DOMAIN 0x000B8000, 0x000BFFFF}
+ 
+ #define _VGA_SHARED_IO \
+-		{ResShrIoBlock  | ResBios | ResBus,     0x03B0,     0x03BB},\
+-		{ResShrIoBlock  | ResBios | ResBus,     0x03C0,     0x03DF}
++		{ResShrIoBlock  | ResBios | ResBus, DEFAULT_DOMAIN     0x03B0,     0x03BB},\
++		{ResShrIoBlock  | ResBios | ResBus, DEFAULT_DOMAIN     0x03C0,     0x03DF}
+ 
+ /*
+  * Exclusive unused VGA:  resources unneeded but cannot be disabled.
+  * Like old Millennium.
+  */
+ #define _VGA_EXCLUSIVE_UNUSED \
+-	{ResExcUusdMemBlock | ResBios | ResBus, 0x000A0000, 0x000AFFFF},\
+-	{ResExcUusdMemBlock | ResBios | ResBus, 0x000B0000, 0x000B7FFF},\
+-	{ResExcUusdMemBlock | ResBios | ResBus, 0x000B8000, 0x000BFFFF},\
+-	{ResExcUusdIoBlock  | ResBios | ResBus,     0x03B0,     0x03BB},\
+-	{ResExcUusdIoBlock  | ResBios | ResBus,     0x03C0,     0x03DF}
++	{ResExcUusdMemBlock | ResBios | ResBus, DEFAULT_DOMAIN 0x000A0000, 0x000AFFFF},\
++	{ResExcUusdMemBlock | ResBios | ResBus, DEFAULT_DOMAIN 0x000B0000, 0x000B7FFF},\
++	{ResExcUusdMemBlock | ResBios | ResBus, DEFAULT_DOMAIN 0x000B8000, 0x000BFFFF},\
++	{ResExcUusdIoBlock  | ResBios | ResBus, DEFAULT_DOMAIN     0x03B0,     0x03BB},\
++	{ResExcUusdIoBlock  | ResBios | ResBus, DEFAULT_DOMAIN     0x03C0,     0x03DF}
+ 
+ /*
+  * Shared unused VGA:  resources unneeded but cannot be disabled
+  * independently.  This is used to determine if a device needs RAC.
+  */
+ #define _VGA_SHARED_UNUSED \
+-	{ResShrUusdMemBlock | ResBios | ResBus, 0x000A0000, 0x000AFFFF},\
+-	{ResShrUusdMemBlock | ResBios | ResBus, 0x000B0000, 0x000B7FFF},\
+-	{ResShrUusdMemBlock | ResBios | ResBus, 0x000B8000, 0x000BFFFF},\
+-	{ResShrUusdIoBlock  | ResBios | ResBus,     0x03B0,     0x03BB},\
+-	{ResShrUusdIoBlock  | ResBios | ResBus,     0x03C0,     0x03DF}
++	{ResShrUusdMemBlock | ResBios | ResBus, DEFAULT_DOMAIN 0x000A0000, 0x000AFFFF},\
++	{ResShrUusdMemBlock | ResBios | ResBus, DEFAULT_DOMAIN 0x000B0000, 0x000B7FFF},\
++	{ResShrUusdMemBlock | ResBios | ResBus, DEFAULT_DOMAIN 0x000B8000, 0x000BFFFF},\
++	{ResShrUusdIoBlock  | ResBios | ResBus, DEFAULT_DOMAIN     0x03B0,     0x03BB},\
++	{ResShrUusdIoBlock  | ResBios | ResBus, DEFAULT_DOMAIN     0x03C0,     0x03DF}
+ 
+ /*
+  * Sparse versions of the above for those adapters that respond to all ISA
+  * aliases of VGA ports.
+  */
+ #define _VGA_EXCLUSIVE_SPARSE \
+-	{ResExcMemBlock | ResBios | ResBus, 0x000A0000, 0x000AFFFF},\
+-	{ResExcMemBlock | ResBios | ResBus, 0x000B0000, 0x000B7FFF},\
+-	{ResExcMemBlock | ResBios | ResBus, 0x000B8000, 0x000BFFFF},\
+-	{ResExcIoSparse | ResBios | ResBus,     0x03B0,     0x03F8},\
+-	{ResExcIoSparse | ResBios | ResBus,     0x03B8,     0x03FC},\
+-	{ResExcIoSparse | ResBios | ResBus,     0x03C0,     0x03E0}
++	{ResExcMemBlock | ResBios | ResBus, DEFAULT_DOMAIN 0x000A0000, 0x000AFFFF},\
++	{ResExcMemBlock | ResBios | ResBus, DEFAULT_DOMAIN 0x000B0000, 0x000B7FFF},\
++	{ResExcMemBlock | ResBios | ResBus, DEFAULT_DOMAIN 0x000B8000, 0x000BFFFF},\
++	{ResExcIoSparse | ResBios | ResBus, DEFAULT_DOMAIN     0x03B0,     0x03F8},\
++	{ResExcIoSparse | ResBios | ResBus, DEFAULT_DOMAIN     0x03B8,     0x03FC},\
++	{ResExcIoSparse | ResBios | ResBus, DEFAULT_DOMAIN     0x03C0,     0x03E0}
+ 
+ #define _VGA_SHARED_SPARSE \
+-	{ResShrMemBlock | ResBios | ResBus, 0x000A0000, 0x000AFFFF},\
+-	{ResShrMemBlock | ResBios | ResBus, 0x000B0000, 0x000B7FFF},\
+-	{ResShrMemBlock | ResBios | ResBus, 0x000B8000, 0x000BFFFF},\
+-	{ResShrIoSparse | ResBios | ResBus,     0x03B0,     0x03F8},\
+-	{ResShrIoSparse | ResBios | ResBus,     0x03B8,     0x03FC},\
+-	{ResShrIoSparse | ResBios | ResBus,     0x03C0,     0x03E0}
++	{ResShrMemBlock | ResBios | ResBus, DEFAULT_DOMAIN 0x000A0000, 0x000AFFFF},\
++	{ResShrMemBlock | ResBios | ResBus, DEFAULT_DOMAIN 0x000B0000, 0x000B7FFF},\
++	{ResShrMemBlock | ResBios | ResBus, DEFAULT_DOMAIN 0x000B8000, 0x000BFFFF},\
++	{ResShrIoSparse | ResBios | ResBus, DEFAULT_DOMAIN     0x03B0,     0x03F8},\
++	{ResShrIoSparse | ResBios | ResBus, DEFAULT_DOMAIN     0x03B8,     0x03FC},\
++	{ResShrIoSparse | ResBios | ResBus, DEFAULT_DOMAIN     0x03C0,     0x03E0}
+ 
+ #define _8514_EXCLUSIVE \
+-	{ResExcIoSparse | ResBios | ResBus, 0x02E8, 0x03F8}
++	{ResExcIoSparse | ResBios | ResBus, DEFAULT_DOMAIN 0x02E8, 0x03F8}
+ 
+ #define _8514_SHARED \
+-	{ResShrIoSparse | ResBios | ResBus, 0x02E8, 0x03F8}
++	{ResShrIoSparse | ResBios | ResBus, DEFAULT_DOMAIN 0x02E8, 0x03F8}
+ 
+ /* predefined resources */
+ extern resRange resVgaExclusive[];
+@@ -102,9 +108,9 @@
+ #define RES_SHARED_8514     res8514Shared
+ 
+ #define _PCI_AVOID_PC_STYLE \
+-	{ResExcIoSparse | ResBus, 0x0100, 0x0300},\
+-	{ResExcIoSparse | ResBus, 0x0200, 0x0200},\
+-        {ResExcMemBlock | ResBus, 0xA0000,0xFFFFF}
++	{ResExcIoSparse | ResBus, DEFAULT_DOMAIN 0x0100, 0x0300},\
++	{ResExcIoSparse | ResBus, DEFAULT_DOMAIN 0x0200, 0x0200},\
++        {ResExcMemBlock | ResBus, DEFAULT_DOMAIN 0xA0000,0xFFFFF}
+ 
+ extern resRange PciAvoid[];
+ 
+--- XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/common/xf86pciBus.c.~1~	Sun Jun  3 19:44:40 2001
++++ XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/common/xf86pciBus.c	Sun Jun  3 19:44:48 2001
+@@ -91,9 +91,9 @@
+                         ? pciBusAddrToHostAddr(tag,PCI_MEM_SIZE,size) \
+                         : pciBusAddrToHostAddr(tag,PCI_IO_SIZE,size))
+ #define PCI_M_RANGE(range,tag,begin,end,type) \
+-                            { RANGE(range,B2M(tag,begin),B2M(tag,end),type); }
++        { RANGE(range,B2M(tag,begin),B2M(tag,end),type,xf86GetPciDomain(tag)); }
+ #define PCI_I_RANGE(range,tag,begin,end,type) \
+-                            { RANGE(range,B2I(tag,begin),B2I(tag,end),type); }
++        { RANGE(range,B2I(tag,begin),B2I(tag,end),type,xf86GetPciDomain(tag)); }
+ #define PCI_X_RANGE(range,tag,begin,end,type) \
+ { if (type & ResMem)  PCI_M_RANGE(range,tag,begin,end,type); \
+                 else PCI_I_RANGE(range,tag,begin,end,type); } 
+@@ -1039,9 +1039,15 @@
+     PciBusPtr pbp = xf86PciBus, pbp1 = xf86PciBus;
+     pciConfigPtr pcp;
+     resPtr tmp;
++#ifdef HAVE_DOMAINS
++    int domain;
++#endif
+     
+     if (!pvp) return FALSE;
+     tag = pciTag(pvp->bus,pvp->device,pvp->func);
++#ifdef HAVE_DOMAINS
++    domain = xf86GetPciDomain(tag);
++#endif
+     pcp = pvp->thisCard;
+ 
+     type &= ResAccMask;
+@@ -1232,12 +1238,20 @@
+ #endif
+     w_tmp = w;
+     while (w) {
+-	if (type & w->res_type & ResPhysMask) {
++	if ((type & w->res_type & ResPhysMask)
++#ifdef HAVE_DOMAINS
++	    && (domain == w->res_domain)
++#endif
++		) {
+ #ifdef DEBUG
+ 	    ErrorF("block_begin: 0x%lx block_end: 0x%lx\n",w->block_begin,
+ 		   w->block_end);
+ #endif
+-	    range = xf86GetBlock(type,PCI_SIZE(type,tag,alignment + 1),
++	    range = xf86GetBlock(type,
++#ifdef HAVE_DOMAINS
++				 domain,
++#endif
++				 PCI_SIZE(type,tag,alignment + 1),
+ 				 w->block_begin, w->block_end,
+ 				 PCI_SIZE(type,tag,alignment),avoid);
+ 	    if (range.type != ResEnd)
+@@ -1250,12 +1264,20 @@
+     if (range.type == ResEnd && w_2nd) {
+ 	w_tmp = w_2nd;
+ 	while (w_2nd) {
+-	    if (type & w_2nd->res_type & ResPhysMask) {
++	    if ((type & w_2nd->res_type & ResPhysMask)
++#ifdef HAVE_DOMAINS
++		&& (domain == w_2nd->res_domain)
++#endif
++		    ) {
+ #ifdef DEBUG
+ 	    ErrorF("block_begin: 0x%lx block_end: 0x%lx\n",w_2nd->block_begin,
+ 		   w_2nd->block_end);
+ #endif
+-	    range = xf86GetBlock(type,PCI_SIZE(type,tag,alignment + 1),
++	    range = xf86GetBlock(type,
++#ifdef HAVE_DOMAINS
++				 domain,
++#endif
++				 PCI_SIZE(type,tag,alignment + 1),
+ 				 w_2nd->block_begin, w_2nd->block_end,
+ 				 PCI_SIZE(type,tag,alignment),avoid);
+ 		if (range.type != ResEnd)
+@@ -1323,7 +1345,7 @@
+ 
+ Bool
+ xf86FixPciResource(int entityIndex, int prt, memType alignment,
+-		    long type)
++		   long type)
+ {
+     pciVideoPtr pvp = xf86GetPciInfoForEntity(entityIndex);
+     return fixPciResource(prt, alignment, pvp, type);
+@@ -1481,6 +1503,9 @@
+ 	 */
+ 	 while (m) {
+ 	     range = xf86GetBlock(ResExcMemBlock,
++#ifdef HAVE_DOMAINS
++				  xf86GetPciDomain(TAG(pvp)),
++#endif
+ 				  PCI_SIZE(ResMem, TAG(pvp), 1 << biosSize),
+ 				  m->block_begin, m->block_end,
+ 				  PCI_SIZE(ResMem, TAG(pvp), alignment), 
+@@ -1730,10 +1755,9 @@
+     PciBusPtr *pnPciBus = &PciBusBase;
+     int MaxBus = 0;
+     int i;
++    int domain = 0;
+     memType base, limit;
+ 
+-    resPtr pciBusAccWindows = xf86PciBusAccWindowsFromOS();
+-
+     if (pciInfo == NULL) return NULL;
+     
+     /* Add each PCI-PCI bridge */
+@@ -1856,13 +1880,25 @@
+ 		PciBus->secondary = -1; /* to be set below */
+ 		PciBus->subclass = sub_class;
+ 		PciBus->brcontrol = PCI_PCI_BRIDGE_VGA_EN;
++#ifdef HAVE_DOMAINS
++ 		domain = xf86GetPciDomain(pcrp->tag);
++#endif
++		/* XXX A memory leak has returned here... -DaveM */
+ 		PciBus->preferred_io = xf86ExtractTypeFromList(
+-		    pciBusAccWindows,ResIo);
++		    xf86PciBusAccWindowsFromOS(domain),ResIo);
+ 		PciBus->preferred_mem = xf86ExtractTypeFromList(
+-		    pciBusAccWindows,ResMem);
++		    xf86PciBusAccWindowsFromOS(domain),ResMem);
+ 		PciBus->preferred_pmem = xf86ExtractTypeFromList(
+-		    pciBusAccWindows,ResMem);
++		    xf86PciBusAccWindowsFromOS(domain),ResMem);
+ 		xf86MsgVerb(X_INFO,3,"Host-to-PCI bridge:\n");
++#ifdef DEBUG
++		xf86MsgVerb(X_INFO,3,"Preferred I/O:\n");
++		xf86PrintResList(3,PciBus->preferred_io);
++		xf86MsgVerb(X_INFO,3,"Preferred MEM:\n");
++		xf86PrintResList(3,PciBus->preferred_mem);
++		xf86MsgVerb(X_INFO,3,"Preferred Prefetchable MEM:\n");
++		xf86PrintResList(3,PciBus->preferred_pmem);
++#endif
+ 		break;
+ 	    default:
+ 		break;
+@@ -1892,12 +1928,23 @@
+ 		PciBus->primary = -1;
+ 		PciBus->secondary = i;
+ 		PciBus->subclass = PCI_SUBCLASS_BRIDGE_HOST;
++
++#ifdef HAVE_DOMAINS
++		/* Find a device on this bus. */
++		for (pcrpp = pciInfo, pcrp = *pcrpp; pcrp; pcrp = *(++pcrpp)) {
++			if (pcrp->busnum == i)
++				break;
++		}
++
++		if (pcrp) domain = xf86GetPciDomain(pcrp->tag);
++#endif
++		/* XXX A memory leak has returned here... -DaveM */
+ 		PciBus->preferred_io = xf86ExtractTypeFromList(
+-		    pciBusAccWindows,ResIo);
++		    xf86PciBusAccWindowsFromOS(domain),ResIo);
+ 		PciBus->preferred_mem = xf86ExtractTypeFromList(
+-		    pciBusAccWindows,ResMem);
++		    xf86PciBusAccWindowsFromOS(domain),ResMem);
+ 		PciBus->preferred_pmem = xf86ExtractTypeFromList(
+-		    pciBusAccWindows,ResMem);
++		    xf86PciBusAccWindowsFromOS(domain),ResMem);
+ 		xf86MsgVerb(X_INFO,3,"Host-to-PCI bridge:\n");
+ 	    }
+ 	}
+@@ -1928,7 +1975,6 @@
+ 	printBridgeInfo(PciBus);
+     }
+     
+-    xf86FreeResList(pciBusAccWindows);
+     return PciBusBase;
+     
+ }
+--- XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/common/xf86str.h.~1~	Sun Jun  3 19:44:40 2001
++++ XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/common/xf86str.h	Sun Jun  3 19:44:48 2001
+@@ -593,15 +593,27 @@
+ 
+ typedef struct {
+     long type;     /* shared, exclusive, unused etc. */
++#ifdef HAVE_DOMAINS
++    unsigned int domain;
++#endif
+     memType a;
+     memType b;
+ } resRange, *resList;
+ 
+-#define RANGE(r,u,v,t) {\
++#ifdef HAVE_DOMAINS
++#define RANGE(r,u,v,t,d) {\
+                        (r).a = (u);\
+                        (r).b = (v);\
+                        (r).type = t;\
++                       (r).domain = d;\
+                        }
++#else
++#define RANGE(r,u,v,t,d) {\
++                       (r).a = (u);\
++                       (r).b = (v);\
++                       (r).type = t;\
++                       }
++#endif
+ 
+ #define rBase a
+ #define rMask b
+@@ -621,6 +633,9 @@
+ #define block_begin	val.rBegin
+ #define block_end	val.rEnd
+ #define res_type	val.type
++#ifdef HAVE_DOMAINS
++#define res_domain	val.domain
++#endif
+ 
+ typedef struct {
+     int numChipset;
+--- XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/drivers/ati/Imakefile.~1~	Sun Jun  3 19:44:41 2001
++++ XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/drivers/ati/Imakefile	Sun Jun  3 19:44:48 2001
+@@ -87,12 +87,12 @@
+ # ifndef ATIAvoidCPIO
+ #  define ATIAvoidCPIO NO
+ # endif
+-#elif defined(SparcArchitecture) || 1
++#elif 1
+ # undef ATIAvoidCPIO    /* Clobber any previous setting */
+ # define ATIAvoidCPIO YES
+ #endif
+ 
+-#if defined(PpcArchitecture)
++#if defined(PpcArchitecture) || defined(SparcArchitecture)
+ # undef ATIAvoidNonPCI
+ # define ATIAvoidNonPCI YES
+ #elif !defined(ATIAvoidNonPCI)
+--- XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/drivers/ati/aticonfig.c.~1~	Sun Jun  3 19:44:41 2001
++++ XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/drivers/ati/aticonfig.c	Sun Jun  3 19:44:48 2001
+@@ -27,6 +27,7 @@
+ #include "aticursor.h"
+ #include "atioption.h"
+ #include "atistruct.h"
++#include "atichip.h"
+ 
+ /*
+  * Non-publicised XF86Config options.
+@@ -122,6 +123,11 @@
+     }
+ 
+     ReferenceClock = ((double)157500000.0) / ((double)11.0);
++#ifdef __sparc__
++    if (pATI->Chip == ATI_CHIP_264XL)
++	    ReferenceClock = ((double)315000000.0) / ((double)11.0);
++    CSync = TRUE;
++#endif
+ 
+ #ifndef AVOID_CPIO
+ 
+--- XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/drivers/ati/atimach64.c.~1~	Sun Jun  3 19:44:41 2001
++++ XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/drivers/ati/atimach64.c	Sun Jun  3 19:44:48 2001
+@@ -1602,6 +1602,24 @@
+          */
+         switch (iDWord)
+         {
++#if X_BYTE_ORDER == X_BIG_ENDIAN
++	    case  0:  xf86WriteMmio32Be(pDst +  0, 0, *(pSrc +  0));
++	    case  1:  xf86WriteMmio32Be(pDst +  1, 0, *(pSrc +  1));
++	    case  2:  xf86WriteMmio32Be(pDst +  2, 0, *(pSrc +  2));
++	    case  3:  xf86WriteMmio32Be(pDst +  3, 0, *(pSrc +  3));
++	    case  4:  xf86WriteMmio32Be(pDst +  4, 0, *(pSrc +  4));
++	    case  5:  xf86WriteMmio32Be(pDst +  5, 0, *(pSrc +  5));
++	    case  6:  xf86WriteMmio32Be(pDst +  6, 0, *(pSrc +  6));
++	    case  7:  xf86WriteMmio32Be(pDst +  7, 0, *(pSrc +  7));
++	    case  8:  xf86WriteMmio32Be(pDst +  8, 0, *(pSrc +  8));
++	    case  9:  xf86WriteMmio32Be(pDst +  9, 0, *(pSrc +  9));
++	    case 10:  xf86WriteMmio32Be(pDst + 10, 0, *(pSrc + 10));
++	    case 11:  xf86WriteMmio32Be(pDst + 11, 0, *(pSrc + 11));
++	    case 12:  xf86WriteMmio32Be(pDst + 12, 0, *(pSrc + 12));
++	    case 13:  xf86WriteMmio32Be(pDst + 13, 0, *(pSrc + 13));
++	    case 14:  xf86WriteMmio32Be(pDst + 14, 0, *(pSrc + 14));
++	    case 15:  xf86WriteMmio32Be(pDst + 15, 0, *(pSrc + 15));
++#else
+             case  0:  MMIO_OUT32(pDst +  0, 0, *(pSrc +  0));
+             case  1:  MMIO_OUT32(pDst +  1, 0, *(pSrc +  1));
+             case  2:  MMIO_OUT32(pDst +  2, 0, *(pSrc +  2));
+@@ -1618,6 +1636,7 @@
+             case 13:  MMIO_OUT32(pDst + 13, 0, *(pSrc + 13));
+             case 14:  MMIO_OUT32(pDst + 14, 0, *(pSrc + 14));
+             case 15:  MMIO_OUT32(pDst + 15, 0, *(pSrc + 15));
++#endif
+ 
+             default:    /* Muffle compiler */
+                 break;
+--- XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/bsd/bsdResource.c.~1~	Sun Jun  3 19:44:41 2001
++++ XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/bsd/bsdResource.c	Sun Jun  3 19:44:48 2001
+@@ -17,22 +17,34 @@
+ 
+ resRange PciAvoid[] = {_PCI_AVOID_PC_STYLE, _END};
+ 
++#define MIN_SYSTEM_DOMAIN	0
++#ifdef HAVE_DOMAINS
++#define MAX_SYSTEM_DOMAIN	255
++#else
++#define MAX_SYSTEM_DOMAIN	0
++#endif
++#define ISA_SYSTEM_DOMAIN	0
++
+ resPtr
+ xf86BusAccWindowsFromOS(void)
+ {
+     resPtr ret = NULL;
+     resRange range;
++    int domain;
+ 
+-    RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock);
+-    ret = xf86AddResToList(ret, &range, -1);
++    for (domain = MIN_SYSTEM_DOMAIN; domain <= MAX_SYSTEM_DOMAIN; domain++) {
++	RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock, domain);
++	ret = xf86AddResToList(ret, &range, -1);
++
++	RANGE(range, 0x00000000, 0xffffffff, ResExcIoBlock, domain);
++	ret = xf86AddResToList(ret, &range, -1);
++    }
+ 
+-    RANGE(range, 0x00000000, 0xffffffff, ResExcIoBlock);
+-    ret = xf86AddResToList(ret, &range, -1);
+     return ret;
+ }
+ 
+ resPtr
+-xf86PciBusAccWindowsFromOS(void)
++xf86PciBusAccWindowsFromOS(int domain)
+ {
+     resPtr ret = NULL;
+     resRange range;
+@@ -44,10 +56,10 @@
+      * region 0x40000000-0xbfffffff for DMA but this only matters if
+      * the bios screws up the pci region mappings.
+      */
+-    RANGE(range, 0x80000000, 0xffffffff, ResExcMemBlock);
++    RANGE(range, 0x80000000, 0xffffffff, ResExcMemBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+ 
+-    RANGE(range, 0x00000000, 0xffffffff, ResExcIoBlock);
++    RANGE(range, 0x00000000, 0xffffffff, ResExcIoBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+     return ret;
+ }
+@@ -58,10 +70,10 @@
+     resPtr ret = NULL;
+     resRange range;
+ 
+-    RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock);
++    RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock, ISA_SYSTEM_DOMAIN);
+     ret = xf86AddResToList(ret, &range, -1);
+ 
+-    RANGE(range, 0x00000000, 0xffffffff, ResExcIoBlock);
++    RANGE(range, 0x00000000, 0xffffffff, ResExcIoBlock, ISA_SYSTEM_DOMAIN);
+     ret = xf86AddResToList(ret, &range, -1);
+     return ret;
+ }
+@@ -70,6 +82,14 @@
+ xf86AccResFromOS(resPtr ret)
+ {
+     resRange range;
++#ifdef HAVE_DOMAINS
++    int domain = MIN_SYSTEM_DOMAIN;
++#endif
++
++#ifdef HAVE_DOMAINS
++    if (ret != NULL)
++	domain = ret->res_domain;
++#endif
+ 
+     /*
+      * Fallback is to claim the following areas:
+@@ -77,7 +97,7 @@
+      * 0x000c0000 - 0x000effff  location of VGA and other extensions ROMS
+      */
+ 
+-    RANGE(range, 0x000c0000, 0x000effff, ResExcMemBlock);
++    RANGE(range, 0x000c0000, 0x000effff, ResExcMemBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+ 
+     /*
+@@ -85,20 +105,20 @@
+      * along with their sparse I/O aliases, but that's too imprecise.  Instead
+      * claim a bare minimum here.
+      */
+-    RANGE(range, 0x00000000, 0x000000ff, ResExcIoBlock); /* For mainboard */
++    RANGE(range, 0x00000000, 0x000000ff, ResExcIoBlock, domain); /* For mainboard */
+     ret = xf86AddResToList(ret, &range, -1);
+ 
+     /*
+      * At minimum, the top and bottom resources must be claimed, so that
+      * resources that are (or appear to be) unallocated can be relocated.
+      */
+-    RANGE(range, 0x00000000, 0x00000000, ResExcMemBlock);
++    RANGE(range, 0x00000000, 0x00000000, ResExcMemBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+-    RANGE(range, 0xffffffff, 0xffffffff, ResExcMemBlock);
++    RANGE(range, 0xffffffff, 0xffffffff, ResExcMemBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+-/*  RANGE(range, 0x00000000, 0x00000000, ResExcIoBlock);
++/*  RANGE(range, 0x00000000, 0x00000000, ResExcIoBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1); */
+-    RANGE(range, 0xffffffff, 0xffffffff, ResExcIoBlock);
++    RANGE(range, 0xffffffff, 0xffffffff, ResExcIoBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+ 
+     /* XXX add others */
+@@ -109,30 +129,38 @@
+ 
+ resRange PciAvoid[] = {_PCI_AVOID_PC_STYLE, _END};
+ 
++#define MIN_SYSTEM_DOMAIN	0
++#define MAX_SYSTEM_DOMAIN	0
++#define ISA_SYSTEM_DOMAIN	0
++
+ resPtr
+ xf86BusAccWindowsFromOS(void)
+ {
+     resPtr ret = NULL;
+     resRange range;
++    int domain;
+ 
+-    RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock);
+-    ret = xf86AddResToList(ret, &range, -1);
++    for (domain = MIN_SYSTEM_DOMAIN; domain <= MAX_SYSTEM_DOMAIN; domain++) {
++	RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock, domain);
++	ret = xf86AddResToList(ret, &range, -1);
++
++	RANGE(range, 0x00000000, 0x0000ffff, ResExcIoBlock, domain);
++	ret = xf86AddResToList(ret, &range, -1);
++    }
+ 
+-    RANGE(range, 0x00000000, 0x0000ffff, ResExcIoBlock);
+-    ret = xf86AddResToList(ret, &range, -1);
+     return ret;
+ }
+ 
+ resPtr
+-xf86PciBusAccWindowsFromOS(void)
++xf86PciBusAccWindowsFromOS(int domain)
+ {
+     resPtr ret = NULL;
+     resRange range;
+ 
+-    RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock);
++    RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+ 
+-    RANGE(range, 0x00000000, 0x0000ffff, ResExcIoBlock);
++    RANGE(range, 0x00000000, 0x0000ffff, ResExcIoBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+     return ret;
+ }
+--- XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/bus/Imakefile.~1~	Sun Jun  3 19:44:41 2001
++++ XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/bus/Imakefile	Sun Jun  3 19:44:48 2001
+@@ -14,8 +14,16 @@
+ PCIDRVRSRC = axpPci.c
+ PCIDRVROBJ = axpPci.o
+ 
+-#elif (defined(LinuxArchitecture) || defined(SunArchitecture)) && \
+-      defined(SparcArchitecture)
++#elif defined(LinuxArchitecture) && defined(SparcArchitecture)
++
++XCOMM Sparc SBUS driver, generic linux PCI driver
++
++PCIDRVRSRC = linuxPci.c
++PCIDRVROBJ = linuxPci.o
++SBUSDRVSRC = Sbus.c
++SBUSDRVOBJ = Sbus.o
++
++#elif defined(SunArchitecture) && defined(SparcArchitecture)
+ 
+ XCOMM Sparc PCI driver
+ 
+--- XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/bus/Pci.c.~1~	Sun Jun  3 19:44:41 2001
++++ XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/bus/Pci.c	Sun Jun  3 19:44:48 2001
+@@ -1015,6 +1015,13 @@
+ 
+ #if defined(INCLUDE_XF86_MAP_PCI_MEM)
+ 
++#ifdef HAVE_DOMAINS
++int xf86GetPciDomain(PCITAG Tag)
++{
++	return 0;
++}
++#endif
++
+ pointer
+ xf86MapPciMem(int ScreenNum, int Flags, PCITAG Tag, ADDRESS Base,
+ 		unsigned long Size)
+--- XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/bus/Pci.h.~1~	Sun Jun  3 19:44:41 2001
++++ XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/bus/Pci.h	Sun Jun  3 19:44:48 2001
+@@ -152,9 +152,11 @@
+ # if !defined(PowerMAX_OS)
+ #  define INCLUDE_XF86_MAP_PCI_MEM
+ # endif
+-#elif defined(__sparc__) && (defined(linux) || defined(sun))
++#elif defined(__sparc__) && defined(sun)
+ # define ARCH_PCI_INIT sparcPciInit
+ # define INCLUDE_XF86_MAP_PCI_MEM
++#elif defined(__sparc__) && defined(linux)
++# define ARCH_PCI_INIT linuxPciInit
+ #elif defined(__alpha__) && defined(linux)
+ # define ARCH_PCI_INIT axpPciInit
+ # define INCLUDE_XF86_MAP_PCI_MEM
+--- XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/bus/linuxPci.c.~1~	Sun Jun  3 19:44:41 2001
++++ XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/bus/linuxPci.c	Sun Jun  3 19:44:48 2001
+@@ -88,6 +88,13 @@
+ #define PCI_CPU(val)	(val)
+ #endif
+ 
++/* Ioctls for /proc/bus/pci/X/Y nodes. */
++#define PCIIOC_BASE		('P' << 24 | 'C' << 16 | 'I' << 8)
++#define PCIIOC_CONTROLLER	(PCIIOC_BASE | 0x00)	/* Get controller for PCI device. */
++#define PCIIOC_MMAP_IS_IO	(PCIIOC_BASE | 0x01)	/* Set mmap state to I/O space. */
++#define PCIIOC_MMAP_IS_MEM	(PCIIOC_BASE | 0x02)	/* Set mmap state to MEM space. */
++#define PCIIOC_WRITE_COMBINE	(PCIIOC_BASE | 0x03)	/* Enable/disable write-combining. */
++
+ void  
+ linuxPciInit()
+ {
+@@ -167,3 +174,129 @@
+ 		write(fd,&val,4);
+ 	}
+ }
++
++#ifndef INCLUDE_XF86_MAP_PCI_MEM
++
++#ifdef HAVE_DOMAINS
++int xf86GetPciDomain(PCITAG Tag)
++{
++	int fd;
++
++	if (-1 != (fd = linuxPciOpenFile(Tag))) {
++		int err = ioctl(fd, PCIIOC_CONTROLLER, 0);
++
++		if (err < 0)
++			return 0;
++
++		return err;
++	}	
++
++	return 0;
++}
++#endif
++
++static pointer
++xf86MapPciGeneric(int ScreenNum, int Flags, PCITAG Tag, ADDRESS Base,
++		  unsigned long Size, int io_space)
++{
++	int fd;
++
++	xf86InitVidMem();
++
++	if (-1 != (fd = linuxPciOpenFile(Tag))) {
++		ADDRESS realBase, alignOff;
++		pointer p;
++		CARD32 save = 0;
++		int err, mapflags;
++
++		if (io_space)
++			err = ioctl(fd, PCIIOC_MMAP_IS_IO, 0);
++		else
++			err = ioctl(fd, PCIIOC_MMAP_IS_MEM, 0);
++
++		if (err < 0)
++			goto fail;
++
++		if (Flags & VIDMEM_READSIDEEFFECT) {
++			save = pciReadLong(Tag, PCI_CMD_STAT_REG);
++			pciWriteLong(Tag, PCI_CMD_STAT_REG,
++				     save & ~PCI_CMD_MEM_ENABLE);
++		}
++
++		mapflags = MAP_SHARED;
++#if defined(__ia64__)
++#ifndef MAP_WRITECOMBINED
++#define MAP_WRITECOMBINED 0x00010000
++#endif
++#ifndef MAP_NONCACHED
++#define MAP_NONCACHED 0x00020000
++#endif
++		if (Flags & VIDMEM_FRAMEBUFFER) 
++			mapflags |= MAP_WRITECOMBINED; 
++		else
++			mapflags |= MAP_NONCACHED; 
++#else /* !(__ia64__) */
++		err = ioctl(fd, PCIIOC_WRITE_COMBINE,
++			    (Flags & VIDMEM_FRAMEBUFFER) ? 1 : 0);
++		if (err < 0)
++			goto fail_restore_cmd_stat;
++#endif
++
++		realBase = Base & ~(getpagesize() - 1);
++		alignOff = Base - realBase;
++
++		p = mmap(NULL, Size + alignOff, PROT_READ | PROT_WRITE,
++			 mapflags, fd, realBase);
++
++		if (!p || p == (pointer) -1) {
++			FatalError("xf86MapPciMem: Could not mmap PCI memory "
++				   "[base=0x%x,size=%x] (%s)\n",
++				   Base, Size, strerror(errno));
++			goto fail_restore_cmd_stat;
++		}
++
++		if (Flags & VIDMEM_READSIDEEFFECT) {
++			xf86MapReadSideEffects(ScreenNum, Flags, p, Size);
++			pciWriteLong(Tag, PCI_CMD_STAT_REG, save);
++		}
++
++		xf86MakeNewMapping(ScreenNum, Flags, Base, Size, p);
++
++		return (pointer) ((char *)p + alignOff);
++
++	fail_restore_cmd_stat:
++		if (Flags & VIDMEM_READSIDEEFFECT)
++			pciWriteLong(Tag, PCI_CMD_STAT_REG, save);
++
++		return NULL;
++	}
++
++fail:
++	return NULL;
++}
++
++pointer
++xf86MapPciMem(int ScreenNum, int Flags, PCITAG Tag, ADDRESS Base,
++	      unsigned long Size)
++{
++	return xf86MapPciGeneric(ScreenNum, Flags, Tag,
++				 Base, Size, 0);
++}
++
++pointer
++xf86MapPciIo(int ScreenNum, int Flags, PCITAG Tag, ADDRESS Base,
++	     unsigned long Size)
++{
++	return xf86MapPciGeneric(ScreenNum, Flags, Tag,
++				 Base, Size, 1);
++}
++
++int
++xf86ReadPciBIOS(unsigned long Offset, PCITAG Tag, int basereg,
++		unsigned char *Buf, int Len)
++{
++	xf86Msg(X_WARNING, "xf86ReadPciBIOS: Unsupported on this platform.\n");
++	return -1;
++}
++
++#endif /* !(INCLUDE_XF86_MAP_PCI_MEM) */
+--- XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/bus/xf86Pci.h.~1~	Sun Jun  3 19:44:41 2001
++++ XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/bus/xf86Pci.h	Sun Jun  3 19:44:48 2001
+@@ -647,6 +647,9 @@
+ 				ADDRESS Base, unsigned long Size);
+ int           xf86ReadPciBIOS(unsigned long Offset, PCITAG Tag, int basereg,
+ 				unsigned char *Buf, int Len);
++#ifdef HAVE_DOMAINS
++int	      xf86GetPciDomain(PCITAG Tag);
++#endif
+ pciConfigPtr *xf86scanpci(int flags);
+ 
+ /* Old sytle PCI access functions (for compatibility) */
+--- XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/linux/lnxResource.c.~1~	Sun Jun  3 19:44:41 2001
++++ XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/linux/lnxResource.c	Sun Jun  3 19:44:48 2001
+@@ -15,22 +15,33 @@
+ #ifdef __alpha__
+ resRange PciAvoid[] = {_PCI_AVOID_PC_STYLE, _END};
+ 
++#define MIN_SYSTEM_DOMAIN	0
++#ifdef HAVE_DOMAINS
++#define MAX_SYSTEM_DOMAIN	255
++#else
++#define MAX_SYSTEM_DOMAIN	0
++#endif
++#define ISA_SYSTEM_DOMAIN	0
++
+ resPtr
+ xf86BusAccWindowsFromOS(void)
+ {
+     resPtr ret = NULL;
+     resRange range;
++    int domain;
+ 
+-    RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock);
+-    ret = xf86AddResToList(ret, &range, -1);
++    for (domain = MIN_SYSTEM_DOMAIN; domain <= MAX_SYSTEM_DOMAIN; domain++) {
++	RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock, domain);
++	ret = xf86AddResToList(ret, &range, -1);
+ 
+-    RANGE(range, 0x00000000, 0xffffffff, ResExcIoBlock);
+-    ret = xf86AddResToList(ret, &range, -1);
++	RANGE(range, 0x00000000, 0xffffffff, ResExcIoBlock, domain);
++	ret = xf86AddResToList(ret, &range, -1);
++    }
+     return ret;
+ }
+ 
+ resPtr
+-xf86PciBusAccWindowsFromOS(void)
++xf86PciBusAccWindowsFromOS(int domain)
+ {
+     resPtr ret = NULL;
+     resRange range;
+@@ -39,75 +50,75 @@
+      * sparse address space are an image of the ISA bus range
+      */
+     if (_bus_base_sparse()) {
+-	RANGE(range, 0x00000000, 0x07ffffff, ResExcMemBlock);
++	RANGE(range, 0x00000000, 0x07ffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0x09000000, 0x0fffffff, ResExcMemBlock);
++	RANGE(range, 0x09000000, 0x0fffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0x11000000, 0x17ffffff, ResExcMemBlock);
++	RANGE(range, 0x11000000, 0x17ffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0x19000000, 0x1fffffff, ResExcMemBlock);
++	RANGE(range, 0x19000000, 0x1fffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0x21000000, 0x27ffffff, ResExcMemBlock);
++	RANGE(range, 0x21000000, 0x27ffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0x29000000, 0x2fffffff, ResExcMemBlock);
++	RANGE(range, 0x29000000, 0x2fffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0x31000000, 0x37ffffff, ResExcMemBlock);
++	RANGE(range, 0x31000000, 0x37ffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0x39000000, 0x3fffffff, ResExcMemBlock);
++	RANGE(range, 0x39000000, 0x3fffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0x41000000, 0x47ffffff, ResExcMemBlock);
++	RANGE(range, 0x41000000, 0x47ffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0x49000000, 0x4fffffff, ResExcMemBlock);
++	RANGE(range, 0x49000000, 0x4fffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0x51000000, 0x57ffffff, ResExcMemBlock);
++	RANGE(range, 0x51000000, 0x57ffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0x59000000, 0x5fffffff, ResExcMemBlock);
++	RANGE(range, 0x59000000, 0x5fffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0x61000000, 0x67ffffff, ResExcMemBlock);
++	RANGE(range, 0x61000000, 0x67ffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0x69000000, 0x6fffffff, ResExcMemBlock);
++	RANGE(range, 0x69000000, 0x6fffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0x71000000, 0x77ffffff, ResExcMemBlock);
++	RANGE(range, 0x71000000, 0x77ffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0x79000000, 0x7fffffff, ResExcMemBlock);
++	RANGE(range, 0x79000000, 0x7fffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0x81000000, 0x87ffffff, ResExcMemBlock);
++	RANGE(range, 0x81000000, 0x87ffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0x89000000, 0x8fffffff, ResExcMemBlock);
++	RANGE(range, 0x89000000, 0x8fffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0x91000000, 0x97ffffff, ResExcMemBlock);
++	RANGE(range, 0x91000000, 0x97ffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0x99000000, 0x9fffffff, ResExcMemBlock);
++	RANGE(range, 0x99000000, 0x9fffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0xa1000000, 0xa7ffffff, ResExcMemBlock);
++	RANGE(range, 0xa1000000, 0xa7ffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0xa9000000, 0xafffffff, ResExcMemBlock);
++	RANGE(range, 0xa9000000, 0xafffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0xb1000000, 0xb7ffffff, ResExcMemBlock);
++	RANGE(range, 0xb1000000, 0xb7ffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0xb9000000, 0xbfffffff, ResExcMemBlock);
++	RANGE(range, 0xb9000000, 0xbfffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0xc1000000, 0xc7ffffff, ResExcMemBlock);
++	RANGE(range, 0xc1000000, 0xc7ffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0xc9000000, 0xcfffffff, ResExcMemBlock);
++	RANGE(range, 0xc9000000, 0xcfffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0xd1000000, 0xd7ffffff, ResExcMemBlock);
++	RANGE(range, 0xd1000000, 0xd7ffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0xd9000000, 0xdfffffff, ResExcMemBlock);
++	RANGE(range, 0xd9000000, 0xdfffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0xe1000000, 0xe7ffffff, ResExcMemBlock);
++	RANGE(range, 0xe1000000, 0xe7ffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0xe9000000, 0xefffffff, ResExcMemBlock);
++	RANGE(range, 0xe9000000, 0xefffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0xf1000000, 0xf7ffffff, ResExcMemBlock);
++	RANGE(range, 0xf1000000, 0xf7ffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+-	RANGE(range, 0xf9000000, 0xffffffff, ResExcMemBlock);
++	RANGE(range, 0xf9000000, 0xffffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+     } else {
+-	RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock);
++	RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock, domain);
+ 	ret = xf86AddResToList(ret, &range, -1);
+     }
+-    RANGE(range, 0x00000000, 0xffffffff, ResExcIoBlock);
++    RANGE(range, 0x00000000, 0xffffffff, ResExcIoBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+     return ret;
+ }
+@@ -118,10 +129,10 @@
+     resPtr ret = NULL;
+     resRange range;
+ 
+-    RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock);
++    RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock, ISA_SYSTEM_DOMAIN);
+     ret = xf86AddResToList(ret, &range, -1);
+ 
+-    RANGE(range, 0x00000000, 0xffffffff, ResExcIoBlock);
++    RANGE(range, 0x00000000, 0xffffffff, ResExcIoBlock, ISA_SYSTEM_DOMAIN);
+     ret = xf86AddResToList(ret, &range, -1);
+     return ret;
+ }
+@@ -130,6 +141,14 @@
+ xf86AccResFromOS(resPtr ret)
+ {
+     resRange range;
++#ifdef HAVE_DOMAINS
++    int domain = MIN_SYSTEM_DOMAIN;
++#endif
++
++#ifdef HAVE_DOMAINS
++    if (ret != NULL)
++	domain = ret->res_domain;
++#endif
+ 
+     /*
+      * Fallback is to claim the following areas:
+@@ -137,7 +156,7 @@
+      * 0x000c0000 - 0x000effff  location of VGA and other extensions ROMS
+      */
+ 
+-    RANGE(range, 0x000c0000, 0x000effff, ResExcMemBlock);
++    RANGE(range, 0x000c0000, 0x000effff, ResExcMemBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+ 
+     /*
+@@ -145,20 +164,20 @@
+      * along with their sparse I/O aliases, but that's too imprecise.  Instead
+      * claim a bare minimum here.
+      */
+-    RANGE(range, 0x00000000, 0x000000ff, ResExcIoBlock); /* For mainboard */
++    RANGE(range, 0x00000000, 0x000000ff, ResExcIoBlock, domain); /* For mainboard */
+     ret = xf86AddResToList(ret, &range, -1);
+ 
+     /*
+      * At minimum, the top and bottom resources must be claimed, so that
+      * resources that are (or appear to be) unallocated can be relocated.
+      */
+-    RANGE(range, 0x00000000, 0x00000000, ResExcMemBlock);
++    RANGE(range, 0x00000000, 0x00000000, ResExcMemBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+-    RANGE(range, 0xffffffff, 0xffffffff, ResExcMemBlock);
++    RANGE(range, 0xffffffff, 0xffffffff, ResExcMemBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+-/*  RANGE(range, 0x00000000, 0x00000000, ResExcIoBlock);
++/*  RANGE(range, 0x00000000, 0x00000000, ResExcIoBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1); */
+-    RANGE(range, 0xffffffff, 0xffffffff, ResExcIoBlock);
++    RANGE(range, 0xffffffff, 0xffffffff, ResExcIoBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+ 
+     /* XXX add others */
+@@ -172,9 +191,18 @@
+   */
+   
+ #ifdef __sparc__
++#ifndef HAVE_DOMAINS
++#error This platform cannot operate correctly without HAVE_DOMAINS defined
++#endif
+ resRange PciAvoid[] = {_END};
++#define MIN_SYSTEM_DOMAIN	0
++#define MAX_SYSTEM_DOMAIN	255
++#define ISA_SYSTEM_DOMAIN	0
+ #else
+ resRange PciAvoid[] = {_PCI_AVOID_PC_STYLE, _END};
++#define MIN_SYSTEM_DOMAIN	0
++#define MAX_SYSTEM_DOMAIN	0
++#define ISA_SYSTEM_DOMAIN	0
+ #endif
+ 
+ resPtr
+@@ -182,32 +210,36 @@
+ {
+     resPtr ret = NULL;
+     resRange range;
++    int domain;
+ 
+-    RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock);
+-    ret = xf86AddResToList(ret, &range, -1);
++    for (domain = MIN_SYSTEM_DOMAIN; domain <= MAX_SYSTEM_DOMAIN; domain++) {
++	RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock, domain);
++	ret = xf86AddResToList(ret, &range, -1);
+ 
+ #ifdef __sparc__
+-    RANGE(range, 0x00000000, 0x00ffffff, ResExcIoBlock);
++	RANGE(range, 0x00000000, 0x00ffffff, ResExcIoBlock, domain);
+ #else
+-    RANGE(range, 0x00000000, 0x0000ffff, ResExcIoBlock);
++	RANGE(range, 0x00000000, 0x0000ffff, ResExcIoBlock, domain);
+ #endif
+-    ret = xf86AddResToList(ret, &range, -1);
++	ret = xf86AddResToList(ret, &range, -1);
++    }
++
+     return ret;
+ }
+ 
+ resPtr
+-xf86PciBusAccWindowsFromOS(void)
++xf86PciBusAccWindowsFromOS(int domain)
+ {
+     resPtr ret = NULL;
+     resRange range;
+ 
+-    RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock);
++    RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+ 
+ #ifdef __sparc__
+-    RANGE(range, 0x00000000, 0x00ffffff, ResExcIoBlock);
++    RANGE(range, 0x00000000, 0x00ffffff, ResExcIoBlock, domain);
+ #else
+-    RANGE(range, 0x00000000, 0x0000ffff, ResExcIoBlock);
++    RANGE(range, 0x00000000, 0x0000ffff, ResExcIoBlock, domain);
+ #endif
+     ret = xf86AddResToList(ret, &range, -1);
+     return ret;
+@@ -219,13 +251,13 @@
+     resPtr ret = NULL;
+     resRange range;
+ 
+-    RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock);
++    RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock, ISA_SYSTEM_DOMAIN);
+     ret = xf86AddResToList(ret, &range, -1);
+ 
+ #ifdef __sparc__
+-    RANGE(range, 0x00000000, 0x00ffffff, ResExcIoBlock);
++    RANGE(range, 0x00000000, 0x00ffffff, ResExcIoBlock, ISA_SYSTEM_DOMAIN);
+ #else
+-    RANGE(range, 0x00000000, 0x0000ffff, ResExcIoBlock);
++    RANGE(range, 0x00000000, 0x0000ffff, ResExcIoBlock, ISA_SYSTEM_DOMAIN);
+ #endif
+     ret = xf86AddResToList(ret, &range, -1);
+     return ret;
+@@ -235,21 +267,29 @@
+ xf86AccResFromOS(resPtr ret)
+ {
+     resRange range;
++#ifdef HAVE_DOMAINS
++    int domain = MIN_SYSTEM_DOMAIN;
++#endif
++
++#ifdef HAVE_DOMAINS
++    if (ret != NULL)
++	domain = ret->res_domain;
++#endif
+ 
+     /*
+      * At minimum, the top and bottom resources must be claimed, so that
+      * resources that are (or appear to be) unallocated can be relocated.
+      */
+-    RANGE(range, 0x00000000, 0x00000000, ResExcMemBlock);
++    RANGE(range, 0x00000000, 0x00000000, ResExcMemBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+-    RANGE(range, 0xffffffff, 0xffffffff, ResExcMemBlock);
++    RANGE(range, 0xffffffff, 0xffffffff, ResExcMemBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+-    RANGE(range, 0x00000000, 0x00000000, ResExcIoBlock);
++    RANGE(range, 0x00000000, 0x00000000, ResExcIoBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+ #ifdef __sparc__
+-    RANGE(range, 0x00ffffff, 0x00ffffff, ResExcIoBlock);
++    RANGE(range, 0x00ffffff, 0x00ffffff, ResExcIoBlock, domain);
+ #else
+-    RANGE(range, 0x0000ffff, 0x0000ffff, ResExcIoBlock);
++    RANGE(range, 0x0000ffff, 0x0000ffff, ResExcIoBlock, domain);
+ #endif
+     ret = xf86AddResToList(ret, &range, -1);
+ 
+--- XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/shared/stdResource.c.~1~	Sun Jun  3 19:44:41 2001
++++ XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/shared/stdResource.c	Sun Jun  3 19:44:48 2001
+@@ -20,34 +20,42 @@
+ resRange PciAvoid[] = {_PCI_AVOID_PC_STYLE, _END};
+ #endif
+ 
++#define MIN_SYSTEM_DOMAIN	0
++#define MAX_SYSTEM_DOMAIN	0
++#define ISA_SYSTEM_DOMAIN	0
++
+ resPtr
+ xf86StdBusAccWindowsFromOS(void)
+ {
+     /* Fallback is to allow addressing of all memory space */
+     resPtr ret = NULL;
+     resRange range;
++    int domain;
+ 
+-    RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock);
+-    ret = xf86AddResToList(ret, &range, -1);
++    for (domain = MIN_SYSTEM_DOMAIN; domain <= MAX_SYSTEM_DOMAIN; domain++) {
++	RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock, domain);
++	ret = xf86AddResToList(ret, &range, -1);
++
++	/* Fallback is to allow addressing of all I/O space */
++	RANGE(range, 0x00000000, 0x0000ffff, ResExcIoBlock, domain);
++	ret = xf86AddResToList(ret, &range, -1);
++    }
+ 
+-    /* Fallback is to allow addressing of all I/O space */
+-    RANGE(range, 0x00000000, 0x0000ffff, ResExcIoBlock);
+-    ret = xf86AddResToList(ret, &range, -1);
+     return ret;
+ }
+ 
+ resPtr
+-xf86StdPciBusAccWindowsFromOS(void)
++xf86StdPciBusAccWindowsFromOS(int domain)
+ {
+     /* Fallback is to allow addressing of all memory space */
+     resPtr ret = NULL;
+     resRange range;
+ 
+-    RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock);
++    RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+ 
+     /* Fallback is to allow addressing of all I/O space */
+-    RANGE(range, 0x00000000, 0x0000ffff, ResExcIoBlock);
++    RANGE(range, 0x00000000, 0x0000ffff, ResExcIoBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+     return ret;
+ }
+@@ -59,11 +67,11 @@
+     resPtr ret = NULL;
+     resRange range;
+ 
+-    RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock);
++    RANGE(range, 0x00000000, 0xffffffff, ResExcMemBlock, ISA_SYSTEM_DOMAIN);
+     ret = xf86AddResToList(ret, &range, -1);
+ 
+     /* Fallback is to allow addressing of all I/O space */
+-    RANGE(range, 0x00000000, 0x0000ffff, ResExcIoBlock);
++    RANGE(range, 0x00000000, 0x0000ffff, ResExcIoBlock, ISA_SYSTEM_DOMAIN);
+     ret = xf86AddResToList(ret, &range, -1);
+     return ret;
+ }
+@@ -72,6 +80,14 @@
+ xf86StdAccResFromOS(resPtr ret)
+ {
+     resRange range;
++#ifdef HAVE_DOMAINS
++    int domain = MIN_SYSTEM_DOMAIN;
++#endif
++
++#ifdef HAVE_DOMAINS
++    if (ret != NULL)
++	domain = ret->res_domain;
++#endif
+ 
+     /*
+      * Fallback is to claim the following areas:
+@@ -91,22 +107,22 @@
+      */
+ 
+     /* Fallback is to claim 0x0 - 0x9ffff and 0x100000 - 0x7fffffff */
+-    RANGE(range, 0x00000000, 0x0009ffff, ResExcMemBlock);
++    RANGE(range, 0x00000000, 0x0009ffff, ResExcMemBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+-    RANGE(range, 0x000c0000, 0x000effff, ResExcMemBlock);
++    RANGE(range, 0x000c0000, 0x000effff, ResExcMemBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+-    RANGE(range, 0x000f0000, 0x000fffff, ResExcMemBlock);
++    RANGE(range, 0x000f0000, 0x000fffff, ResExcMemBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+     RANGE(range, 0x00100000, 0x3fffffff,
+-	ResExcMemBlock | ResBios | ResEstimated);
++	ResExcMemBlock | ResBios | ResEstimated, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+ #if 0
+-    RANGE(range, 0xfec00000, 0xfecfffff, ResExcMemBlock | ResBios);
++    RANGE(range, 0xfec00000, 0xfecfffff, ResExcMemBlock | ResBios, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+-    RANGE(range, 0xfee00000, 0xfeefffff, ResExcMemBlock | ResBios);
++    RANGE(range, 0xfee00000, 0xfeefffff, ResExcMemBlock | ResBios, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+ #endif
+-    RANGE(range, 0xffe00000, 0xffffffff, ResExcMemBlock | ResBios);
++    RANGE(range, 0xffe00000, 0xffffffff, ResExcMemBlock | ResBios, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+ 
+     /*
+@@ -114,20 +130,20 @@
+      * along with their sparse I/O aliases, but that's too imprecise.  Instead
+      * claim a bare minimum here.
+      */
+-    RANGE(range, 0x00000000, 0x000000ff, ResExcIoBlock); /* For mainboard */
++    RANGE(range, 0x00000000, 0x000000ff, ResExcIoBlock, domain); /* For mainboard */
+     ret = xf86AddResToList(ret, &range, -1);
+ 
+     /*
+      * At minimum, the top and bottom resources must be claimed, so that
+      * resources that are (or appear to be) unallocated can be relocated.
+      */
+-/*  RANGE(range, 0x00000000, 0x00000000, ResExcMemBlock);
++/*  RANGE(range, 0x00000000, 0x00000000, ResExcMemBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+-    RANGE(range, 0xffffffff, 0xffffffff, ResExcMemBlock);
++    RANGE(range, 0xffffffff, 0xffffffff, ResExcMemBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+-    RANGE(range, 0x00000000, 0x00000000, ResExcIoBlock);
++    RANGE(range, 0x00000000, 0x00000000, ResExcIoBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1); */
+-    RANGE(range, 0x0000ffff, 0x0000ffff, ResExcIoBlock);
++    RANGE(range, 0x0000ffff, 0x0000ffff, ResExcIoBlock, domain);
+     ret = xf86AddResToList(ret, &range, -1);
+ 
+     /* XXX add others */
+--- XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/shared/vidmem.c.~1~	Sun Jun  3 19:44:41 2001
++++ XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/shared/vidmem.c	Sun Jun  3 19:44:48 2001
+@@ -135,6 +135,29 @@
+ 	}
+ }
+ 
++void
++xf86MakeNewMapping(int ScreenNum, int Flags, unsigned long Base, unsigned long Size, pointer Vbase)
++{
++	VidMapPtr vp;
++	MappingPtr mp;
++
++	vp = getVidMapRec(ScreenNum);
++	mp = newMapping(vp);
++	mp->physBase = Base;
++	mp->size = Size;
++	mp->virtBase = Vbase;
++	mp->flags = Flags;
++}
++
++void
++xf86InitVidMem(void)
++{
++	if (!vidMemInfo.initialised) {
++		memset(&vidMemInfo, 0, sizeof(VidMemInfo));
++		xf86OSInitVidMem(&vidMemInfo);
++	}
++}
++
+ pointer
+ xf86MapVidMem(int ScreenNum, int Flags, unsigned long Base, unsigned long Size)
+ {
+--- XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/xf86_OSproc.h.~1~	Sun Jun  3 19:44:41 2001
++++ XFree86-4.1.0/xc/programs/Xserver/hw/xfree86/os-support/xf86_OSproc.h	Sun Jun  3 19:44:48 2001
+@@ -137,6 +137,8 @@
+ /* public functions */
+ extern Bool xf86LinearVidMem(void);
+ extern Bool xf86CheckMTRR(int); 
++extern void xf86MakeNewMapping(int, int, unsigned long, unsigned long, pointer);
++extern void xf86InitVidMem(void);
+ extern pointer xf86MapVidMem(int, int, unsigned long, unsigned long);
+ extern void xf86UnMapVidMem(int, pointer, unsigned long);
+ extern void xf86MapReadSideEffects(int, int, pointer, unsigned long);
+@@ -235,13 +237,13 @@
+ /* RAC-related privs */
+ /* internal to os-support layer */
+ resPtr xf86StdBusAccWindowsFromOS(void);
+-resPtr xf86StdPciAccWindowsFromOS(void);
++resPtr xf86StdPciAccWindowsFromOS(int domain);
+ resPtr xf86StdIsaAccWindowsFromOS(void);
+ resPtr xf86StdAccResFromOS(resPtr ret);
+ 
+ /* available to the common layer */
+ resPtr xf86BusAccWindowsFromOS(void);
+-resPtr xf86PciBusAccWindowsFromOS(void);
++resPtr xf86PciBusAccWindowsFromOS(int domain);
+ resPtr xf86IsaBusAccWindowsFromOS(void);
+ resPtr xf86AccResFromOS(resPtr ret);
+ #endif /* NEED_OS_RAC_PROTOS */
