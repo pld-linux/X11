@@ -28,7 +28,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.8.1
-Release:	5
+Release:	5.1
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -77,41 +77,39 @@ Source51:	xload.png
 Source52:	xmag.png
 Source53:	http://oss.sgi.com/projects/ogl-sample/ABI/glext.h
 # NoSource53-md5: a5738dcfa20119fa3e06ce479ca94acf
-Patch0:		%{name}-PLD.patch
-Patch1:		%{name}-enableglide.patch
-Patch2:		%{name}-DisableDebug.patch
-Patch3:		%{name}-Xwrapper.patch
-Patch4:		%{name}-xfs.patch
-Patch5:		%{name}-xterm-utempter.patch
-Patch6:		%{name}-app_defaults_dir.patch
-Patch7:		%{name}-broken-includes.patch
-Patch8:		%{name}-fhs.patch
-Patch9:		%{name}-xdmsecurity.patch
-Patch10:	%{name}-xman.patch
-Patch11:	%{name}-xdm-fixes.patch
-Patch12:	%{name}-pic.patch
-Patch13:	%{name}-r128-busmstr2.patch
-Patch14:	%{name}-neomagic_swcursor.patch
-Patch15:	%{name}-mga-busmstr.patch
-Patch16:	%{name}-agpgart-load.patch
-Patch17:	%{name}-XTerm.ad.patch
-Patch18:	%{name}-llh.patch
-Patch19:	XFree86-xman-manpaths.patch
-Patch20:	XFree86-clearrts.patch
-Patch21:	XFree86-Xfont-Type1-large-DoS.patch
-Patch22:	%{name}-GLcore-strip-a-workaround.patch
-Patch23:	%{name}-pkgconfig.patch
-Patch24:	XFree86-spencode-nowarning.patch
-Patch25:	%{name}-xterm-256colors.patch
-Patch26:	%{name}-makefile-fastbuild.patch
-Patch27:	%{name}-sparc-kbd.patch
+Patch0:		%{name}-6.8.2-20050108.patch
+Patch1:		%{name}-PLD.patch
+Patch2:		%{name}-enableglide.patch
+Patch3:		%{name}-DisableDebug.patch
+Patch4:		%{name}-Xwrapper.patch
+Patch5:		%{name}-xfs.patch
+Patch6:		%{name}-xterm-utempter.patch
+Patch7:		%{name}-app_defaults_dir.patch
+Patch8:		%{name}-broken-includes.patch
+Patch9:		%{name}-fhs.patch
+Patch10:		%{name}-xdmsecurity.patch
+Patch11:	%{name}-xman.patch
+Patch12:	%{name}-xdm-fixes.patch
+Patch13:	%{name}-pic.patch
+Patch14:	%{name}-r128-busmstr2.patch
+Patch15:	%{name}-neomagic_swcursor.patch
+Patch16:	%{name}-mga-busmstr.patch
+Patch17:	%{name}-agpgart-load.patch
+Patch18:	%{name}-XTerm.ad.patch
+Patch19:	%{name}-llh.patch
+Patch20:	XFree86-xman-manpaths.patch
+Patch21:	XFree86-clearrts.patch
+Patch22:	XFree86-Xfont-Type1-large-DoS.patch
+Patch23:	%{name}-GLcore-strip-a-workaround.patch
+Patch24:	%{name}-pkgconfig.patch
+Patch25:	XFree86-spencode-nowarning.patch
+Patch26:	%{name}-xterm-256colors.patch
+Patch27:	%{name}-makefile-fastbuild.patch
+Patch28:	%{name}-sparc-kbd.patch
 Patch29:	%{name}-radeon-entervt.patch
-Patch30:	http://www.x.org/pub/X11R6.8.1/patches/xorg-681-CAN-2004-0914.patch
 # updated from http://dl.sourceforge.net/i810fb/i810fb-xfree86-420.tar.bz2 : i810fb-xfree420.diff
 Patch31:	%{name}-i810fb.patch
-Patch32:	p_i810-accel.diff
 Patch33:	p_i810dri-memfix.diff
-Patch34:	%{name}-kbd-segv.patch
 Patch50:	%{name}-glibc-locale_sync.patch
 # XFree86-tdfx-fix-vtswitch-font-corruption.patch - issue still not fixed,
 # but patch doesn't help either; however, it occurs in text mode only, not
@@ -1925,9 +1923,11 @@ X11-libs.
 
 %prep
 %setup -qc -a1 -a2 -a7
+cd xc
 %patch0 -p0
-%{?with_glide:%patch1 -p0}
-%patch2 -p0
+cd -
+%patch1 -p0
+%{?with_glide:%patch2 -p0}
 %patch3 -p0
 %patch4 -p0
 %patch5 -p0
@@ -1944,26 +1944,24 @@ X11-libs.
 %patch16 -p0
 %patch17 -p0
 %patch18 -p0
-%patch19 -p1
+%patch19 -p0
 %patch20 -p1
 %patch21 -p1
 %patch22 -p1
-%patch23 -p0
-%patch24 -p1
-%patch25 -p0
+%patch23 -p1
+%patch24 -p0
+%patch25 -p1
 %patch26 -p0
-%patch27 -p1
+%patch27 -p0
+%patch28 -p1
 
 rm -f xc/config/cf/host.def
 
 %patch29 -p1
 cd xc
-%patch30 -p0
-%patch32 -p0
 %patch33 -p0
 cd -
 %patch31 -p0
-%patch34 -p0
 %patch50 -p1
 %{?with_dualhead:%patch100 -p1}
 
