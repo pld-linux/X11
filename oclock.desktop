@@ -61,4 +61,5 @@ Exec=oclock
 Terminal=0
 Icon=oclock.png
 Type=Application
+Categories=Utility;X-X11
 # vi: encoding=utf-8
