@@ -90,20 +90,19 @@ Patch14:	%{name}-neomagic_swcursor.patch
 Patch15:	%{name}-mga-busmstr.patch
 Patch16:	%{name}-agpgart-load.patch
 Patch17:	%{name}-XTerm.ad.patch
-Patch18:	%{name}-dontbuildfonts.patch
-Patch19:	%{name}-llh.patch
-Patch20:	XFree86-xman-manpaths.patch
-Patch21:	XFree86-clearrts.patch
-Patch22:	XFree86-Xfont-Type1-large-DoS.patch
-Patch23:	%{name}-GLcore-strip-a-workaround.patch
-Patch24:	%{name}-pkgconfig.patch
-Patch25:	XFree86-spencode-nowarning.patch
-Patch26:	%{name}-xterm-256colors.patch
-Patch27:	%{name}-makefile-fastbuild.patch
+Patch18:	%{name}-llh.patch
+Patch19:	XFree86-xman-manpaths.patch
+Patch20:	XFree86-clearrts.patch
+Patch21:	XFree86-Xfont-Type1-large-DoS.patch
+Patch22:	%{name}-GLcore-strip-a-workaround.patch
+Patch23:	%{name}-pkgconfig.patch
+Patch24:	XFree86-spencode-nowarning.patch
+Patch25:	%{name}-xterm-256colors.patch
+Patch26:	%{name}-makefile-fastbuild.patch
 # cleaner version in XFree86?
-Patch28:	%{name}-sparc-kbd.patch
-Patch29:	%{name}-glibc-charset.patch
-Patch30:	%{name}-radeon-entervt.patch
+Patch27:	%{name}-sparc-kbd.patch
+Patch28:	%{name}-glibc-charset.patch
+Patch29:	%{name}-radeon-entervt.patch
 # tdfx-fix-vtswitch-font-corruption - not applied, needs check
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
@@ -1933,21 +1932,20 @@ X11-libs.
 %patch16 -p0
 %patch17 -p0
 %patch18 -p0
-%patch19 -p0
+%patch19 -p1
 %patch20 -p1
 %patch21 -p1
 %patch22 -p1
-%patch23 -p1
-%patch24 -p0
-%patch25 -p1
+%patch23 -p0
+%patch24 -p1
+%patch25 -p0
 %patch26 -p0
-%patch27 -p0
-%patch28 -p1
+%patch27 -p1
 
 rm -f xc/config/cf/host.def
 
 %if %{with glibc_charset}
-%patch29 -p1
+%patch28 -p1
 # strip charset info, it's not welcome there
 cat xc/nls/locale.alias \
 	| sed 's/\.[^ \t@:]*//g' \
@@ -1955,7 +1953,7 @@ cat xc/nls/locale.alias \
 	| uniq > tmp
 mv tmp xc/nls/locale.alias
 %endif
-%patch30 -p1
+%patch29 -p1
 
 %build
 PWD=`pwd`
@@ -1968,6 +1966,7 @@ PWD=`pwd`
 	CXXOPTIONS="%{rpmcflags}" \
 	CXXDEBUGFLAGS="" \
 	CDEBUGFLAGS="" \
+	FONTSDIR= \
 	ICONDIR="%{_iconsdir}" \
 	LINUXDIR="/dev/null" \
 	TOP="$PWD/xc"
@@ -1998,6 +1997,7 @@ install -d $RPM_BUILD_ROOT/etc/{pam.d,rc.d/init.d,security/console.apps,sysconfi
 	CXXOPTIONS="%{rpmcflags}" \
 	CXXDEBUGFLAGS="" \
 	CDEBUGFLAGS="" \
+	FONTSDIR= \
 	ICONDIR="%{_iconsdir}" \
 	LINUXDIR="/dev/null" \
 	TOP="$PWD/xc"
