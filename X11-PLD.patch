@@ -473,3 +473,15 @@
  # define HasFreetype2		YES
  #endif
 
+--- xc/config/cf/X11.tmpl.orig	2004-09-14 17:15:01.000000000 +0200
++++ xc/config/cf/X11.tmpl	2004-09-14 21:29:44.837063736 +0200
+@@ -2775,7 +2775,7 @@
+ #endif
+ 
+ #ifndef SharedLibXau
+-#define SharedLibXau		NO
++#define SharedLibXau		YES
+ #endif
+ #ifndef NormalLibXau
+ #define NormalLibXau (!SharedLibXau | ForceNormalLib)
+
