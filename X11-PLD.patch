@@ -483,3 +483,17 @@
  #ifndef NormalLibXdmcp
  #define NormalLibXdmcp (!SharedLibXdmcp | ForceNormalLib)
 
+--- xc/config/cf/linux.cf.orig	2004-09-13 18:37:30.000000000 +0200
++++ xc/config/cf/linux.cf	2004-09-13 22:42:59.680857256 +0200
+@@ -502,6 +502,10 @@
+ # define HasExpat		YES
+ #endif
+ 
++#ifndef HasFontconfig
++# define HasFontconfig		YES
++#endif
++
+ #ifndef HasFreetype2
+ # define HasFreetype2		YES
+ #endif
+
