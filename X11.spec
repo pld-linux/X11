@@ -103,7 +103,6 @@ Patch46:	XFree86-lock.patch
 Patch50:	%{name}-xterm-256colors.patch
 Patch54:	%{name}-setxkbmap.patch
 Patch55:	%{name}-makefile-fastbuild.patch
-Patch56:	%{name}-xrender-pkgconfig.patch
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
 # Required by xc/programs/Xserver/hw/xfree86/drivers/glide/glide_driver.c
@@ -1944,7 +1943,6 @@ X11-libs.
 %patch45 -p1
 %patch50 -p0
 %patch55 -p0
-%patch56 -p0
 
 rm -f xc/config/cf/host.def
 
