@@ -84,4 +84,5 @@ Exec=xedit
 Icon=xedit.png
 Type=Application
 Terminal=0
+Categories=Editors;X-X11
 # vi: encoding=utf-8
