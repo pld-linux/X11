@@ -1993,7 +1993,7 @@ install -d $RPM_BUILD_ROOT/etc/{pam.d,rc.d/init.d,security/console.apps,sysconfi
 	$RPM_BUILD_ROOT/usr/{bin,include,lib} \
 	$RPM_BUILD_ROOT/var/{log,lib/xkb} \
 	$RPM_BUILD_ROOT{%{_desktopdir},%{_iconsdir},%{_pixmapsdir}/mini} \
-	$RPM_BUILD_ROOT{%{_wmpropsdir},%{_soundsdir},%{_themesdir}/{Default,ThinIce,Metal,Industrial,Bluecurve}} \
+	$RPM_BUILD_ROOT{%{_wmpropsdir},%{_soundsdir},%{_themesdir}/{Default,ThinIce,Metal,Industrial}} \
 	$RPM_BUILD_ROOT{%{_xsessdir},%{_wallpapersdir},%{_wmstylesdir}} \
 	$RPM_BUILD_ROOT%{_pkgconfigdir}
 
@@ -3021,7 +3021,6 @@ fi
 %dir %{_themesdir}/ThinIce
 %dir %{_themesdir}/Metal
 %dir %{_themesdir}/Industrial
-%dir %{_themesdir}/Bluecurve
 %{_libx11dir}/XErrorDB
 %{_libx11dir}/XKeysymDB
 %dir %{_appdefsdir}
