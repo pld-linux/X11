@@ -39,3 +39,4 @@ Exec=xeyes
 Icon=xeyes.png
 Terminal=0
 Type=Application
+# vi: encoding=utf-8
