@@ -13,7 +13,7 @@
  !*VT100*colorBDMode: on
 --- xc/programs/xterm/XTerm.ad.orig	2003-09-25 13:06:59.000000000 +0200
 +++ xc/programs/xterm/XTerm.ad	2003-10-01 20:49:35.565015104 +0200
-@@ -110,3 +110,178 @@
+@@ -110,3 +110,179 @@
  *tek4014*font2: 8x13
  *tek4014*font3: 6x13
  *tek4014*fontSmall: 6x10
@@ -155,6 +155,7 @@
 +	a<Key>space: string(0x1b) string(" ")\n\
 +	a s<Key>question: string(0x1b) string("?")\n\
 +	a s<Key>exclam: string(0x1b) string("!")\n\
++	a<Key>`: string(0x1b) string("`")\n\
 +	a<Key>1: string(0x1b) string("1")\n\
 +	a<Key>2: string(0x1b) string("2")\n\
 +	a<Key>3: string(0x1b) string("3")\n\
