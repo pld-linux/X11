@@ -1,0 +1,14 @@
+--- XFree86-4.0/xc/config/cf/X11.tmpl	Wed Jun  7 07:29:47 2000
++++ XFree86-4.0/xc/config/cf/X11.tmpl	Wed Jun  7 07:35:17 2000
+@@ -2199,11 +2199,9 @@
+ #ifndef InstallAppDefaultsLong
+ #if InstallAppDefFiles
+ #define InstallAppDefaultsLong(file,class)				@@\
+-LinkConfDirectory(app-defaults,.,app-defaults,.)			@@\
+ InstallNamedTarget(install,file.ad,$(INSTAPPFLAGS),$(XAPPLOADDIR),class)
+ #else
+ #define InstallAppDefaultsLong(file,class)				@@\
+-LinkConfDirectory(app-defaults,.,app-defaults,.)			@@\
+ InstallNamedTargetNoClobber(install,file.ad,$(INSTAPPFLAGS),$(XAPPLOADDIR),class)
+ #endif /* InstallAppDefFiles */
+ #endif /* InstallAppDefaultsLong */
