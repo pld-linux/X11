@@ -1909,7 +1909,7 @@ ln -sf /usr/share/doc/%{name}-%{version} $RPM_BUILD_ROOT%{_libx11dir}/doc
 rm -f $RPM_BUILD_ROOT%{_libx11dir}/config/host.def
 
 :> $RPM_BUILD_ROOT%{_libx11dir}/config/host.def
-:> $RPM_BUILD_ROOT%{_sysconfdir}/X11/XF86Config
+:> $RPM_BUILD_ROOT%{_sysconfdir}/X11/xorg.conf
 
 rm -rf $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/html
 
@@ -2378,7 +2378,7 @@ fi
 %{_libx11dir}/Options
 %{_libx11dir}/getconfig
 
-%config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/X11/XF86Config
+%config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/X11/xorg.conf
 %attr(640,root,root) %config %verify(not md5 size mtime) /etc/pam.d/xserver
 %attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/security/blacklist.xserver
 %config(missingok) /etc/security/console.apps/xserver
