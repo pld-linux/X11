@@ -1,8 +1,8 @@
 #
 # TODO
 # - XDM Auth broken (can anyone confirm now with new implementation?)
-# - Review rest of patches
-# - missing dir in Xprint
+# - Review Patch 46   
+# - missing dir in Xprint (which one?)
 #
 Summary:	XOrg X11 Window System servers and basic programs
 Summary(de):	XOrg X11 Window-System-Server und grundlegende Programme
@@ -93,7 +93,7 @@ Patch32:	XFree86-xman-manpaths.patch
 Patch33:	XFree86-clearrts.patch
 Patch40:	XFree86-Xfont-Type1-large-DoS.patch
 Patch41:	%{name}-GLcore-strip-a-workaround.patch
-Patch44:	XFree86-pkgconfig.patch
+Patch44:	%{name}-pkgconfig.patch
 Patch45:	XFree86-spencode-nowarning.patch
 Patch46:	XFree86-lock.patch
 Patch50:	%{name}-xterm-256colors.patch
@@ -1934,6 +1934,7 @@ X11-libs.
 %patch33 -p1
 %patch40 -p1
 %patch41 -p1
+%patch44 -p0
 %patch45 -p1
 %patch50 -p0
 %patch55 -p0
