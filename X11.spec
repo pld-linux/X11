@@ -113,6 +113,7 @@ Patch33:	p_i810dri-memfix.diff
 Patch50:	%{name}-glibc-locale_sync.patch
 Patch60:	%{name}-oldkeyb.patch
 Patch61:	%{name}-sparc64-asmfix.patch
+Patch62:	%{name}-sparc64-v9fix.patch
 # XFree86-tdfx-fix-vtswitch-font-corruption.patch - issue still not fixed,
 # but patch doesn't help either; however, it occurs in text mode only, not
 # with tdfxfb, which is worth using anyway
@@ -150,7 +151,7 @@ Obsoletes:	XFree86
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1
 %endif
-ExclusiveArch:	%{ix86} alpha amd64 armv4l ia64 m68k ppc sparc
+ExclusiveArch:	%{ix86} alpha amd64 armv4l ia64 m68k ppc sparc sparc64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -1968,6 +1969,7 @@ cd -
 %ifarch sparc sparc64
 %patch60 -p0
 %patch61 -p1
+%patch62 -p1
 %endif
 %{?with_dualhead:%patch100 -p1}
 
@@ -2711,7 +2713,7 @@ fi
 %{_includedir}/X11/Xserver
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64
+%ifarch %{ix86} ia64 amd64 sparc64
 %files driver-apm
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/apm_drv.o
@@ -2719,14 +2721,14 @@ fi
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64
+%ifarch %{ix86} ia64 amd64 sparc64
 %files driver-ark
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/ark_drv.o
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64 mips ppc arm
+%ifarch %{ix86} ia64 amd64 mips ppc arm sparc64
 %files driver-chips
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/chips_drv.o
@@ -2734,7 +2736,7 @@ fi
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64 alpha
+%ifarch %{ix86} ia64 amd64 alpha sparc64
 %files driver-cirrus
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/cirrus_*.o
@@ -2773,7 +2775,7 @@ fi
 %{_mandir}/man4/glint.4*
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64
+%ifarch %{ix86} ia64 amd64 sparc64
 %files driver-i128
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/i128_drv.o
@@ -2781,7 +2783,7 @@ fi
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64
+%ifarch %{ix86} ia64 sparc64
 %files driver-i740
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/i740_drv.o
@@ -2789,7 +2791,7 @@ fi
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64
+%ifarch %{ix86} ia64 sparc64
 %files driver-i810
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/i810_drv.o
@@ -2818,7 +2820,7 @@ fi
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64
+%ifarch %{ix86} ia64 amd64 sparc64
 %files driver-neomagic
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/neomagic_drv.o
@@ -2826,7 +2828,7 @@ fi
 %endif
 
 # Devel: %{ix86} sparc sparc64 amd64
-%ifarch mips
+%ifarch mips sparc64
 %files driver-newport
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/newport_drv.o
@@ -2841,7 +2843,7 @@ fi
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64 mips alpha arm ppc
+%ifarch %{ix86} ia64 amd64 mips alpha arm ppc sparc64
 %files driver-nv
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/nv_drv.o
@@ -2871,7 +2873,7 @@ fi
 %{_mandir}/man4/radeon.4*
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64 alpha
+%ifarch %{ix86} ia64 amd64 alpha sparc64
 %files driver-rendition
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/rendition_drv.o
@@ -2880,7 +2882,7 @@ fi
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64 mips alpha ppc arm
+%ifarch %{ix86} ia64 amd64 mips alpha ppc arm sparc64
 %files driver-s3virge
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/s3virge_drv.o
@@ -2895,7 +2897,7 @@ fi
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64 mips alpha ppc arm
+%ifarch %{ix86} ia64 amd64 mips alpha ppc arm sparc64
 %files driver-savage
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/savage_drv.o
@@ -2903,7 +2905,7 @@ fi
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64 alpha
+%ifarch %{ix86} ia64 amd64 alpha sparc64
 %files driver-siliconmotion
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/siliconmotion_drv.o
@@ -2982,14 +2984,14 @@ fi
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64 alpha
+%ifarch %{ix86} sparc64 ia64 amd64 alpha
 %files driver-tga
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/tga_drv.o
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64 mips ppc arm
+%ifarch %{ix86} sparc64 ia64 amd64 mips ppc arm
 %files driver-trident
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/trident_drv.o
@@ -3011,7 +3013,7 @@ fi
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64
+%ifarch %{ix86} sparc64 ia64
 %files driver-vmware
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/vmware_drv.o
