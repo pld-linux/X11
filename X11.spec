@@ -109,7 +109,7 @@ Patch40:	XFree86-Xfont-Type1-large-DoS.patch
 # "strip -g libGLcore.a" leaves empty objects m_debug_*.o, which cause
 # warnings during GLcore loading ("m_debug_*.o: no symbols") - shut up them
 Patch41:	XFree86-GLcore-strip-a-workaround.patch
-Patch42:	XFree86-disable_glide.patch
+Patch42:	%{name}-disable_glide.patch
 Patch43:	XFree86-expat.patch
 Patch44:	XFree86-pkgconfig.patch
 # spencode.o in libspeedo.a is empty - patch like for libGLcore.a
