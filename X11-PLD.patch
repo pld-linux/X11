@@ -246,30 +246,6 @@
  
  /*
   * To not install the local font directory, uncomment the following
-@@ -311,20 +311,20 @@
-  * HasGlide2 to YES and set the Glide2IncDir variable. 
-  * HasGlide2 is per default NO.
-  *
--#define HasGlide2 YES
-  */
-+#define	HasGlide2 YES
- 
- /*
-  * Set the path to your Glide include files.
-  *
--#define Glide2IncDir /usr/include/glide
-  */
-+#define Glide2IncDir /usr/include/glide
- 
- /* 
-  * Have glide 3?
-  *
--#define HasGlide3 YES
-  */
-+#define HasGlide3 YES
- 
- /*
-  * Set the path to your Glide 3 include files.
 @@ -433,8 +433,8 @@
   * Some Linux releases don't have a libtermcap.  In this case you may need
   * to uncomment the following
