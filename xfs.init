@@ -30,7 +30,7 @@ case "$1" in
 			$([ -n "$XFS_PORT" ] && echo "-port $XFS_PORT") \
 			$([ -n "$XFS_OPTIONS" ] && echo "$XFS_OPTIONS")
 	else
-		mag_Already_Running "X Font Server"
+		msg_Already_Running "X Font Server"
 	fi
 	touch /var/lock/subsys/xfs
 	;;
