@@ -140,6 +140,16 @@ NXTerm.JoinSession:			False
 ! On some systems you may want to replace the a (alt) modifiers with
 ! m (meta) modifier in fron of some <Key> events.
 *vt100.translations: #override \
+	Alt Ctrl<Btn4Down>: string(0x1b) string("OA")\n\
+	Alt Ctrl<Btn5Down>: string(0x1b) string("OB")\n\
+	Alt<Btn4Down>: string(0x1b) string("OA") string(0x1b) string("OA") string(0x1b) string("OA") string(0x1b) string("OA") string(0x1b) string("OA")\n\
+	Alt<Btn5Down>: string(0x1b) string("OB") string(0x1b) string("OB") string(0x1b) string("OB") string(0x1b) string("OB") string(0x1b) string("OB")\n\
+	Shift<Btn4Down>: scroll-back(1,page)\n\
+	Shift<Btn5Down>: scroll-forw(1,page)\n\
+	Ctrl<Btn4Down>: scroll-back(1,line)\n\
+	Ctrl<Btn5Down>:scroll-forw(1,line)\n\
+	<Btn4Down>: scroll-back(5,line)\n\
+	<Btn5Down>: scroll-forw(5,line)\n\
 	@Num_Lock<Key>KP_0: string(0)\n\
 	@Num_Lock<Key>KP_1: string(1)\n\
 	@Num_Lock<Key>KP_2: string(2)\n\
@@ -171,104 +181,108 @@ NXTerm.JoinSession:			False
 	<Key>KP_Subtract: string(-)\n\
 	Shift<Key>Prior:scroll-back(1,page)\n\
 	Shift<Key>Next:scroll-forw(1,page)\n\
-	<Key>F16: start-extend() select-end(PRIMARY, CUT_BUFFER0, CLIPBOARD) \n\
-	<Key>F18: insert-selection(PRIMARY, CLIPBOARD) \n\
-	<Key>F27: scroll-back(100,page) \n\
-	<Key>R13: scroll-forw(100,page) \n\
-	~Meta<Key>Home: string(0x1b) string("[1~") \n\
-	Meta<Key>Home: string(0x1b) string(0x1b) string("[1~") \n\
-	~Meta<Key>End: string(0x1b) string("[4~") \n\
-	Meta<Key>End: string(0x1b) string(0x1b) string("[4~") \n\
-	~Meta<Key>Insert: string(0x1b) string("[2~") \n\
-	Meta<Key>Insert: string(0x1b) string(0x1b) string("[2~") \n\
-	~Meta<Key>Delete: string(0x1b) string("[3~") \n\
-	Meta<Key>Delete: string(0x1b) string(0x1b) string("[3~") \n\
-	~Meta<Key>Page_Up: string(0x1b) string("[5~") \n\
-	Meta<Key>Page_Up: string(0x1b) string(0x1b) string("[5~") \n\
-	~Meta<Key>Page_Down: string(0x1b) string("[6~") \n\
-	Meta<Key>Page_Down: string(0x1b) string(0x1b) string("[6~") \n\
-	~Meta<Key>BackSpace: string(\177) \n\
-	Meta<Key>BackSpace: string(0x1b) string(\177) \n\
-	~Meta<Key>Up: string(0x1b) string("OA") \n\
-	Meta<Key>Up: string(0x1b) string(0x1b) string("OA") \n\
-	~Meta<Key>Down: string(0x1b) string("OB") \n\
-	Meta<Key>Down: string(0x1b) string(0x1b) string("OB") \n\
-	~Meta<Key>Left: string(0x1b) string("OD") \n\
-	Meta<Key>Left: string(0x1b) string(0x1b) string("OD") \n\
-	~Meta<Key>Right: string(0x1b) string("OC") \n\
-	Meta<Key>Right: string(0x1b) string(0x1b) string("OC") \n\
-	~Meta<Key>Return: string(0x0d) \n\
-	Meta<Key>Return: string(0x1b) string(0x0d) \n\
-	~Meta<Key>Tab: string(0x09) \n\
-	Meta<Key>Tab: string(0x1b) string(0x09) \n\
-	~Shift<Key>F1: string(0x1b) string("[11~") \n\
-	~Shift<Key>F2: string(0x1b) string("[12~") \n\
-	~Shift<Key>F3: string(0x1b) string("[13~") \n\
-	~Shift<Key>F4: string(0x1b) string("[14~") \n\
-	~Shift<Key>F5: string(0x1b) string("[15~") \n\
-	~Shift<Key>F6: string(0x1b) string("[17~") \n\
-	~Shift<Key>F7: string(0x1b) string("[18~") \n\
-	~Shift<Key>F8: string(0x1b) string("[19~") \n\
-	~Shift<Key>F9: string(0x1b) string("[20~") \n\
-	~Shift<Key>F10: string(0x1b) string("[21~") \n\
-	<Key>F11: string(0x1b) string("[23~") \n\
-	<Key>F12: string(0x1b) string("[24~") \n\
-	<Key>F13: string(0x1b) string("[25~") \n\
-	<Key>F14: string(0x1b) string("[26~") \n\
-	<Key>F15: string(0x1b) string("[28~") \n\
-	<Key>F16: string(0x1b) string("[29~") \n\
-	<Key>F17: string(0x1b) string("[31~") \n\
-	<Key>F18: string(0x1b) string("[32~") \n\
-	<Key>F19: string(0x1b) string("[33~") \n\
-	<Key>F20: string(0x1b) string("[34~") \n\
-	Shift<Key>F1: string(0x1b) string("[23~") \n\
-	Shift<Key>F2: string(0x1b) string("[24~") \n\
-	Shift<Key>F3: string(0x1b) string("[25~") \n\
-	Shift<Key>F4: string(0x1b) string("[26~") \n\
-	Shift<Key>F5: string(0x1b) string("[28~") \n\
-	Shift<Key>F6: string(0x1b) string("[29~") \n\
-	Shift<Key>F7: string(0x1b) string("[31~") \n\
-	Shift<Key>F8: string(0x1b) string("[32~") \n\
-	Shift<Key>F9: string(0x1b) string("[33~") \n\
-	Shift<Key>F10: string(0x1b) string("[34~") \n\
-	Shift<Key>Home: scroll-back(100,page) \n\
-	Shift<Key>End: scroll-forw(100,page) \n
-	s<Key>F1: string(0x1b) string("[23~") \n\
-	s<Key>F2: string(0x1b) string("[24~") \n\
-	s<Key>F3: string(0x1b) string("[25~") \n\
-	s<Key>F4: string(0x1b) string("[26~") \n\
-	s<Key>F5: string(0x1b) string("[28~") \n\
-	s<Key>F6: string(0x1b) string("[29~") \n\
-	s<Key>F7: string(0x1b) string("[31~") \n\
-	s<Key>F8: string(0x1b) string("[32~") \n\
-	s<Key>F9: string(0x1b) string("[33~") \n\
-	s<Key>F10: string(0x1b) string("[34~") \n\
-	a<Key>Return: string(0x1b) string(0x0d) \n\
-	a<Key>Tab: string(0x1b) string(0x09) \n\
-	a<Key>space: string(0x1b) string(" ") \n\
-	a<Key>a: string(0x1b) string("a") \n\
-	a<Key>b: string(0x1b) string("b") \n\
-	a<Key>c: string(0x1b) string("c") \n\
-	a<Key>d: string(0x1b) string("d") \n\
-	a<Key>e: string(0x1b) string("e") \n\
-	a<Key>f: string(0x1b) string("f") \n\
-	a<Key>g: string(0x1b) string("g") \n\
-	a<Key>h: string(0x1b) string("h") \n\
-	a<Key>i: string(0x1b) string("i") \n\
-	a<Key>j: string(0x1b) string("j") \n\
-	a<Key>k: string(0x1b) string("k") \n\
-	a<Key>l: string(0x1b) string("l") \n\
-	a<Key>m: string(0x1b) string("m") \n\
-	a<Key>n: string(0x1b) string("n") \n\
-	a<Key>o: string(0x1b) string("o") \n\
-	a<Key>p: string(0x1b) string("p") \n\
-	a<Key>q: string(0x1b) string("q") \n\
-	a<Key>r: string(0x1b) string("r") \n\
-	a<Key>s: string(0x1b) string("s") \n\
-	a<Key>t: string(0x1b) string("t") \n\
-	a<Key>u: string(0x1b) string("u") \n\
-	a<Key>v: string(0x1b) string("v") \n\
-	a<Key>w: string(0x1b) string("w") \n\
-	a<Key>x: string(0x1b) string("x") \n\
-	a<Key>y: string(0x1b) string("y") \n\
+	<Key>F16: start-extend() select-end(PRIMARY, CUT_BUFFER0, CLIPBOARD)\n\
+	<Key>F18: insert-selection(PRIMARY, CLIPBOARD)\n\
+	<Key>F27: scroll-back(100,page)\n\
+	<Key>R13: scroll-forw(100,page)\n\
+	<Key>KP_Home: string(0x1b) string("[1~")\n\
+	<Key>KP_End: string(0x1b) string("[4~")\n\
+	~Meta<Key>Home: string(0x1b) string("[1~")\n\
+	Meta<Key>Home: string(0x1b) string(0x1b) string("[1~")\n\
+	~Meta<Key>End: string(0x1b) string("[4~")\n\
+	Meta<Key>End: string(0x1b) string(0x1b) string("[4~")\n\
+	~Meta<Key>Insert: string(0x1b) string("[2~")\n\
+	Meta<Key>Insert: string(0x1b) string(0x1b) string("[2~")\n\
+	~Meta<Key>Delete: string(0x1b) string("[3~")\n\
+	Meta<Key>Delete: string(0x1b) string(0x1b) string("[3~")\n\
+	~Meta<Key>Page_Up: string(0x1b) string("[5~")\n\
+	Meta<Key>Page_Up: string(0x1b) string(0x1b) string("[5~")\n\
+	~Meta<Key>Page_Down: string(0x1b) string("[6~")\n\
+	Meta<Key>Page_Down: string(0x1b) string(0x1b) string("[6~")\n\
+	~Meta<Key>BackSpace: string(\177)\n\
+	Meta<Key>BackSpace: string(0x1b) string(\177)\n\
+	~Meta<Key>Up: string(0x1b) string("OA")\n\
+	Meta<Key>Up: string(0x1b) string(0x1b) string("OA")\n\
+	~Meta<Key>Down: string(0x1b) string("OB")\n\
+	Meta<Key>Down: string(0x1b) string(0x1b) string("OB")\n\
+	~Meta<Key>Left: string(0x1b) string("OD")\n\
+	Meta<Key>Left: string(0x1b) string(0x1b) string("OD")\n\
+	~Meta<Key>Right: string(0x1b) string("OC")\n\
+	Meta<Key>Right: string(0x1b) string(0x1b) string("OC")\n\
+	~Meta<Key>Return: string(0x0d)\n\
+	Meta<Key>Return: string(0x1b) string(0x0d)\n\
+	~Meta<Key>Tab: string(0x09)\n\
+	Meta<Key>Tab: string(0x1b) string(0x09)\n\
+	~Shift<Key>F1: string(0x1b) string("[11~")\n\
+	~Shift<Key>F2: string(0x1b) string("[12~")\n\
+	~Shift<Key>F3: string(0x1b) string("[13~")\n\
+	~Shift<Key>F4: string(0x1b) string("[14~")\n\
+	~Shift<Key>F5: string(0x1b) string("[15~")\n\
+	~Shift<Key>F6: string(0x1b) string("[17~")\n\
+	~Shift<Key>F7: string(0x1b) string("[18~")\n\
+	~Shift<Key>F8: string(0x1b) string("[19~")\n\
+	~Shift<Key>F9: string(0x1b) string("[20~")\n\
+	~Shift<Key>F10: string(0x1b) string("[21~")\n\
+	<Key>F11: string(0x1b) string("[23~")\n\
+	<Key>F12: string(0x1b) string("[24~")\n\
+	<Key>F13: string(0x1b) string("[25~")\n\
+	<Key>F14: string(0x1b) string("[26~")\n\
+	<Key>F15: string(0x1b) string("[28~")\n\
+	<Key>F16: string(0x1b) string("[29~")\n\
+	<Key>F17: string(0x1b) string("[31~")\n\
+	<Key>F18: string(0x1b) string("[32~")\n\
+	<Key>F19: string(0x1b) string("[33~")\n\
+	<Key>F20: string(0x1b) string("[34~")\n\
+	Shift<Key>F1: string(0x1b) string("[23~")\n\
+	Shift<Key>F2: string(0x1b) string("[24~")\n\
+	Shift<Key>F3: string(0x1b) string("[25~")\n\
+	Shift<Key>F4: string(0x1b) string("[26~")\n\
+	Shift<Key>F5: string(0x1b) string("[28~")\n\
+	Shift<Key>F6: string(0x1b) string("[29~")\n\
+	Shift<Key>F7: string(0x1b) string("[31~")\n\
+	Shift<Key>F8: string(0x1b) string("[32~")\n\
+	Shift<Key>F9: string(0x1b) string("[33~")\n\
+	Shift<Key>F10: string(0x1b) string("[34~")\n\
+	Shift<Key>Home: scroll-back(100,page)\n\
+	Shift<Key>End: scroll-forw(100,page)\n
+	Shift<Key>KP_Home: scroll-back(100,page)\n\
+	Shift<Key>KP_End: scroll-forw(100,page)\n
+	s<Key>F1: string(0x1b) string("[23~")\n\
+	s<Key>F2: string(0x1b) string("[24~")\n\
+	s<Key>F3: string(0x1b) string("[25~")\n\
+	s<Key>F4: string(0x1b) string("[26~")\n\
+	s<Key>F5: string(0x1b) string("[28~")\n\
+	s<Key>F6: string(0x1b) string("[29~")\n\
+	s<Key>F7: string(0x1b) string("[31~")\n\
+	s<Key>F8: string(0x1b) string("[32~")\n\
+	s<Key>F9: string(0x1b) string("[33~")\n\
+	s<Key>F10: string(0x1b) string("[34~")\n\
+	a<Key>Return: string(0x1b) string(0x0d)\n\
+	a<Key>Tab: string(0x1b) string(0x09)\n\
+	a<Key>space: string(0x1b) string(" ")\n\
+	a<Key>a: string(0x1b) string("a")\n\
+	a<Key>b: string(0x1b) string("b")\n\
+	a<Key>c: string(0x1b) string("c")\n\
+	a<Key>d: string(0x1b) string("d")\n\
+	a<Key>e: string(0x1b) string("e")\n\
+	a<Key>f: string(0x1b) string("f")\n\
+	a<Key>g: string(0x1b) string("g")\n\
+	a<Key>h: string(0x1b) string("h")\n\
+	a<Key>i: string(0x1b) string("i")\n\
+	a<Key>j: string(0x1b) string("j")\n\
+	a<Key>k: string(0x1b) string("k")\n\
+	a<Key>l: string(0x1b) string("l")\n\
+	a<Key>m: string(0x1b) string("m")\n\
+	a<Key>n: string(0x1b) string("n")\n\
+	a<Key>o: string(0x1b) string("o")\n\
+	a<Key>p: string(0x1b) string("p")\n\
+	a<Key>q: string(0x1b) string("q")\n\
+	a<Key>r: string(0x1b) string("r")\n\
+	a<Key>s: string(0x1b) string("s")\n\
+	a<Key>t: string(0x1b) string("t")\n\
+	a<Key>u: string(0x1b) string("u")\n\
+	a<Key>v: string(0x1b) string("v")\n\
+	a<Key>w: string(0x1b) string("w")\n\
+	a<Key>x: string(0x1b) string("x")\n\
+	a<Key>y: string(0x1b) string("y")\n\
 	a<Key>z: string(0x1b) string("z")
