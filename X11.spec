@@ -18,8 +18,8 @@ Summary(ru):	Базовые шрифты, программы и документация для рабочей станции под X
 Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
-Version:	6.7.0.%{snap}
-Release:	1
+Version:	6.7.0
+Release:	0.%{snap}.1
 Epoch:		1
 License:	XFree86 1.0 (?)
 Group:		X11/Xorg
@@ -27,7 +27,7 @@ Group:		X11/Xorg
 ##Source0:	http://www.kernel.pl/~adasi/%{name}-%{snap}.tar.gz
 Source0:	%{name}-%{snap}.tar.gz
 Source7:	ftp://ftp.pld-linux.org/software/xinit/xdm-xinitrc-0.2.tar.bz2
-#Source7-MD5:  	0a15b1c374256b5cad7961807baa3896
+# Source7-md5:	0a15b1c374256b5cad7961807baa3896
 Source8:	xdm.pamd
 Source9:	xserver.pamd
 Source10:	xdm.init
