@@ -647,6 +647,7 @@ Summary(uk):	Б╕бл╕отеки програм╕ста, хедери та документац╕я по програмуванню X11
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	imake = %{epoch}:%{version}-%{release}
+Requires:	fontconfig-devel >= 1:2.2.0
 Provides:	XFree86-devel = %{epoch}:%{version}-%{release}
 Provides:	render
 Provides:	xcursor-devel
