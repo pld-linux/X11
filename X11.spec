@@ -19,7 +19,7 @@ Summary(uk):	‚¡⁄œ◊¶ €“…∆‘…, –“œ«“¡Õ… ‘¡ ƒœÀ’Õ≈Œ‘¡√¶— ƒÃ— “œ¬œﬁœß ”‘¡Œ√¶ß –¶ƒ X
 Summary(zh_CN):	XOrg X11 ¥∞ø⁄œµÕ≥∑˛ŒÒ∆˜∫Õª˘±æ≥Ã–Ú
 Name:		X11
 Version:	6.7.0.%{snap}
-Release:	0.1
+Release:	0.2
 Epoch:		1
 License:	XFree86 1.0 (?)
 Group:		X11/Xorg
@@ -109,7 +109,6 @@ BuildRequires:	bison
 BuildRequires:	ed
 BuildRequires:	expat-devel
 BuildRequires:	flex
-BuildRequires:	fontconfig-devel
 BuildRequires:	freetype-devel >= 2.0.0
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
@@ -277,6 +276,76 @@ XOrg X11 files required both on server and client side.
 %description common -l pl
 Pliki XOrg X11 wymagane zarÛwno po stronie serwera jak i klienta.
 
+%package fontconfig
+Summary:        Font configuration and customization library
+Summary(pl):    Biblioteka do konfigurowania fontÛw
+Summary(pt_BR): Fontconfig È uma biblioteca para configuraÁ„o e customizaÁ„o do acesso a fontes
+Group:          Libraries
+Requires:       freetype >= 2.1.5
+Provides:       XFree86-fontconfig
+Obsoletes:      XFree86-fontconfig
+Provides:	fontconfig
+Obsoletes:	fontconfig
+
+%description fontconfig
+Fontconfig is designed to locate fonts within the system and select
+them according to requirements specified by applications.
+
+%description fontconfig -l pl
+Fontconfig jest biblioteka przeznaczon± do lokalizowania fontÛw w
+systemie i wybierania ich w zaleøno∂ci od potrzeb aplikacji.
+
+%description fontconfig -l pt_BR
+Fontconfig È uma biblioteca para configuraÁ„o e customizaÁ„o do acesso
+a fontes.
+
+%package fontconfig-devel
+Summary:        Font configuration and customization library
+Summary(pl):    Biblioteka do konfigurowania fontÛw
+Summary(pt_BR): Fontconfig È uma biblioteca para configuraÁ„o e customizaÁ„o do acesso a fontes
+Group:          Development/Libraries
+Requires:       %{name}-fontconfig = %{epoch}:%{version}-%{release}
+Requires:       expat-devel
+Requires:       freetype-devel >= 2.1.5
+Provides:       XFree86-fontconfig-devel
+Obsoletes:      XFree86-fontconfig-devel
+Provides:       fontconfig-devel
+Obsoletes:      fontconfig-devel
+
+%description fontconfig-devel
+Fontconfig is designed to locate fonts within the system and select
+them according to requirements specified by applications.
+
+This package contains the header files needed to develop programs that
+use these fontconfig.
+
+%description fontconfig-devel -l pl
+Fontconfig jest biblioteka przeznaczon± do lokalizowania fontÛw w
+systemie i wybierania ich w zaleøno∂ci od potrzeb aplikacji.
+
+Ten pakiet zawiera pliki nag≥Ûwkowe potrzebne do kompilowania
+programÛw korzystaj±cych z biblioteki fontconfig.
+
+%description fontconfig-devel -l pt_BR
+Fontconfig È uma biblioteca para configuraÁ„o e customizaÁ„o do acesso
+a fontes.
+
+%package fontconfig-static
+Summary:        Static font configuration and customization library
+Summary(pl):    Statyczna biblioteka do konfigurowania fontÛw
+Group:          Development/Libraries
+Requires:       %{name}-fontconfig-devel = %{epoch}:%{version}-%{release}
+Provides:       XFree86-fontconfig-static
+Obsoletes:      XFree86-fontconfig-static
+Provides:       fontconfig-static
+Obsoletes:      fontconfig-static
+
+%description fontconfig-static
+This package contains static version of fontconfig library.
+
+%description fontconfig-static -l pl
+Ten pakiet zawiera statyczn± wersjÍ biblioteki fontconfig.
+
 %package DPS
 Summary:	Display PostScript
 Summary(pl):	Display PostScript
@@ -310,6 +379,20 @@ Header files for develop X-Window Display Postscript.
 
 %description DPS-devel -l pl
 Pliki nag≥Ûwkowe biblioteki X-Window Display PostScript.
+
+%package DPS-static
+Summary:        Display PostScript static libraries
+Summary(pl):    Biblioteki statyczne Display PostScript
+Group:          X11/Xorg
+Requires:       %{name}-DPS-devel = %{epoch}:%{version}-%{release}
+Provides:       XFree86-DPS-static = %{epoch}:%{version}-%{release}
+Obsoletes:      dgs-static
+
+%description DPS-static
+X-Window Display PostScript static libraries.
+
+%description DPS-static -l pl
+Statyczne biblioteki X-Window Display PostScript.
 
 
 %package OpenGL-core
@@ -391,6 +474,22 @@ OpenGL libraries for X11R6 system.
 
 %description OpenGL-libs -l pl
 Biblioteki OpenGL dla systemu X11R6.
+
+%package OpenGL-static
+Summary:        X11R6 static libraries with OpenGL
+Summary(pl):    Biblioteki statyczne do X11R6 ze wsparciem dla OpenGL
+Group:          X11/Development/Libraries
+Requires:       %{name}-OpenGL-devel = %{epoch}:%{version}-%{release}
+Provides:       OpenGL-static
+Provides:       XFree86-OpenGL-static = %{epoch}:%{version}-%{release}
+Obsoletes:      Mesa-static
+
+%description OpenGL-static
+X11R6 static libraries with OpenGL.
+
+%description OpenGL-static -l pl
+Biblioteki statyczne zawieraj±ce wsparcie dla OpenGL do X11R6.
+
 
 
 %package Xnest
@@ -1408,6 +1507,37 @@ standardowej 16-kolorowej VGA.
 %description setup -l uk
 ı‘…Ã¶‘¡ ƒÃ— ÀœŒ∆¶«’“’◊¡ŒŒ— XOrg X11.
 
+%package static
+Summary:        X11R6 static libraries
+Summary(pl):    Biblioteki statyczne X11R6
+Summary(ru):    Û‘¡‘…ﬁ≈”À…≈ ¬…¬Ã…œ‘≈À… X11R6
+Summary(uk):    Û‘¡‘…ﬁŒ¶ ¬¶¬Ã¶œ‘≈À… X11R6
+Group:          X11/Development/Libraries
+Requires:       %{name}-devel = %{epoch}:%{version}-%{release}
+Provides:       XFree86-static = %{epoch}:%{version}-%{release}
+%ifarch sparc sparc64
+Obsoletes:      X11R6.1-devel
+%endif
+Obsoletes:      xcursor-static
+Obsoletes:      xft-static
+Obsoletes:      xpm-static
+Obsoletes:      xrender-static
+
+%description static
+X11R6 static libraries.
+
+%description static -l pl
+Biblioteki statyczne X11R6.
+
+%description static -l ru
+X11-static ◊ÀÃ¿ﬁ¡≈‘ ”‘¡‘…ﬁ≈”À…≈ ¬…¬Ã…œ‘≈À…, Œ≈œ¬»œƒ…ÕŸ≈ ƒÃ— “¡⁄“¡¬œ‘À…
+–“œ«“¡ÕÕ, “¡¬œ‘¡¿›…» À¡À X-ÀÃ…≈Œ‘Ÿ. ”œ¬“¡ŒŒŸ≈ –“œ«“¡ÕÕŸ, Àœ‘œ“Ÿ≈ ¬’ƒ’‘
+“¡¬œ‘¡‘ÿ À¡À X-ÀÃ…≈Œ‘Ÿ.
+
+%description static -l uk
+X11-static Õ¶”‘…‘ÿ ”‘¡‘…ﬁŒ¶ ¬¶¬Ã¶œ‘≈À…, Œ≈œ¬»¶ƒŒ¶ ƒÃ— “œ⁄“œ¬À…
+–“œ«“¡Õ, —À¶ –“¡√¿¿‘ÿ —À X-ÀÃ¶§Œ‘….
+
 
 %package tools
 Summary:	Various tools for XOrg X11
@@ -2228,6 +2358,23 @@ fi
 %dir %{_libx11dir}
 %{_libx11dir}/rgb.txt
 
+%files fontconfig
+%dir %{_sysconfdir}/fonts
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/fonts/fonts.conf
+%{_sysconfdir}/fonts/fonts.dtd
+%attr(755,root,root) %{_bindir}/fc-*
+%attr(755,root,root) %{_libdir}/libfontconfig.so.*.*
+
+%files fontconfig-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libfontconfig.so
+%{_includedir}/fontconfig
+%{_pkgconfigdir}/fontconfig.pc
+
+%files fontconfig-static
+%defattr(644,root,root,755)
+%{_libdir}/libfontconfig.a
+
 %files DPS
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/makepsres
@@ -2248,6 +2395,12 @@ fi
 %attr(755,root,root) %{_libdir}/libdpstk.so
 %attr(755,root,root) %{_libdir}/libpsres.so
 %{_includedir}/DPS
+
+%files DPS-static
+%defattr(644,root,root,755)
+%{_libdir}/libdps.a
+%{_libdir}/libdpstk.a
+%{_libdir}/libpsres.a
 
 %files OpenGL-core
 %defattr(644,root,root,755)
@@ -2297,12 +2450,18 @@ fi
 %attr(755,root,root) %{_libdir}/libGLU.so.*.*
 # to be fixed: it contains unresolved symbols and would need -lXm
 #%attr(755,root,root) %{_libdir}/libGLw.so.*.*
+%attr(755,root,root) %{_libdir}/libGLw.a
 %attr(755,root,root) %{_libdir}/libOSMesa.so.*.*
 # Linux OpenGL ABI compatibility symlink
 %attr(755,root,root) /usr/%{_lib}/libGLU.so.1
 %{_mandir}/man1/glxinfo.1*
 %{_mandir}/man1/glxgears.1*
 
+%files OpenGL-static
+%defattr(644,root,root,755)
+%{_libdir}/libGL.a
+%{_libdir}/libGLU.a
+%{_libdir}/libOSMesa.a
 
 %files Xnest
 %defattr(644,root,root,755)
@@ -2316,6 +2475,8 @@ fi
 %files Xserver
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/Xorg
+%attr(755,root,root) %{_bindir}/Xdmx
+%attr(755,root,root) %{_bindir}/Xwrapper
 %attr(755,root,root) %{_bindir}/getconfig*
 %attr(755,root,root) %{_sysconfdir}/X11/X
 %attr(755,root,root) %{_bindir}/X
@@ -2403,7 +2564,6 @@ fi
 %{_mandir}/man3/[A-FH-Z]*
 %{_pkgconfigdir}/xcursor.pc
 %{_pkgconfigdir}/xft.pc
-/usr/lib/pkgconfig/fontconfig.pc
 /usr/lib/pkgconfig/xcomposite.pc
 /usr/lib/pkgconfig/xdamage.pc
 /usr/lib/pkgconfig/xfixes.pc
@@ -2858,6 +3018,44 @@ fi
 %{_mandir}/man1/xorgcfg.1*
 %{_mandir}/man1/xorgconfig.1*
 
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/libFS.a
+%{_libdir}/libI810XvMC.a
+%{_libdir}/libICE.a
+%{_libdir}/libSM.a
+%{_libdir}/libX11.a
+%{_libdir}/libXRes.a
+%{_libdir}/libXTrap.a
+%{_libdir}/libXaw.a
+%{_libdir}/libXcursor.a
+%{_libdir}/libXext.a
+%{_libdir}/libXfont.a
+%{_libdir}/libXft.a
+%{_libdir}/libXi.a
+%{_libdir}/libXinerama.a
+%{_libdir}/libXcomposite.a
+%{_libdir}/libXfixes.a
+%{_libdir}/libXdamage.a
+%{_libdir}/libXmu.a
+%{_libdir}/libXmuu.a
+%{_libdir}/libXp.a
+%{_libdir}/libXpm.a
+%{_libdir}/libXrandr.a
+%{_libdir}/libXrender.a
+%{_libdir}/libXss.a
+%{_libdir}/libXt.a
+%{_libdir}/libXtst.a
+%{_libdir}/libXv.a
+%{_libdir}/libXvMC.a
+%{_libdir}/libXxf86dga.a
+%{_libdir}/libXxf86misc.a
+%{_libdir}/libXxf86rush.a
+%{_libdir}/libXxf86vm.a
+%{_libdir}/libfontenc.a
+%{_libdir}/libxkbfile.a
+%{_libdir}/libxkbui.a
+%{_libdir}/libdmx.a
 
 %files tools
 %defattr(644,root,root,755)
@@ -2870,6 +3068,7 @@ fi
 %attr(755,root,root) %{_bindir}/x11perfcomp
 %attr(755,root,root) %{_bindir}/xbiff
 %attr(755,root,root) %{_bindir}/xcalc
+%attr(755,root,root) %{_bindir}/chooser
 %attr(755,root,root) %{_bindir}/xclipboard
 %attr(755,root,root) %{_bindir}/xclock
 %attr(755,root,root) %{_bindir}/xditview
@@ -2891,6 +3090,13 @@ fi
 %attr(755,root,root) %{_bindir}/rman
 %attr(755,root,root) %{_bindir}/xtrap*
 %attr(755,root,root) %{_bindir}/texteroids
+%attr(755,root,root) %{_bindir}/xdriinfo
+%attr(755,root,root) %{_bindir}/xmore
+%attr(755,root,root) %{_bindir}/xphelloworld
+%attr(755,root,root) %{_bindir}/xplsprinters
+%attr(755,root,root) %{_bindir}/xprehashprinterlist
+%attr(755,root,root) %{_bindir}/xpsimplehelloworld
+%attr(755,root,root) %{_bindir}/xpxthelloworld
 %{_libx11dir}/xedit
 %{_libx11dir}/xman.help
 %{_mandir}/man1/beforelight.1*
