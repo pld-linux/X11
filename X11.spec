@@ -1823,7 +1823,7 @@ rm -f $RPM_BUILD_ROOT%{_bindir}/X
 ln -sf X11 $RPM_BUILD_ROOT%{_bindir}/X
 
 # setting ghost X in /etc/X11 -- xf86config will fix this ...
-ln -sf %{_bindir}/XOrg X11 $RPM_BUILD_ROOT%{_sysconfdir}/X11/X
+ln -sf %{_bindir}/Xorg $RPM_BUILD_ROOT%{_sysconfdir}/X11/X
 
 # add X11 links in /usr/bin, /usr/lib /usr/include
 ln -sf %{_includedir}/X11 $RPM_BUILD_ROOT/usr/include/X11
