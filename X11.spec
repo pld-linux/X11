@@ -121,6 +121,7 @@ Patch50:	%{name}-xterm-256colors.patch
 Patch52:	XFree86-kernel_headers.patch
 Patch53:	XFree86-stdint.patch
 Patch54:	%{name}-setxkbmap.patch
+Patch55:	%{name}-makefile-fastbuild.patch
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
 %ifarch %{ix86} alpha amd64
@@ -1734,8 +1735,6 @@ X11-xfs м╕стить сервер шрифт╕в для XOrg X11. Xfs також може надавати
 шрифт╕в XOrg X11, необх╕дн╕ для вашо╖ системи, Xconfigurator та
 X11-libs.
 
-#--- %prep ---------------------------
-
 %prep
 %setup -qc -a1 -a2 -a7
 %patch0 -p0
@@ -1789,11 +1788,13 @@ X11-libs.
 %patch52 -p1
 %patch53 -p0
 %patch54 -p1
+%patch55 -p0
 
 rm -f xc/config/cf/host.def
 
 %build
 %{__make} -S -C xc World \
+	FAST=1 \
 	DEFAULT_OS_CPU_FROB=%{_target_cpu} \
 	CC="%{__cc}" \
 	BOOTSTRAPCFLAGS="%{rpmcflags}" \
