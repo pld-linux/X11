@@ -4,8 +4,6 @@
 # - Review rest of patches
 # - define HasFontconfig in linux.cf to stop building it here and use just the system one
 # - missing dir in Xprint
-# - what happened to glide driver?
-# - what happened to manpages? and move some to proper package
 #
 Summary:	XOrg X11 Window System servers and basic programs
 Summary(de):	XOrg X11 Window-System-Server und grundlegende Programme
@@ -71,7 +69,7 @@ Source52:	xmag.png
 Source53:	http://oss.sgi.com/projects/ogl-sample/ABI/glext.h
 # NoSource53-md5: a5738dcfa20119fa3e06ce479ca94acf
 Patch0:		%{name}-PLD.patch
-Patch1:		%{name}-HasZlib.patch
+#Patch1:		%{name}-HasZlib.patch
 Patch2:		%{name}-DisableDebug.patch
 Patch3:		%{name}-Xwrapper.patch
 Patch4:		%{name}-xfs.patch
@@ -111,6 +109,10 @@ Patch55:	%{name}-makefile-fastbuild.patch
 
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
+# Required by xc/programs/Xserver/hw/xfree86/drivers/glide/glide_driver.c
+%ifarch %{ix86} amd64 ia64
+%{?with_glide:BuildRequires:	Glide2x_SDK}
+%endif
 BuildRequires:	bison
 BuildRequires:	ed
 BuildRequires:	expat-devel
@@ -923,6 +925,22 @@ Video driver for DRI sparc framebuffer device.
 
 %description driver-ffb -l pl
 Sterownik do framebuffera DRI na sparc.
+
+%package driver-glide
+Summary:	3Dfx Voodoo1 and Voodoo2 video driver
+Summary(pl):	Sterownik do kart 3Dfx Voodoo1 i Voodoo2
+Group:		X11/Servers
+Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
+Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+# dlopens libglide2x.so
+Requires:	Glide_VG
+Obsoletes:	XFree86-driver-glide
+
+%description driver-glide
+Voodoo1 and Voodoo2 video driver.
+
+%description driver-glide -l pl
+Sterownik do kart Voodoo1 i Voodoo2 firmy 3Dfx.
 
 %package driver-glint
 Summary:	GLINT/Permedia video driver
@@ -1899,7 +1917,7 @@ X11-libs.
 %prep
 %setup -qc -a1 -a2 -a7
 %patch0 -p0
-%patch1 -p0
+#%patch1 -p0
 %patch2 -p0
 %patch3 -p0
 %patch4 -p0
@@ -1969,8 +1987,8 @@ install -d $RPM_BUILD_ROOT/etc/{pam.d,rc.d/init.d,security/console.apps,sysconfi
 	LINUXDIR="/dev/null"
 
 # fix pkgconfig path
-if [ "%{_pkgconfigdir}" != "%{_libdir}/pkgconfig" ] ; then
-	mv $RPM_BUILD_ROOT%{_libdir}/pkgconfig/* $RPM_BUILD_ROOT%{_pkgconfigdir}
+if [ "%{_pkgconfigdir}" != "/usr/lib/pkgconfig" ] ; then
+	mv $RPM_BUILD_ROOT/usr/lib/pkgconfig/* $RPM_BUILD_ROOT%{_pkgconfigdir}
 fi
 
 # setting default X
@@ -2064,7 +2082,7 @@ rm -f $RPM_BUILD_ROOT%{_libx11dir}/config/host.def
 rm -rf $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/html
 
 # resolve conflict with man-pages
-# ? # mv -f $RPM_BUILD_ROOT%{_mandir}/man4/{mouse.4,mouse-x.4}
+mv -f $RPM_BUILD_ROOT%{_mandir}/man4/{mouse.4,mouse-x.4}
 
 # help rpm to detect deps
 chmod 755 $RPM_BUILD_ROOT%{_libdir}/modules/dri/*.so
@@ -2344,31 +2362,76 @@ fi
 
 %{_appdefsdir}/Xvidtune
 
-%{_mandir}/man1/XDarwin.1*
-%{_mandir}/man1/Xdmx.1*
-%{_mandir}/man1/dmxtodmx.1*
-%{_mandir}/man1/dumpkeymap.1*
-%{_mandir}/man1/ucs2any.1*
-%{_mandir}/man1/vdltodmx.1*
-%{_mandir}/man1/xdmxconfig.1*
-%{_mandir}/man1/xdriinfo.1*
-#%{_mandir}/man1/xmore.1*
-%{_mandir}/man1/xphelloworld.1*
-%{_mandir}/man1/xplsprinters.1*
-%{_mandir}/man1/xprehashprinterlist.1*
-%{_mandir}/man1/xpsimplehelloworld.1*
-%{_mandir}/man1/xpxthelloworld.1*
-# XXX: wrong place, move to proper packages!
-#%{_mandir}/man3/libXp.3*
-#%{_mandir}/man4/glide.4*
-#%{_mandir}/man4/newport.4*
-#%{_mandir}/man4/sunbw2.4*
-#%{_mandir}/man4/suncg14.4*
-#%{_mandir}/man4/suncg3.4*
-#%{_mandir}/man4/suncg6.4*
-#%{_mandir}/man4/sunffb.4*
-#%{_mandir}/man4/sunleo.4*
-#%{_mandir}/man4/suntcx.4*
+%{_mandir}/man1/Xmark.1*
+%{_mandir}/man1/appres.1*
+%{_mandir}/man1/atobm.1*
+%{_mandir}/man1/bitmap.1*
+%{_mandir}/man1/bmtoa.1*
+%{_mandir}/man1/cxpm.1*
+%{_mandir}/man1/dga.1*
+%{_mandir}/man1/editres.1*
+%{_mandir}/man1/gtf.1*
+%{_mandir}/man1/iceauth.1*
+%{_mandir}/man1/lbxproxy.1*
+#%{_mandir}/man1/libxrx.1*
+%{_mandir}/man1/lndir.1*
+%{_mandir}/man1/luit.1x*
+%{_mandir}/man1/makestrs.1*
+%{_mandir}/man1/makeg.1*
+%{_mandir}/man1/mergelib.1*
+%{_mandir}/man1/mkdirhier.1*
+%{_mandir}/man1/mkhtmlindex.1*
+%{_mandir}/man1/proxymngr.1*
+%{_mandir}/man1/resize.1*
+%{_mandir}/man1/revpath.1*
+%{_mandir}/man1/rstart.1*
+%{_mandir}/man1/rstartd.1*
+%{_mandir}/man1/setxkbmap.1*
+%{_mandir}/man1/showrgb.1*
+%{_mandir}/man1/smproxy.1*
+%{_mandir}/man1/startx.1*
+%{_mandir}/man1/sxpm.1*
+%{_mandir}/man1/xcmsdb.1*
+%{_mandir}/man1/xconsole.1*
+%{_mandir}/man1/xcursorgen.1*
+%{_mandir}/man1/xcutsel.1*
+%{_mandir}/man1/xdpyinfo.1*
+%{_mandir}/man1/xfindproxy.1*
+%{_mandir}/man1/xfwp.1*
+%{_mandir}/man1/xgamma.1*
+%{_mandir}/man1/xhost.1*
+%{_mandir}/man1/xinit.1*
+%{_mandir}/man1/xkbevd.1*
+%{_mandir}/man1/xkbprint.1*
+%{_mandir}/man1/xlsatoms.1*
+%{_mandir}/man1/xlsclients.1*
+%{_mandir}/man1/xlsfonts.1*
+%{_mandir}/man1/xmodmap.1*
+%{_mandir}/man1/xprop.1*
+%{_mandir}/man1/xrandr.1*
+%{_mandir}/man1/xrdb.1*
+%{_mandir}/man1/xrefresh.1*
+%{_mandir}/man1/xset.1*
+%{_mandir}/man1/xsetmode.1*
+%{_mandir}/man1/xsetpointer.1*
+%{_mandir}/man1/xsetroot.1*
+%{_mandir}/man1/xsm.1*
+%{_mandir}/man1/xstdcmap.1*
+%{_mandir}/man1/xterm.1*
+%{_mandir}/man1/xvidtune.1*
+%{_mandir}/man1/xvinfo.1*
+%{_mandir}/man1/xwd.1*
+%{_mandir}/man1/xwud.1*
+%{_mandir}/man1/xon.1*
+%{_mandir}/man7/*
+
+# not related to any packaged files
+#%{_mandir}/man1/XDarwin.1*
+#%{_mandir}/man1/dmxtodmx.1*
+#%{_mandir}/man1/dumpkeymap.1*
+#%{_mandir}/man1/ucs2any.1*
+#%{_mandir}/man1/vdltodmx.1*
+#%{_mandir}/man1/xdmxconfig.1*
 
 %lang(it) %{_mandir}/it/man1/startx.1*
 %lang(it) %{_mandir}/it/man1/xconsole.1*
@@ -2510,6 +2573,7 @@ fi
 %attr(755,root,root) %{_bindir}/getconfig*
 %attr(755,root,root) %{_sysconfdir}/X11/X
 %attr(755,root,root) %{_bindir}/X
+%{_mandir}/man1/Xdmx.1*
 %{_mandir}/man1/Xorg.1*
 %{_mandir}/man1/Xserver.1*
 %{_mandir}/man1/getconfig.1*
@@ -2548,8 +2612,11 @@ fi
 %attr(755,root,root) %{_libdir}/libXRes.so
 %attr(755,root,root) %{_libdir}/libXTrap.so
 %attr(755,root,root) %{_libdir}/libXaw.so
+%attr(755,root,root) %{_libdir}/libXcomposite.so
 %attr(755,root,root) %{_libdir}/libXcursor.so
+%attr(755,root,root) %{_libdir}/libXdamage.so
 %attr(755,root,root) %{_libdir}/libXext.so
+%attr(755,root,root) %{_libdir}/libXfixes.so
 %attr(755,root,root) %{_libdir}/libXfont.so
 %attr(755,root,root) %{_libdir}/libXft.so
 %attr(755,root,root) %{_libdir}/libXi.so
@@ -2572,9 +2639,6 @@ fi
 %attr(755,root,root) %{_libdir}/libfontenc.so
 %attr(755,root,root) %{_libdir}/libxkbfile.so
 %attr(755,root,root) %{_libdir}/libxkbui.so
-%attr(755,root,root) %{_libdir}/libXdamage.so
-%attr(755,root,root) %{_libdir}/libXcomposite.so
-%attr(755,root,root) %{_libdir}/libXfixes.so
 #%attr(755,root,root) %{_libdir}/libxrx.so
 %{_libdir}/libXau.a
 %{_libdir}/libXdmcp.a
@@ -2594,7 +2658,8 @@ fi
 %{_includedir}/X11/fonts
 %{_includedir}/xf86*.h
 %{_libx11dir}/config
-%{_mandir}/man3/[A-FH-Z]*
+%{_mandir}/man1/bdftopcf.1*
+%{_mandir}/man3/[A-FH-Zl]*
 %{_pkgconfigdir}/xcomposite.pc
 %{_pkgconfigdir}/xcursor.pc
 %{_pkgconfigdir}/xdamage.pc
@@ -2651,6 +2716,14 @@ fi
 %{_mandir}/man4/fbdev.4*
 %endif
 
+%ifarch %{ix86} ia64
+%if %{with glide}
+%files driver-glide
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/modules/drivers/glide_drv.o
+%{_mandir}/man4/glide.4*
+%endif
+%endif
 
 %files driver-glint
 %defattr(644,root,root,755)
@@ -3103,7 +3176,10 @@ fi
 %attr(755,root,root) %{_bindir}/beforelight
 %attr(755,root,root) %{_bindir}/ico
 %attr(755,root,root) %{_bindir}/listres
+%attr(755,root,root) %{_bindir}/oclock
+%attr(755,root,root) %{_bindir}/rman
 %attr(755,root,root) %{_bindir}/showfont
+%attr(755,root,root) %{_bindir}/texteroids
 %attr(755,root,root) %{_bindir}/viewres
 %attr(755,root,root) %{_bindir}/x11perf
 %attr(755,root,root) %{_bindir}/x11perfcomp
@@ -3112,37 +3188,37 @@ fi
 %attr(755,root,root) %{_bindir}/xclipboard
 %attr(755,root,root) %{_bindir}/xclock
 %attr(755,root,root) %{_bindir}/xditview
+%attr(755,root,root) %{_bindir}/xdriinfo
 %attr(755,root,root) %{_bindir}/xedit
 %attr(755,root,root) %{_bindir}/xev
 %attr(755,root,root) %{_bindir}/xeyes
 %attr(755,root,root) %{_bindir}/xfd
 %attr(755,root,root) %{_bindir}/xfontsel
 %attr(755,root,root) %{_bindir}/xgc
+%attr(755,root,root) %{_bindir}/xkill
 %attr(755,root,root) %{_bindir}/xload
+%attr(755,root,root) %{_bindir}/xlogo
 %attr(755,root,root) %{_bindir}/xmag
 %attr(755,root,root) %{_bindir}/xman
 %attr(755,root,root) %{_bindir}/xmessage
 %attr(755,root,root) %{_bindir}/xmh
-%attr(755,root,root) %{_bindir}/xwininfo
-%attr(755,root,root) %{_bindir}/oclock
-%attr(755,root,root) %{_bindir}/xlogo
-%attr(755,root,root) %{_bindir}/xkill
-%attr(755,root,root) %{_bindir}/rman
-%attr(755,root,root) %{_bindir}/xtrap*
-%attr(755,root,root) %{_bindir}/texteroids
-%attr(755,root,root) %{_bindir}/xdriinfo
 #%attr(755,root,root) %{_bindir}/xmore
 %attr(755,root,root) %{_bindir}/xphelloworld
 %attr(755,root,root) %{_bindir}/xplsprinters
 %attr(755,root,root) %{_bindir}/xprehashprinterlist
 %attr(755,root,root) %{_bindir}/xpsimplehelloworld
 %attr(755,root,root) %{_bindir}/xpxthelloworld
+%attr(755,root,root) %{_bindir}/xtrap*
+%attr(755,root,root) %{_bindir}/xwininfo
 %{_libx11dir}/xedit
 %{_libx11dir}/xman.help
 %{_mandir}/man1/beforelight.1*
 %{_mandir}/man1/ico.1*
 %{_mandir}/man1/listres.1*
+%{_mandir}/man1/oclock.1*
+%{_mandir}/man1/rman.1*
 %{_mandir}/man1/showfont.1*
+%{_mandir}/man1/texteroids.1*
 %{_mandir}/man1/viewres.1*
 %{_mandir}/man1/x11perf.1*
 %{_mandir}/man1/x11perfcomp.1*
@@ -3151,24 +3227,28 @@ fi
 %{_mandir}/man1/xclipboard.1*
 %{_mandir}/man1/xclock.1*
 %{_mandir}/man1/xditview.1*
+%{_mandir}/man1/xdriinfo.1*
+#%{_mandir}/man1/xmore.1*
 %{_mandir}/man1/xedit.1*
 %{_mandir}/man1/xev.1*
 %{_mandir}/man1/xeyes.1*
 %{_mandir}/man1/xfd.1*
 %{_mandir}/man1/xfontsel.1*
 %{_mandir}/man1/xgc.1*
+%{_mandir}/man1/xkill.1*
 %{_mandir}/man1/xload.1*
+%{_mandir}/man1/xlogo.1*
 %{_mandir}/man1/xmag.1*
 %{_mandir}/man1/xman.1*
 %{_mandir}/man1/xmessage.1*
 %{_mandir}/man1/xmh.1*
+%{_mandir}/man1/xphelloworld.1*
+%{_mandir}/man1/xplsprinters.1*
+%{_mandir}/man1/xprehashprinterlist.1*
+%{_mandir}/man1/xpsimplehelloworld.1*
+%{_mandir}/man1/xpxthelloworld.1*
+%{_mandir}/man1/xtrap*
 %{_mandir}/man1/xwininfo.1*
-%{_mandir}/man1/xkill.1*
-%{_mandir}/man1/xlogo.1*
-%{_mandir}/man1/oclock.1*
-%{_mandir}/man1/rman.1*
-%{_mandir}/man1/xtr*
-%{_mandir}/man1/texteroids.1*
 
 %lang(it) %{_mandir}/it/man1/xload.1*
 
