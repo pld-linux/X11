@@ -2121,7 +2121,7 @@ fi
 
 %triggerpostun Xserver -- XFree86-Xserver
 if [ -r /etc/X11/XF86Config.rpmsave ]; then
-	cp /etc/X11/XF86Config.rpmsave /etc/X11/xorg.conf
+	cp -f /etc/X11/XF86Config.rpmsave /etc/X11/xorg.conf
 	sed -i -e "s/xfree86/xorg/g" /etc/X11/xorg.conf
 fi
 
