@@ -254,6 +254,8 @@ NXTerm.JoinSession:			False
 	a<Key>Return: string(0x1b) string(0x0d)\n\
 	a<Key>Tab: string(0x1b) string(0x09)\n\
 	a<Key>space: string(0x1b) string(" ")\n\
+	a s<Key>question: string(0x1b) string("?")\n\
+	a s<Key>exclam: string(0x1b) string("!")\n\
 	a<Key>1: string(0x1b) string("1")\n\
 	a<Key>2: string(0x1b) string("2")\n\
 	a<Key>3: string(0x1b) string("3")\n\
@@ -291,5 +293,3 @@ NXTerm.JoinSession:			False
 	a<Key>x: string(0x1b) string("x")\n\
 	a<Key>y: string(0x1b) string("y")\n\
 	a<Key>z: string(0x1b) string("z")
-!	a s<Key>/: string(0x1b) string("?")\n\
-!	a s<Key>1: string(0x1b) string("!")
