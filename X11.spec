@@ -354,7 +354,7 @@ Statyczne biblioteki X-Window Display PostScript.
 %package OpenGL-core
 Summary:	OpenGL support for X11R6
 Summary(pl):	Wsparcie OpenGL dla systemu X11R6
-Group:		XFree86/Libraries
+Group:		X11/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	X11-OpenGL-libGL
 Provides:	XFree86-OpenGL-core = %{epoch}:%{version}-%{release}
@@ -369,7 +369,7 @@ Wsparcie OpenGL dla systemu X11R6.
 %package OpenGL-libGL
 Summary:	OpenGL support for X11R6 - GL library
 Summary(pl):	Wsparcie OpenGL dla systemu X11R6 - biblioteka GL
-Group:		XFree86/Libraries
+Group:		X11/Libraries
 Requires:	X11-OpenGL-core = %{epoch}:%{version}-%{release}
 Provides:	XFree86-OpenGL-libGL = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-OpenGL-libGL
@@ -421,7 +421,7 @@ Podstawowe pliki nag³ówkowe (tylko GL i GLX) OpenGL dla systemu X11R6.
 %package OpenGL-libs
 Summary:	OpenGL libraries for X11R6
 Summary(pl):	Biblioteki OpenGL dla systemu X11R6
-Group:		XFree86/Libraries
+Group:		X11/Libraries
 Requires:	%{name}-OpenGL-core
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	OpenGL
