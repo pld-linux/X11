@@ -50,8 +50,6 @@ case "$1" in
 	if [ -f /var/lock/subsys/xfs ]; then
 		msg_reloading "X Font Server"
 		killproc xfs -USR1
-		deltext;
-		ok;
 	else
 		msg_Not_Running "X Font Server"
 	fi
