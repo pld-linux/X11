@@ -1,23 +1,24 @@
 In file included from linuxPci.c:211:
-pci.h:174:1: warning: "PCI_CB_IO_RANGE_MASK" redefined
-In file included from /home/users/builder2/rpm/BUILD/X11-6.8.2/xc/programs/Xserver/hw/xfree86/common/xf86str.h:45,
-                 from /home/users/builder2/rpm/BUILD/X11-6.8.2/xc/programs/Xserver/hw/xfree86/common/xf86.h:40,
-	         from linuxPci.c:50:
-/home/users/builder2/rpm/BUILD/X11-6.8.2/xc/programs/Xserver/hw/xfree86/common/xf86Pci.h:394:1: warning: this is the location of the previous definition
-In file included from linuxPci.c:211:
 pci.h:454: error: parse error before "pci_power_t"
 pci.h:454: warning: type defaults to `int' in declaration of `pci_power_t'
 pci.h:454: warning: data definition has no type or storage class
 
---- X11-6.8.2/xc/programs/Xserver/hw/xfree86/os-support/bus/xf86Pci.h.orig	2003-11-25 19:28:50.000000000 +0000
-+++ X11-6.8.2/xc/programs/Xserver/hw/xfree86/os-support/bus/xf86Pci.h	2005-03-30 15:43:27.084457168 +0000
-@@ -391,7 +391,8 @@
- #define PCI_CB_IO_LIMIT_1_REG		0x38
- #define PCI_CB_BRIDGE_CONTROL_REG	0x3E
+--- X11-6.8.2/xc/programs/Xserver/hw/xfree86/os-support/bus/linuxPci.c.orig	2004-12-15 05:48:20.000000000 +0000
++++ X11-6.8.2/xc/programs/Xserver/hw/xfree86/os-support/bus/linuxPci.c	2005-04-01 11:20:25.678791042 +0000
+@@ -45,6 +45,7 @@
+  * SOFTWARE.
+  */
  
--#define PCI_CB_IO_RANGE_MASK		~0x03
 +#include <linux/pci.h>
-+
- #define PCI_CB_IOBASE(x)		(x & PCI_CB_IO_RANGE_MASK)
- #define PCI_CB_IOLIMIT(x)		((x & PCI_CB_IO_RANGE_MASK) + 3)
+ #include <stdio.h>
+ #include "compiler.h"
+ #include "xf86.h"
+@@ -208,8 +209,6 @@
+  *         master aborts are avoided during PCI scans).
+  */
+ 
+-#include <linux/pci.h>
+-
+ #ifndef PCIIOC_BASE		/* Ioctls for /proc/bus/pci/X/Y nodes. */
+ #define PCIIOC_BASE		('P' << 24 | 'C' << 16 | 'I' << 8)
  
