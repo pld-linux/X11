@@ -1,7 +1,6 @@
 #
 # TODO
 # - XDM Auth broken (can anyone confirm now with new implementation?)
-# - Review Patch 46   
 # - missing dir in Xprint (which one?)
 #
 # Conditional build:
@@ -25,7 +24,7 @@ Name:		X11
 Version:	6.8.1
 Release:	2
 Epoch:		1
-License:	XFree86 1.0 (?)
+License:	MIT/X Consortium/BSD (see README)
 Group:		X11
 Source0:	http://www.x.org/pub/X11R%{version}/src/%{name}R%{version}-src1.tar.gz
 # Source0-md5:	e352319d423391ff2c03bb7f81fe8d2b
@@ -99,7 +98,6 @@ Patch23:	%{name}-pkgconfig.patch
 Patch24:	XFree86-spencode-nowarning.patch
 Patch25:	%{name}-xterm-256colors.patch
 Patch26:	%{name}-makefile-fastbuild.patch
-# cleaner version in XFree86?
 Patch27:	%{name}-sparc-kbd.patch
 Patch28:	%{name}-glibc-charset.patch
 Patch29:	%{name}-radeon-entervt.patch
