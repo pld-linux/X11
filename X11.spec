@@ -2054,6 +2054,12 @@ else
 	echo "found"
 fi
 
+%triggerpostun libs -- XFree86-libs
+umask 022
+grep -qs "^%{_libdir}$" /etc/ld.so.conf
+[ $? -ne 0 ] && echo "%{_libdir}" >> /etc/ld.so.conf
+/sbin/ldconfig
+
 %pre modules
 if [ -d /etc/X11/xkb/geometry/hp ]; then
 	rm -rf /etc/X11/xkb/geometry/hp
@@ -2120,6 +2126,11 @@ fi
 if [ "$1" = "0" ]; then
 	%userremove xfs
 	%groupremove xfs
+fi
+
+%triggerpostun xfs -- xfs
+if [ -r /etc/X11/fs/config.rpmsave ]; then
+	cp -f /etc/X11/fs/config.rpmsave /etc/X11/fs/config
 fi
 
 %triggerpostun Xserver -- XFree86-Xserver
