@@ -24,18 +24,18 @@ case "$1" in
   start)
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/xfs ]; then
-		show Starting X Font Server
+		msg_starting "X Font Server"
 		rm -fr /tmp/.font-unix
 		daemon xfs \
 			$([ -n "$XFS_PORT" ] && echo "-port $XFS_PORT") \
-			$([ -n "$XFS_OPTIONS" ] && echo "-port $XFS_PORT")
+			$([ -n "$XFS_OPTIONS" ] && echo "$XFS_OPTIONS")
 	else
-		echo "X Font Server already is running"
+		mag_Already_Running "X Font Server"
 	fi
 	touch /var/lock/subsys/xfs
 	;;
   stop)
-	show Shutting down X Font Server
+	msg_stopping "X Font Server"
 	killproc xfs
 	rm -f /var/lock/subsys/xfs
 	;;
@@ -48,16 +48,16 @@ case "$1" in
 	;;
   reload)
 	if [ -f /var/lock/subsys/xfs ]; then
-		show "Reload X Font Server configuration"
+		msg_Reloading "X Font Server"
 		killproc xfs -USR1
 		deltext;
 		ok;
 	else
-		echo "Reload X Font Server not runed"
+		msg_Not_Running "X Font Server"
 	fi
 	;;
   *)
-	echo "*** Usage: xfs {start|stop|status|restart|reload}"
+	msg_Usage "$0 {start|stop|status|restart|reload}"
 	exit 1
 esac
 

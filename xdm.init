@@ -25,15 +25,15 @@ case "$1" in
   start)
 	# Check if the service is already running?
 	if [ -f /var/lock/subsys/xdm ]; then
-		echo "Starting X Display Manager already is running"
+		msg_Already_Running "X Display Manager"
 	else
-		show Starting X Display Manager daemon
+		msg_starting "X Display Manager"
 		daemon /usr/X11R6/bin/xdm
 		touch /var/lock/subsys/xdm
 	fi
 	;;
   stop)
-	show Stopping X Display Manager daemon
+	msg_stopping "X Display Manager"
 	killproc xdm
 	rm -f /var/lock/subsys/xdm
 	;;
@@ -45,7 +45,7 @@ case "$1" in
 	$0 start
 	;;
   *)
-	echo "Usage: $0 {start|stop|status|restart|reload}"
+	msg_Usage "$0 {start|stop|status|restart|reload}"
 	exit 1
 esac
 
