@@ -133,6 +133,7 @@ BuildRequires:	bison
 BuildRequires:	ed
 BuildRequires:	expat-devel
 BuildRequires:	flex
+BuildRequires:	fontconfig-devel
 BuildRequires:	freetype-devel >= 2.0.0
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
@@ -145,14 +146,14 @@ BuildRequires:	zlib-devel
 Requires:	%{name}-libs = %{epoch}:%{version}
 Requires:	xauth
 Requires:	pam >= 0.77.3
-ExclusiveArch:	%{ix86} alpha sparc m68k armv4l noarch ppc amd64
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Provides:	XFree86 = %{epoch}:%{version}-%{release}
 Obsoletes:	xpm-progs
 Obsoletes:	xterm
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1
 %endif
-Provides:	XFree86 = %{epoch}:%{version}-%{release}
+ExclusiveArch:	%{ix86} alpha sparc m68k armv4l noarch ppc amd64
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
@@ -304,8 +305,8 @@ Summary(pl):	Display PostScript
 Group:		X11/Xorg
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	DPS
-Obsoletes:	dgs
 Provides:	XFree86-DPS = %{epoch}:%{version}-%{release}
+Obsoletes:	dgs
 
 %description DPS
 X-Window Display PostScript is device-independent imaging model for
@@ -321,8 +322,8 @@ Summary(pl):	Pliki nag³ówkowe dla Display PostScript
 Group:		X11/Xorg
 Requires:	%{name}-DPS = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
-Obsoletes:	dgs-devel
 Provides:	XFree86-DPS-devel = %{epoch}:%{version}-%{release}
+Obsoletes:	dgs-devel
 
 %description DPS-devel
 Header files for develop X-Window Display Postscript.
@@ -335,8 +336,8 @@ Summary:	Display PostScript static libraries
 Summary(pl):	Biblioteki statyczne Display PostScript
 Group:		X11/Xorg
 Requires:	%{name}-DPS-devel = %{epoch}:%{version}-%{release}
-Obsoletes:	dgs-static
 Provides:	XFree86-DPS-static = %{epoch}:%{version}-%{release}
+Obsoletes:	dgs-static
 
 %description DPS-static
 X-Window Display PostScript static libraries.
@@ -363,8 +364,8 @@ Summary:	OpenGL support for X11R6 - GL library
 Summary(pl):	Wsparcie OpenGL dla systemu X11R6 - biblioteka GL
 Group:		XFree86/Libraries
 Requires:	X11-OpenGL-core = %{epoch}:%{version}-%{release}
-Obsoletes:	X11-driver-firegl
 Provides:	XFree86-OpenGL-libGL = %{epoch}:%{version}-%{release}
+Obsoletes:	X11-driver-firegl
 
 %description OpenGL-libGL
 OpenGL support for X11R6 system - GL library.
@@ -380,9 +381,9 @@ Requires:	%{name}-OpenGL-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Requires:	OpenGL-devel-base
 Provides:	OpenGL-devel
+Provides:	XFree86-OpenGL-devel = %{epoch}:%{version}-%{release}
 Obsoletes:	Mesa-devel
 Obsoletes:	glxMesa-devel
-Provides:	XFree86-OpenGL-devel = %{epoch}:%{version}-%{release}
 
 %description OpenGL-devel
 Headers and man pages for OpenGL for X11R6.
@@ -412,8 +413,8 @@ Group:		XFree86/Libraries
 Requires:	%{name}-OpenGL-core
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	OpenGL
-Obsoletes:	Mesa
 Provides:	XFree86-OpenGL-libs = %{epoch}:%{version}-%{release}
+Obsoletes:	Mesa
 
 %description OpenGL-libs
 OpenGL libraries for X11R6 system.
@@ -427,8 +428,8 @@ Summary(pl):	Biblioteki statyczne do X11R6 ze wsparciem dla OpenGL
 Group:		X11/Development/Libraries
 Requires:	%{name}-OpenGL-devel = %{epoch}:%{version}-%{release}
 Provides:	OpenGL-static
-Obsoletes:	Mesa-static
 Provides:	XFree86-OpenGL-static = %{epoch}:%{version}-%{release}
+Obsoletes:	Mesa-static
 
 %description OpenGL-static
 X11R6 static libraries with OpenGL.
@@ -510,6 +511,7 @@ Requires:	/usr/X11R6/lib/X11/rgb.txt
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Requires:	X11-fonts-base
 Requires:	pam
+Provides:	XFree86-Xserver = %{epoch}:%{version}-%{release}
 Obsoletes:	X11-Mono
 Obsoletes:	X11-SVGA
 Obsoletes:	X11-VGA16
@@ -520,7 +522,6 @@ Obsoletes:	X11-Sun24
 #Obsoletes:	X11-Mach8 X11-8514 X11-AGX X11-P9000
 # (and many drivers from XF86_SVGA server... and some from others)
 Obsoletes:	Xconfigurator
-Provides:	XFree86-Xserver = %{epoch}:%{version}-%{release}
 
 %description Xserver
 Generally used X server which uses display hardware. It requires
@@ -644,12 +645,16 @@ Summary(uk):	â¦ÂÌ¦ÏÔÅËÉ ÐÒÏÇÒÁÍ¦ÓÔÁ, ÈÅÄÅÒÉ ÔÁ ÄÏËÕÍÅÎÔÁÃ¦Ñ ÐÏ ÐÒÏÇÒÁÍÕ×ÁÎÎÀ X11
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	imake = %{epoch}:%{version}-%{release}
+Provides:	XFree86-devel = %{epoch}:%{version}-%{release}
 Provides:	xpm-devel
-Obsoletes:	xpm-devel
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1-devel
 %endif
-Provides:	XFree86-devel = %{epoch}:%{version}-%{release}
+Obsoletes:	render
+Obsoletes:	xcursor-devel
+Obsoletes:	xft-devel
+Obsoletes:	xpm-devel
+Obsoletes:	xrender-devel
 
 %description devel
 Libraries, header files, and documentation for developing programs
@@ -1277,12 +1282,15 @@ Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	grep
 Requires(postun):	fileutils
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
+Provides:	XFree86-libs = %{epoch}:%{version}-%{release}
 Provides:	xpm
-Obsoletes:	xpm
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1-libs
 %endif
-Provides:	XFree86-libs = %{epoch}:%{version}-%{release}
+Obsoletes:	xcursor
+Obsoletes:	xft
+Obsoletes:	xpm
+Obsoletes:	xrender
 
 %description libs
 X11-libs contains the shared libraries that most X programs need to
@@ -1410,11 +1418,14 @@ Summary(ru):	óÔÁÔÉÞÅÓËÉÅ ÂÉÂÌÉÏÔÅËÉ X11R6
 Summary(uk):	óÔÁÔÉÞÎ¦ Â¦ÂÌ¦ÏÔÅËÉ X11R6
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
+Provides:	XFree86-static = %{epoch}:%{version}-%{release}
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1-devel
 %endif
+Obsoletes:	xcursor-static
+Obsoletes:	xft-static
 Obsoletes:	xpm-static
-Provides:	XFree86-static = %{epoch}:%{version}-%{release}
+Obsoletes:	xrender-static
 
 %description static
 X11R6 static libraries.
@@ -1440,8 +1451,8 @@ Group:		X11/Xorg
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	man-config
-Obsoletes:	X11R6-contrib
 Provides:	XFree86-tools = %{epoch}:%{version}-%{release}
+Obsoletes:	X11R6-contrib
 
 %description tools
 Various tools for X, including listres, xbiff, xedit, xeyes, xcalc,
@@ -1506,8 +1517,7 @@ Xconfigurator, X11-xfs ÔÁ X11-libs. íÏÖÌÉ×Ï, ×ÁÍ ÔÒÅÂÁ ×ÓÔÁÎÏ×ÉÔÉ Ê
 Summary:	Cursors Theme "handhelds"
 Summary(pl):	Motyw kursorów "handhelds"
 Group:		X11/Themes
-Requires:	X11-libs
-Requires:	xcursor
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description -n XcursorTheme-handhelds
 Cursors theme "handhelds" for X11.
@@ -1519,8 +1529,7 @@ Motyw kursorów "handhelds" dla X11.
 Summary:	Cursors theme "redglass"
 Summary(pl):	Motyw kursorów "redglass"
 Group:		X11/Themes
-Requires:	X11-libs
-Requires:	xcursor
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description -n XcursorTheme-redglass
 Cursors theme "redglass" for X11.
@@ -1532,8 +1541,7 @@ Motyw kursorów "redglass" dla X11.
 Summary:	Cursors theme "whiteglass"
 Summary(pl):	Motyw kursorów "whiteglass"
 Group:		X11/Themes
-Requires:	X11-libs
-Requires:	xcursor
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description -n XcursorTheme-whiteglass
 Cursors theme "whiteglass" for X11.
@@ -1645,8 +1653,8 @@ Requires:	pam >= 0.71
 Requires:	sessreg = %{epoch}:%{version}-%{release}
 Requires:	/usr/X11R6/bin/sessreg
 Provides:	XDM
-Obsoletes:	gdm
 Provides:	xdm = %{epoch}:%{version}-%{release}
+Obsoletes:	gdm
 
 %description xdm
 Xdm manages a collection of X displays, which may be on the local host
@@ -1681,8 +1689,8 @@ Requires(postun):	/usr/sbin/groupdel
 Requires(postun):	/usr/sbin/userdel
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	X11-fonts-base
-Obsoletes:	xfsft
 Provides:	xfs = %{epoch}:%{version}-%{release}
+Obsoletes:	xfsft
 
 %description xfs
 This is a font server for XOrg X11. You can serve fonts to other X
