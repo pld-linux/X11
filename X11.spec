@@ -19,7 +19,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.7.0.%{snap}
-Release:	0.2
+Release:	1
 Epoch:		1
 License:	XFree86 1.0 (?)
 Group:		X11/Xorg
@@ -90,6 +90,7 @@ Patch21:	X11-XTerm.ad.patch
 Patch22:	X11-xf86Pcih.patch
 Patch23:	X11-dontbuildfonts.patch
 Patch24:	X11-dixsym-missing.patch
+Patch25:	X11-llh.patch
 
 Patch32:	XFree86-xman-manpaths.patch
 Patch33:	XFree86-clearrts.patch
@@ -1868,6 +1869,8 @@ X11-libs.
 %patch21 -p0
 %patch22 -p0
 %patch23 -p0
+%patch24 -p0
+%patch25 -p0
 
 rm -f xc/config/cf/host.def
 
@@ -2390,7 +2393,7 @@ fi
 
 %files Xprint
 %defattr(644,root,root,755)
-%dir/etc/X11/xserver/C/print/
+%dir /etc/X11/xserver/C/print/
 /etc/X11/xserver/C/print/*
 
 %files DPS
