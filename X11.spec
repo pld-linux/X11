@@ -3,7 +3,7 @@
 # - separate XFS to be standalone - is it possible without duplicated files?
 #
 # Conditional build:
-%bcond_without	tdfx	# disables tdfx drivers building
+%bcond_without	glide	# don't build glide driver
 #
 Summary:	XOrg X11 Window System servers and basic programs
 Summary(de):	XOrg X11 Window-System-Server und grundlegende Programme
@@ -124,12 +124,12 @@ Patch54:	%{name}-setxkbmap.patch
 Patch55:	%{name}-makefile-fastbuild.patch
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
-%ifarch %{ix86} alpha amd64 ia64
-%{?with_tdfx:BuildRequires:	Glide3-DRI-devel}
-%endif
+#%ifarch %{ix86} alpha amd64 ia64
+#%{?with_tdfx:BuildRequires:	Glide3-DRI-devel}
+#%endif
 # Required by xc/programs/Xserver/hw/xfree86/drivers/glide/glide_driver.c
 %ifarch %{ix86} amd64 ia64
-%{?with_tdfx:BuildRequires:	Glide2x_SDK}
+%{?with_glide:BuildRequires:	Glide2x_SDK}
 %endif
 BuildRequires:	bison
 BuildRequires:	ed
@@ -1774,12 +1774,12 @@ X11-libs.
 %patch33 -p1
 #%patch34 -p1	-- seems not applied (was partially in rc1??? maybe another fix present?)
 #%patch35 -p1	-- obsoleted? (but doesn't look to be applied)
-%{?with_tdfx:%patch36 -p0}
+%patch36 -p0
 #%patch38 -p0	-- causing problems IIRC (but not really needed)
-%{?with_tdfx:%patch39 -p0}
+%patch39 -p0
 %patch40 -p1
 %{!?debug:%patch41 -p1}
-%{!?with_tdfx:%patch42 -p0}
+%{!?with_glide:%patch42 -p0}
 %patch43 -p0
 %patch44 -p0
 %patch45 -p1
@@ -2505,7 +2505,7 @@ fi
 %endif
 
 %ifarch %{ix86} ia64
-%if %{with tdfx}
+%if %{with glide}
 %files driver-glide
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/glide_drv.o
@@ -2721,15 +2721,13 @@ fi
 %endif
 
 %ifarch %{ix86} ia64 amd64 sparc sparc64 mips alpha arm ppc
-%if %{with tdfx}
 %files driver-tdfx
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/tdfx_drv.o
 %ifarch %{ix86} ia64 alpha arm ppc
 %attr(755,root,root) %{_libdir}/modules/dri/tdfx_dri.so
 %endif
-%{_mandir}/man4/tdfx*
-%endif
+%{_mandir}/man4/tdfx.4*
 %endif
 
 # Devel: sparc sparc64
