@@ -5,29 +5,29 @@
 # Conditional build:
 %bcond_without	tdfx	# disables tdfx drivers building
 #
-Summary:	Xorg Window System servers and basic programs
-Summary(de):	Xorg Window-System-Server und grundlegende Programme
-Summary(es):	Programas bАsicos y servidores para el sistema de ventanas Xorg
-Summary(fr):	Serveurs du systХme Xorg et programmes de base
-Summary(ja):	Xorg window system ╓н╔╣║╪╔п╓х╢Пкэе╙╓й╔в╔М╔╟╔И╔Ю
+Summary:	XOrg X11 Window System servers and basic programs
+Summary(de):	XOrg X11 Window-System-Server und grundlegende Programme
+Summary(es):	Programas bАsicos y servidores para el sistema de ventanas XOrg X11
+Summary(fr):	Serveurs du systХme XOrg X11 et programmes de base
+Summary(ja):	XOrg X11 window system ╓н╔╣║╪╔п╓х╢Пкэе╙╓й╔в╔М╔╟╔И╔Ю
 Summary(ko):	X©║ гй©Дгя ╠Б╨╩юШюн ╠ш╡ц╟З га╥н╠в╥╔╟З ╧╝╪╜╣И
-Summary(pl):	Xorg Window System wraz z podstawowymi programami
-Summary(tr):	Xorg Pencereleme Sistemi sunucularЩ ve temel programlar
-Summary(pt_BR):	Programas bАsicos e servidores para o sistema de janelas Xorg
+Summary(pl):	XOrg X11 Window System wraz z podstawowymi programami
+Summary(tr):	XOrg X11 Pencereleme Sistemi sunucularЩ ve temel programlar
+Summary(pt_BR):	Programas bАsicos e servidores para o sistema de janelas XOrg X11
 Summary(ru):	Базовые шрифты, программы и документация для рабочей станции под X
 Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
-Summary(zh_CN):	Xorg ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
-Name:		Xorg
+Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
+Name:		X11
 Version:	6.7.0
 Release:	0.1
 Epoch:		1
 License:	XFree86 1.0 (?)
 Group:		X11/Xorg
-Source0:	http://freedesktop.org/~xorg/X11R%{version}/src/X11R%{version}-src1.tar.gz
+Source0:	http://freedesktop.org/~xorg/X11R%{version}/src/%{name}R%{version}-src1.tar.gz
 # Source0-md5:	22465263bae7a2e9f5ad77e172cf1ab5
-Source1:	http://freedesktop.org/~xorg/X11R%{version}/src/X11R%{version}-src2.tar.gz
+Source1:	http://freedesktop.org/~xorg/X11R%{version}/src/%{name}R%{version}-src2.tar.gz
 # Source1-md5:	6ef4e8f7647a28f080c10ea1bcf01f79
-Source2:	http://freedesktop.org/~xorg/X11R%{version}/src/X11R%{version}-src3.tar.gz
+Source2:	http://freedesktop.org/~xorg/X11R%{version}/src/%{name}R%{version}-src3.tar.gz
 # Source2-md5:	4c7144786522bbce383b21ace72bf669
 Source7:	ftp://ftp.pld-linux.org/software/xinit/xdm-xinitrc-0.2.tar.bz2
 # Source7-md5:  0a15b1c374256b5cad7961807baa3896
@@ -163,7 +163,7 @@ Provides:	XFree86 = %{epoch}:%{version}-%{release}
 %define		_libx11dir	%{_prefix}/lib/X11
 %define		_appdefsdir	%{_libx11dir}/app-defaults
 
-# avoid Mesa dependency in Xorg-OpenGL-libs
+# avoid Mesa dependency in X11-OpenGL-libs
 # Glide3 (libglide3.so.3) can be provided by Glide_V3-DRI or Glide_V5-DRI
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1 libOSMesa.so.3.3 libglide3.so.3
 
@@ -179,7 +179,7 @@ interactions back to the application. X also supports remote
 application deployment--running an application on another computer
 while viewing the input/output on your machine. X is a powerful
 environment which supports many different applications, such as games,
-programming tools, graphics programs, text editors, etc. Xorg is
+programming tools, graphics programs, text editors, etc. XOrg X11 is
 the version of X which runs on Linux, as well as other platforms.
 
 This package contains the basic fonts, programs and documentation for
@@ -252,19 +252,18 @@ X Window System предоставляет базу для разработки графических
 запуск программ на удаленном компьютере с вводом/выводом на
 пользовательскую машину. X - это мощная среда, поддерживающая
 множество приложений, таких как игры, инструменты для программиста,
-графические программы, текстовые редакторы и т.п. Xorg - это версия
-X, работающая на Linux и других системах.
+графические программы, текстовые редакторы и т.п. XOrg X11 - это
+версия X, работающая на Linux и других системах.
 
 Этот пакет содержит базовые шрифты, программы и документацию для
 рабочей станции X.
 
 Дополнительно необходимо установить пакеты Xconfigurator, фонтсервер
-xfs и библиотеки Xorg-libs. Возможно придется установить также один
-или более пакетов шрифтов Xorg.
+xfs и библиотеки X11-libs. Возможно придется установить также один или
+более пакетов шрифтов XOrg X11.
 
 Ну и, наконец, если вы собираетесь разрабатывать приложения,
-работающие как X-клиенты, вам также надо будет установить
-Xorg-devel.
+работающие как X-клиенты, вам также надо будет установить X11-devel.
 
 %description -l uk
 X Window System нада╓ базу для розробки граф╕чних ╕нтерфейс╕в
@@ -274,30 +273,30 @@ X Window System нада╓ базу для розробки граф╕чних ╕нтерфейс╕в
 програм на в╕ддаленому комп'ютер╕ з вводом/виводом на машину
 користувача. X - це потужне середовище, яке п╕дтриму╓ велику к╕льк╕сть
 р╕зних програм, таких як ╕гри, ╕нструменти для програм╕ста, граф╕чн╕
-програми, текстов╕ редактори ╕ т.╕. Xorg - це верс╕я X, яка працю╓
+програми, текстов╕ редактори ╕ т.╕. XOrg X11 - це верс╕я X, яка працю╓
 на Linux та ╕нших системах.
 
 Цей пакет м╕стить базов╕ шрифти, програми та документац╕ю для робочо╖
 станц╕╖ X.
 
 Додатково необх╕дно встановити пакети Xconfigurator, фонтсервер xfs та
-б╕бл╕отеки Xorg-libs. Можливо також прийдеться встановити один або
-дек╕лька пакет╕в шрифт╕в Xorg.
+б╕бл╕отеки X11-libs. Можливо також прийдеться встановити один або
+дек╕лька пакет╕в шрифт╕в XOrg X11.
 
 Ну ╕, нарешт╕, якщо ви збира╓тесь розробляти прикладн╕ програми, що
-працюють як X-кл╕╓нти, вам також треба буде встановити Xorg-devel.
+працюють як X-кл╕╓нти, вам також треба буде встановити X11-devel.
 
 %package common
-Summary:	Xorg files required both on server and client side
-Summary(pl):	Pliki Xorg wymagane zarСwno po stronie serwera jak i klienta
+Summary:	XOrg X11 files required both on server and client side
+Summary(pl):	Pliki XOrg X11 wymagane zarСwno po stronie serwera jak i klienta
 Group:		X11/Xorg
-Provides:       XFree86-common = %{epoch}:%{version}-%{release}
+Provides:	XFree86-common = %{epoch}:%{version}-%{release}
 
 %description common
-Xorg files required both on server and client side.
+XOrg X11 files required both on server and client side.
 
 %description common -l pl
-Pliki Xorg wymagane zarСwno po stronie serwera jak i klienta.
+Pliki XOrg X11 wymagane zarСwno po stronie serwera jak i klienta.
 
 %package DPS
 Summary:	Display PostScript
@@ -306,7 +305,7 @@ Group:		X11/Xorg
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	DPS
 Obsoletes:	dgs
-Provides:       XFree86-DPS = %{epoch}:%{version}-%{release}
+Provides:	XFree86-DPS = %{epoch}:%{version}-%{release}
 
 %description DPS
 X-Window Display PostScript is device-independent imaging model for
@@ -323,7 +322,7 @@ Group:		X11/Xorg
 Requires:	%{name}-DPS = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Obsoletes:	dgs-devel
-Provides:       XFree86-DPS-devel = %{epoch}:%{version}-%{release}
+Provides:	XFree86-DPS-devel = %{epoch}:%{version}-%{release}
 
 %description DPS-devel
 Header files for develop X-Window Display Postscript.
@@ -337,7 +336,7 @@ Summary(pl):	Biblioteki statyczne Display PostScript
 Group:		X11/Xorg
 Requires:	%{name}-DPS-devel = %{epoch}:%{version}-%{release}
 Obsoletes:	dgs-static
-Provides:       XFree86-DPS-static = %{epoch}:%{version}-%{release}
+Provides:	XFree86-DPS-static = %{epoch}:%{version}-%{release}
 
 %description DPS-static
 X-Window Display PostScript static libraries.
@@ -348,10 +347,10 @@ Statyczne biblioteki X-Window Display PostScript.
 %package OpenGL-core
 Summary:	OpenGL support for X11R6
 Summary(pl):	Wsparcie OpenGL dla systemu X11R6
-Group:		X11/Libraries
+Group:		XFree86/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires:	Xorg-OpenGL-libGL
-Provides:       XFree86-OpenGL-core = %{epoch}:%{version}-%{release}
+Requires:	X11-OpenGL-libGL
+Provides:	XFree86-OpenGL-core = %{epoch}:%{version}-%{release}
 
 %description OpenGL-core
 OpenGL support for X11R6 system.
@@ -362,10 +361,10 @@ Wsparcie OpenGL dla systemu X11R6.
 %package OpenGL-libGL
 Summary:	OpenGL support for X11R6 - GL library
 Summary(pl):	Wsparcie OpenGL dla systemu X11R6 - biblioteka GL
-Group:		X11/Libraries
-Requires:	Xorg-OpenGL-core = %{epoch}:%{version}-%{release}
-Obsoletes:	Xorg-driver-firegl
-Provides:       XFree86-OpenGL-libGL = %{epoch}:%{version}-%{release}
+Group:		XFree86/Libraries
+Requires:	X11-OpenGL-core = %{epoch}:%{version}-%{release}
+Obsoletes:	X11-driver-firegl
+Provides:	XFree86-OpenGL-libGL = %{epoch}:%{version}-%{release}
 
 %description OpenGL-libGL
 OpenGL support for X11R6 system - GL library.
@@ -382,9 +381,8 @@ Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Requires:	OpenGL-devel-base
 Provides:	OpenGL-devel
 Obsoletes:	Mesa-devel
-Obsoletes:	Xorg-OpenGL-doc
 Obsoletes:	glxMesa-devel
-Provides:       XFree86-OpenGL-devel = %{epoch}:%{version}-%{release}
+Provides:	XFree86-OpenGL-devel = %{epoch}:%{version}-%{release}
 
 %description OpenGL-devel
 Headers and man pages for OpenGL for X11R6.
@@ -399,7 +397,7 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-OpenGL-devel = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Provides:	OpenGL-devel-base
-Provides:       XFree86-OpenGL-devel-base = %{epoch}:%{version}-%{release}
+Provides:	XFree86-OpenGL-devel-base = %{epoch}:%{version}-%{release}
 
 %description OpenGL-devel-base
 Base headers (GL and GLX only) for OpenGL for X11R6.
@@ -410,13 +408,12 @@ Podstawowe pliki nagЁСwkowe (tylko GL i GLX) OpenGL dla systemu X11R6.
 %package OpenGL-libs
 Summary:	OpenGL libraries for X11R6
 Summary(pl):	Biblioteki OpenGL dla systemu X11R6
-Group:		X11/Libraries
+Group:		XFree86/Libraries
 Requires:	%{name}-OpenGL-core
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	OpenGL
 Obsoletes:	Mesa
-Obsoletes:	Xorg-OpenGL
-Provides:       XFree86-OpenGL-libs = %{epoch}:%{version}-%{release}
+Provides:	XFree86-OpenGL-libs = %{epoch}:%{version}-%{release}
 
 %description OpenGL-libs
 OpenGL libraries for X11R6 system.
@@ -431,7 +428,7 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-OpenGL-devel = %{epoch}:%{version}-%{release}
 Provides:	OpenGL-static
 Obsoletes:	Mesa-static
-Provides:       XFree86-OpenGL-static = %{epoch}:%{version}-%{release}
+Provides:	XFree86-OpenGL-static = %{epoch}:%{version}-%{release}
 
 %description OpenGL-static
 X11R6 static libraries with OpenGL.
@@ -440,16 +437,16 @@ X11R6 static libraries with OpenGL.
 Biblioteki statyczne zawieraj╠ce wsparcie dla OpenGL do X11R6.
 
 %package Xnest
-Summary:	Xorg Xnest server
-Summary(pl):	Serwer Xorg Xnest
-Summary(ru):	"Вложенный" сервер Xorg
-Summary(uk):	"Вкладений" сервер Xorg
+Summary:	XOrg X11 Xnest server
+Summary(pl):	Serwer XOrg X11 Xnest
+Summary(ru):	"Вложенный" сервер XOrg X11
+Summary(uk):	"Вкладений" сервер XOrg X11
 Group:		X11/Xorg/Servers
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	/usr/X11R6/lib/X11/rgb.txt
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
-Requires:	Xorg-fonts-base
-Provides:       XFree86-Xnest = %{epoch}:%{version}-%{release}
+Requires:	X11-fonts-base
+Provides:	XFree86-Xnest = %{epoch}:%{version}-%{release}
 
 %description Xnest
 Xnest is an X Window System server which runs in an X window. Xnest is
@@ -492,7 +489,7 @@ PreReq:		xprint-initrc
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	/usr/X11R6/lib/X11/rgb.txt
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
-Requires:	Xorg-fonts-base
+Requires:	X11-fonts-base
 
 %description Xprt
 Xprt provides an X server with the print extension and special DDX
@@ -502,35 +499,34 @@ implementation.
 Xprt jest X serwerem z rozszerzeniem Xprint.
 
 %package Xserver
-Summary:	Xorg X display server
-Summary(de):	Xorg Server
-Summary(fr):	Serveur Xorg
-Summary(pl):	Serwer Xorg
-Summary(tr):	Xorg sunucusu
+Summary:	XOrg X11 X display server
+Summary(de):	XOrg X11 Server
+Summary(fr):	Serveur XOrg X11
+Summary(pl):	Serwer XOrg X11
+Summary(tr):	XOrg X11 sunucusu
 Group:		X11/Xorg/Servers
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	/usr/X11R6/lib/X11/rgb.txt
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
-Requires:	Xorg-fonts-base
+Requires:	X11-fonts-base
 Requires:	pam
-Obsoletes:	Xorg-Mono
-Obsoletes:	Xorg-SVGA
-Obsoletes:	Xorg-VGA16
+Obsoletes:	X11-Mono
+Obsoletes:	X11-SVGA
+Obsoletes:	X11-VGA16
 # obsoleted by many drivers: suncg3,suncg6,suncg14,sunffb,sunleo,suntcx
-Obsoletes:	Xorg-Sun
-Obsoletes:	Xorg-Sun24
+Obsoletes:	X11-Sun
+Obsoletes:	X11-Sun24
 # still not supported in 4.2.0:
-#Obsoletes:	Xorg-Mach8 Xorg-8514 Xorg-AGX Xorg-P9000
+#Obsoletes:	X11-Mach8 X11-8514 X11-AGX X11-P9000
 # (and many drivers from XF86_SVGA server... and some from others)
-Obsoletes:	Xorg-XF86Setup
 Obsoletes:	Xconfigurator
-Provides:       XFree86-Xserver = %{epoch}:%{version}-%{release}
+Provides:	XFree86-Xserver = %{epoch}:%{version}-%{release}
 
 %description Xserver
 Generally used X server which uses display hardware. It requires
 proper driver for your display hardware - package itself contains only
 drivers for VGA and VESA-compliant cards (without acceleration). Other
-drivers can be found in Xorg-driver-* packages.
+drivers can be found in X11-driver-* packages.
 
 %description Xserver -l de
 X-Server fЭr die elementarsten Framebuffer-SVGA-GerДte, einschlieъlich
@@ -554,8 +550,7 @@ avez des problХmes.
 Jest to podstawowy Xserwer wy╤wietlaj╠cy obraz na karcie graficznej.
 Do dziaЁania wymaga odpowiedniego sterownika - sam pakiet zawiera
 tylko odpowiedni dla kart VGA oraz SVGA zgodnych z VESA (bez
-akceleracji). Inne sterowniki mo©na znale╪Ф w pakietach
-Xorg-driver-*.
+akceleracji). Inne sterowniki mo©na znale╪Ф w pakietach X11-driver-*.
 
 %description Xserver -l tr
 ET4000, Cirrus Logic, Chips and Technologies dizЭstЭ, Trident 8900 ve
@@ -566,15 +561,15 @@ birГok diПer kart ile de ГalЩЧЩr. Herhangi bir sorun yaЧarsanЩz bu
 sunucuyu deneyin.
 
 %package Xvfb
-Summary:	Xorg Xvfb server
-Summary(pl):	Serwer Xorg Xvfb
-Summary(ru):	Сервер Xorg для виртуального фреймбуфера
-Summary(uk):	Сервер Xorg для в╕ртуального фреймбуфера
+Summary:	XOrg X11 Xvfb server
+Summary(pl):	Serwer XOrg X11 Xvfb
+Summary(ru):	Сервер XOrg X11 для виртуального фреймбуфера
+Summary(uk):	Сервер XOrg X11 для в╕ртуального фреймбуфера
 Group:		X11/Xorg/Servers
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	/usr/X11R6/lib/X11/rgb.txt
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
-Requires:	Xorg-fonts-base
+Requires:	X11-fonts-base
 
 %description Xvfb
 Xvfb (X Virtual Frame Buffer) is an X Window System server that is
@@ -654,7 +649,7 @@ Obsoletes:	xpm-devel
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1-devel
 %endif
-Provides:       XFree86-devel = %{epoch}:%{version}-%{release}
+Provides:	XFree86-devel = %{epoch}:%{version}-%{release}
 
 %description devel
 Libraries, header files, and documentation for developing programs
@@ -686,11 +681,11 @@ bibliotek mo©esz znale╪Ф w ksi╠©kach wydawnictwa O'Reilly and
 Associates (X Programming) polecanych przez Red Hata.
 
 %description devel -l ru
-Xorg-devel включает библиотеки, хедера и документацию, необходимые
-для разработки программ, работающих как X-клиенты. Xorg-devel
-включает базовую библиотеку Xlib и наборы примитивов Xt и Xaw.
+X11-devel включает библиотеки, хедера и документацию, необходимые для
+разработки программ, работающих как X-клиенты. X11-devel включает
+базовую библиотеку Xlib и наборы примитивов Xt и Xaw.
 
-Установите Xorg-devel если вы собираетесь разрабатывать программы,
+Установите X11-devel если вы собираетесь разрабатывать программы,
 которые будут работать как X-клиенты.
 
 %description devel -l tr
@@ -699,26 +694,26 @@ statik kitaplЩklar, baЧlЩk dosyalarЩ ve belgeler. Xlib kitaplЩПЩnЩn
 yanЩsЩra Xt ve Xaw arayЭz kitaplЩklarЩnЩ da iГerir.
 
 %description devel -l uk
-Xorg-devel м╕стить б╕бл╕отеки, хедери та документац╕ю, необх╕дн╕
-для розробки програм, як╕ працюють як X-кл╕╓нти. Xorg-devel м╕стить
-базову б╕бл╕отеку Xlib та набори прим╕тив╕в Xt та Xaw.
+X11-devel м╕стить б╕бл╕отеки, хедери та документац╕ю, необх╕дн╕ для
+розробки програм, як╕ працюють як X-кл╕╓нти. X11-devel м╕стить базову
+б╕бл╕отеку Xlib та набори прим╕тив╕в Xt та Xaw.
 
-Встанов╕ть Xorg-devel якщо ви збира╓тесь розробляти програми, як╕
+Встанов╕ть X11-devel якщо ви збира╓тесь розробляти програми, як╕
 будуть працювати як X-кл╕╓нти.
 
 %package Xserver-devel
-Summary:	Header files for Xorg Xserver drivers/extensions development
-Summary(pl):	Pliki nagЁСwkowe do tworzenia sterownikСw/rozszerzeЯ X serwera Xorg
+Summary:	Header files for XOrg X11 Xserver drivers/extensions development
+Summary(pl):	Pliki nagЁСwkowe do tworzenia sterownikСw/rozszerzeЯ X serwera XOrg X11
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
-Provides:       XFree86-Xserver-devel = %{epoch}:%{version}-%{release}
+Provides:	XFree86-Xserver-devel = %{epoch}:%{version}-%{release}
 
 %description Xserver-devel
-Header files for Xorg Xserver drivers and extensions development.
+Header files for XOrg X11 Xserver drivers and extensions development.
 
 %description Xserver-devel -l pl
-Pliki nagЁСwkowe do tworzenia sterownikСw i rozszerzeЯ X serwera
-Xorg.
+Pliki nagЁСwkowe do tworzenia sterownikСw i rozszerzeЯ X serwera XOrg
+X11.
 
 %package driver-apm
 Summary:	Alliance Promotion video driver
@@ -766,7 +761,7 @@ Group:		X11/Xorg
 Requires:	OpenGL
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
-Conflicts:	Xorg-driver-nvidia
+Conflicts:	X11-driver-nvidia
 
 %description driver-r128
 ATI Rage 128 video driver.
@@ -782,7 +777,7 @@ Requires:	OpenGL
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Requires:	%{name}-driver-ati = %{epoch}:%{version}-%{release}
-Conflicts:	Xorg-driver-nvidia
+Conflicts:	X11-driver-nvidia
 
 %description driver-radeon
 ATI Radeon video driver.
@@ -877,7 +872,7 @@ Group:		X11/Xorg
 Requires:	OpenGL
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
-Conflicts:	Xorg-driver-nvidia
+Conflicts:	X11-driver-nvidia
 
 %description driver-glint
 GLINT/Permedia video driver.
@@ -918,7 +913,7 @@ Group:		X11/Xorg
 Requires:	OpenGL
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
-Conflicts:	Xorg-driver-nvidia
+Conflicts:	X11-driver-nvidia
 
 %description driver-i810
 Intel i810/i815/i830 video driver.
@@ -946,7 +941,7 @@ Group:		X11/Xorg
 Requires:	OpenGL
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
-Conflicts:	Xorg-driver-nvidia
+Conflicts:	X11-driver-nvidia
 
 %description driver-mga
 Matrox video driver.
@@ -1189,7 +1184,7 @@ Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 # dlopens libglide3x.so
 Requires:	Glide3-DRI
 Requires:	OpenGL
-Conflicts:	Xorg-driver-nvidia
+Conflicts:	X11-driver-nvidia
 
 %description driver-tdfx
 3Dfx video driver. Supports Voodoo Banshee, Voodoo3, Voodoo4, Voodoo5.
@@ -1287,22 +1282,22 @@ Obsoletes:	xpm
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1-libs
 %endif
-Provides:       XFree86-libs = %{epoch}:%{version}-%{release}
+Provides:	XFree86-libs = %{epoch}:%{version}-%{release}
 
 %description libs
-Xorg-libs contains the shared libraries that most X programs need
-to run properly. These shared libraries are in a separate package in
+X11-libs contains the shared libraries that most X programs need to
+run properly. These shared libraries are in a separate package in
 order to reduce the disk space needed to run X applications on a
 machine without an X server (i.e, over a network).
 
 If you are installing the X Window System on your machine, you will
-need to install Xorg-libs. You will also need to install the
-Xorg package, Xorg-Xserver, one of the Xorg-driver-*,
-Xorg-fonts, Xorg-fonts-ISO8859-1, optionally some of the other
-fonts (choose 75dpi or 100dpi depending upon your monitor's
-resolution), the Xorg-setup and the Xorg-tools. And, finally, if
-you are going to be developing applications that run as X clients, you
-will also need to install Xorg-devel.
+need to install X11-libs. You will also need to install the X11
+package, X11-Xserver, one of the X11-driver-*, X11-fonts,
+X11-fonts-ISO8859-1, optionally some of the other fonts (choose 75dpi
+or 100dpi depending upon your monitor's resolution), the X11-setup and
+the X11-tools. And, finally, if you are going to be developing
+applications that run as X clients, you will also need to install
+X11-devel.
 
 %description libs -l de
 Dieses Paket enthДlt die zur gemeinsamen Nutzung vorgesehenen
@@ -1343,33 +1338,32 @@ kitaplЩklarЩ iГerir. Bunlar, X programlarЩnЩ (sunucu olsun olmasЩn)
 olarak sunulmuЧtur.
 
 %description libs -l ru
-Xorg-libs содержит разделяемые библиотеки, которые необходимы для
+X11-libs содержит разделяемые библиотеки, которые необходимы для
 работы большинству программ для X. Эти библиотеки вынесены в отдельный
 пакет чтобы сэкономить дисковое пространство, необходимое для запуска
 приложений X на машинах без X-сервера (например, по сети).
 
 Если вы устанавливаете X Window System на вашей машине, вам необходимо
-установить Xorg-libs. Также необходимо установить следующие пакеты:
-Xorg, один или несколько пакетов шрифтов Xorg, Xconfigurator,
-Xorg-xfs.
+установить X11-libs. Также необходимо установить следующие пакеты:
+XOrg X11, один или несколько пакетов шрифтов XOrg X11, Xconfigurator,
+X11-xfs.
 
 Если вы собираетесь разрабатывать программы, работающие как X-клиенты,
-вам также надо установить Xorg-devel.
+вам также надо установить X11-devel.
 
 %description libs -l uk
-Xorg-libs м╕стить б╕бл╕отеки сп╕льного використання, котр╕
-необх╕дн╕ для роботи б╕льшост╕ прикладних програм для X. Ц╕ б╕бл╕отеки
-винесен╕ в окремий пакет для економ╕╖ дискового простору, необх╕дного
-для запуску прикладних програм X на машинах без X-серверу (наприклад,
-по мереж╕).
+X11-libs м╕стить б╕бл╕отеки сп╕льного використання, котр╕ необх╕дн╕
+для роботи б╕льшост╕ прикладних програм для X. Ц╕ б╕бл╕отеки винесен╕
+в окремий пакет для економ╕╖ дискового простору, необх╕дного для
+запуску прикладних програм X на машинах без X-серверу (наприклад, по
+мереж╕).
 
 Якщо ви встановлю╓те X Window System на ваш╕й машин╕, вам необх╕дно
-встановити Xorg-libs. Також необх╕дно встановити так╕ пакети:
-Xorg, один або дек╕лька пакет╕в шрифт╕в Xorg, Xconfigurator,
-Xorg-xfs.
+встановити X11-libs. Також необх╕дно встановити так╕ пакети: XOrg X11,
+один або дек╕лька пакет╕в шрифт╕в XOrg X11, Xconfigurator, X11-xfs.
 
 Якщо ви збира╓тесь розробляти програми, як╕ працюють як X-кл╕╓нти, вам
-також необх╕дно встановити Xorg-devel.
+також необх╕дно встановити X11-devel.
 
 %package modules
 Summary:	Modules with X servers extensions
@@ -1383,31 +1377,31 @@ Modules with X servers extensions.
 WspСlne dla wszystkich X serwerСw moduЁy rozszerzeЯ.
 
 %package setup
-Summary:	Graphical configuration tool for Xorg
-Summary(pl):	Graficzny konfigurator dla Xorg
-Summary(ru):	Утилита для конфигурации Xorg
-Summary(uk):	Утил╕та для конф╕гурування Xorg
+Summary:	Graphical configuration tool for XOrg X11
+Summary(pl):	Graficzny konfigurator dla XOrg X11
+Summary(ru):	Утилита для конфигурации XOrg X11
+Summary(uk):	Утил╕та для конф╕гурування XOrg X11
 Group:		X11/Xorg
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
-Obsoletes:	Xorg-xf86cfg
+Obsoletes:	X11-xf86cfg
 
 %description setup
-Setup containst a configuration tool for the Xorg family of
+Setup containst a configuration tool for the XOrg X11 family of
 servers. It allows you to configure video settings, keyboard layouts,
 mouse type, and other miscellaneous options. It is slow however, and
 requires the generic VGA 16 color server be available.
 
 %description setup -l pl
-Pakiet setup zawiera narzЙdzia do konfiguracji Xorg. Pozwala na
+Pakiet setup zawiera narzЙdzia do konfiguracji XOrg X11. Pozwala na
 skonfigurowanie ustawieЯ obrazu, klawiatury, typu myszki i innych
 rС©nych rzeczy. Jednak©e jest wolny i wymaga dostЙpno╤ci serwera do
 standardowej 16-kolorowej VGA.
 
 %description setup -l ru
-Утилита для конфигурации Xorg.
+Утилита для конфигурации XOrg X11.
 
 %description setup -l uk
-Утил╕та для конф╕гурування Xorg.
+Утил╕та для конф╕гурування XOrg X11.
 
 %package static
 Summary:	X11R6 static libraries
@@ -1420,7 +1414,7 @@ Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Obsoletes:	X11R6.1-devel
 %endif
 Obsoletes:	xpm-static
-Provides:       XFree86-static = %{epoch}:%{version}-%{release}
+Provides:	XFree86-static = %{epoch}:%{version}-%{release}
 
 %description static
 X11R6 static libraries.
@@ -1429,37 +1423,37 @@ X11R6 static libraries.
 Biblioteki statyczne X11R6.
 
 %description static -l ru
-Xorg-static включает статические библиотеки, необходимые для
-разработки программ, работающих как X-клиенты. собранные программы,
-которые будут работать как X-клиенты.
+X11-static включает статические библиотеки, необходимые для разработки
+программ, работающих как X-клиенты. собранные программы, которые будут
+работать как X-клиенты.
 
 %description static -l uk
-Xorg-static м╕стить статичн╕ б╕бл╕отеки, необх╕дн╕ для розробки
+X11-static м╕стить статичн╕ б╕бл╕отеки, необх╕дн╕ для розробки
 програм, як╕ працюють як X-кл╕╓нти.
 
 %package tools
-Summary:	Various tools for Xorg
-Summary(pl):	RС©ne narzЙdzia dla Xorg
-Summary(ru):	Разнообразные утилиты для Xorg
-Summary(uk):	Р╕зноман╕тн╕ утил╕ти для Xorg
+Summary:	Various tools for XOrg X11
+Summary(pl):	RС©ne narzЙdzia dla XOrg X11
+Summary(ru):	Разнообразные утилиты для XOrg X11
+Summary(uk):	Р╕зноман╕тн╕ утил╕ти для XOrg X11
 Group:		X11/Xorg
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	man-config
 Obsoletes:	X11R6-contrib
-Provides:       XFree86-tools = %{epoch}:%{version}-%{release}
+Provides:	XFree86-tools = %{epoch}:%{version}-%{release}
 
 %description tools
 Various tools for X, including listres, xbiff, xedit, xeyes, xcalc,
 xload and xman, among others.
 
-If you're using X, you should install Xorg-tools. You will also
-need to install the Xorg package, the Xorg package which
-corresponds to your video card, some of the Xorg fonts packages,
-the Xorg-setup package and the Xorg-libs package.
+If you're using X, you should install X11-tools. You will also need to
+install the XOrg X11 package, the XOrg X11 package which corresponds
+to your video card, some of the XOrg X11 fonts packages, the X11-setup
+package and the X11-libs package.
 
 Finally, if you are going to develop applications that run as X
-clients, you will also need to install Xorg-devel.
+clients, you will also need to install X11-devel.
 
 This package contains all applications that used to be in
 X11R6-contrib in older releases.
@@ -1468,13 +1462,13 @@ X11R6-contrib in older releases.
 RС©ne narzЙdzia dla X, w tym listres, xbiff, xedit, xeyes, xcalc,
 xload, xman i inne.
 
-Je╤li u©ywasz XСw powiniene╤ zainstalowaФ Xorg-tools. BЙdziesz
-rСwnie© musiaЁ zainstalowaФ pakiet Xorg, pakiet odpowiadaj╠cy
-Twojej karcie graficznej, jeden z pakietСw z fontami, pakiet
-Xconfigurator oraz Xorg-libs.
+Je╤li u©ywasz XСw powiniene╤ zainstalowaФ X11-tools. BЙdziesz rСwnie©
+musiaЁ zainstalowaФ pakiet XOrg X11, pakiet odpowiadaj╠cy Twojej
+karcie graficznej, jeden z pakietСw z fontami, pakiet Xconfigurator
+oraz X11-libs.
 
 Wreszcie, je╤li zamierzasz tworzyФ aplikacje, ktСre dziaЁaj╠ jako
-klienci X, bЙdziesz musiaЁ zainstalowaФ rСwnie© Xorg-devel.
+klienci X, bЙdziesz musiaЁ zainstalowaФ rСwnie© X11-devel.
 
 Ten pakiet zawiera aplikacje, ktСre byЁy w X11R6-contrib w starszych
 wersjach X.
@@ -1483,13 +1477,13 @@ wersjach X.
 Разнообразные утилиты для X, включая listres, xbiff, xedit, xeyes,
 xcalc, xload, xman и другие.
 
-Если вы устанавливаете X Window System, вам надо установить
-Xorg-tools. Также вам также необходимо установить такие пакеты:
-Xorg, Xconfigurator, Xorg-xfs и Xorg-libs. Возможно, вам надо
-установить и другие пакеты шрифтов Xorg.
+Если вы устанавливаете X Window System, вам надо установить X11-tools.
+Также вам также необходимо установить такие пакеты: XOrg X11,
+Xconfigurator, X11-xfs и X11-libs. Возможно, вам надо установить и
+другие пакеты шрифтов XOrg X11.
 
 Если вы собираетесь разрабатывать программы, работающие как X-клиенты,
-вам также надо установить Xorg-devel.
+вам также надо установить X11-devel.
 
 Этот пакет содержит все программы, которые раньше включались в
 X11R6-contrib.
@@ -1499,12 +1493,12 @@ X11R6-contrib.
 xcalc, xload, xman та ╕нш╕.
 
 Якщо ви встановлю╓те X Window System, вам необх╕дно встановити
-Xorg-tools. Також треба встановити так╕ пакети: Xorg,
-Xconfigurator, Xorg-xfs та Xorg-libs. Можливо, вам треба
-встановити й ╕нш╕ пакети шрифт╕в Xorg.
+X11-tools. Також треба встановити так╕ пакети: XOrg X11,
+Xconfigurator, X11-xfs та X11-libs. Можливо, вам треба встановити й
+╕нш╕ пакети шрифт╕в XOrg X11.
 
 Якщо ви збира╓тесь розробляти програми, як╕ працюють як X-кл╕╓нти, вам
-також необх╕дно встановити Xorg-devel.
+також необх╕дно встановити X11-devel.
 
 Цей пакет м╕стить ус╕ програми, як╕ ран╕ше входили до X11R6-contrib.
 
@@ -1512,7 +1506,7 @@ Xconfigurator, Xorg-xfs та Xorg-libs. Можливо, вам треба
 Summary:	Cursors Theme "handhelds"
 Summary(pl):	Motyw kursorСw "handhelds"
 Group:		X11/Themes
-Requires:	Xorg-libs
+Requires:	X11-libs
 Requires:	xcursor
 
 %description -n XcursorTheme-handhelds
@@ -1525,7 +1519,7 @@ Motyw kursorСw "handhelds" dla X11.
 Summary:	Cursors theme "redglass"
 Summary(pl):	Motyw kursorСw "redglass"
 Group:		X11/Themes
-Requires:	Xorg-libs
+Requires:	X11-libs
 Requires:	xcursor
 
 %description -n XcursorTheme-redglass
@@ -1538,7 +1532,7 @@ Motyw kursorСw "redglass" dla X11.
 Summary:	Cursors theme "whiteglass"
 Summary(pl):	Motyw kursorСw "whiteglass"
 Group:		X11/Themes
-Requires:	Xorg-libs
+Requires:	X11-libs
 Requires:	xcursor
 
 %description -n XcursorTheme-whiteglass
@@ -1551,7 +1545,7 @@ Motyw kursorСw "whiteglass" dla X11.
 Summary:	C preprocessor interface to the make utility
 Summary(pl):	Miedzymordzie do make oparte o preprocesor C
 Group:		Development/Building
-Provides:       imake = %{epoch}:%{version}-%{release}
+Provides:	imake = %{epoch}:%{version}-%{release}
 
 %description imake
 Imake is used to generate Makefiles from a template, a set of cpp
@@ -1572,7 +1566,7 @@ byФ kompilowane.
 Summary:	sessreg - manage utmp/wtmp entries for non-init clients
 Summary(pl):	Program do zarz╠dzania wpisami w utmp/wtmp
 Group:		X11/Xorg
-Provides:       sessreg = %{epoch}:%{version}-%{release}
+Provides:	sessreg = %{epoch}:%{version}-%{release}
 
 %description sessreg
 sessreg is a simple program for managing utmp/wtmp entries for xdm
@@ -1621,7 +1615,7 @@ Summary:	xauth - X authority file utility
 Summary(pl):	xauth - narzЙdzie do plikСw X authority
 Group:		X11/Xorg
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Provides:       xauth = %{epoch}:%{version}-%{release}
+Provides:	xauth = %{epoch}:%{version}-%{release}
 
 %description xauth
 The xauth program is used to edit and display the authorization
@@ -1652,7 +1646,7 @@ Requires:	sessreg = %{epoch}:%{version}-%{release}
 Requires:	/usr/X11R6/bin/sessreg
 Provides:	XDM
 Obsoletes:	gdm
-Provides:       xdm = %{epoch}:%{version}-%{release}
+Provides:	xdm = %{epoch}:%{version}-%{release}
 
 %description xdm
 Xdm manages a collection of X displays, which may be on the local host
@@ -1672,8 +1666,8 @@ terminali oraz standardem X Consortium XDMCP.
 Менеджер дисплею X.
 
 %package xfs
-Summary:	Font server for Xorg
-Summary(pl):	Serwer fontСw dla Xorg
+Summary:	Font server for XOrg X11
+Summary(pl):	Serwer fontСw dla XOrg X11
 Summary(ru):	Фонтсервер для X Window System
 Summary(uk):	Фонтсервер для X Window System
 Group:		X11/Xorg
@@ -1686,41 +1680,41 @@ Requires(post,preun):	/sbin/chkconfig
 Requires(postun):	/usr/sbin/groupdel
 Requires(postun):	/usr/sbin/userdel
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires:	Xorg-fonts-base
+Requires:	X11-fonts-base
 Obsoletes:	xfsft
-Provides:       xfs = %{epoch}:%{version}-%{release}
+Provides:	xfs = %{epoch}:%{version}-%{release}
 
 %description xfs
-This is a font server for Xorg. You can serve fonts to other X
+This is a font server for XOrg X11. You can serve fonts to other X
 servers remotely with this package, and the remote system will be able
 to use all fonts installed on the font server, even if they are not
 installed on the remote computer.
 
 %description xfs -l pl
-Pakiet zawiera serwer fontСw dla Xorg. Mo©e udostЙpniaФ fonty dla X
-serwerСw lokalnych lub zdalnych.
+Pakiet zawiera serwer fontСw dla XOrg X11. Mo©e udostЙpniaФ fonty dla
+X serwerСw lokalnych lub zdalnych.
 
 %description xfs -l ru
-Xorg-xfs содержит сервер шрифтов для Xorg. Xfs также может
+X11-xfs содержит сервер шрифтов для XOrg X11. Xfs также может
 предоставлять шрифты удаленным X-серверам. Удаленная система будет
 способна использовать все шрифты, установленные на сервере шрифтов,
 даже если они не установлены на удаленном компьютере.
 
-Вы должны установить Xorg-xfs если вы устанавливаете X Window
-System. Также вам придется установить следующие пакеты: Xorg,
-пакет(ы) шрифтов Xorg, необходимые для вашей системы, Xconfigurator
-и Xorg-libs.
+Вы должны установить X11-xfs если вы устанавливаете X Window System.
+Также вам придется установить следующие пакеты: XOrg X11, пакет(ы)
+шрифтов XOrg X11, необходимые для вашей системы, Xconfigurator и
+X11-libs.
 
 %description xfs -l uk
-Xorg-xfs м╕стить сервер шрифт╕в для Xorg. Xfs також може
-надавати шрифти в╕ддаленим X-серверам. В╕ддалена система зможе
-використовувати ус╕ шрифти, як╕ встановлен╕ на сервер╕ шрифт╕в, нав╕ть
-якщо вони не встановлен╕ на в╕ддаленому комп'ютер╕.
+X11-xfs м╕стить сервер шрифт╕в для XOrg X11. Xfs також може надавати
+шрифти в╕ддаленим X-серверам. В╕ддалена система зможе використовувати
+ус╕ шрифти, як╕ встановлен╕ на сервер╕ шрифт╕в, нав╕ть якщо вони не
+встановлен╕ на в╕ддаленому комп'ютер╕.
 
-Ви повинн╕ встановити Xorg-xfs якщо ви встановлю╓те X Window
-System. Також вам прийдеться встановити наступн╕ пакети: Xorg,
-пакет(и) шрифт╕в Xorg, необх╕дн╕ для вашо╖ системи, Xconfigurator
-та Xorg-libs.
+Ви повинн╕ встановити X11-xfs якщо ви встановлю╓те X Window System.
+Також вам прийдеться встановити наступн╕ пакети: XOrg X11, пакет(и)
+шрифт╕в XOrg X11, необх╕дн╕ для вашо╖ системи, Xconfigurator та
+X11-libs.
 
 #--- %prep ---------------------------
 
@@ -1826,10 +1820,10 @@ fi
 
 # setting default X
 rm -f $RPM_BUILD_ROOT%{_bindir}/X
-ln -sf Xorg $RPM_BUILD_ROOT%{_bindir}/X
+ln -sf X11 $RPM_BUILD_ROOT%{_bindir}/X
 
 # setting ghost X in /etc/X11 -- xf86config will fix this ...
-ln -sf %{_bindir}/Xorg $RPM_BUILD_ROOT%{_sysconfdir}/X11/X
+ln -sf %{_bindir}/XOrg X11 $RPM_BUILD_ROOT%{_sysconfdir}/X11/X
 
 # add X11 links in /usr/bin, /usr/lib /usr/include
 ln -sf %{_includedir}/X11 $RPM_BUILD_ROOT/usr/include/X11
@@ -1844,7 +1838,7 @@ ln -sf libGLU.so.1 $RPM_BUILD_ROOT%{_libdir}/libGLU.so
 # according to OpenGL ABI for Linux v1.0
 # (http://oss.sgi.com/projects/ogl-sample/ABI/index.html)
 # libGL.so.1, libGL.so, libGLU.so.1, libGL.so must be accessible in /usr
-# libGL is already linked by Xorg build, but libGLU not
+# libGL is already linked by XOrg X11 build, but libGLU not
 ln -sf %{_libdir}/libGLU.so.1 $RPM_BUILD_ROOT/usr/%{_lib}/libGLU.so.1
 ln -sf %{_libdir}/libGLU.so $RPM_BUILD_ROOT/usr/%{_lib}/libGLU.so
 
@@ -1981,7 +1975,7 @@ if [ -d /etc/X11/xkb/geometry/hp ]; then
 	rm -rf /etc/X11/xkb/geometry/hp
 fi
 
-%triggerpostun modules -- Xorg-modules < 4.0.2
+%triggerpostun modules -- X11-modules < 4.0.2
 if [ -d /usr/X11R6/lib/X11/xkb ]; then
 	rm -rf /usr/X11R6/lib/X11/xkb
 	ln -sf /etc/X11/xkb /usr/X11R6/lib/X11/xkb
@@ -2761,7 +2755,7 @@ fi
 
 %files libs
 %defattr(644,root,root,755)
-%dir /etc/xdg
+%dir %{_sysconfdir}/xdg
 %dir %{_themesdir}
 %dir %{_themesdir}/Default
 %dir %{_themesdir}/ThinIce
@@ -3104,18 +3098,18 @@ fi
 %attr(755,root,root) %{_bindir}/chooser
 %{_mandir}/man1/xdm.1*
 
-%dir /etc/X11/xdm
-%attr(755,root,root) %config(noreplace) %verify(not size mtime md5) /etc/X11/xdm/GiveConsole
-%attr(755,root,root) %config(noreplace) %verify(not size mtime md5) /etc/X11/xdm/TakeConsole
-%attr(755,root,root) %config(noreplace) %verify(not size mtime md5) /etc/X11/xdm/Xsession
-%attr(755,root,root) %config(noreplace) %verify(not size mtime md5) /etc/X11/xdm/Xsetup_0
-%attr(755,root,root) %config(noreplace) %verify(not size mtime md5) /etc/X11/xdm/Xwilling
-%config(noreplace) %verify(not size mtime md5) /etc/X11/xdm/Xaccess
-%config(noreplace) %verify(not size mtime md5) /etc/X11/xdm/Xresources
-%config(noreplace) %verify(not size mtime md5) /etc/X11/xdm/Xservers
-%config(noreplace) %verify(not size mtime md5) /etc/X11/xdm/xdm-config
-/etc/X11/xdm/pixmaps
-/etc/X11/xdm/authdir
+%dir %{_sysconfdir}/X11/xdm
+%attr(755,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/X11/xdm/GiveConsole
+%attr(755,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/X11/xdm/TakeConsole
+%attr(755,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/X11/xdm/Xsession
+%attr(755,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/X11/xdm/Xsetup_0
+%attr(755,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/X11/xdm/Xwilling
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/X11/xdm/Xaccess
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/X11/xdm/Xresources
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/X11/xdm/Xservers
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/X11/xdm/xdm-config
+%{_sysconfdir}/X11/xdm/pixmaps
+%{_sysconfdir}/X11/xdm/authdir
 
 %files xfs
 %defattr(644,root,root,755)
