@@ -1605,6 +1605,7 @@ Summary(pl):	Twm - podstawowy zarz╠dca okien dla X Window System
 Summary(ru):	Простой оконный менеджер
 Summary(uk):	Простий в╕конний менеджер
 Group:		X11/Window Managers
+Provides:	twm
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description twm
