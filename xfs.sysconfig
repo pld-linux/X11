@@ -2,7 +2,7 @@
 
 # Specifies the TCP port number on which the server will listen for
 # connections. The default port number is 7100.
-XFS_PORT="-1"
+XFS_PORT="7100"
 
 XFS_OPTIONS="-daemon"
 
