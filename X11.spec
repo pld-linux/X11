@@ -2621,7 +2621,7 @@ fi
 %{_libx11dir}/Options
 %{_libx11dir}/getconfig
 
-%config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/X11/xorg.conf
+%config(missingok,noreplace) %verify(not md5 size mtime) %{_sysconfdir}/X11/xorg.conf
 %attr(640,root,root) %config %verify(not md5 size mtime) /etc/pam.d/xserver
 %attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/security/blacklist.xserver
 %config(missingok) /etc/security/console.apps/xserver
