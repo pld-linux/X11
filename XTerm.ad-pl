@@ -258,6 +258,7 @@ NXTerm.JoinSession:			False
 	a<Key>space: string(0x1b) string(" ")\n\
 	a s<Key>question: string(0x1b) string("?")\n\
 	a s<Key>exclam: string(0x1b) string("!")\n\
+	a <Key>period: string(0x1b) string(".")\n\
 	a<Key>`: string(0x1b) string("`")\n\
 	a<Key>1: string(0x1b) string("1")\n\
 	a<Key>2: string(0x1b) string("2")\n\
