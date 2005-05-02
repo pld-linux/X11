@@ -151,6 +151,8 @@ Provides:	XFree86 = %{epoch}:%{version}-%{release}
 Obsoletes:	xpm-progs
 Obsoletes:	xterm
 Obsoletes:	XFree86
+# for /usr/X11R6/bin/mkfontdir
+Obsoletes:	XFree86-font-utils
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1
 %endif
