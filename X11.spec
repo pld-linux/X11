@@ -128,7 +128,7 @@ Patch101:	%{name}-gcc4.patch
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
 # Required by xc/programs/Xserver/hw/xfree86/drivers/glide/glide_driver.c
-%ifarch %{ix86} amd64 ia64
+%ifarch %{ix86} %{x8664} ia64
 %{?with_glide:BuildRequires:	Glide2x_SDK}
 %endif
 BuildRequires:	bison
@@ -141,7 +141,7 @@ BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	ncurses-devel
 BuildRequires:	pam-devel
-BuildRequires:	rpmbuild(macros) >= 1.202
+BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRequires:	utempter-devel
 BuildRequires:	zlib-devel
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
@@ -156,7 +156,7 @@ Obsoletes:	XFree86-font-utils
 %ifarch sparc sparc64
 Obsoletes:	X11R6.1
 %endif
-ExclusiveArch:	%{ix86} alpha amd64 armv4l ia64 m68k ppc sparc sparc64
+ExclusiveArch:	%{ix86} alpha %{x8664} armv4l ia64 m68k ppc sparc sparc64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -828,7 +828,7 @@ Summary(pl):	Sterownik do kart ATI Rage 128
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
-%ifarch %{ix86} ia64 amd64 alpha ppc arm
+%ifarch %{ix86} ia64 %{x8664} alpha ppc arm
 # for dri
 Requires:	%{name}-OpenGL-core = %{epoch}:%{version}-%{release}
 Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
@@ -850,7 +850,7 @@ Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Requires:	%{name}-driver-ati = %{epoch}:%{version}-%{release}
-%ifarch %{ix86} ia64 amd64 alpha ppc arm
+%ifarch %{ix86} ia64 %{x8664} alpha ppc arm
 # for dri
 Requires:	%{name}-OpenGL-core = %{epoch}:%{version}-%{release}
 Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
@@ -960,7 +960,7 @@ Summary(pl):	Sterownik do kart GLINT i Permedia
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
-%ifarch %{ix86} ia64 amd64 alpha ppc arm
+%ifarch %{ix86} ia64 %{x8664} alpha ppc arm
 # for dri
 Requires:	%{name}-OpenGL-core = %{epoch}:%{version}-%{release}
 Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
@@ -1046,7 +1046,7 @@ Summary(pl):	Sterownik do kart Matrox
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
-%ifarch %{ix86} ia64 amd64 alpha ppc arm
+%ifarch %{ix86} ia64 %{x8664} alpha ppc arm
 # for dri
 Requires:	%{name}-OpenGL-core = %{epoch}:%{version}-%{release}
 Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
@@ -2690,7 +2690,7 @@ fi
 %{_includedir}/X11/Xserver
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64 sparc64
+%ifarch %{ix86} ia64 %{x8664} sparc64
 %files driver-apm
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/apm_drv.o
@@ -2698,14 +2698,14 @@ fi
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64 sparc64
+%ifarch %{ix86} ia64 %{x8664} sparc64
 %files driver-ark
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/ark_drv.o
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64 mips ppc arm sparc64
+%ifarch %{ix86} ia64 %{x8664} mips ppc arm sparc64
 %files driver-chips
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/chips_drv.o
@@ -2713,21 +2713,21 @@ fi
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64 alpha sparc64
+%ifarch %{ix86} ia64 %{x8664} alpha sparc64
 %files driver-cirrus
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/cirrus_*.o
 %{_mandir}/man4/cirrus.4*
 %endif
 
-%ifarch %{ix86} ia64 amd64
+%ifarch %{ix86} ia64 %{x8664}
 %files driver-cyrix
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/cyrix_drv.o
 %{_mandir}/man4/cyrix.4*
 %endif
 
-%ifarch %{ix86} ia64 amd64 alpha sparc sparc64 mips ppc arm superh
+%ifarch %{ix86} ia64 %{x8664} alpha sparc sparc64 mips ppc arm superh
 %files driver-fbdev
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/fbdev_drv.o
@@ -2746,13 +2746,13 @@ fi
 %files driver-glint
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/glint_drv.o
-%ifarch %{ix86} ia64 amd64 alpha ppc arm
+%ifarch %{ix86} ia64 %{x8664} alpha ppc arm
 %attr(755,root,root) %{_libdir}/modules/dri/gamma_dri.so
 %endif
 %{_mandir}/man4/glint.4*
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64 sparc64
+%ifarch %{ix86} ia64 %{x8664} sparc64
 %files driver-i128
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/i128_drv.o
@@ -2768,7 +2768,7 @@ fi
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64 sparc64
+%ifarch %{ix86} ia64 %{x8664} sparc64
 %files driver-i810
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/i810_drv.o
@@ -2779,7 +2779,7 @@ fi
 %{_mandir}/man4/i810.4*
 %endif
 
-# Devel: %{ix86} sparc sparc64 ppc amd64
+# Devel: %{ix86} sparc sparc64 ppc %{x8664}
 %if 0
 %files driver-imstt
 %defattr(644,root,root,755)
@@ -2787,25 +2787,25 @@ fi
 %{_mandir}/man4/imstt.4*
 %endif
 
-%ifarch %{ix86} ia64 amd64 sparc sparc64 mips alpha ppc arm
+%ifarch %{ix86} ia64 %{x8664} sparc sparc64 mips alpha ppc arm
 %files driver-mga
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/mga_drv.o
-%ifarch %{ix86} ia64 amd64 alpha ppc arm
+%ifarch %{ix86} ia64 %{x8664} alpha ppc arm
 %attr(755,root,root) %{_libdir}/modules/dri/mga_dri.so
 %endif
 %{_mandir}/man4/mga.4*
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64 sparc64
+%ifarch %{ix86} ia64 %{x8664} sparc64
 %files driver-neomagic
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/neomagic_drv.o
 %{_mandir}/man4/neomagic.4*
 %endif
 
-# Devel: %{ix86} sparc sparc64 amd64
+# Devel: %{ix86} sparc sparc64 %{x8664}
 %ifarch mips sparc64
 %files driver-newport
 %defattr(644,root,root,755)
@@ -2821,7 +2821,7 @@ fi
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64 mips alpha arm ppc sparc64
+%ifarch %{ix86} ia64 %{x8664} mips alpha arm ppc sparc64
 %files driver-nv
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/nv_drv.o
@@ -2836,7 +2836,7 @@ fi
 %files driver-r128
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/r128*_drv.o
-%ifarch %{ix86} ia64 amd64 alpha ppc arm
+%ifarch %{ix86} ia64 %{x8664} alpha ppc arm
 %attr(755,root,root) %{_libdir}/modules/dri/r128_dri.so
 %endif
 %{_mandir}/man4/r128.4*
@@ -2844,14 +2844,14 @@ fi
 %files driver-radeon
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/radeon*_drv.o
-%ifarch %{ix86} ia64 amd64 alpha ppc arm
+%ifarch %{ix86} ia64 %{x8664} alpha ppc arm
 %attr(755,root,root) %{_libdir}/modules/dri/radeon_dri.so
 %attr(755,root,root) %{_libdir}/modules/dri/r200_dri.so
 %endif
 %{_mandir}/man4/radeon.4*
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64 alpha sparc64
+%ifarch %{ix86} ia64 %{x8664} alpha sparc64
 %files driver-rendition
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/rendition_drv.o
@@ -2860,14 +2860,14 @@ fi
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64 mips alpha ppc arm sparc64
+%ifarch %{ix86} ia64 %{x8664} mips alpha ppc arm sparc64
 %files driver-s3virge
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/s3virge_drv.o
 %{_mandir}/man4/s3virge.4*
 %endif
 
-%ifarch %{ix86} ia64 amd64 mips alpha ppc arm
+%ifarch %{ix86} ia64 %{x8664} mips alpha ppc arm
 %files driver-s3
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/s3_drv.o
@@ -2875,7 +2875,7 @@ fi
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64 mips alpha ppc arm sparc64
+%ifarch %{ix86} ia64 %{x8664} mips alpha ppc arm sparc64
 %files driver-savage
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/savage_drv.o
@@ -2883,14 +2883,14 @@ fi
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} ia64 amd64 alpha sparc64
+%ifarch %{ix86} ia64 %{x8664} alpha sparc64
 %files driver-siliconmotion
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/siliconmotion_drv.o
 %{_mandir}/man4/siliconmotion.4*
 %endif
 
-%ifarch %{ix86} ia64 amd64 mips ppc arm
+%ifarch %{ix86} ia64 %{x8664} mips ppc arm
 %files driver-sis
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/sis_drv.o
@@ -2951,7 +2951,7 @@ fi
 %{_mandir}/man4/suntcx.4*
 %endif
 
-%ifarch %{ix86} ia64 amd64 sparc sparc64 mips alpha arm ppc
+%ifarch %{ix86} ia64 %{x8664} sparc sparc64 mips alpha arm ppc
 %files driver-tdfx
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/tdfx_drv.o
@@ -2962,21 +2962,21 @@ fi
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} sparc64 ia64 amd64 alpha
+%ifarch %{ix86} sparc64 ia64 %{x8664} alpha
 %files driver-tga
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/tga_drv.o
 %endif
 
 # Devel: sparc sparc64
-%ifarch %{ix86} sparc64 ia64 amd64 mips ppc arm
+%ifarch %{ix86} sparc64 ia64 %{x8664} mips ppc arm
 %files driver-trident
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/trident_drv.o
 %{_mandir}/man4/trident.4*
 %endif
 
-%ifarch %{ix86} ia64 amd64
+%ifarch %{ix86} ia64 %{x8664}
 %files driver-tseng
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/tseng_drv.o
@@ -3096,10 +3096,10 @@ fi
 %dir %{_libdir}/modules/drivers
 %attr(755,root,root) %{_libdir}/modules/*.a
 %attr(755,root,root) %{_libdir}/modules/drivers/linux
-%ifarch %{ix86} ia64 amd64 sparc sparc64 alpha ppc arm
+%ifarch %{ix86} ia64 %{x8664} sparc sparc64 alpha ppc arm
 %attr(755,root,root) %{_libdir}/modules/drivers/vga_drv.o
 %endif
-%ifarch %{ix86} ia64 amd64 sparc sparc64
+%ifarch %{ix86} ia64 %{x8664} sparc sparc64
 %attr(755,root,root) %{_libdir}/modules/drivers/vesa_drv.o
 %endif
 %dir %{_libdir}/modules/extensions
@@ -3134,10 +3134,10 @@ fi
 %{_mandir}/man4/tek4957.4*
 %{_mandir}/man4/ur98.4*
 %{_mandir}/man4/v4l.4*
-%ifarch %{ix86} ia64 amd64 sparc sparc64 alpha ppc arm
+%ifarch %{ix86} ia64 %{x8664} sparc sparc64 alpha ppc arm
 %{_mandir}/man4/vga.4*
 %endif
-%ifarch %{ix86} ia64 amd64 sparc sparc64
+%ifarch %{ix86} ia64 %{x8664} sparc sparc64
 %{_mandir}/man4/vesa.4*
 %endif
 %{_mandir}/man4/void.4*
