@@ -28,7 +28,7 @@ Summary(uk):	âÁÚÏ×¦ ÛÒÉÆÔÉ, ÐÒÏÇÒÁÍÉ ÔÁ ÄÏËÕÍÅÎÔÁÃ¦Ñ ÄÌÑ ÒÏÂÏÞÏ§ ÓÔÁÎÃ¦§ Ð¦Ä X
 Summary(zh_CN):	XOrg X11 ´°¿ÚÏµÍ³·þÎñÆ÷ºÍ»ù±¾³ÌÐò
 Name:		X11
 Version:	6.8.2
-Release:	5
+Release:	6
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -146,7 +146,7 @@ BuildRequires:	utempter-devel
 BuildRequires:	zlib-devel
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-xauth = %{epoch}:%{version}-%{release}
-Requires:	pam >= 0.77.3
+Requires:	pam >= 0.79.0
 Provides:	XFree86 = %{epoch}:%{version}-%{release}
 Obsoletes:	xpm-progs
 Obsoletes:	xterm
