@@ -553,7 +553,7 @@ Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	/usr/X11R6/lib/X11/rgb.txt
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Requires:	X11-fonts-base
-Requires:	pam
+Requires:	pam >= 0.79.0
 Provides:	XFree86-Xserver = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-Xserver
 Obsoletes:	XFree86-Mono
@@ -1845,7 +1845,7 @@ PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires:	pam >= 0.71
+Requires:	pam >= 0.79.0
 Requires:	%{name}-sessreg = %{epoch}:%{version}-%{release}
 Requires:	/usr/X11R6/bin/sessreg
 Provides:	XDM
