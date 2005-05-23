@@ -13,6 +13,8 @@
 
 #http://cambuca.ldhs.cetuc.puc-rio.br/multiuser/
 %bcond_with	dualhead	# apply dualhead patch
+%bcond_with	r300		# experimental ati r300 and newer 3D support
+				# see r300.sf.net or details
 
 Summary:	XOrg X11 Window System servers and basic programs
 Summary(de):	XOrg X11 Window-System-Server und grundlegende Programme
@@ -124,6 +126,7 @@ Patch63:	%{name}-pci-build.patch
 #ftp://ftp.linux.cz/pub/linux/people/jan_kasprzak/xorg-dualhead/
 Patch100:	ftp://ftp.linux.cz/pub/linux/people/jan_kasprzak/xorg-dualhead/xorg-x11-6.8.1-dualhead.patch
 Patch101:	%{name}-gcc4.patch
+Patch102:	%{name}-r300.patch
 
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
@@ -1975,6 +1978,7 @@ cd -
 %patch63 -p1
 %{?with_dualhead:%patch100 -p1}
 %patch101 -p1
+%{?with_r300:%patch102 -p0}
 
 %build
 PWD=`pwd`
