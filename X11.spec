@@ -3021,7 +3021,7 @@ fi
 %lang(es) %dir %{_appdefsdir}/es
 %lang(fr) %dir %{_appdefsdir}/fr
 %lang(hu) %dir %{_appdefsdir}/hu
-%lang(hu) %dir %{_appdefsdir}/it
+%lang(it) %dir %{_appdefsdir}/it
 %lang(ja) %dir %{_appdefsdir}/ja
 %lang(ko) %dir %{_appdefsdir}/ko
 %lang(nl) %dir %{_appdefsdir}/nl
