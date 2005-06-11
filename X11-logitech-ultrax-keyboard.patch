@@ -1,0 +1,70 @@
+This patch add support for the new keyboard model called `logiultrax`.
+The Logitech Ultra-X (extremely flat and thin) keyborad works fine now.
+
+ rules/xorg     |    2 +-
+ rules/xorg.lst |    1 +
+ rules/xorg.xml |    6 ++++++
+ symbols/inet   |   12 ++++++++++++
+ 4 files changed, 20 insertions(+), 1 deletion(-)
+
+diff -uNr X11-6.8.2/xc/programs/xkbcomp.orig/rules/xorg X11-6.8.2/xc/programs/xkbcomp/rules/xorg
+--- X11-6.8.2/xc/programs/xkbcomp.orig/rules/xorg	2004-04-23 21:54:52.000000000 +0200
++++ X11-6.8.2/xc/programs/xkbcomp/rules/xorg	2005-06-11 15:22:36.000000000 +0200
+@@ -111,7 +111,7 @@
+               honeywell_euroboard \
+               rapidaccess rapidaccess2 rapidaccess2a \
+               ltcd logiaccess logicdp logicdpa logicink logiciink \
+-              logiinkse logiinkseusb logiik itouch \
++              logiinkse logiinkseusb logiik itouch logiultrax \
+               mx1998 mx2500 mx2750 \
+               microsoftinet microsoftpro microsoftprooem microsoftprose \
+               microsoftoffice microsoftmult \
+diff -uNr X11-6.8.2/xc/programs/xkbcomp.orig/rules/xorg.lst X11-6.8.2/xc/programs/xkbcomp/rules/xorg.lst
+--- X11-6.8.2/xc/programs/xkbcomp.orig/rules/xorg.lst	2004-04-23 21:54:52.000000000 +0200
++++ X11-6.8.2/xc/programs/xkbcomp/rules/xorg.lst	2005-06-11 15:22:36.000000000 +0200
+@@ -75,6 +75,7 @@
+   logiinkse	Logitech iTouch Internet Navigator Keyboard SE
+   logiinkseusb	Logitech iTouch Internet Navigator Keyboard SE (USB)
+   logiik	Logitech Internet Keyboard
++  logiultrax	Logitech Ultra-X Keyboard
+   itouch	Logitech iTouch
+   mx1998	Memorex MX1998
+   mx2500	Memorex MX2500 EZ-Access Keyboard
+diff -uNr X11-6.8.2/xc/programs/xkbcomp.orig/rules/xorg.xml X11-6.8.2/xc/programs/xkbcomp/rules/xorg.xml
+--- X11-6.8.2/xc/programs/xkbcomp.orig/rules/xorg.xml	2004-04-23 21:54:52.000000000 +0200
++++ X11-6.8.2/xc/programs/xkbcomp/rules/xorg.xml	2005-06-11 15:22:36.000000000 +0200
+@@ -798,6 +798,12 @@
+     </model>
+     <model>
+       <configItem>
++        <name>logiultrax</name>
++        <description>Logitech Ultra-X Keyboard</description>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
+         <name>mx1998</name>
+         <description>Memorex MX1998</description>
+       </configItem>
+diff -uNr X11-6.8.2/xc/programs/xkbcomp.orig/symbols/inet X11-6.8.2/xc/programs/xkbcomp/symbols/inet
+--- X11-6.8.2/xc/programs/xkbcomp.orig/symbols/inet	2004-12-15 04:00:47.000000000 +0100
++++ X11-6.8.2/xc/programs/xkbcomp/symbols/inet	2005-06-11 15:22:36.000000000 +0200
+@@ -1305,6 +1305,18 @@
+     key <I66>	{	[ XF86Start		]	};
+ };
+ 
++partial alphanumeric_keys 
++xkb_symbols "logiultrax" {
++    name[Group1]= "Logitech Ultra-X Keyboard";
++
++    key <I01>	{	[ XF86AudioMedia	]	};
++    key <I22>	{	[ XF86AudioPlay, XF86AudioPause ] };
++    key <I20>	{	[ XF86AudioMute		]	};
++    key <I66>	{	[ XF86Favorites		]	};
++    key <I6C>	{	[ XF86Mail		]	};
++    key <I02>	{	[ XF86HomePage		]	};
++};
++
+ // Memorex
+ 
+ partial alphanumeric_keys
