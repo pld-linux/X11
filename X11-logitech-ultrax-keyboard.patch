@@ -62,7 +62,7 @@ diff -uNr X11-6.8.2/xc/programs/xkbcomp.orig/symbols/inet X11-6.8.2/xc/programs/
 +    key <I20>	{	[ XF86AudioMute		]	};
 +    key <I66>	{	[ XF86Favorites		]	};
 +    key <I6C>	{	[ XF86Mail		]	};
-+    key <I02>	{	[ XF86HomePage		]	};
++    key <I02>	{	[ XF86WWW		]	};
 +};
 +
  // Memorex
