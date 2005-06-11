@@ -30,7 +30,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.8.2
-Release:	6
+Release:	7
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -118,6 +118,7 @@ Patch60:	%{name}-oldkeyb.patch
 Patch61:	%{name}-sparc64-asmfix.patch
 Patch62:	%{name}-sparc64-v9fix.patch
 Patch63:	%{name}-pci-build.patch
+Patch64:	%{name}-logitech-ultrax-keyboard.patch
 # XFree86-tdfx-fix-vtswitch-font-corruption.patch - issue still not fixed,
 # but patch doesn't help either; however, it occurs in text mode only, not
 # with tdfxfb, which is worth using anyway
@@ -1976,6 +1977,7 @@ cd -
 %patch61 -p1
 %patch62 -p1
 %patch63 -p1
+%patch64 -p1
 %{?with_dualhead:%patch100 -p1}
 %patch101 -p1
 %{?with_r300:%patch102 -p0}
