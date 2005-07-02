@@ -193,7 +193,7 @@ NXTerm.JoinSession:			False
 	Ctrl<Key>Page_Down: string(0x1b) string("[6;5~")\n\
 	~Meta<Key>Page_Down: string(0x1b) string("[6~")\n\
 	Meta<Key>Page_Down: string(0x1b) string(0x1b) string("[6~")\n\
-	~Meta<Key>BackSpace: string(\177)\n\
+	~Meta<Key>BackSpace: string(0x7f)\n\
 	Meta<Key>BackSpace: string(0x1b) string(0x08)\n\
 	Ctrl Shift<Key>Up: string(0x1b) string("[1;6A")\n\
 	Ctrl<Key>Up: string(0x1b) string("[1;5A")\n\
