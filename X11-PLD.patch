@@ -483,15 +483,3 @@ diff -Nru xc.orig/programs/xterm/Imakefile xc/programs/xterm/Imakefile
  
  #ifdef OS2Architecture
          MAINSRC = os2main.c
-diff -Nru xc.orig/programs/xterm/xterm.h xc/programs/xterm/xterm.h
---- xc.orig/programs/xterm/xterm.h	2003-12-19 05:51:52.000000000 +0100
-+++ xc/programs/xterm/xterm.h	2003-12-23 12:09:12.000000000 +0100
-@@ -73,7 +73,7 @@
- #endif
- 
- #ifndef DFT_TERMTYPE
--#define DFT_TERMTYPE "xterm"
-+#define DFT_TERMTYPE "xterm-color"
- #endif
- 
- #ifndef X_NOT_POSIX
