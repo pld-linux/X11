@@ -414,17 +414,6 @@
  
  #ifdef OS2Architecture
          MAINSRC = os2main.c
---- xc/programs/xterm/xterm.h.wiget	2004-08-13 14:57:21.000000000 +0200
-+++ xc/programs/xterm/xterm.h	2004-09-09 16:16:53.269433070 +0200
-@@ -75,7 +75,7 @@
- #endif
- 
- #ifndef DFT_TERMTYPE
--#define DFT_TERMTYPE "xterm"
-+#define DFT_TERMTYPE "xterm-color"
- #endif
- 
- #ifndef X_NOT_POSIX
 --- xc/programs/Xserver/hw/xfree86/xf86cfg/Imakefile.wiget	2004-09-02 03:10:29.000000000 +0200
 +++ xc/programs/Xserver/hw/xfree86/xf86cfg/Imakefile	2004-09-09 16:16:53.266433659 +0200
 @@ -110,7 +110,7 @@
