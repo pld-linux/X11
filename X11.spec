@@ -30,7 +30,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.8.2
-Release:	9
+Release:	10
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -1981,6 +1981,9 @@ cd -
 %{?with_dualhead:%patch100 -p1}
 %patch101 -p1
 %{?with_r300:%patch102 -p0}
+
+sed -i -e 's#krb5/##g' xc/lib/Xau/*.* xc/programs/xdm/greeter/*.* \
+	xc/programs/xdm/*.* xc/programs/Xserver/os/*.*
 
 %build
 PWD=`pwd`
