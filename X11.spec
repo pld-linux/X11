@@ -30,7 +30,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.8.2
-Release:	10
+Release:	10.1
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -122,6 +122,15 @@ Patch64:	%{name}-logitech-ultrax-keyboard.patch
 # XFree86-tdfx-fix-vtswitch-font-corruption.patch - issue still not fixed,
 # but patch doesn't help either; however, it occurs in text mode only, not
 # with tdfxfb, which is worth using anyway
+Patch65:	%{name}-canonicalize-builderaddr.patch
+Patch66:	%{name}-composite-gravity.patch
+
+# radeon
+Patch67:	%{name}-deassert-ddc-lines.patch
+Patch68:	%{name}-radeon-cursor-sync.patch
+Patch69:	%{name}-radeon-dynamic-clocks.patch
+Patch70:	%{name}-radeon-render-byteswap.patch
+Patch71:	%{name}-radeon-set-fb-location.patch
 
 #head-patch
 #ftp://ftp.linux.cz/pub/linux/people/jan_kasprzak/xorg-dualhead/
@@ -1978,9 +1987,20 @@ cd -
 %patch62 -p1
 %patch63 -p1
 %patch64 -p1
+
+%patch65 -p0
+%patch66 -p0
+
+%patch67 -p0
+%patch68 -p0
+%patch69 -p0
+%patch70 -p0
+%patch71 -p0
+
 %{?with_dualhead:%patch100 -p1}
 %patch101 -p1
 %{?with_r300:%patch102 -p0}
+
 
 sed -i -e 's#krb5/##g' xc/lib/Xau/*.* xc/programs/xdm/greeter/*.* \
 	xc/programs/xdm/*.* xc/programs/Xserver/os/*.*
