@@ -1,0 +1,15 @@
+--- xc/programs/Xserver/mi/miwindow.c.~1.2.~	2004-04-23 15:54:26.000000000 -0400
++++ xc/programs/Xserver/mi/miwindow.c	2005-02-02 12:16:29.489952336 -0500
+@@ -883,7 +883,11 @@
+ 
+ 	    /* and move those bits */
+ 
+-	    if (oldpt.x != x || oldpt.y != y)
++	    if (oldpt.x != x || oldpt.y != y
++#ifdef COMPOSITE
++		|| pWin->redirectDraw
++#endif
++		)
+ 		(*pWin->drawable.pScreen->CopyWindow)(pWin, oldpt, gravitate[g]);
+ 
+ 	    /* remove any overwritten bits from the remaining useful bits */
