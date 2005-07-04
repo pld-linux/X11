@@ -1,0 +1,54 @@
+--- xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_driver.c.ati-radeon-dynamic-clocks-fix	2005-04-14 14:07:38.000000000 -0400
++++ xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_driver.c	2005-04-14 14:10:50.000000000 -0400
+@@ -4512,7 +4512,7 @@
+ 
+     RADEONSave(pScrn);
+ 
+-    if ((!info->IsSecondary) && info->IsMobility) {
++    if ((!info->IsSecondary)) {
+         if (xf86ReturnOptValBool(info->Options, OPTION_DYNAMIC_CLOCKS, FALSE)) {
+ 	    RADEONSetDynamicClock(pScrn, 1);
+         } else {
+@@ -7808,6 +7808,34 @@
+     CARD32 tmp;
+     switch(mode) {
+         case 0: /* Turn everything OFF (ForceON to everything)*/
++#if 1
++	    /* some chips seem to have problems with the method of
++	     * forcing everything on as per below; thus we revert to the old 
++	     * forceON behavior
++	     */
++    	    if (info->HasCRTC2) {
++        	tmp = INPLL(pScrn, RADEON_SCLK_CNTL);
++        	OUTPLL(RADEON_SCLK_CNTL, ((tmp & ~RADEON_DYN_STOP_LAT_MASK) |
++                                  		RADEON_CP_MAX_DYN_STOP_LAT |
++                                  		RADEON_SCLK_FORCEON_MASK));
++
++        	if (info->ChipFamily == CHIP_FAMILY_RV200) {
++            	    tmp = INPLL(pScrn, RADEON_SCLK_MORE_CNTL);
++            	    OUTPLL(RADEON_SCLK_MORE_CNTL, tmp | RADEON_SCLK_MORE_FORCEON);
++        	}
++
++    	    }
++
++	    tmp = INPLL(pScrn, RADEON_MCLK_CNTL);
++	    OUTPLL(RADEON_MCLK_CNTL, (tmp |
++                               RADEON_FORCEON_MCLKA |
++                               RADEON_FORCEON_MCLKB |
++                               RADEON_FORCEON_YCLKA |
++                               RADEON_FORCEON_YCLKB |
++                               RADEON_FORCEON_MC |
++                               RADEON_FORCEON_AIC));
++
++#else
+             if ( !info->HasCRTC2 ) {
+                 tmp = INPLL(pScrn, RADEON_SCLK_CNTL);
+                 tmp |= (RADEON_SCLK_FORCE_CP   | RADEON_SCLK_FORCE_HDP |
+@@ -7945,6 +7973,7 @@
+ 			 RADEON_PIXCLK_DAC_ALWAYS_ONb); 
+                 OUTPLL(RADEON_VCLK_ECP_CNTL, tmp);
+ 	    }
++#endif
+ 	    xf86DrvMsg(pScrn->scrnIndex, X_INFO, "Dynamic Clock Scaling Disabled\n");
+             break;
+         case 1:
