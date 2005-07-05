@@ -30,7 +30,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.8.2
-Release:	10.1
+Release:	11
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -111,7 +111,6 @@ Patch29:	%{name}-radeon-entervt.patch
 Patch31:	%{name}-i810fb.patch
 Patch33:	p_i810dri-memfix.diff
 # http://lists.freedesktop.org/pipermail/xorg/2005-February/006126.html
-Patch34:	%{name}-radeon.patch
 Patch35:	%{name}-xft_memfree.patch
 Patch50:	%{name}-glibc-locale_sync.patch
 Patch60:	%{name}-oldkeyb.patch
@@ -119,11 +118,11 @@ Patch61:	%{name}-sparc64-asmfix.patch
 Patch62:	%{name}-sparc64-v9fix.patch
 Patch63:	%{name}-pci-build.patch
 Patch64:	%{name}-logitech-ultrax-keyboard.patch
+Patch65:	%{name}-canonicalize-builderaddr.patch
+Patch66:	%{name}-composite-gravity.patch
 # XFree86-tdfx-fix-vtswitch-font-corruption.patch - issue still not fixed,
 # but patch doesn't help either; however, it occurs in text mode only, not
 # with tdfxfb, which is worth using anyway
-Patch65:	%{name}-canonicalize-builderaddr.patch
-Patch66:	%{name}-composite-gravity.patch
 
 # radeon
 Patch67:	%{name}-deassert-ddc-lines.patch
@@ -1979,7 +1978,6 @@ cd xc
 %patch33 -p0
 cd -
 %patch31 -p0
-%patch34 -p0
 %patch35 -p0
 %patch50 -p1
 %patch60 -p0
