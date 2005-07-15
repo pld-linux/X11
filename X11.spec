@@ -30,7 +30,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.8.2
-Release:	11
+Release:	11.9
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -78,7 +78,7 @@ Source50:	xcalc.png
 Source51:	xload.png
 Source52:	xmag.png
 Source53:	http://oss.sgi.com/projects/ogl-sample/ABI/glext.h
-# NoSource53-md5: b3e8590b46dbab4341841592147fba26
+# NoSource53-md5:	0c40bd4545aa630e139043c2b12f0807
 Patch1:		%{name}-PLD.patch
 Patch2:		%{name}-enableglide.patch
 Patch3:		%{name}-DisableDebug.patch
