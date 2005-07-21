@@ -223,10 +223,6 @@ NXTerm.JoinSession:			False
 	Mod5<Key>Tab: string(0x1b) string(0x09)\n\
 	~Meta<Key>Tab: string(0x09)\n\
 	Meta<Key>Tab: string(0x1b) string(0x09)\n\
-	~s<Key>F1: string(0x1b) string("[11~")\n\
-	~s<Key>F2: string(0x1b) string("[12~")\n\
-	~s<Key>F3: string(0x1b) string("[13~")\n\
-	~s<Key>F4: string(0x1b) string("[14~")\n\
 	~s<Key>F5: string(0x1b) string("[15~")\n\
 	~s<Key>F6: string(0x1b) string("[17~")\n\
 	~s<Key>F7: string(0x1b) string("[18~")\n\
@@ -243,10 +239,6 @@ NXTerm.JoinSession:			False
 	<Key>F18: string(0x1b) string("[32~")\n\
 	<Key>F19: string(0x1b) string("[33~")\n\
 	<Key>F20: string(0x1b) string("[34~")\n\
-	s<Key>F1: string(0x1b) string("[23~")\n\
-	s<Key>F2: string(0x1b) string("[24~")\n\
-	s<Key>F3: string(0x1b) string("[25~")\n\
-	s<Key>F4: string(0x1b) string("[26~")\n\
 	s<Key>F5: string(0x1b) string("[28~")\n\
 	s<Key>F6: string(0x1b) string("[29~")\n\
 	s<Key>F7: string(0x1b) string("[31~")\n\
