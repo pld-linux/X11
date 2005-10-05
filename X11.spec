@@ -2494,6 +2494,9 @@ fi
 /usr/lib/X11
 %dir %{_bindir}
 %dir %{_libdir}
+%if "%{_lib}" != "lib"
+%dir %{_prefix}/lib
+%endif
 %dir %{_libx11dir}
 %{_libx11dir}/rgb.txt
 
