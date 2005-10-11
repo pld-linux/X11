@@ -131,6 +131,7 @@ Patch68:	%{name}-radeon-cursor-sync.patch
 Patch69:	%{name}-radeon-dynamic-clocks.patch
 Patch70:	%{name}-radeon-render-byteswap.patch
 Patch71:	%{name}-radeon-set-fb-location.patch
+Patch72:	http://glen.alkohol.ee/xkb/xorg.patch
 
 #head-patch
 #ftp://ftp.linux.cz/pub/linux/people/jan_kasprzak/xorg-dualhead/
@@ -1995,6 +1996,7 @@ cd -
 %patch69 -p0
 %patch70 -p0
 %patch71 -p0
+%{__patch} -d xc/programs/xkbcomp/symbols/pc < %{PATCH72}
 
 %{?with_dualhead:%patch100 -p1}
 %patch101 -p1
