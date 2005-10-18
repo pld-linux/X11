@@ -31,7 +31,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.8.2
-Release:	11.9
+Release:	11.10
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -131,7 +131,9 @@ Patch68:	%{name}-radeon-cursor-sync.patch
 Patch69:	%{name}-radeon-dynamic-clocks.patch
 Patch70:	%{name}-radeon-render-byteswap.patch
 Patch71:	%{name}-radeon-set-fb-location.patch
+
 Patch72:	http://glen.alkohol.ee/xkb/xorg.patch
+Patch73:	http://owczi.net/stuff/mac/X11R6.8.2-r128-write_depth.patch
 
 #head-patch
 #ftp://ftp.linux.cz/pub/linux/people/jan_kasprzak/xorg-dualhead/
@@ -1997,6 +1999,7 @@ cd -
 %patch70 -p0
 %patch71 -p0
 %{__patch} -d xc/programs/xkbcomp/symbols/pc < %{PATCH72}
+%patch73 -p0
 
 %{?with_dualhead:%patch100 -p1}
 %patch101 -p1
