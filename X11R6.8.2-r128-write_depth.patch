@@ -1,0 +1,18 @@
+--- xc.orig/extras/Mesa/src/mesa/drivers/dri/common/depthtmp.h	2004/09/28 06:44:46
++++ xc/extras/Mesa/src/mesa/drivers/dri/common/depthtmp.h	2004/10/08 22:21:09
+@@ -64,6 +64,7 @@
+    HW_WRITE_UNLOCK();
+ }
+ 
++#if !HAVE_HW_DEPTH_SPANS
+ static void TAG(WriteMonoDepthSpan)( GLcontext *ctx,
+                                  GLuint n, GLint x, GLint y,
+ 				 const GLdepth depth,
+@@ -99,6 +100,7 @@
+       }
+    HW_WRITE_UNLOCK();
+ }
++#endif
+ 
+ static void TAG(WriteDepthPixels)( GLcontext *ctx,
+ 				   GLuint n,
