@@ -31,7 +31,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.8.2
-Release:	11.10
+Release:	11.11
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -1448,6 +1448,8 @@ Summary(uk):	Б╕бл╕отеки сп╕льного використання для X Window System (X11R6.4)
 Group:		X11/Libraries
 Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	grep
+# remove R: grep if R(post): grep starts to work
+Requires:	grep
 Requires(postun):	fileutils
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Provides:	XFree86-libs = %{epoch}:%{version}-%{release}
