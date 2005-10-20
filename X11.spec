@@ -31,7 +31,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.8.2
-Release:	11.11
+Release:	11.13
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -1447,11 +1447,8 @@ Summary(ru):	Разделяемые библиотеки для X Window System (X11R6.4)
 Summary(uk):	Б╕бл╕отеки сп╕льного використання для X Window System (X11R6.4)
 Group:		X11/Libraries
 Requires(post,postun):	/sbin/ldconfig
-Requires(post,postun):	grep
-# remove R: grep if R(post): grep starts to work
-Requires:	grep
-Requires(postun):	fileutils
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
+Requires:	glibc >= 6:2.3.5-7.6
 Provides:	XFree86-libs = %{epoch}:%{version}-%{release}
 Provides:	xcursor = 1.1.2
 Provides:	xft = 2.1.6
@@ -2164,10 +2161,13 @@ gzip -9nf $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/*
 # don't gzip README.* files, they are needed by XF86Setup
 gunzip $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/README.*
 
+install -d $RPM_BUILD_ROOT/etc/ld.so.conf.d
+echo '%{_libdir}' > $RPM_BUILD_ROOT/etc/ld.so.conf.d/X11-libs.conf
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-#--- %post{un}, %preun, %verifyscript, %trigge ----------
+#--- %post{un}, %preun, %trigger ----------
 
 %post	DPS -p /sbin/ldconfig
 %postun DPS -p /sbin/ldconfig
@@ -2178,34 +2178,8 @@ rm -rf $RPM_BUILD_ROOT
 %post	OpenGL-libs -p /sbin/ldconfig
 %postun OpenGL-libs -p /sbin/ldconfig
 
-%post libs
-umask 022
-grep -qs "^%{_libdir}$" /etc/ld.so.conf
-[ $? -ne 0 ] && echo "%{_libdir}" >> /etc/ld.so.conf
-/sbin/ldconfig
-
-%postun libs
-if [ "$1" = "0" ]; then
-	umask 022
-	grep -v "%{_libdir}" /etc/ld.so.conf > /etc/ld.so.conf.new
-	mv -f /etc/ld.so.conf.new /etc/ld.so.conf
-fi
-/sbin/ldconfig
-
-%verifyscript libs
-echo -n "Looking for %{_libdir} in /etc/ld.so.conf... "
-if ! grep -q "^%{_libdir}$" /etc/ld.so.conf ; then
-	echo "missing"
-	echo "%{_libdir} missing from /etc/ld.so.conf" >&2
-else
-	echo "found"
-fi
-
-%triggerpostun libs -- XFree86-libs
-umask 022
-grep -qs "^%{_libdir}$" /etc/ld.so.conf
-[ $? -ne 0 ] && echo "%{_libdir}" >> /etc/ld.so.conf
-/sbin/ldconfig
+%post	libs -p /sbin/ldconfig
+%postun	libs -p /sbin/ldconfig
 
 %pre modules
 if [ -d /etc/X11/xkb/geometry/hp ]; then
@@ -2217,6 +2191,9 @@ if [ -d /usr/X11R6/lib/X11/xkb ]; then
 	rm -rf /usr/X11R6/lib/X11/xkb
 	ln -sf /etc/X11/xkb /usr/X11R6/lib/X11/xkb
 fi
+
+%triggerpostun libs -- X11-libs < 1:6.8.2-11.13
+sed -i -e "/^%(echo %{_libdir} | sed -e 's,/,\\/,g')$/d" /etc/ld.so.conf
 
 %post xdm
 /sbin/chkconfig --add xdm
@@ -3038,6 +3015,7 @@ fi
 
 %files libs
 %defattr(644,root,root,755)
+%verify(not md5 mtime size) /etc/ld.so.conf.d/X11-libs.conf
 %dir %{_sysconfdir}/xdg
 %dir %{_themesdir}
 %dir %{_themesdir}/Default
