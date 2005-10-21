@@ -3015,7 +3015,7 @@ fi
 
 %files libs
 %defattr(644,root,root,755)
-%verify(not md5 mtime size) /etc/ld.so.conf.d/X11-libs.conf
+/etc/ld.so.conf.d/X11-libs.conf
 %dir %{_sysconfdir}/xdg
 %dir %{_themesdir}
 %dir %{_themesdir}/Default
