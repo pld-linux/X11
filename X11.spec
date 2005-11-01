@@ -31,7 +31,7 @@ Summary(uk):	âÁÚÏ×¦ ÛÒÉÆÔÉ, ÐÒÏÇÒÁÍÉ ÔÁ ÄÏËÕÍÅÎÔÁÃ¦Ñ ÄÌÑ ÒÏÂÏÞÏ§ ÓÔÁÎÃ¦§ Ð¦Ä X
 Summary(zh_CN):	XOrg X11 ´°¿ÚÏµÍ³·þÎñÆ÷ºÍ»ù±¾³ÌÐò
 Name:		X11
 Version:	6.8.2
-Release:	12
+Release:	13
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -2162,7 +2162,7 @@ gzip -9nf $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/*
 gunzip $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/README.*
 
 install -d $RPM_BUILD_ROOT/etc/ld.so.conf.d
-echo '%{_libdir}' > $RPM_BUILD_ROOT/etc/ld.so.conf.d/X11-libs.conf
+echo '%{_libdir}' > $RPM_BUILD_ROOT/etc/ld.so.conf.d/X11-%{_lib}.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -3015,7 +3015,7 @@ fi
 
 %files libs
 %defattr(644,root,root,755)
-/etc/ld.so.conf.d/X11-libs.conf
+/etc/ld.so.conf.d/*.conf
 %dir %{_sysconfdir}/xdg
 %dir %{_themesdir}
 %dir %{_themesdir}/Default
