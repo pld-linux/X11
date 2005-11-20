@@ -590,37 +590,11 @@ proper driver for your display hardware - package itself contains only
 drivers for VGA and VESA-compliant cards (without acceleration). Other
 drivers can be found in X11-driver-* packages.
 
-%description Xserver -l de
-X-Server für die elementarsten Framebuffer-SVGA-Geräte, einschließlich
-Karten, die aus ET4000-Chips, Cirrus Logic-Chips, Chips and
-Technologies Laptop-Chips sowie Trident 8900 und 9000 Chips gebaut
-sind. Funktioniert mit Diamond Speedstar, Orchid Kelvins, STB Nitros
-und Horizons, Genoa 8500VL, den meisten Actix-Karten sowie Spider VLB
-Plus und außerdem mit vielen anderen Chips und Karten. Es lohnt sich,
-diesen Server auszuprobieren, wenn Sie Probleme haben.
-
-%description Xserver -l fr
-Serveur X pour les circuits SVGA les plus simples, dont les cartes
-construites avec les circuits ET4000, Cirrus Logic, Chips and
-Technologies laptop, Trident 8900 et 9000. Fonctionne pour les cartes
-Diamond Speedstar, Orchid Kelvins, STB Nitros et Horizons, Genoa
-8500VL, la plupart des Actix et la Spider VLB Plus. Fonctionne aussi
-pour de nombreux autres circuits et cartes. Essayez ce serveur si vous
-avez des problèmes.
-
 %description Xserver -l pl
 Jest to podstawowy X serwer wy¶wietlaj±cy obraz na karcie graficznej.
 Do dzia³ania wymaga odpowiedniego sterownika - sam pakiet zawiera
 tylko odpowiedni dla kart VGA oraz SVGA zgodnych z VESA (bez
 akceleracji). Inne sterowniki mo¿na znale¼æ w pakietach X11-driver-*.
-
-%description Xserver -l tr
-ET4000, Cirrus Logic, Chips and Technologies dizüstü, Trident 8900 ve
-9000 gibi basit 'framebuffer' SVGA kullananan kartlar için X sunucusu.
-Ayný zamanda Diamond Speedstar, Orchid Kelvins, STB Nitros / Horizons,
-Genoa 8500VL, çoðu Actix kartlarý, Spider VLB Plus gibi kartlar ve
-birçok diðer kart ile de çalýþýr. Herhangi bir sorun yaþarsanýz bu
-sunucuyu deneyin.
 
 %package Xvfb
 Summary:	XOrg X11 Xvfb server
