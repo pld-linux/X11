@@ -241,8 +241,6 @@ NXTerm.JoinSession:			False
 	s<Key>F8: string(0x1b) string("[32~")\n\
 	s<Key>F9: string(0x1b) string("[33~")\n\
 	s<Key>F10: string(0x1b) string("[34~")\n\
-	a<Key>Return: string(0x1b) string(0x0d)\n\
-	a<Key>Tab: string(0x1b) string(0x09)\n\
 	a<Key>space: string(0x1b) string(" ")\n\
 	a s<Key>question: string(0x1b) string("?")\n\
 	a s<Key>exclam: string(0x1b) string("!")\n\
