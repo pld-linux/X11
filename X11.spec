@@ -105,6 +105,7 @@ Patch24:	%{name}-pkgconfig.patch
 Patch25:	XFree86-spencode-nowarning.patch
 Patch26:	%{name}-xterm-256colors.patch
 Patch27:	%{name}-makefile-fastbuild.patch
+Patch28:	%{name}-dri-ffb-compile.patch
 Patch29:	%{name}-radeon-entervt.patch
 # updated from http://dl.sourceforge.net/i810fb/i810fb-xfree86-420.tar.bz2 : i810fb-xfree420.diff
 Patch31:	%{name}-i810fb.patch
@@ -1947,6 +1948,7 @@ X11-libs.
 %patch25 -p1
 %patch26 -p0
 %patch27 -p0
+%patch28 -p1
 
 rm -f xc/config/cf/host.def
 
