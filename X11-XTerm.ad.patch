@@ -1,22 +1,20 @@
 --- xc/programs/xterm/XTerm-col.ad.orig	2003-09-25 13:06:59.000000000 +0200
 +++ xc/programs/xterm/XTerm-col.ad	2003-10-01 20:48:30.453913496 +0200
-@@ -11,8 +11,8 @@
- !*VT100*background: black
+@@ -24,7 +24,7 @@
+ !*SimpleMenu*borderColor: gray15
  
  ! Uncomment this to use color for underline attribute
 -!*VT100*colorULMode: on
--!*VT100*underLine: off
 +*VT100*colorULMode: on
-+*VT100*underLine: on
+ *VT100*colorUL: yellow
  
- ! Uncomment this to use color for the bold attribute
- !*VT100*colorBDMode: on
+ !*VT100*italicULMode: on
 --- xc/programs/xterm/XTerm.ad.orig	2003-09-25 13:06:59.000000000 +0200
 +++ xc/programs/xterm/XTerm.ad	2003-10-01 20:49:35.565015104 +0200
-@@ -110,3 +110,166 @@
- *tek4014*font2: 8x13
+@@ -118,6 +118,170 @@
  *tek4014*font3: 6x13
  *tek4014*fontSmall: 6x10
+ 
 +
 +! This file causes when loaded using xrdb correct behaviour of xterm
 +! if you are using enclosed xterm.tcap and xterm.ti.
@@ -180,3 +178,7 @@
 +	a<Key>x: string(0x1b) string("x")\n\
 +	a<Key>y: string(0x1b) string("y")\n\
 +	a<Key>z: string(0x1b) string("z")
++
+ ! If xterm is built with a toolbar, the widget hierarchy looks like this,
+ ! showing widget name / class names.  The complete menu hierarchy is built
+ ! at startup because it is needed to make the layout work for the menubar:
