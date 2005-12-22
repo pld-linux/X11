@@ -190,6 +190,15 @@ diff -ur X11-6.9.0.org/xc/config/cf/X11.tmpl X11-6.9.0/xc/config/cf/X11.tmpl
  #endif
  #ifndef NlsDir
  #define NlsDir $(LIBDIR)/nls
+@@ -1502,7 +1502,7 @@
+ #define FontDir /usr/share/fonts
+ #endif
+ #ifndef FontEncDir
+-#define FontEncDir $(LIBDIR)/fonts/encodings
++#define FontEncDir /usr/share/fonts/encodings
+ #endif
+ #ifndef AdmDir
+ #define AdmDir /var/log
 @@ -1531,23 +1535,20 @@
  #define XLocaleDir $(LIBDIR)/locale
  #endif
