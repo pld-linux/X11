@@ -1,6 +1,7 @@
---- xc/config/cf/Imake.cf.wiget	2004-08-11 23:14:01.000000000 +0200
-+++ xc/config/cf/Imake.cf	2004-09-09 16:16:53.093467589 +0200
-@@ -805,6 +805,10 @@
+diff -ur X11-6.9.0.org/xc/config/cf/Imake.cf X11-6.9.0/xc/config/cf/Imake.cf
+--- X11-6.9.0.org/xc/config/cf/Imake.cf	2005-11-08 07:33:24.000000000 +0100
++++ X11-6.9.0/xc/config/cf/Imake.cf	2005-12-22 10:27:11.890963000 +0100
+@@ -888,6 +888,10 @@
  #   define s390Architecture
  #  undef __s390__
  # endif /* s390 */
@@ -11,9 +12,10 @@
  # ifdef __alpha
  #  define AlphaArchitecture
  #  undef __alpha
---- xc/config/cf/Imake.tmpl.wiget	2004-07-28 05:24:29.000000000 +0200
-+++ xc/config/cf/Imake.tmpl	2004-09-09 16:16:53.116463078 +0200
-@@ -262,7 +262,7 @@
+diff -ur X11-6.9.0.org/xc/config/cf/Imake.tmpl X11-6.9.0/xc/config/cf/Imake.tmpl
+--- X11-6.9.0.org/xc/config/cf/Imake.tmpl	2005-11-08 07:33:24.000000000 +0100
++++ X11-6.9.0/xc/config/cf/Imake.tmpl	2005-12-22 10:28:07.490963000 +0100
+@@ -266,7 +266,7 @@
  
  #ifndef BuildHtmlManPages
  #ifdef RmanCmd
@@ -22,7 +24,7 @@
  #else
  #define BuildHtmlManPages NO
  #endif
-@@ -863,11 +863,7 @@
+@@ -882,11 +882,7 @@
  #define LintlibDir $(USRLIBDIR)/lint
  #endif
  #ifndef SystemManDirectory
@@ -34,7 +36,7 @@
  #endif
  #ifndef ManDirectoryRoot
  #ifdef ProjectRoot
-@@ -1171,7 +1167,7 @@
+@@ -1196,7 +1192,7 @@
  #define CppCmd /LibDirName/cpp
  #endif
  #ifndef RawCppCmd
@@ -43,18 +45,30 @@
  #endif
  #ifndef CppNoLineInfoOption
  #define CppNoLineInfoOption /**/
---- xc/config/cf/linux.cf.wiget	2004-08-11 23:14:01.000000000 +0200
-+++ xc/config/cf/linux.cf	2004-09-09 16:16:53.123461705 +0200
-@@ -368,7 +368,7 @@
-  */
- #if BuildXF86DRI
- # if defined(i386Architecture)
--#  define BuildLibGlxWithoutPIC	YES
-+#  define BuildLibGlxWithoutPIC	NO
+diff -ur X11-6.9.0.org/xc/config/cf/linux.cf X11-6.9.0/xc/config/cf/linux.cf
+--- X11-6.9.0.org/xc/config/cf/linux.cf	2005-10-21 21:10:27.000000000 +0200
++++ X11-6.9.0/xc/config/cf/linux.cf	2005-12-22 10:40:10.100963000 +0100
+@@ -394,7 +394,7 @@
+ #ifndef BuildLibGlxWithoutPIC
+ # if BuildXF86DRI
+ #  if defined(i386Architecture)
+-#   define BuildLibGlxWithoutPIC	YES
++#   define BuildLibGlxWithoutPIC	NO
+ #  endif
  # endif
  #endif
+@@ -539,6 +539,10 @@
+ # define HasExpat		YES
+ #endif
  
-@@ -757,7 +757,7 @@
++#ifndef HasFontconfig
++# define HasFontconfig         YES
++#endif
++
+ #ifndef HasFreetype2
+ # define HasFreetype2		YES
+ #endif
+@@ -792,7 +796,7 @@
  
  #define HasVarRun		YES
  #ifndef VarDbDirectory
@@ -63,16 +77,13 @@
  #endif
  
  #ifndef XF86OSCardDrivers
---- xc/config/cf/site.def.wiget	2004-05-06 17:08:25.000000000 +0200
-+++ xc/config/cf/site.def	2004-09-09 16:16:53.129460529 +0200
-@@ -119,10 +119,14 @@
- #define HasSentinel	YES
+diff -ur X11-6.9.0.org/xc/config/cf/site.def X11-6.9.0/xc/config/cf/site.def
+--- X11-6.9.0.org/xc/config/cf/site.def	2004-05-06 17:08:25.000000000 +0200
++++ X11-6.9.0/xc/config/cf/site.def	2005-12-22 10:29:12.390963000 +0100
+@@ -124,6 +124,14 @@
+ #define DefaultUserPath /bin:/usr/bin:$(BINDIR):/usr/ucb:/usr/local/bin
  */
  
--/*
- #undef DefaultUserPath
--#define DefaultUserPath /bin:/usr/bin:$(BINDIR):/usr/ucb:/usr/local/bin
--*/
 +#define DefaultUserPath /usr/local/bin:/bin:/usr/bin:$(BINDIR)
 +#undef DefaultSystemPath
 +#define DefaultSystemPath /sbin:/bin:/usr/sbin:/usr/bin:$(BINDIR)
@@ -80,21 +91,23 @@
 +
 +#define HasPam    YES
 +#define HasPamMisc    YES
- 
++
  
  /* You do NOT need SetUID if you only run the server under xdm */
---- xc/config/cf/X11.tmpl.wiget	2004-09-03 18:18:18.000000000 +0200
-+++ xc/config/cf/X11.tmpl	2004-09-09 16:16:53.172452095 +0200
-@@ -715,7 +715,7 @@
+ /* You MAY need SetUID if users run the server by hand or under xinit */
+diff -ur X11-6.9.0.org/xc/config/cf/X11.tmpl X11-6.9.0/xc/config/cf/X11.tmpl
+--- X11-6.9.0.org/xc/config/cf/X11.tmpl	2005-12-15 00:41:52.000000000 +0100
++++ X11-6.9.0/xc/config/cf/X11.tmpl	2005-12-22 10:32:25.830963000 +0100
+@@ -731,7 +731,7 @@
  #endif
-
+ 
  #ifndef InstallHardcopyDocs
 -#define InstallHardcopyDocs	YES
 +#define InstallHardcopyDocs	NO
  #endif
-
+ 
  #ifndef InstallMiscManPages
-@@ -1398,8 +1398,12 @@
+@@ -1395,8 +1395,12 @@
  # define UsbMouseSupport NO
  #endif
  
@@ -108,7 +121,7 @@
  #endif
  
  #ifndef BinDir
-@@ -1486,7 +1490,7 @@
+@@ -1483,7 +1487,7 @@
  #define ConfigDir $(LIBDIR)/config
  #endif
  #ifndef DocDir
@@ -117,12 +130,15 @@
  #endif
  #ifndef DocHtmlDir
  #define DocHtmlDir $(DOCDIR)/html
-@@ -1498,31 +1502,31 @@
+@@ -1495,34 +1499,34 @@
  #define DocPdfDir $(DOCDIR)/PDF
  #endif
  #ifndef FontDir
 -#define FontDir $(LIBDIR)/fonts
 +#define FontDir /usr/share/fonts
+ #endif
+ #ifndef FontEncDir
+ #define FontEncDir $(LIBDIR)/fonts/encodings
  #endif
  #ifndef AdmDir
 -#define AdmDir /usr/adm
@@ -214,18 +230,19 @@
             RGBSRC = $(XTOP)/programs/rgb
        BDFTOPCFSRC = $(PROGRAMSRC)/bdftopcf
       MKFONTDIRSRC = $(PROGRAMSRC)/mkfontdir
---- xc/config/cf/xorg.cf.wiget	2004-09-04 00:00:10.000000000 +0200
-+++ xc/config/cf/xorg.cf	2004-09-09 16:16:53.189448761 +0200
-@@ -142,7 +142,7 @@
+diff -ur X11-6.9.0.org/xc/config/cf/xorg.cf X11-6.9.0/xc/config/cf/xorg.cf
+--- X11-6.9.0.org/xc/config/cf/xorg.cf	2005-10-03 18:08:44.000000000 +0200
++++ X11-6.9.0/xc/config/cf/xorg.cf	2005-12-22 10:32:59.590963000 +0100
+@@ -136,7 +136,7 @@
  #define XConfigFile		xorg.conf
  #endif
  #ifndef XConfigDir
 -#define XConfigDir		$(LIBDIR)
-+#define XConfigDir		$(ETCX11DIR)
++#define XConfigDir             $(ETCX11DIR)
  #endif
  #ifndef XLogFile
  #define XLogFile		Xorg
-@@ -409,7 +409,7 @@
+@@ -408,7 +408,7 @@
  				neomagic i740 tdfx savage \
  				cirrus vmware tseng trident chips apm \
  				GlideDriver i128 i386Drivers \
@@ -234,9 +251,10 @@
  				cyrix siliconmotion via \
  				vesa vga \
  				dummy XF86OSCardDrivers XF86ExtraCardDrivers
---- xc/config/cf/xorgsite.def.wiget	2004-08-21 04:06:44.000000000 +0200
-+++ xc/config/cf/xorgsite.def	2004-09-09 16:16:53.193447976 +0200
-@@ -264,8 +264,8 @@
+diff -ur X11-6.9.0.org/xc/config/cf/xorgsite.def X11-6.9.0/xc/config/cf/xorgsite.def
+--- X11-6.9.0.org/xc/config/cf/xorgsite.def	2005-07-16 09:59:50.000000000 +0200
++++ X11-6.9.0/xc/config/cf/xorgsite.def	2005-12-22 10:33:48.940963000 +0100
+@@ -266,8 +266,8 @@
  /*
   * To not build/install the Cyrillic fonts, uncomment the following
   *
@@ -246,7 +264,7 @@
  
  /*
   * To not install the local font directory, uncomment the following
-@@ -433,8 +433,8 @@
+@@ -435,8 +435,8 @@
   * Some Linux releases don't have a libtermcap.  In this case you may need
   * to uncomment the following
   *
@@ -266,9 +284,10 @@
  
  /*
   * Uncomment this if your default tools (eg, gcc, ld, as, etc) are
---- xc/config/imake/imake.c.wiget	2004-06-11 19:59:30.000000000 +0200
-+++ xc/config/imake/imake.c	2004-09-09 16:16:53.252436404 +0200
-@@ -1057,6 +1057,7 @@
+diff -ur X11-6.9.0.org/xc/config/imake/imake.c X11-6.9.0/xc/config/imake/imake.c
+--- X11-6.9.0.org/xc/config/imake/imake.c	2005-11-08 07:33:24.000000000 +0100
++++ X11-6.9.0/xc/config/imake/imake.c	2005-12-22 10:34:57.200963000 +0100
+@@ -1061,6 +1061,7 @@
    static char* suse = "/etc/SuSE-release";
    static char* redhat = "/etc/redhat-release";
    static char* debian = "/etc/debian_version";
@@ -276,7 +295,7 @@
  
    fprintf (inFile, "%s\n", "#define LinuxUnknown    0");
    fprintf (inFile, "%s\n", "#define LinuxSuSE       1");
-@@ -1071,6 +1072,7 @@
+@@ -1075,6 +1076,7 @@
    fprintf (inFile, "%s\n", "#define LinuxTurbo      10");
    fprintf (inFile, "%s\n", "#define LinuxWare       11");
    fprintf (inFile, "%s\n", "#define LinuxYggdrasil  12");
@@ -284,7 +303,7 @@
  
  #ifdef CROSSCOMPILE
    if (CrossCompiling) {
-@@ -1097,6 +1099,11 @@
+@@ -1101,6 +1103,12 @@
       * at the content of /etc/debian_version */
      return;
    }
@@ -293,11 +312,25 @@
 +    fprintf (inFile, "%s\n", "#define DefaultLinuxDistName PLD");
 +    return;
 +  }
++	  
    /* what's the definitive way to tell what any particular distribution is? */
  
    fprintf (inFile, "%s\n", "#define DefaultLinuxDistribution LinuxUnknown");
---- xc/programs/xdm/config/Xres.cpp.wiget	2004-04-23 21:54:43.000000000 +0200
-+++ xc/programs/xdm/config/Xres.cpp	2004-09-09 16:16:53.261434639 +0200
+diff -ur X11-6.9.0.org/xc/Makefile X11-6.9.0/xc/Makefile
+--- X11-6.9.0.org/xc/Makefile	2005-12-15 00:41:52.000000000 +0100
++++ X11-6.9.0/xc/Makefile	2005-12-22 10:39:28.160963000 +0100
+@@ -9,7 +9,7 @@
+ # or add "MAKE = make" to this file.
+ 
+ RELEASE = "Release 6.9"
+-SHELL = /bin/sh
++SHELL = /bin/sh -e
+ RM = rm -f
+ MV = mv
+ WORLDOPTS =
+diff -ur X11-6.9.0.org/xc/programs/xdm/config/Xres.cpp X11-6.9.0/xc/programs/xdm/config/Xres.cpp
+--- X11-6.9.0.org/xc/programs/xdm/config/Xres.cpp	2004-04-23 21:54:43.000000000 +0200
++++ X11-6.9.0/xc/programs/xdm/config/Xres.cpp	2005-12-22 10:35:32.500963000 +0100
 @@ -70,10 +70,10 @@
  #endif /* XPM */
  XHASHendif
@@ -312,8 +345,9 @@
  XHASHendif
  xlogin*useShape: true
  xlogin*logoPadding: 10
---- xc/programs/xdm/resource.c.wiget	2004-04-23 21:54:42.000000000 +0200
-+++ xc/programs/xdm/resource.c	2004-09-09 16:16:53.264434051 +0200
+diff -ur X11-6.9.0.org/xc/programs/xdm/resource.c X11-6.9.0/xc/programs/xdm/resource.c
+--- X11-6.9.0.org/xc/programs/xdm/resource.c	2005-11-08 07:33:31.000000000 +0100
++++ X11-6.9.0/xc/programs/xdm/resource.c	2005-12-22 10:36:59.580963000 +0100
 @@ -85,31 +85,31 @@
   */
  #ifndef __EMX__
@@ -363,9 +397,10 @@
  #endif
  #ifndef DEF_USER_AUTH_DIR
  #define DEF_USER_AUTH_DIR	"/tmp"
---- xc/programs/xinit/Imakefile.wiget	2004-04-23 21:54:49.000000000 +0200
-+++ xc/programs/xinit/Imakefile	2004-09-09 16:16:53.265433855 +0200
-@@ -48,11 +48,12 @@
+diff -ur X11-6.9.0.org/xc/programs/xinit/Imakefile X11-6.9.0/xc/programs/xinit/Imakefile
+--- X11-6.9.0.org/xc/programs/xinit/Imakefile	2005-11-15 05:03:10.000000000 +0100
++++ X11-6.9.0/xc/programs/xinit/Imakefile	2005-12-22 10:37:39.740963000 +0100
+@@ -88,11 +88,12 @@
  #endif
  InstallManPage(startx,$(MANDIR))
  
@@ -383,39 +418,9 @@
  
  LinkConfDirectory(xinit,.,xinit,.)
  
---- xc/programs/xterm/Imakefile.wiget	2004-08-13 14:57:19.000000000 +0200
-+++ xc/programs/xterm/Imakefile	2004-09-09 16:16:53.267433462 +0200
-@@ -36,6 +36,10 @@
- #define XkbClientLibs /**/
- #endif
- 
-+#if InstallXtermSetUID
-+#undef InstallXtermSetUID
-+#endif
-+
- #ifndef SpecialCObjectRule
- #define SpecialCObjectRule(module,ignore,defines) \
- module.o: ; $(CC) -c defines $(CFLAGS) module.c
-@@ -57,6 +61,8 @@
-          PTYLIB = -lpucc
- #endif
- 
-+         PTYLIB = -lutil
-+
- #if defined(NetBSDArchitecture) || defined(OpenBSDArchitecture) || \
-     (defined(LinuxArchitecture) && \
-      (LinuxCLibMajorVersion == 6) && (LinuxCLibMinorVersion < 1))
-@@ -116,7 +122,7 @@
-     XKB_DEFINES = XkbClientDefines
-    PATH_DEFINES = -DPROJECTROOT=$(PROJECTROOT)
-         DEFINES = $(XKB_DEFINES) $(TERMCAPDEFINES) $(FEATURE_DEFINES) $(SCROLLBAR_RIGHT) $(UTF8_OPTION) $(XRFDEF) $(PATH_DEFINES) $(TRACEDEF)
--       INCLUDES = -I. $(XRFINCLUDES)
-+       INCLUDES = -I. -I/usr/include/ncurses $(XRFINCLUDES)
- 
- #ifdef OS2Architecture
-         MAINSRC = os2main.c
---- xc/programs/Xserver/hw/xfree86/xf86cfg/Imakefile.wiget	2004-09-02 03:10:29.000000000 +0200
-+++ xc/programs/Xserver/hw/xfree86/xf86cfg/Imakefile	2004-09-09 16:16:53.266433659 +0200
+diff -ur X11-6.9.0.org/xc/programs/Xserver/hw/xfree86/xf86cfg/Imakefile X11-6.9.0/xc/programs/Xserver/hw/xfree86/xf86cfg/Imakefile
+--- X11-6.9.0.org/xc/programs/Xserver/hw/xfree86/xf86cfg/Imakefile	2005-08-23 03:14:35.000000000 +0200
++++ X11-6.9.0/xc/programs/Xserver/hw/xfree86/xf86cfg/Imakefile	2005-12-22 10:39:11.440963000 +0100
 @@ -110,7 +110,7 @@
  
  #if HasNCurses
@@ -425,52 +430,34 @@
  #endif
  
  XF86CONFIGFILE = XConfigFile
---- xc/Makefile.wiget	2004-09-03 18:18:17.000000000 +0200
-+++ xc/Makefile	2004-09-09 16:18:24.437548570 +0200
-@@ -8,7 +8,7 @@
- # or add "MAKE = make" to this file.
- 
- RELEASE = "Release 6.8.2"
--SHELL = /bin/sh
-+SHELL = /bin/sh -e
- RM = rm -f
- MV = mv
- WORLDOPTS =
---- xc/config/cf/X11.tmpl.orig	2004-09-13 18:37:30.000000000 +0200
-+++ xc/config/cf/X11.tmpl	2004-09-13 22:24:31.449334056 +0200
-@@ -2801,7 +2801,7 @@
+diff -ur X11-6.9.0.org/xc/programs/xterm/Imakefile X11-6.9.0/xc/programs/xterm/Imakefile
+--- X11-6.9.0.org/xc/programs/xterm/Imakefile	2005-12-15 00:28:27.000000000 +0100
++++ X11-6.9.0/xc/programs/xterm/Imakefile	2005-12-22 10:38:51.510963000 +0100
+@@ -68,6 +68,10 @@
+ # endif
  #endif
  
- #ifndef SharedLibXdmcp
--#define SharedLibXdmcp		NO
-+#define SharedLibXdmcp		YES
- #endif
- #ifndef NormalLibXdmcp
- #define NormalLibXdmcp (!SharedLibXdmcp | ForceNormalLib)
-
---- xc/config/cf/linux.cf.orig	2004-09-13 18:37:30.000000000 +0200
-+++ xc/config/cf/linux.cf	2004-09-13 22:42:59.680857256 +0200
-@@ -502,6 +502,10 @@
- # define HasExpat		YES
- #endif
- 
-+#ifndef HasFontconfig
-+# define HasFontconfig		YES
++#if InstallXtermSetUID
++#undef InstallXtermSetUID
 +#endif
 +
- #ifndef HasFreetype2
- # define HasFreetype2		YES
+ #ifndef SpecialCObjectRule
+ #define SpecialCObjectRule(module,ignore,defines) \
+ module.o: ; $(CC) -c defines $(CFLAGS) module.c
+@@ -88,6 +92,7 @@
+     PUCCPTYDDEF = -DPUCC_PTYD	/* does not need to be setuid */
+          PTYLIB = -lpucc
  #endif
-
---- xc/config/cf/X11.tmpl.orig	2004-09-14 17:15:01.000000000 +0200
-+++ xc/config/cf/X11.tmpl	2004-09-14 21:29:44.837063736 +0200
-@@ -2775,7 +2775,7 @@
- #endif
++    PTYLIB = -lutil
  
- #ifndef SharedLibXau
--#define SharedLibXau		NO
-+#define SharedLibXau		YES
- #endif
- #ifndef NormalLibXau
- #define NormalLibXau (!SharedLibXau | ForceNormalLib)
-
+ #if defined(NetBSDArchitecture) || \
+     defined(OpenBSDArchitecture) || \
+@@ -153,7 +158,7 @@
+     XKB_DEFINES = XkbClientDefines
+    PATH_DEFINES = -DPROJECTROOT=$(PROJECTROOT)
+         DEFINES = $(XKB_DEFINES) $(TERMCAPDEFINES) $(FEATURE_DEFINES) $(SCROLLBAR_RIGHT) $(UTF8_OPTION) $(XRFDEF) $(PATH_DEFINES) $(PUTENVDEF) $(IMAKEDEFINES) $(TRACEDEF)
+-       INCLUDES = -I. $(XRFINCLUDES)
++       INCLUDES = -I. -I/usr/include/ncurses $(XRFINCLUDES)
+ 
+ #ifdef OS2Architecture
+         MAINSRC = os2main.c
