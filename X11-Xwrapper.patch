@@ -1,5 +1,6 @@
---- xc.orig/config/cf/Server.tmpl	2004-08-08 14:23:13.000000000 +0200
-+++ xc/config/cf/Server.tmpl	2004-08-08 14:39:45.673849000 +0200
+diff -urN X11-6.9.0.org/xc/config/cf/Server.tmpl X11-6.9.0/xc/config/cf/Server.tmpl
+--- X11-6.9.0.org/xc/config/cf/Server.tmpl	2004-04-23 20:41:58.000000000 +0200
++++ X11-6.9.0/xc/config/cf/Server.tmpl	2005-12-22 10:50:30.350963000 +0100
 @@ -25,8 +25,14 @@
  #ifndef DoThreadedServer
  #define DoThreadedServer NO
@@ -16,8 +17,32 @@
  #endif
  
  #ifdef CrossCompileDir
---- xc.orig/config/cf/xorgsite.def	2004-08-08 14:31:29.000000000 +0200
-+++ xc/config/cf/xorgsite.def	2004-08-08 14:39:45.727840792 +0200
+diff -urN X11-6.9.0.org/xc/config/cf/xorg.cf X11-6.9.0/xc/config/cf/xorg.cf
+--- X11-6.9.0.org/xc/config/cf/xorg.cf	2005-12-22 10:49:00.730963000 +0100
++++ X11-6.9.0/xc/config/cf/xorg.cf	2005-12-22 10:50:53.520963000 +0100
+@@ -835,12 +835,15 @@
+ #endif
+ 
+ /*
+- * The default is to install the X servers setuid-root on most OSs.
+- * It the servers are only started by xdm, they should not be setuid-root.
++ * The X servers need to run as root on most OSs.  We're now using a
++ * wrapper in that case, but we still need to make it known that the
++ * servers need SetUID.  When only using xdm, this (and the wrapper)
++ * are not required.  Disabling this automatically disables use of the
++ * wrapper.
+  */
+ #if !defined(i386MachArchitecture) && !defined(OS2Architecture)
+-# ifndef InstallXserverSetUID
+-#  define InstallXserverSetUID	YES
++# ifndef XserverNeedsSetUID
++#  define XserverNeedsSetUID	YES
+ # endif
+ #endif
+ 
+diff -urN X11-6.9.0.org/xc/config/cf/xorgsite.def X11-6.9.0/xc/config/cf/xorgsite.def
+--- X11-6.9.0.org/xc/config/cf/xorgsite.def	2005-12-22 10:49:00.730963000 +0100
++++ X11-6.9.0/xc/config/cf/xorgsite.def	2005-12-22 10:50:53.510963000 +0100
 @@ -75,14 +75,15 @@
   */
  
@@ -40,30 +65,60 @@
   */
  
  
---- xc.orig/config/cf/xorg.cf	2004-08-08 14:31:29.000000000 +0200
-+++ xc/config/cf/xorg.cf	2004-08-08 14:39:45.744838208 +0200
-@@ -710,12 +710,15 @@
- #endif
+diff -urN X11-6.9.0.org/xc/programs/xinit/startx.cpp X11-6.9.0/xc/programs/xinit/startx.cpp
+--- X11-6.9.0.org/xc/programs/xinit/startx.cpp	2005-11-15 05:03:10.000000000 +0100
++++ X11-6.9.0/xc/programs/xinit/startx.cpp	2005-12-22 10:53:22.620963000 +0100
+@@ -65,7 +65,7 @@
+ userserverrc=$HOME/.xserverrc
+ sysserverrc=XINITDIR/xserverrc
+ defaultclient=XTERM
+-defaultserver=XSERVER
++defaultserver=BINDIR/Xwrapper
+ defaultclientargs=""
+ defaultserverargs=""
+ clientargs=""
+diff -urN X11-6.9.0.org/xc/programs/xinit/xinit.c X11-6.9.0/xc/programs/xinit/xinit.c
+--- X11-6.9.0.org/xc/programs/xinit/xinit.c	2005-10-04 03:27:34.000000000 +0200
++++ X11-6.9.0/xc/programs/xinit/xinit.c	2005-12-22 10:50:53.630963000 +0100
+@@ -156,6 +156,7 @@
+ #define	OK_EXIT		0
+ #define	ERR_EXIT	1
  
- /*
-- * The default is to install the X servers setuid-root on most OSs.
-- * It the servers are only started by xdm, they should not be setuid-root.
-+ * The X servers need to run as root on most OSs.  We're now using a
-+ * wrapper in that case, but we still need to make it known that the
-+ * servers need SetUID.  When only using xdm, this (and the wrapper)
-+ * are not required.  Disabling this automatically disables use of the
-+ * wrapper.
-  */
- #if !defined(i386MachArchitecture) && !defined(OS2Architecture)
--# ifndef InstallXserverSetUID
--#  define InstallXserverSetUID	YES
-+# ifndef XserverNeedsSetUID
-+#  define XserverNeedsSetUID	YES
- # endif
- #endif
++char *default_wrapper = BINDIR "/Xwrapper";
+ char *default_server = "X";
+ char *default_display = ":0";		/* choose most efficient */
+ char *default_client[] = {"xterm", "-geometry", "+1+1", "-n", "login", NULL};
+@@ -346,7 +347,10 @@
+ 	if (argc == 0 ||
+ #ifndef __UNIXOS2__
+ 	    (**argv != '/' && **argv != '.')) {
+-		*sptr++ = default_server;
++		if (access(default_wrapper, X_OK) == 0)
++			*sptr++ = default_wrapper;
++		else
++			*sptr++ = default_server;
+ #else
+ 	    (**argv != '/' && **argv != '\\' && **argv != '.' &&
+ 	     !(isalpha(**argv) && (*argv)[1]==':'))) {
+diff -urN X11-6.9.0.org/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c X11-6.9.0/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c
+--- X11-6.9.0.org/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c	2005-08-26 09:35:55.000000000 +0200
++++ X11-6.9.0/xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c	2005-12-22 10:52:06.630963000 +0100
+@@ -104,8 +104,10 @@
  
---- xc.orig/programs/Xserver/Imakefile	2004-08-08 14:22:53.000000000 +0200
-+++ xc/programs/Xserver/Imakefile	2004-08-08 14:39:45.765835016 +0200
+ 	/* when KeepTty check if we're run with euid==0 */
+ 	if (KeepTty && geteuid() != 0) 
+-	    FatalError("xf86OpenConsole:"
+-		       " Server must be suid root for option \"KeepTTY\"\n");
++	    FatalError("xf86OpenConsole: Server must be running with root "
++			    "permissions\n"
++			    "You should be using Xwrapper to start the server or xdm.\n"
++			    "We strongly advise against making the server SUID root!\n");
+ 
+ 	/*
+ 	 * setup the virtual terminal manager
+diff -urN X11-6.9.0.org/xc/programs/Xserver/Imakefile X11-6.9.0/xc/programs/Xserver/Imakefile
+--- X11-6.9.0.org/xc/programs/Xserver/Imakefile	2005-11-18 19:15:23.000000000 +0100
++++ X11-6.9.0/xc/programs/Xserver/Imakefile	2005-12-22 10:50:53.540963000 +0100
 @@ -5,11 +5,6 @@
   */
  XCOMM $XFree86: xc/programs/Xserver/Imakefile,v 3.296 2003/11/23 06:47:00 torrey Exp $
@@ -75,8 +130,8 @@
 -
  #include <Server.tmpl>
  
- #if (defined (XFree86Version) || defined(XorgVersion))
-@@ -877,6 +872,11 @@
+ /* On most systems the linker requires the libraries in dependency order. 
+@@ -893,6 +888,11 @@
  #endif /* XnestServer */
  
  
@@ -88,31 +143,18 @@
  #if defined(XnonServer) && XnonServer
  XCOMM
  XCOMM non server, just compile sources for build test
---- xc.orig/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c	2004-08-08 14:22:46.000000000 +0200
-+++ xc/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c	2004-08-08 14:39:45.793830760 +0200
-@@ -100,7 +100,10 @@
- 	/* check if we're run with euid==0 */
- 	if (geteuid() != 0)
- 	{
--	    FatalError("xf86OpenConsole: Server must be suid root\n");
-+	    FatalError("xf86OpenConsole: Server must be running with root "
-+	        "permissions\n"
-+		"You should be using Xwrapper to start the server or xdm.\n"
-+		"We strongly advise against making the server SUID root!\n");
- 	}
- 
- 	/*
---- xc.orig/programs/Xserver/os/Imakefile	2004-08-08 14:22:51.000000000 +0200
-+++ xc/programs/Xserver/os/Imakefile	2004-08-08 14:39:45.844823008 +0200
-@@ -137,6 +137,7 @@
+diff -urN X11-6.9.0.org/xc/programs/Xserver/os/Imakefile X11-6.9.0/xc/programs/Xserver/os/Imakefile
+--- X11-6.9.0.org/xc/programs/Xserver/os/Imakefile	2005-03-23 20:58:45.000000000 +0100
++++ X11-6.9.0/xc/programs/Xserver/os/Imakefile	2005-12-22 10:52:36.410963000 +0100
+@@ -132,6 +132,7 @@
         INCLUDES = -I. -I../include -I$(XINCLUDESRC) -I$(EXTINCSRC) \
  		  -I$(SERVERSRC)/Xext -I$(FONTINCSRC) -I$(SERVERSRC)/render \
- 		  -I$(TOP)/lib/Xau -I../lbx Krb5Includes
+ 		  -I$(TOP)/lib/Xau -I../lbx -I../Xprint Krb5Includes
 +  EXTRA_DEFINES = -DUSE_PAM
   DEPEND_DEFINES = $(DBM_DEFINES) $(XDMCP_DEFINES) $(EXT_DEFINES) \
  		  $(TRANS_INCLUDES) $(CONNECTION_FLAGS) $(GETPEER_DEFINES) \
  		  DependDefines
-@@ -184,6 +185,14 @@
+@@ -179,6 +180,14 @@
  SpecialCObjectRule(oscolor,$(ICONFIGFILES),$(DBM_DEFINES))
  #endif
  
@@ -127,8 +169,9 @@
  #if HasKrb5
  LinkSourceFile(k5encode.c,$(XAUTHSRC))
  #endif
---- xc.orig/programs/Xserver/os/wrapper.c	1970-01-01 01:00:00.000000000 +0100
-+++ xc/programs/Xserver/os/wrapper.c	2004-08-08 14:39:45.845822856 +0200
+diff -urN X11-6.9.0.org/xc/programs/Xserver/os/wrapper.c X11-6.9.0/xc/programs/Xserver/os/wrapper.c
+--- X11-6.9.0.org/xc/programs/Xserver/os/wrapper.c	1970-01-01 01:00:00.000000000 +0100
++++ X11-6.9.0/xc/programs/Xserver/os/wrapper.c	2005-12-22 10:50:53.610963000 +0100
 @@ -0,0 +1,304 @@
 +/*
 + * X server wrapper.
@@ -434,36 +477,3 @@
 +    exit(1);
 +}
 +
---- xc.orig/programs/xinit/startx.cpp	2004-08-08 14:22:55.000000000 +0200
-+++ xc/programs/xinit/startx.cpp	2004-08-08 14:39:45.874818448 +0200
-@@ -53,7 +53,7 @@
- sysclientrc=XINITDIR/xinitrc
- sysserverrc=XINITDIR/xserverrc
- defaultclient=BINDIR/xterm
--defaultserver=BINDIR/X
-+defaultserver=BINDIR/Xwrapper
- defaultclientargs=""
- defaultserverargs=""
- clientargs=""
---- xc.orig/programs/xinit/xinit.c	2004-08-08 14:22:55.000000000 +0200
-+++ xc/programs/xinit/xinit.c	2004-08-08 14:39:45.900814496 +0200
-@@ -149,6 +149,7 @@
- #define	OK_EXIT		0
- #define	ERR_EXIT	1
- 
-+char *default_wrapper = BINDIR "/Xwrapper";
- char *default_server = "X";
- char *default_display = ":0";		/* choose most efficient */
- char *default_client[] = {"xterm", "-geometry", "+1+1", "-n", "login", NULL};
-@@ -335,7 +336,10 @@
- 	if (argc == 0 ||
- #ifndef __UNIXOS2__
- 	    (**argv != '/' && **argv != '.')) {
--		*sptr++ = default_server;
-+		if (access(default_wrapper, X_OK) == 0)
-+			*sptr++ = default_wrapper;
-+		else
-+			*sptr++ = default_server;
- #else
- 	    (**argv != '/' && **argv != '\\' && **argv != '.' &&
- 	     !(isalpha(**argv) && (*argv)[1]==':'))) {
