@@ -30,17 +30,17 @@ Summary(tr):	XOrg X11 Pencereleme Sistemi sunucularЩ ve temel programlar
 Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
-Version:	6.8.2
-Release:	14
+Version:	6.9.0
+Release:	0.1
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
 Source0:	ftp://ftp.x.org/pub/X11R%{version}/src/%{name}R%{version}-src1.tar.gz
-# Source0-md5:	a9cfa54ae2e65a057b9c6416befeb6ab
+# Source0-md5:	9cd255a090e81e2c62637122794e6150
 Source1:	ftp://ftp.x.org/pub/X11R%{version}/src/%{name}R%{version}-src2.tar.gz
-# Source1-md5:	b6f011b3131e442b8dab85d443d9a56f
+# Source1-md5:	f49a0993d89038a46556720688450479
 Source2:	ftp://ftp.x.org/pub/X11R%{version}/src/%{name}R%{version}-src3.tar.gz
-# Source2-md5:	057d20af30569434e2c6693c1ca66e57
+# Source2-md5:	4d5450bde835270632e004b25e45ef33
 Source7:	ftp://ftp.pld-linux.org/software/xinit/xdm-xinitrc-0.2.tar.bz2
 # Source7-md5:	0a15b1c374256b5cad7961807baa3896
 Source8:	xdm.pamd
