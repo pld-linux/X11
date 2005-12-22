@@ -15,19 +15,18 @@
  
  #ifndef XdmPixmap
  # define XdmPixmap XVendorStdFilePrefix.xpm
-@@ -42,7 +36,11 @@
+@@ -42,7 +42,11 @@
  #endif
  
- CppFileTarget(Xservers.ws,Xserv.ws.cpp,-DBINDIR=$(BINDIR) -DDEFAULTVT=$(DEFAULTVT),NullParameter)
--CppFileTarget(xdm-config,xdm-conf.cpp,-DXDMDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR) -DSU=$(SU) -DCHOOSERPATH=$(CHOOSERPATH),NullParameter)
+ CppFileTarget(Xservers.ws,Xserv.ws.cpp,-DBINDIR=$(BINDIR) -DDEFAULTVT=$(DEFAULTVT) -DSHELL_CMD=$(SHELL_CMD),NullParameter)
 +#ifdef LinuxArchitecture
 +CppFileTarget(xdm-config,xdm-conf.cpp,$(XPM_DEFINES) -DLINUX=1 -DXDMDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR) -DXDMVARDIR=$(XDMVARDIR) -DCHOOSERPATH="$(BINDIR)/chooser",NullParameter)
 +#else
-+CppFileTarget(xdm-config,xdm-conf.cpp,$(XPM_DEFINES) -DXDMDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR) -DCHOOSERPATH="$(BINDIR)/chooser",NullParameter)
-+#endif /* LinuxArchitecture */
+ CppFileTarget(xdm-config,xdm-conf.cpp,-DXDMDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR) -DSU=$(SU) -DCHOOSERPATH=$(CHOOSERPATH) $(XPM_DEFINES),NullParameter)
++#endif
  CppFileTarget(Xresources,Xres.cpp,$(XPM_DEFINES),NullParameter)
+ CppFileTarget(Xsession,Xsession.cpp,-DBINDIR=$(BINDIR) -DDEFAULTVT=$(DEFAULTVT) -DSHELL_CMD=$(SHELL_CMD),NullParameter)
  
- LinkFile(Xservers,Xservers.$(SERVERSTYPE))
 --- xc.orig/programs/xdm/config/Xres.cpp	2004-08-08 14:31:29.000000000 +0200
 +++ xc/programs/xdm/config/Xres.cpp	2004-08-08 15:03:33.539780384 +0200
 @@ -41,9 +41,7 @@
