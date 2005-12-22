@@ -100,7 +100,7 @@ Patch17:	%{name}-agpgart-load.patch
 Patch18:	%{name}-XTerm.ad.patch
 Patch19:	%{name}-llh.patch
 Patch20:	XFree86-xman-manpaths.patch
-Patch21:	XFree86-clearrts.patch
+Patch21:	%{name}-clearrts.patch
 Patch22:	XFree86-Xfont-Type1-large-DoS.patch
 Patch23:	%{name}-GLcore-strip-a-workaround.patch
 Patch24:	%{name}-pkgconfig.patch
@@ -110,37 +110,24 @@ Patch27:	%{name}-makefile-fastbuild.patch
 Patch29:	%{name}-radeon-entervt.patch
 # updated from http://dl.sourceforge.net/i810fb/i810fb-xfree86-420.tar.bz2 : i810fb-xfree420.diff
 Patch31:	%{name}-i810fb.patch
-Patch33:	p_i810dri-memfix.diff
-# http://lists.freedesktop.org/pipermail/xorg/2005-February/006126.html
-Patch35:	%{name}-xft_memfree.patch
 Patch50:	%{name}-glibc-locale_sync.patch
 Patch60:	%{name}-oldkeyb.patch
 Patch61:	%{name}-sparc64-asmfix.patch
 Patch62:	%{name}-sparc64-v9fix.patch
 Patch63:	%{name}-pci-build.patch
-Patch64:	%{name}-logitech-ultrax-keyboard.patch
-Patch65:	%{name}-canonicalize-builderaddr.patch
-Patch66:	%{name}-composite-gravity.patch
 # XFree86-tdfx-fix-vtswitch-font-corruption.patch - issue still not fixed,
 # but patch doesn't help either; however, it occurs in text mode only, not
 # with tdfxfb, which is worth using anyway
 
 # radeon
-Patch67:	%{name}-deassert-ddc-lines.patch
-Patch68:	%{name}-radeon-cursor-sync.patch
 Patch69:	%{name}-radeon-dynamic-clocks.patch
-Patch70:	%{name}-radeon-render-byteswap.patch
 Patch71:	%{name}-radeon-set-fb-location.patch
 
 Patch72:	http://glen.alkohol.ee/xkb/xorg.patch
-Patch73:	http://owczi.net/stuff/mac/%{name}R6.8.2-r128-write_depth.patch
-
-Patch74:	%{name}-6.8.2-add-i945-support.patch
 
 #head-patch
 #ftp://ftp.linux.cz/pub/linux/people/jan_kasprzak/xorg-dualhead/
 Patch100:	ftp://ftp.linux.cz/pub/linux/people/jan_kasprzak/xorg-dualhead/xorg-x11-6.8.1-dualhead.patch
-Patch101:	%{name}-gcc4.patch
 Patch102:	%{name}-r300.patch
 
 URL:		http://www.x.org/
@@ -1922,10 +1909,10 @@ X11-libs.
 
 %prep
 %setup -qc -a1 -a2 -a7
-%patch1 -p0
+%patch1 -p1
 %{?with_glide:%patch2 -p0}
 %patch3 -p0
-%patch4 -p0
+%patch4 -p1
 %patch5 -p0
 %patch6 -p0
 %patch7 -p0
@@ -1940,7 +1927,7 @@ X11-libs.
 %patch16 -p0
 %patch17 -p0
 %patch18 -p0
-%patch19 -p0
+%patch19 -p1
 %patch20 -p1
 %patch21 -p1
 %patch22 -p1
@@ -1953,33 +1940,22 @@ X11-libs.
 rm -f xc/config/cf/host.def
 
 %patch29 -p1
-cd xc
-%patch33 -p0
-cd -
 %patch31 -p0
-%patch35 -p0
-%patch50 -p1
+# ankry, FIXME :)
+# %patch50 -p1
 %patch60 -p0
-%patch61 -p1
+# FIXME
+# %patch61 -p1
 %patch62 -p1
 %patch63 -p1
-%patch64 -p1
 
-%patch65 -p0
-%patch66 -p0
-
-%patch67 -p0
-%patch68 -p0
-%patch69 -p0
-%patch70 -p0
-%patch71 -p0
+# FIXME, is this still needed?
+# %patch69 -p0
+# FIXME, is this still needed?
+# %patch71 -p0
 %{__patch} -d xc/programs/xkbcomp/symbols/pc < %{PATCH72}
-%patch73 -p0
-
-%patch74 -p0
 
 %{?with_dualhead:%patch100 -p1}
-%patch101 -p1
 %{?with_r300:%patch102 -p0}
 
 
