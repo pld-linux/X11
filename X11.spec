@@ -14,8 +14,6 @@
 
 #http://cambuca.ldhs.cetuc.puc-rio.br/multiuser/
 %bcond_with	dualhead	# apply dualhead patch
-%bcond_with	r300		# experimental ati r300 and newer 3D support
-				# see r300.sf.net or details
 
 Summary:	XOrg X11 Window System servers and basic programs
 Summary(de):	XOrg X11 Window-System-Server und grundlegende Programme
@@ -128,7 +126,6 @@ Patch72:	http://glen.alkohol.ee/xkb/xorg.patch
 #head-patch
 #ftp://ftp.linux.cz/pub/linux/people/jan_kasprzak/xorg-dualhead/
 Patch100:	ftp://ftp.linux.cz/pub/linux/people/jan_kasprzak/xorg-dualhead/xorg-x11-6.8.1-dualhead.patch
-Patch102:	%{name}-r300.patch
 
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
@@ -790,6 +787,7 @@ Summary(pl):	Sterownik do kart ATI
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+Requires:	%{name}-driver-i2c = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-ATI
 Obsoletes:	XFree86-Mach32
 Obsoletes:	XFree86-Mach64
@@ -968,6 +966,19 @@ Number 9 I128 video driver.
 
 %description driver-i128 -l pl
 Sterownik do kart Number 9 I128.
+
+%package driver-i2c
+Summary:	I2C drivers
+Summary(pl):	Sterowniki I2C
+Group:		X11/Servers
+Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
+Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+
+%description driver-i2c
+I2C drivers.
+
+%description driver-i2c -l pl
+Sterowniki I2C.
 
 %package driver-i740
 Summary:	Intel i740 video driver
@@ -1956,7 +1967,6 @@ rm -f xc/config/cf/host.def
 %{__patch} -d xc/programs/xkbcomp/symbols/pc < %{PATCH72}
 
 %{?with_dualhead:%patch100 -p1}
-%{?with_r300:%patch102 -p0}
 
 
 sed -i -e 's#krb5/##g' xc/lib/Xau/*.* xc/programs/xdm/greeter/*.* \
@@ -2117,6 +2127,8 @@ gunzip $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/README.*
 
 install -d $RPM_BUILD_ROOT/etc/ld.so.conf.d
 echo '%{_libdir}' > $RPM_BUILD_ROOT/etc/ld.so.conf.d/X11-%{_lib}.conf
+
+chmod -R u+w $RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -2476,8 +2488,8 @@ fi
 
 %files OpenGL-core
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/extensions/libglx.a
-%attr(755,root,root) %{_libdir}/modules/extensions/libGLcore.a
+%attr(755,root,root) %{_libdir}/modules/extensions/libglx.so
+%attr(755,root,root) %{_libdir}/modules/extensions/libGLcore.so
 
 %files OpenGL-libGL
 %defattr(644,root,root,755)
@@ -2548,17 +2560,18 @@ fi
 %files Xserver
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/Xorg
-%attr(755,root,root) %{_bindir}/Xdmx
+%attr(755,root,root) %{_bindir}/*dmx*
 %attr(4755,root,root) %{_bindir}/Xwrapper
 %attr(755,root,root) %{_bindir}/getconfig*
 %attr(755,root,root) %{_sysconfdir}/X11/X
 %attr(755,root,root) %{_bindir}/X
-%{_mandir}/man1/Xdmx.1*
 %{_mandir}/man1/Xorg.1*
 %{_mandir}/man1/Xserver.1*
+%{_mandir}/man1/*dmx*.1*
 %{_mandir}/man1/getconfig.1*
 %{_mandir}/man5/xorg.conf.5*
 %{_mandir}/man5/getconfig.5*
+
 
 %{_libx11dir}/Cards
 %{_libx11dir}/Options
@@ -2585,7 +2598,7 @@ fi
 %attr(755,root,root) %{_bindir}/xcursor-config
 %attr(755,root,root) %{_bindir}/xft-config
 %attr(755,root,root) %{_libdir}/libFS.so
-%attr(755,root,root) %{_libdir}/libI810XvMC.so
+%attr(755,root,root) %{_libdir}/lib*XvMC*.so
 %attr(755,root,root) %{_libdir}/libICE.so
 %attr(755,root,root) %{_libdir}/libSM.so
 %attr(755,root,root) %{_libdir}/libX11.so
@@ -2614,7 +2627,6 @@ fi
 %attr(755,root,root) %{_libdir}/libXt.so
 %attr(755,root,root) %{_libdir}/libXtst.so
 %attr(755,root,root) %{_libdir}/libXv.so
-%attr(755,root,root) %{_libdir}/libXvMC.so
 %attr(755,root,root) %{_libdir}/libXxf86dga.so
 %attr(755,root,root) %{_libdir}/libXxf86misc.so
 %attr(755,root,root) %{_libdir}/libXxf86rush.so
@@ -2645,6 +2657,7 @@ fi
 %{_includedir}/xf86*.h
 %{_libx11dir}/config
 %{_mandir}/man1/bdftopcf.1*
+%{_mandir}/man1/xft-config.1*
 %{_mandir}/man3/[A-FH-Zl]*
 %{_pkgconfigdir}/xcomposite.pc
 %{_pkgconfigdir}/xcursor.pc
@@ -2662,7 +2675,7 @@ fi
 %ifarch %{ix86} ia64 %{x8664}
 %files driver-apm
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/apm_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/apm_drv.so
 %{_mandir}/man4/apm.4*
 %endif
 
@@ -2670,14 +2683,14 @@ fi
 %ifarch %{ix86} ia64 %{x8664}
 %files driver-ark
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/ark_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/ark_drv.so
 %endif
 
 # Devel: sparc sparc64
 %ifarch %{ix86} ia64 %{x8664} mips ppc arm
 %files driver-chips
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/chips_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/chips_drv.so
 %{_mandir}/man4/chips.4*
 %endif
 
@@ -2685,21 +2698,21 @@ fi
 %ifarch %{ix86} ia64 %{x8664} alpha
 %files driver-cirrus
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/cirrus_*.o
+%attr(755,root,root) %{_libdir}/modules/drivers/cirrus_*.so
 %{_mandir}/man4/cirrus.4*
 %endif
 
 %ifarch %{ix86} ia64 %{x8664}
 %files driver-cyrix
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/cyrix_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/cyrix_drv.so
 %{_mandir}/man4/cyrix.4*
 %endif
 
 %ifarch %{ix86} ia64 %{x8664} alpha sparc sparc64 sparcv9 mips ppc arm superh
 %files driver-fbdev
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/fbdev_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/fbdev_drv.so
 %{_mandir}/man4/fbdev.4*
 %endif
 
@@ -2707,16 +2720,16 @@ fi
 %if %{with glide}
 %files driver-glide
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/glide_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/glide_drv.so
 %{_mandir}/man4/glide.4*
 %endif
 %endif
 
 %files driver-glint
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/glint_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/glint_drv.so
 %ifarch %{ix86} ia64 %{x8664} alpha ppc arm
-%attr(755,root,root) %{_libdir}/modules/dri/gamma_dri.so
+#%attr(755,root,root) %{_libdir}/modules/dri/gamma_dri.so
 %endif
 %{_mandir}/man4/glint.4*
 
@@ -2724,15 +2737,23 @@ fi
 %ifarch %{ix86} ia64 %{x8664}
 %files driver-i128
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/i128_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/i128_drv.so
 %{_mandir}/man4/i128.4*
 %endif
+
+%files driver-i2c
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/modules/multimedia/bt*.so
+%attr(755,root,root) %{_libdir}/modules/multimedia/fi*.so
+%attr(755,root,root) %{_libdir}/modules/multimedia/tda*.so
+%attr(755,root,root) %{_libdir}/modules/multimedia/msp*.so
+%attr(755,root,root) %{_libdir}/modules/multimedia/uda*.so
 
 # Devel: sparc sparc64
 %ifarch %{ix86} ia64
 %files driver-i740
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/i740_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/i740_drv.so
 %{_mandir}/man4/i740.4*
 %endif
 
@@ -2740,7 +2761,7 @@ fi
 %ifarch %{ix86} ia64 %{x8664}
 %files driver-i810
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/i810_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/i810_drv.so
 %ifarch %{ix86} ia64
 %attr(755,root,root) %{_libdir}/modules/dri/i810_dri.so
 %endif
@@ -2752,14 +2773,14 @@ fi
 %if 0
 %files driver-imstt
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/imstt_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/imstt_drv.so
 %{_mandir}/man4/imstt.4*
 %endif
 
 %ifarch %{ix86} ia64 %{x8664} sparc sparc64 sparcv9 mips alpha ppc arm
 %files driver-mga
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/mga_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/mga_drv.so
 %ifarch %{ix86} ia64 %{x8664} alpha ppc arm
 %attr(755,root,root) %{_libdir}/modules/dri/mga_dri.so
 %endif
@@ -2770,7 +2791,7 @@ fi
 %ifarch %{ix86} ia64 %{x8664}
 %files driver-neomagic
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/neomagic_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/neomagic_drv.so
 %{_mandir}/man4/neomagic.4*
 %endif
 
@@ -2778,14 +2799,14 @@ fi
 %ifarch mips
 %files driver-newport
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/newport_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/newport_drv.so
 %{_mandir}/man4/newport.4*
 %endif
 
 %ifarch %{ix86}
 %files driver-nsc
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/nsc_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/nsc_drv.so
 %{_mandir}/man4/nsc.4*
 %endif
 
@@ -2793,18 +2814,19 @@ fi
 %ifarch %{ix86} ia64 %{x8664} mips alpha arm ppc
 %files driver-nv
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/nv_drv.o
-%attr(755,root,root) %{_libdir}/modules/drivers/riva128.o
+%attr(755,root,root) %{_libdir}/modules/drivers/nv_drv.so
+%attr(755,root,root) %{_libdir}/modules/drivers/riva128.so
 %{_mandir}/man4/nv.4*
 %endif
 
 %files driver-ati
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/ati*_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/ati*_drv.so
+%attr(755,root,root) %{_libdir}/modules/multimedia/theatre*_drv.so
 
 %files driver-r128
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/r128*_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/r128*_drv.so
 %ifarch %{ix86} ia64 %{x8664} alpha ppc arm
 %attr(755,root,root) %{_libdir}/modules/dri/r128_dri.so
 %endif
@@ -2812,7 +2834,7 @@ fi
 
 %files driver-radeon
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/radeon*_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/radeon*_drv.so
 %ifarch %{ix86} ia64 %{x8664} alpha ppc arm
 %attr(755,root,root) %{_libdir}/modules/dri/radeon_dri.so
 %attr(755,root,root) %{_libdir}/modules/dri/r200_dri.so
@@ -2823,7 +2845,7 @@ fi
 %ifarch %{ix86} ia64 %{x8664} alpha
 %files driver-rendition
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/rendition_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/rendition_drv.so
 %{_libdir}/modules/*.uc
 %{_mandir}/man4/rendition.4*
 %endif
@@ -2832,14 +2854,14 @@ fi
 %ifarch %{ix86} ia64 %{x8664} mips alpha ppc arm
 %files driver-s3virge
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/s3virge_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/s3virge_drv.so
 %{_mandir}/man4/s3virge.4*
 %endif
 
 %ifarch %{ix86} ia64 %{x8664} mips alpha ppc arm
 %files driver-s3
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/s3_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/s3_drv.so
 #%%{_mandir}/man4/s3.4*
 %endif
 
@@ -2847,7 +2869,7 @@ fi
 %ifarch %{ix86} ia64 %{x8664} mips alpha ppc arm
 %files driver-savage
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/savage_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/savage_drv.so
 %{_mandir}/man4/savage.4*
 %endif
 
@@ -2855,52 +2877,53 @@ fi
 %ifarch %{ix86} ia64 %{x8664} alpha
 %files driver-siliconmotion
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/siliconmotion_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/siliconmotion_drv.so
 %{_mandir}/man4/siliconmotion.4*
 %endif
 
 %ifarch %{ix86} ia64 %{x8664} mips ppc arm
 %files driver-sis
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/sis_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/sis_drv.so
+%attr(755,root,root) %{_libdir}/modules/drivers/sisusb_drv.so
 %ifarch %{ix86} ia64
 %attr(755,root,root) %{_libdir}/modules/dri/sis_dri.so
 %endif
-%{_mandir}/man4/sis.4*
+%{_mandir}/man4/sis*.4*
 %endif
 
 %ifarch sparc sparc64 sparcv9
 %files driver-sunbw2
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/sunbw2_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/sunbw2_drv.so
 %{_mandir}/man4/sunbw2.4*
 %endif
 
 %ifarch sparc sparc64 sparcv9
 %files driver-suncg14
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/suncg14_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/suncg14_drv.so
 %{_mandir}/man4/suncg14.4*
 %endif
 
 %ifarch sparc sparc64 sparcv9
 %files driver-suncg3
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/suncg3_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/suncg3_drv.so
 %{_mandir}/man4/suncg3.4*
 %endif
 
 %ifarch sparc sparc64 sparcv9
 %files driver-suncg6
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/suncg6_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/suncg6_drv.so
 %{_mandir}/man4/suncg6.4*
 %endif
 
 %ifarch sparc sparc64 sparcv9
 %files driver-sunffb
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/sunffb_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/sunffb_drv.so
 # Devel: %{ix86} ia64 (for fun?)
 %attr(755,root,root) %{_libdir}/modules/dri/ffb_dri.so
 %{_mandir}/man4/sunffb.4*
@@ -2909,21 +2932,21 @@ fi
 %ifarch sparc sparc64 sparcv9
 %files driver-sunleo
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/sunleo_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/sunleo_drv.so
 %{_mandir}/man4/sunleo.4*
 %endif
 
 %ifarch sparc sparc64 sparcv9
 %files driver-suntcx
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/suntcx_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/suntcx_drv.so
 %{_mandir}/man4/suntcx.4*
 %endif
 
 %ifarch %{ix86} ia64 %{x8664} sparc sparc64 sparcv9 mips alpha arm ppc
 %files driver-tdfx
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/tdfx_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/tdfx_drv.so
 %ifarch %{ix86} ia64 alpha arm
 %attr(755,root,root) %{_libdir}/modules/dri/tdfx_dri.so
 %endif
@@ -2934,28 +2957,28 @@ fi
 %ifarch %{ix86} ia64 %{x8664} alpha
 %files driver-tga
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/tga_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/tga_drv.so
 %endif
 
 # Devel: sparc sparc64
 %ifarch %{ix86} ia64 %{x8664} mips ppc arm
 %files driver-trident
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/trident_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/trident_drv.so
 %{_mandir}/man4/trident.4*
 %endif
 
 %ifarch %{ix86} ia64 %{x8664}
 %files driver-tseng
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/tseng_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/tseng_drv.so
 %{_mandir}/man4/tseng.4*
 %endif
 
 %ifarch %{ix86} ia64
 %files driver-via
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/via_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/via_drv.so
 %{_mandir}/man4/via.4*
 %endif
 
@@ -2963,7 +2986,7 @@ fi
 %ifarch %{ix86} ia64
 %files driver-vmware
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/modules/drivers/vmware_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/vmware_drv.so
 %{_mandir}/man4/vmware.4*
 %endif
 
@@ -3015,7 +3038,7 @@ fi
 %dir %{_xsessdir}
 %dir %{_wmstylesdir}
 %attr(755,root,root) %{_libdir}/libFS.so.*.*
-%attr(755,root,root) %{_libdir}/libI810XvMC.so.*.*
+%attr(755,root,root) %{_libdir}/lib*XvMC*.so.*.*
 %attr(755,root,root) %{_libdir}/libICE.so.*.*
 %attr(755,root,root) %{_libdir}/libSM.so.*.*
 %attr(755,root,root) %{_libdir}/libX11.so.*.*
@@ -3047,7 +3070,6 @@ fi
 %attr(755,root,root) %{_libdir}/libXt.so.*.*
 %attr(755,root,root) %{_libdir}/libXtst.so.*.*
 %attr(755,root,root) %{_libdir}/libXv.so.*.*
-%attr(755,root,root) %{_libdir}/libXvMC.so.*.*
 %attr(755,root,root) %{_libdir}/libXxf86dga.so.*.*
 %attr(755,root,root) %{_libdir}/libXxf86misc.so.*.*
 %attr(755,root,root) %{_libdir}/libXxf86rush.so.*.*
@@ -3066,20 +3088,21 @@ fi
 %dir %{_libdir}/modules
 %dir %{_libdir}/modules/dri
 %dir %{_libdir}/modules/drivers
-%attr(755,root,root) %{_libdir}/modules/*.a
-%attr(755,root,root) %{_libdir}/modules/drivers/linux
+%attr(755,root,root) %{_libdir}/modules/*.so
+%attr(755,root,root) %{_libdir}/modules/drivers/v4l_drv.so
 %ifarch %{ix86} ia64 %{x8664} sparc sparc64 alpha ppc arm
-%attr(755,root,root) %{_libdir}/modules/drivers/vga_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/vga_drv.so
 %endif
 %ifarch %{ix86} ia64 %{x8664} sparc sparc64
-%attr(755,root,root) %{_libdir}/modules/drivers/vesa_drv.o
+%attr(755,root,root) %{_libdir}/modules/drivers/vesa_drv.so
 %endif
 %dir %{_libdir}/modules/extensions
-%attr(755,root,root) %{_libdir}/modules/extensions/libdbe.a
-%attr(755,root,root) %{_libdir}/modules/extensions/libdri.a
-%attr(755,root,root) %{_libdir}/modules/extensions/libextmod.a
-%attr(755,root,root) %{_libdir}/modules/extensions/librecord.a
-%attr(755,root,root) %{_libdir}/modules/extensions/libxtrap.a
+%dir %{_libdir}/modules/multimedia
+%attr(755,root,root) %{_libdir}/modules/extensions/libdbe.so
+%attr(755,root,root) %{_libdir}/modules/extensions/libdri.so
+%attr(755,root,root) %{_libdir}/modules/extensions/libextmod.so
+%attr(755,root,root) %{_libdir}/modules/extensions/librecord.so
+%attr(755,root,root) %{_libdir}/modules/extensions/libxtrap.so
 %attr(755,root,root) %{_libdir}/modules/fonts
 %attr(755,root,root) %{_libdir}/modules/input
 %attr(755,root,root) %{_libdir}/modules/linux
@@ -3130,7 +3153,7 @@ fi
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libFS.a
-%{_libdir}/libI810XvMC.a
+%{_libdir}/lib*XvMC*.a
 %{_libdir}/libICE.a
 %{_libdir}/libSM.a
 %{_libdir}/libX11.a
@@ -3159,7 +3182,6 @@ fi
 %{_libdir}/libXt.a
 %{_libdir}/libXtst.a
 %{_libdir}/libXv.a
-%{_libdir}/libXvMC.a
 %{_libdir}/libXxf86dga.a
 %{_libdir}/libXxf86misc.a
 %{_libdir}/libXxf86rush.a
@@ -3185,6 +3207,8 @@ fi
 %attr(755,root,root) %{_bindir}/xclipboard
 %attr(755,root,root) %{_bindir}/xclock
 %attr(755,root,root) %{_bindir}/xditview
+%attr(755,root,root) %{_bindir}/xdbedizzy
+%attr(755,root,root) %{_bindir}/xdpr
 %attr(755,root,root) %{_bindir}/xdriinfo
 %attr(755,root,root) %{_bindir}/xedit
 %attr(755,root,root) %{_bindir}/xev
@@ -3202,6 +3226,7 @@ fi
 %attr(755,root,root) %{_bindir}/xmore
 %attr(755,root,root) %{_bindir}/xphelloworld
 %attr(755,root,root) %{_bindir}/xplsprinters
+%attr(755,root,root) %{_bindir}/xpr
 %attr(755,root,root) %{_bindir}/xprehashprinterlist
 %attr(755,root,root) %{_bindir}/xpsimplehelloworld
 %attr(755,root,root) %{_bindir}/xpxthelloworld
@@ -3224,6 +3249,8 @@ fi
 %{_mandir}/man1/xclipboard.1*
 %{_mandir}/man1/xclock.1*
 %{_mandir}/man1/xditview.1*
+%{_mandir}/man1/xdbedizzy.1*
+%{_mandir}/man1/xdpr.1*
 %{_mandir}/man1/xdriinfo.1*
 %{_mandir}/man1/xmore.1*
 %{_mandir}/man1/xedit.1*
@@ -3241,6 +3268,7 @@ fi
 %{_mandir}/man1/xmh.1*
 %{_mandir}/man1/xphelloworld.1*
 %{_mandir}/man1/xplsprinters.1*
+%{_mandir}/man1/xpr.1*
 %{_mandir}/man1/xprehashprinterlist.1*
 %{_mandir}/man1/xpsimplehelloworld.1*
 %{_mandir}/man1/xpxthelloworld.1*
@@ -3335,7 +3363,7 @@ fi
 
 %files xauth
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/xauth
+%attr(755,root,root) %{_bindir}/xauth*
 %{_mandir}/man1/xauth.1*
 
 %files xdm
