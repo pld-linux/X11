@@ -98,6 +98,24 @@ diff -ur X11-6.9.0.org/xc/config/cf/site.def X11-6.9.0/xc/config/cf/site.def
 diff -ur X11-6.9.0.org/xc/config/cf/X11.tmpl X11-6.9.0/xc/config/cf/X11.tmpl
 --- X11-6.9.0.org/xc/config/cf/X11.tmpl	2005-12-15 00:41:52.000000000 +0100
 +++ X11-6.9.0/xc/config/cf/X11.tmpl	2005-12-22 10:32:25.830963000 +0100
+@@ -597,7 +597,7 @@
+ #define BuildXF86RushLibrary	(BuildXF86RushExt && !BuildServersOnly)
+ #endif
+ #ifndef BuildDPSLibraries
+-#define BuildDPSLibraries	NO
++#define BuildDPSLibraries	YES
+ #endif
+ #ifndef BuildDPSLibrary
+ #define BuildDPSLibrary		BuildDPSLibraries
+@@ -693,7 +693,7 @@
+ #endif
+ 
+ #ifndef BuildXterm
+-#define BuildXterm		NO
++#define BuildXterm		YES
+ #endif
+ 
+ #ifndef BuildXkbcomp
 @@ -731,7 +731,7 @@
  #endif
  
