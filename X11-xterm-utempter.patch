@@ -1,11 +1,12 @@
 --- xc.orig/programs/xterm/Imakefile	2004-08-08 14:31:29.000000000 +0200
 +++ xc/programs/xterm/Imakefile	2004-08-08 14:47:26.823743560 +0200
-@@ -17,6 +17,8 @@
+@@ -18,6 +18,8 @@
  /* Define UTF8support to compile-in support for UTF-8 */
  #define UTF8support
  
 +#define UseUtempter
 +
- /*
-  * Fixes to allow compile with X11R5
-  */
+ #if defined(UseUtempter)
+ #undef InstallXtermSetUID /* imake sets this */
+ #define InstallXtermSetUID NO
+
