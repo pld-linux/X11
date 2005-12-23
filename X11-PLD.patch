@@ -419,6 +419,15 @@ diff -ur X11-6.9.0.org/xc/programs/xdm/resource.c X11-6.9.0/xc/programs/xdm/reso
 diff -ur X11-6.9.0.org/xc/programs/xinit/Imakefile X11-6.9.0/xc/programs/xinit/Imakefile
 --- X11-6.9.0.org/xc/programs/xinit/Imakefile	2005-11-15 05:03:10.000000000 +0100
 +++ X11-6.9.0/xc/programs/xinit/Imakefile	2005-12-22 10:37:39.740963000 +0100
+@@ -72,7 +72,7 @@
+ 
+ MakeScriptFromCpp(xinitrc, -DXINITDIR=$(XINITDIR) $(PROGCPPDEFS) -DSHELL_CMD=$(SHELL_CMD) -DLIBDIR=$(LIBDIR))
+ 
+-MakeScriptFromCpp(startx, -DXINITDIR=$(XINITDIR) $(PROGCPPDEFS) $(COOKIEDEFS) -DSHELL_CMD=$(SHELL_CMD) -DLIBDIR=$(LIBDIR))
++MakeScriptFromCpp(startx, -DXINITDIR=$(XINITDIR) $(PROGCPPDEFS) $(COOKIEDEFS) -DSHELL_CMD=$(SHELL_CMD) -DBINDIR=$(BINDIR) -DLIBDIR=$(LIBDIR))
+ 
+ #if defined(SCOArchitecture) || defined(USLArchitecture)
+ ARCHMANDEFS=-D__SCOMAN__
 @@ -88,11 +88,12 @@
  #endif
  InstallManPage(startx,$(MANDIR))
