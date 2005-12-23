@@ -29,7 +29,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.9.0
-Release:	0.1
+Release:	1
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
