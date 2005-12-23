@@ -1209,6 +1209,27 @@ SiS video driver.
 %description driver-sis -l pl
 Sterownik do kart na uk³adach SiS.
 
+%package driver-sisusb
+Summary:	Video driver for SiS video chips connected via a Net2280-based USB dongle
+Summary(pl):	Sterownik obrazu dla uk³adów SiS pod³±czonych poprzez przej¶ciówkê USB Net2280
+Group:		X11/Servers
+Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
+Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
+
+%description driver-sisusb
+Video driver for SiS video chips connected via a Net2280-based USB
+dongle. It supports SiS315E/PRO video chipset.
+
+Note: it requires a Linux kernel driver (included in Linux 2.6.12 and
+later).
+
+%description driver-sisusb -l pl
+Sterownik obrazu dla uk³adów SiS pod³±czonych poprzez przej¶ciówkê USB
+opart± na uk³adzie Net2280. Obs³uguje uk³ad graficzny SiS315E/PRO.
+
+Uwaga: wymaga sterownika j±dra Linuksa (za³±czonego w wersji Linuksa
+2.6.12 i pó¼niejszych).
+
 %package driver-sunbw2
 Summary:	sunbw2 - Sun BW2 video driver
 Summary(pl):	Sterownik do monochromatycznego framebuffera BW2 na Sunie
@@ -2887,12 +2908,16 @@ fi
 %files driver-sis
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/sis_drv.so
-%attr(755,root,root) %{_libdir}/modules/drivers/sisusb_drv.so
 %ifarch %{ix86} ia64
 %attr(755,root,root) %{_libdir}/modules/dri/sis_dri.so
 %endif
-%{_mandir}/man4/sis*.4*
+%{_mandir}/man4/sis.4*
 %endif
+
+%files driver-sisusb
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/modules/drivers/sisusb_drv.so
+%{_mandir}/man4/sisusb.4*
 
 %ifarch sparc sparc64 sparcv9
 %files driver-sunbw2
