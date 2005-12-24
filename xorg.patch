@@ -73,3 +73,14 @@ http://glen.alkohol.ee/xkb/
 +};
 +
 +// vim:ts=8:sw=8
+--- Imakefile~	2005-10-09 21:05:42.000000000 +0300
++++ Imakefile	2005-12-24 17:09:12.000000000 +0200
+@@ -20,7 +20,7 @@
+ 		ro ru \
+ 		se si sk srp sy \
+ 		th tj tr \
+-		ua us uz \
++		ua us us_ee uz \
+ 		vn 
+ 
+ all::
