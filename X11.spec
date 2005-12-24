@@ -135,6 +135,7 @@ BuildRequires:	/usr/bin/perl
 %{?with_glide:BuildRequires:	Glide2x_SDK}
 %endif
 BuildRequires:	bison
+BuildRequires:	cpp
 BuildRequires:	ed
 BuildRequires:	expat-devel
 BuildRequires:	flex
