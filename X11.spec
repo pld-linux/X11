@@ -14,6 +14,7 @@
 
 #http://cambuca.ldhs.cetuc.puc-rio.br/multiuser/
 %bcond_with	dualhead	# apply dualhead patch
+%bcond_with	r300		# enable r300_dri
 
 Summary:	XOrg X11 Window System servers and basic programs
 Summary(de):	XOrg X11 Window-System-Server und grundlegende Programme
@@ -123,6 +124,9 @@ Patch69:	%{name}-radeon-dynamic-clocks.patch
 Patch71:	%{name}-radeon-set-fb-location.patch
 
 Patch72:	http://glen.alkohol.ee/xkb/xorg.patch
+
+# r300
+Patch73:       %{name}-r300-Imakefile.patch
 
 #head-patch
 #ftp://ftp.linux.cz/pub/linux/people/jan_kasprzak/xorg-dualhead/
@@ -1990,8 +1994,11 @@ rm -f xc/config/cf/host.def
 # %patch71 -p0
 %{__patch} -d xc/programs/xkbcomp/symbols/pc < %{PATCH72}
 
+%{?with_r300:%patch73 -p0}
+
 %{?with_dualhead:%patch100 -p1}
 
+%{?with_r300:sed -i -e 's/r200/r200 r300/g' xc/config/cf/*.cf}
 
 sed -i -e 's#krb5/##g' xc/lib/Xau/*.* xc/programs/xdm/greeter/*.* \
 	xc/programs/xdm/*.* xc/programs/Xserver/os/*.*
