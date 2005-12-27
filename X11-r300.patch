@@ -1,186 +1,384 @@
-Index: radeon_accel.c
-===================================================================
-RCS file: /cvs/xorg/xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_accel.c,v
-retrieving revision 1.10
-diff -u -p -b -r1.10 radeon_accel.c
---- xc.orig/programs/Xserver/hw/xfree86/drivers/ati/radeon_accel.c	12 Aug 2004 05:00:22 -0000	1.10
-+++ xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_accel.c	15 Oct 2004 21:13:47 -0000
-@@ -168,6 +168,31 @@ void RADEONEngineReset(ScrnInfoPtr pScrn
-     CARD32         rbbm_soft_reset;
-     CARD32         host_path_cntl;
+diff -urN X11-6.9.0/xc/config/cf/xfree86.cf.orig X11-6.9.0/xc/config/cf/xfree86.cf
+--- X11-6.9.0/xc/config/cf/xfree86.cf.orig	2005-10-03 18:08:44.000000000 +0200
++++ X11-6.9.0/xc/config/cf/xfree86.cf	2005-12-27 21:28:39.000000000 +0100
+@@ -398,7 +398,7 @@
+ # endif
  
-+    /* The following RBBM_SOFT_RESET sequence can help un-wedge
-+     * an R300 after the command processor got stuck.
-+     */
-+    rbbm_soft_reset = INREG(RADEON_RBBM_SOFT_RESET);
-+    OUTREG(RADEON_RBBM_SOFT_RESET, (rbbm_soft_reset |
-+                                   RADEON_SOFT_RESET_CP |
-+                                   RADEON_SOFT_RESET_HI |
-+                                   RADEON_SOFT_RESET_SE |
-+                                   RADEON_SOFT_RESET_RE |
-+                                   RADEON_SOFT_RESET_PP |
-+                                   RADEON_SOFT_RESET_E2 |
-+                                   RADEON_SOFT_RESET_RB));
-+    INREG(RADEON_RBBM_SOFT_RESET);
-+    OUTREG(RADEON_RBBM_SOFT_RESET, (rbbm_soft_reset & (CARD32)
-+                                   ~(RADEON_SOFT_RESET_CP |
-+                                     RADEON_SOFT_RESET_HI |
-+                                     RADEON_SOFT_RESET_SE |
-+                                     RADEON_SOFT_RESET_RE |
-+                                     RADEON_SOFT_RESET_PP |
-+                                     RADEON_SOFT_RESET_E2 |
-+                                     RADEON_SOFT_RESET_RB)));
-+    INREG(RADEON_RBBM_SOFT_RESET);
-+    OUTREG(RADEON_RBBM_SOFT_RESET, rbbm_soft_reset);
-+    INREG(RADEON_RBBM_SOFT_RESET);
+ # ifndef DriDrivers
+-#  define DriDrivers		gamma i810 i830 mga r128 radeon r200 \
++#  define DriDrivers		gamma i810 i830 mga r128 radeon r200 r300 \
+ 				sis tdfx DevelDRIDrivers
+ # endif
+ #endif
+@@ -490,7 +490,7 @@
+ 
+ # define DevelDRIDrivers	/**/
+ 
+-# define DriDrivers		gamma i810 mga r128 radeon r200 \
++# define DriDrivers		gamma i810 mga r128 radeon r200 r300 \
+ 				TdfxDriDriver DevelDRIDrivers
+ #endif /*AMD64Arcitecture*/
+ 
+@@ -873,7 +873,7 @@
+ 				vga XF86OSCardDrivers XF86ExtraCardDrivers
+ # endif
+ # ifndef DriDrivers
+-#  define DriDrivers		gamma tdfx mga r128 radeon r200 /*sis*/
++#  define DriDrivers		gamma tdfx mga r128 radeon r200 r300 /*sis*/
+ # endif
+ #endif
+ 
+@@ -969,7 +969,7 @@
+ 				XF86OSCardDrivers XF86ExtraCardDrivers
+ # endif
+ # ifndef DriDrivers
+-#  define DriDrivers		gamma tdfx mga r128 radeon r200
++#  define DriDrivers		gamma tdfx mga r128 radeon r200 r300
+ # endif
+ #endif
+ 
+@@ -1066,7 +1066,7 @@
+ #  define TdfxDriDriver		/**/
+ # endif
+ # ifndef DriDrivers
+-#  define DriDrivers		gamma tdfx mga r128 radeon r200
++#  define DriDrivers		gamma tdfx mga r128 radeon r200 r300
+ # endif
+ #endif
+ 
+@@ -1443,7 +1443,7 @@
+ #      define DriDrivers radeon
+ #    endif
+ #    if GlxBuiltInR200
+-#      define DriDrivers r200
++#      define DriDrivers r200 r300
+ #    endif
+ #    if GlxBuiltInSIS
+ #      define DriDrivers sis
+diff -urN X11-6.9.0/xc/config/cf/xorg.cf.orig X11-6.9.0/xc/config/cf/xorg.cf
+--- X11-6.9.0/xc/config/cf/xorg.cf.orig	2005-12-27 23:20:10.000000000 +0100
++++ X11-6.9.0/xc/config/cf/xorg.cf	2005-12-27 23:19:52.000000000 +0100
+@@ -425,7 +425,7 @@
+    /* SiS is 64-bit unclean as of this writing. */
+ #   define i386DRIDrivers /**/
+ #  endif
+-#  define DriDrivers		i386DRIDrivers mga r128 radeon r200 tdfx
++#  define DriDrivers		i386DRIDrivers mga r128 radeon r200 r300 tdfx
+ # endif
+ #endif /* i386Architecture || ia64Architecture */
+ 
+@@ -462,7 +462,7 @@
+ 
+ /* SiS is 64-bit unclean as of this writing. */
+ # ifndef DriDrivers
+-#  define DriDrivers		i915 mga r128 radeon r200 tdfx
++#  define DriDrivers		i915 mga r128 radeon r200 r300 tdfx
+ # endif
+ #endif /*AMD64Arcitecture*/
+ 
+@@ -603,7 +603,7 @@
+  *  SiS is 64-bit unclean as of this writing. 
+  */  
+ # ifndef DriDrivers
+-#  define DriDrivers		tdfx mga r128 radeon r200
++#  define DriDrivers		tdfx mga r128 radeon r200 r300
+ # endif
+ #endif /* AlphaArchitecture */
+ 
+@@ -637,7 +637,7 @@
+ # endif
+ /*  The tdfx driver needs Glide, which is not available for PPC. */
+ # ifndef DriDrivers
+-#  define DriDrivers		mga r128 radeon r200
++#  define DriDrivers		mga r128 radeon r200 r300
+ # endif
+ #endif  /* PpcArchitecture || Mc68020Architecture */
+ 
+@@ -666,7 +666,7 @@
+ 				XF86OSCardDrivers XF86ExtraCardDrivers
+ # endif
+ # ifndef DriDrivers
+-#  define DriDrivers		mga r128 radeon r200
++#  define DriDrivers		mga r128 radeon r200 r300
+ # endif
+ #endif
+ 
+@@ -985,7 +985,7 @@
+ #      define DriDrivers radeon
+ #    endif
+ #    if GlxBuiltInR200
+-#      define DriDrivers r200
++#      define DriDrivers r200 r300
+ #    endif
+ #    if GlxBuiltInSIS
+ #      define DriDrivers sis
+--- X/xc/lib/GL/mesa/drivers/dri/r300/Imakefile.mesa-	2005-11-15 01:09:43.000000000 +0100
++++ X/xc/lib/GL/mesa/drivers/dri/r300/Imakefile	2005-11-15 01:09:43.000000000 +0100
+@@ -0,0 +1,76 @@
++XCOMM $XFree86: xc/lib/GL/mesa/src/drv/r300/Imakefile,v 1.9 3002/02/23 00:45:50 dawes Exp $
 +
-     RADEONEngineFlush(pScrn);
- 
-     clock_cntl_index = INREG(RADEON_CLOCK_CNTL_INDEX);
-@@ -531,6 +556,30 @@ void RADEONCPFlushIndirect(ScrnInfoPtr p
- 		   buffer->idx);
-     }
- 
-+    /* TODO: Fix this more elegantly.
-+     * Sometimes (especially with multiple DRI clients), this code
-+     * runs immediately after a DRI client issues a rendering command.
-+     *
-+     * The accel code regularly inserts WAIT_UNTIL_IDLE into the
-+     * command buffer that is sent with the indirect buffer below.
-+     * The accel code fails to set the 3D cache flush registers for
-+     * the R300 before sending WAIT_UNTIL_IDLE. Sending a cache flush
-+     * on these new registers is not necessary for pure 2D functionality,
-+     * but it *is* necessary after 3D operations.
-+     * Without the cache flushes before WAIT_UNTIL_IDLE, the R300 locks up.
-+     *
-+     * The CP_IDLE call into the DRM indirectly flushes all caches and
-+     * thus avoids the lockup problem, but the solution is far from ideal.
-+     * Better solutions could be:
-+     *  - always flush caches when entering the X server
-+     *  - track the type of rendering commands somewhere and issue
-+     *    cache flushes when they change
-+     * However, I don't feel confident enough with the control flow
-+     * inside the X server to implement either fix. -- nh
-+     */
-+    if (IS_R300_VARIANT)
-+        drmCommandNone(info->drmFD, DRM_RADEON_CP_IDLE);
-+    
-     indirect.idx     = buffer->idx;
-     indirect.start   = start;
-     indirect.end     = buffer->used;
-@@ -570,6 +619,10 @@ void RADEONCPReleaseIndirect(ScrnInfoPtr
- 		   buffer->idx);
-     }
- 
-+    /* Hack for the R300 (see RADEONCPFlushIndirect for explanation) */
-+    if (IS_R300_VARIANT)
-+        drmCommandNone(info->drmFD, DRM_RADEON_CP_IDLE);
-+	
-     indirect.idx     = buffer->idx;
-     indirect.start   = start;
-     indirect.end     = buffer->used;
-Index: radeon_common.h
-===================================================================
-RCS file: /cvs/xorg/xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_common.h,v
-retrieving revision 1.3
-diff -u -p -b -r1.3 radeon_common.h
---- xc.orig/programs/Xserver/hw/xfree86/drivers/ati/radeon_common.h	16 Jun 2004 09:43:58 -0000	1.3
-+++ xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_common.h	15 Oct 2004 21:13:50 -0000
-@@ -93,7 +93,8 @@ typedef struct {
-    enum {
-       DRM_RADEON_INIT_CP    = 0x01,
-       DRM_RADEON_CLEANUP_CP = 0x02,
--      DRM_RADEON_INIT_R200_CP = 0x03
-+      DRM_RADEON_INIT_R200_CP = 0x03,
-+      DRM_RADEON_INIT_R300_CP = 0x04
-    } func;
-    unsigned long sarea_priv_offset;
-    int is_pci;
-Index: radeon_dri.c
-===================================================================
-RCS file: /cvs/xorg/xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_dri.c,v
-retrieving revision 1.7
-diff -u -p -b -r1.7 radeon_dri.c
---- xc.orig/programs/Xserver/hw/xfree86/drivers/ati/radeon_dri.c	12 Aug 2004 05:00:22 -0000	1.7
-+++ xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_dri.c	15 Oct 2004 21:13:55 -0000
-@@ -1025,7 +1025,9 @@ static int RADEONDRIKernelInit(RADEONInf
- 
-     memset(&drmInfo, 0, sizeof(drmRadeonInit));
- 
--    if ( info->ChipFamily >= CHIP_FAMILY_R200 )
-+    if ( info->ChipFamily >= CHIP_FAMILY_R300 )
-+       drmInfo.func		= DRM_RADEON_INIT_R300_CP;
-+    else if ( info->ChipFamily >= CHIP_FAMILY_R200 )
-        drmInfo.func		= DRM_RADEON_INIT_R200_CP;
-     else
-        drmInfo.func		= DRM_RADEON_INIT_CP;
-@@ -1184,6 +1186,12 @@ Bool RADEONDRIScreenInit(ScreenPtr pScre
-     int            major, minor, patch;
-     drmVersionPtr  version;
- 
-+    if (info->ChipFamily >= CHIP_FAMILY_R300) {
-+    	xf86DrvMsg(pScrn->scrnIndex, X_WARNING,
-+    		   "Direct rendering support is highly experimental for "
-+    		   "Radeon 9500/9700 and newer cards\n");
-+    }
++#include <Threads.tmpl>
 +
-     /* Check that the GLX, DRI, and DRM modules have been loaded by testing
-      * for known symbols in each module.
-      */
-@@ -1236,7 +1244,9 @@ Bool RADEONDRIScreenInit(ScreenPtr pScre
-     info->pDRIInfo                       = pDRIInfo;
-     pDRIInfo->drmDriverName              = RADEON_DRIVER_NAME;
- 
--    if ( info->ChipFamily >= CHIP_FAMILY_R200 )
-+    if ( info->ChipFamily >= CHIP_FAMILY_R300 )
-+       pDRIInfo->clientDriverName	 = R300_DRIVER_NAME;
-+    else if ( info->ChipFamily >= CHIP_FAMILY_R200 )
-        pDRIInfo->clientDriverName	 = R200_DRIVER_NAME;
-     else
-        pDRIInfo->clientDriverName	 = RADEON_DRIVER_NAME;
-@@ -1371,6 +1381,9 @@ Bool RADEONDRIScreenInit(ScreenPtr pScre
- 	} else if (info->ChipFamily >= CHIP_FAMILY_R200) {
- 	    req_minor = 5;
- 	    req_patch = 0;
-+       	} else if (info->ChipFamily >= CHIP_FAMILY_R300) {
-+           req_minor = 11;
-+           req_patch = 1;
- 	} else {
- #if X_BYTE_ORDER == X_LITTLE_ENDIAN
- 	    req_minor = 1;
-Index: radeon_driver.c
-===================================================================
-RCS file: /cvs/xorg/xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_driver.c,v
-retrieving revision 1.19
-diff -u -p -b -r1.19 radeon_driver.c
---- xc.orig/programs/Xserver/hw/xfree86/drivers/ati/radeon_driver.c	25 Aug 2004 00:30:41 -0000	1.19
-+++ xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_driver.c	15 Oct 2004 21:14:10 -0000
-@@ -4526,11 +4526,13 @@ Bool RADEONScreenInit(int scrnIndex, Scr
- 		       (pScrn->displayWidth * pScrn->virtualY *
- 			info->CurrentLayout.pixel_bytes * 3 + 1023) / 1024);
- 	    info->directRenderingEnabled = FALSE;
-+#if 0
- 	} else if (info->ChipFamily >= CHIP_FAMILY_R300) {
- 	    info->directRenderingEnabled = FALSE;
- 	    xf86DrvMsg(scrnIndex, X_WARNING,
- 		       "Direct rendering not yet supported on "
- 		       "Radeon 9500 and newer cards\n");
++#if GlxUseBuiltInDRIDriver
++#define DoNormalLib (NormalLibGlx || SharedLibGlxWithoutPIC)
++#define DoSharedLib (SharedLibGlx && !SharedLibGlxWithoutPIC)
++#define DoExtraLib SharedLibGlx
++#define DoDebugLib DebugLibGlx
++#define DoProfileLib ProfileLibGlx
++#else
++#define DoNormalLib SharedLibGlxWithoutPIC
++#define DoSharedLib !SharedLibGlxWithoutPIC
++#define DoExtrasLib NO
++#define DoDebugLib NO
++#define DoProfileLib NO
 +#endif
- 	} else if (info->IsSecondary) {
- 	    info->directRenderingEnabled = FALSE;
- 	} else if (xf86IsEntityShared(info->pEnt->index)) {
-Index: radeon_version.h
-===================================================================
-RCS file: /cvs/xorg/xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_version.h,v
-retrieving revision 1.2
-diff -u -p -b -r1.2 radeon_version.h
---- xc.orig/programs/Xserver/hw/xfree86/drivers/ati/radeon_version.h	23 Apr 2004 19:26:46 -0000	1.2
-+++ xc/programs/Xserver/hw/xfree86/drivers/ati/radeon_version.h	15 Oct 2004 21:14:10 -0000
-@@ -38,6 +38,7 @@
- #define RADEON_NAME          "RADEON"
- #define RADEON_DRIVER_NAME   "radeon"
- #define R200_DRIVER_NAME     "r200"
-+#define R300_DRIVER_NAME     "r300"
- 
- #define RADEON_VERSION_MAJOR 4
- #define RADEON_VERSION_MINOR 0
++
++#define MesaDrvCommonBuildDir ../common/
++#include "../common/Imakefile.inc"
++#include "../../../array_cache/Imakefile.inc"
++#include "../../../main/Imakefile.inc"
++#include "../../../math/Imakefile.inc"
++#include "../../../shader/Imakefile.inc"
++#include "../../../shader/grammar/Imakefile.inc"
++#include "../../../shader/slang/Imakefile.inc"
++#include "../../../shader/slang/library/Imakefile.inc"
++#include "../../../swrast/Imakefile.inc"
++#include "../../../swrast_setup/Imakefile.inc"
++#include "../../../tnl/Imakefile.inc"
++#include "../../../tnl_dd/Imakefile.inc"
++#include "../../../Imakefile.inc"
++#if defined(i386Architecture) && MesaUseX86Asm
++#include "../../../x86/Imakefile.inc"
++#endif
++#ifdef SparcArchitecture
++#include "../../../sparc/Imakefile.inc"
++#endif
++#define NeedToLinkMesaSrc
++#include "Imakefile.inc"
++
++      DEFINES = $(ALLOC_DEFINES) $(DRI_DEFINES) $(MESA_ASM_DEFINES)
++     INCLUDES = $(X_INCLUDES) $(MESA_INCLUDES) $(DRI_INCLUDES)
++
++      DRMOBJS = $(GLXLIBSRC)/dri/drm/xf86drm.o \
++		$(GLXLIBSRC)/dri/drm/xf86drmHash.o \
++		$(GLXLIBSRC)/dri/drm/xf86drmRandom.o \
++		$(GLXLIBSRC)/dri/drm/xf86drmSL.o
++
++         SRCS = $(R300SRCS)
++         OBJS = $(DRMOBJS) $(COREMESAOBJS) \
++		$(MESA_ASM_OBJS) $(COMMONOBJS) $(R300OBJS) 
++
++REQUIREDLIBS = MathLibrary $(LDPRELIB) $(GLXLIB) $(XONLYLIB) $(EXPATLIB)
++
++#include <Library.tmpl>
++
++LibraryObjectRule()
++
++SubdirLibraryRule($(R300OBJS))
++NormalLintTarget($(SRCS))
++
++#if !GlxUseBuiltInDRIDriver
++LIBNAME = r300_dri.so
++SharedDriModuleTarget($(LIBNAME),DONE $(OBJS),$(OBJS))
++InstallDynamicModule($(LIBNAME),$(MODULEDIR),dri)
++
++#ifdef GlxSoProf
++SOPROF_LIBNAME = _r300_dri_p
++NormalDepLibraryTarget($(SOPROF_LIBNAME),DONE $(OBJS),$(OBJS))
++InstallLibrary($(SOPROF_LIBNAME),$(MODULEDIR)/dri)
++#endif
++#endif
++
++DependTarget()
++
+--- X/xc/lib/GL/mesa/drivers/dri/r300/Imakefile.inc.mesa-	2005-11-15 01:09:43.000000000 +0100
++++ X/xc/lib/GL/mesa/drivers/dri/r300/Imakefile.inc	2005-11-15 01:42:48.000000000 +0100
+@@ -0,0 +1,188 @@
++XCOMM $XFree86: xc/lib/GL/mesa/src/drv/r300/Imakefile.inc,v 1.2 3001/05/02 15:06:04 dawes Exp $
++
++#ifndef MesaDrvSrcDir
++#define MesaDrvSrcDir $(MESASRCDIR)/src/mesa/drivers/dri
++#endif
++
++MESADRVSRCDIR = MesaDrvSrcDir
++
++#ifndef MesaDrvR300BuildDir
++#define MesaDrvR300BuildDir /**/
++#endif
++MESADRVR300BUILDDIR = MesaDrvR300BuildDir
++
++#if Malloc0ReturnsNull
++ALLOC_DEFINES = -DMALLOC_0_RETURNS_NULL
++#endif
++
++#if BuildXF86DRI
++  DRI_DEFINES = GlxDefines -DX_BYTE_ORDER=ByteOrder -DUSE_NEW_INTERFACE -DIN_DRI_DRIVER -DRADEON_COMMON=1 -DRADEON_COMMON_FOR_R300
++ DRI_INCLUDES = -I$(GLXLIBSRC)/dri \
++		-I$(XINCLUDESRC) \
++		-I$(GLXLIBSRC)/glx \
++		-I$(GLXLIBSRC)/include \
++		-I$(SERVERSRC)/GL/dri \
++		-I$(XF86COMSRC) \
++		-I$(XF86OSSRC) \
++		-I$(DRMSRCDIR)/shared-core \
++		-I$(XF86DRIVERSRC)/ati \
++		-I$(GLXLIBSRC)/dri/drm
++#endif
++
++MESA_INCLUDES = -I$(MESASRCDIR)/src/mesa \
++		-I$(MESASRCDIR)/src/mesa/main \
++		-I$(MESASRCDIR)/src/mesa/glapi \
++		-I$(MESASRCDIR)/src/mesa/shader \
++		-I$(MESASRCDIR)/include \
++		-I$(MESADRVSRCDIR)/common \
++		-I$(MESADRVSRCDIR)/r300 \
++		-I$(MESADRVSRCDIR)/radeon \
++                -I$(MESADRVSRCDIR)/radeon/server
++   X_INCLUDES = -I$(XINCLUDESRC) -I$(EXTINCSRC)
++
++   R300SRCS =	$(MESADRVR300BUILDDIR)r300_cmdbuf.c \
++		$(MESADRVR300BUILDDIR)r300_context.c \
++		$(MESADRVR300BUILDDIR)r300_fragprog.c \
++		/* broken? $(MESADRVR300BUILDDIR)r300_fragprog_swz.c */ \
++		$(MESADRVR300BUILDDIR)r300_ioctl.c \
++		$(MESADRVR300BUILDDIR)r300_maos.c \
++		$(MESADRVR300BUILDDIR)r300_render.c \
++		$(MESADRVR300BUILDDIR)r300_shader.c \
++		$(MESADRVR300BUILDDIR)r300_state.c \
++		$(MESADRVR300BUILDDIR)r300_tex.c \
++		$(MESADRVR300BUILDDIR)r300_texmem.c \
++		$(MESADRVR300BUILDDIR)r300_texprog.c \
++		$(MESADRVR300BUILDDIR)r300_texstate.c \
++		$(MESADRVR300BUILDDIR)r300_vertexprog.c \
++		$(MESADRVR300BUILDDIR)radeon_context.c \
++		$(MESADRVR300BUILDDIR)radeon_ioctl.c \
++		$(MESADRVR300BUILDDIR)radeon_lock.c \
++		$(MESADRVR300BUILDDIR)radeon_span.c \
++		$(MESADRVR300BUILDDIR)radeon_screen.c \
++		$(MESADRVR300BUILDDIR)radeon_state.c
++
++   R300OBJS =	$(MESADRVR300BUILDDIR)r300_cmdbuf.o \
++		$(MESADRVR300BUILDDIR)r300_context.o \
++		$(MESADRVR300BUILDDIR)r300_fragprog.o \
++		/* broken? $(MESADRVR300BUILDDIR)r300_fragprog_swz.o */ \
++		$(MESADRVR300BUILDDIR)r300_ioctl.o \
++		$(MESADRVR300BUILDDIR)r300_maos.o \
++		$(MESADRVR300BUILDDIR)r300_render.o \
++		$(MESADRVR300BUILDDIR)r300_shader.o \
++		$(MESADRVR300BUILDDIR)r300_state.o \
++		$(MESADRVR300BUILDDIR)r300_tex.o \
++		$(MESADRVR300BUILDDIR)r300_texmem.o \
++		$(MESADRVR300BUILDDIR)r300_texprog.o \
++		$(MESADRVR300BUILDDIR)r300_texstate.o \
++		$(MESADRVR300BUILDDIR)r300_vertexprog.o \
++		$(MESADRVR300BUILDDIR)radeon_context.o \
++		$(MESADRVR300BUILDDIR)radeon_ioctl.o \
++		$(MESADRVR300BUILDDIR)radeon_lock.o \
++		$(MESADRVR300BUILDDIR)radeon_span.o \
++		$(MESADRVR300BUILDDIR)radeon_screen.o \
++		$(MESADRVR300BUILDDIR)radeon_state.o
++
++   R300UOBJS =	$(MESADRVR300BUILDDIR)unshared/r300_cmdbuf.o \
++		$(MESADRVR300BUILDDIR)unshared/r300_context.o \
++		$(MESADRVR300BUILDDIR)unshared/r300_fragprog.o \
++		/* broken? $(MESADRVR300BUILDDIR)unshared/r300_fragprog_swz.o */ \
++		$(MESADRVR300BUILDDIR)unshared/r300_ioctl.o \
++		$(MESADRVR300BUILDDIR)unshared/r300_maos.o \
++		$(MESADRVR300BUILDDIR)unshared/r300_render.o \
++		$(MESADRVR300BUILDDIR)unshared/r300_shader.o \
++		$(MESADRVR300BUILDDIR)unshared/r300_state.o \
++		$(MESADRVR300BUILDDIR)unshared/r300_tex.o \
++		$(MESADRVR300BUILDDIR)unshared/r300_texmem.o \
++		$(MESADRVR300BUILDDIR)unshared/r300_texprog.o \
++		$(MESADRVR300BUILDDIR)unshared/r300_texstate.o \
++		$(MESADRVR300BUILDDIR)unshared/r300_vertexprog.o \
++		$(MESADRVR300BUILDDIR)unshared/radeon_context.o \
++		$(MESADRVR300BUILDDIR)unshared/radeon_ioctl.o \
++		$(MESADRVR300BUILDDIR)unshared/radeon_lock.o \
++		$(MESADRVR300BUILDDIR)unshared/radeon_span.o \
++		$(MESADRVR300BUILDDIR)unshared/radeon_screen.o \
++		$(MESADRVR300BUILDDIR)unshared/radeon_state.o
++
++   R300DOBJS =	$(MESADRVR300BUILDDIR)debugger/r300_cmdbuf.o \
++		$(MESADRVR300BUILDDIR)debugger/r300_context.o \
++		$(MESADRVR300BUILDDIR)debugger/r300_fragprog.o \
++		/* broken? $(MESADRVR300BUILDDIR)debugger/r300_fragprog_swz.o */ \
++		$(MESADRVR300BUILDDIR)debugger/r300_ioctl.o \
++		$(MESADRVR300BUILDDIR)debugger/r300_maos.o \
++		$(MESADRVR300BUILDDIR)debugger/r300_render.o \
++		$(MESADRVR300BUILDDIR)debugger/r300_shader.o \
++		$(MESADRVR300BUILDDIR)debugger/r300_state.o \
++		$(MESADRVR300BUILDDIR)debugger/r300_tex.o \
++		$(MESADRVR300BUILDDIR)debugger/r300_texmem.o \
++		$(MESADRVR300BUILDDIR)debugger/r300_texprog.o \
++		$(MESADRVR300BUILDDIR)debugger/r300_texstate.o \
++		$(MESADRVR300BUILDDIR)debugger/r300_vertexprog.o \
++		$(MESADRVR300BUILDDIR)debugger/radeon_context.o \
++		$(MESADRVR300BUILDDIR)debugger/radeon_ioctl.o \
++		$(MESADRVR300BUILDDIR)debugger/radeon_lock.o \
++		$(MESADRVR300BUILDDIR)debugger/radeon_span.o \
++		$(MESADRVR300BUILDDIR)debugger/radeon_screen.o \
++		$(MESADRVR300BUILDDIR)debugger/radeon_state.o
++
++   R300POBJS =	$(MESADRVR300BUILDDIR)profiled/r300_cmdbuf.o \
++		$(MESADRVR300BUILDDIR)profiled/r300_context.o \
++		$(MESADRVR300BUILDDIR)profiled/r300_fragprog.o \
++		/* broken? $(MESADRVR300BUILDDIR)profiled/r300_fragprog_swz.o */ \
++		$(MESADRVR300BUILDDIR)profiled/r300_ioctl.o \
++		$(MESADRVR300BUILDDIR)profiled/r300_maos.o \
++		$(MESADRVR300BUILDDIR)profiled/r300_render.o \
++		$(MESADRVR300BUILDDIR)profiled/r300_shader.o \
++		$(MESADRVR300BUILDDIR)profiled/r300_state.o \
++		$(MESADRVR300BUILDDIR)profiled/r300_tex.o \
++		$(MESADRVR300BUILDDIR)profiled/r300_texmem.o \
++		$(MESADRVR300BUILDDIR)profiled/r300_texprog.o \
++		$(MESADRVR300BUILDDIR)profiled/r300_texstate.o \
++		$(MESADRVR300BUILDDIR)profiled/r300_vertexprog.o \
++		$(MESADRVR300BUILDDIR)profiled/radeon_context.o \
++		$(MESADRVR300BUILDDIR)profiled/radeon_ioctl.o \
++		$(MESADRVR300BUILDDIR)profiled/radeon_lock.o \
++		$(MESADRVR300BUILDDIR)profiled/radeon_span.o \
++		$(MESADRVR300BUILDDIR)profiled/radeon_screen.o \
++		$(MESADRVR300BUILDDIR)profiled/radeon_state.o
++
++#ifdef NeedToLinkMesaSrc
++LinkSourceFile(r300_context.c, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_context.h, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_cmdbuf.c, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_cmdbuf.h, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_emit.h, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_fixed_pipelines.h, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_ioctl.c, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_ioctl.h, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_maos.c, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_maos.h, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_program.h, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_render.c, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_reg.h, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_fragprog.c, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_fragprog.h, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_fragprog_swz.c, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_shader.c, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_state.c, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_state.h, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_tex.c, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_tex.h, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_texmem.c, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_texprog.c, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_texstate.c, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(r300_vertexprog.c, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(radeon_context.c, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(radeon_context.h, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(radeon_ioctl.c, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(radeon_ioctl.h, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(radeon_lock.c, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(radeon_lock.h, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(radeon_screen.c, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(radeon_screen.h, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(radeon_span.c, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(radeon_span.h, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(radeon_state.c, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(radeon_state.h, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(pixel_shader.h, $(MESADRVSRCDIR)/r300)
++LinkSourceFile(vertex_shader.h, $(MESADRVSRCDIR)/r300)
++#endif
