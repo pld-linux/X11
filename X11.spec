@@ -670,6 +670,7 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-imake = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	fontconfig-devel >= 1:2.2.0
+Provides:	libXvMCW-devel
 Provides:	XFree86-devel = %{epoch}:%{version}-%{release}
 Provides:	render = 0.8
 Provides:	xcursor-devel = 1.1.2
@@ -681,6 +682,7 @@ Provides:	xrender-devel = 0.8.4
 #Provides:	libXdamage-devel
 #Provides:	libXfixes-devel
 #Provides:	libXrender-devel
+Obsoletes:	libXvMCW-devel
 %ifarch sparc sparc64 sparcv9
 Obsoletes:	X11R6.1-devel
 %endif
@@ -1445,6 +1447,7 @@ Group:		X11/Libraries
 Requires(post,postun):	/sbin/ldconfig
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	glibc >= 6:2.3.5-7.6
+Provides:	libXvMCW
 Provides:	XFree86-libs = %{epoch}:%{version}-%{release}
 Provides:	xcursor = 1.1.2
 Provides:	xft = 2.1.6
@@ -1454,6 +1457,7 @@ Provides:	xrender = 0.8.4
 #Provides:	libXdamage
 #Provides:	libXfixes
 #Provides:	libXrender
+Obsoletes:	libXvMCW
 %ifarch sparc sparc64 sparcv9
 Obsoletes:	X11R6.1-libs
 %endif
