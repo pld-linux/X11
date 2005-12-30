@@ -151,9 +151,9 @@ Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-xauth = %{epoch}:%{version}-%{release}
 Requires:	pam >= 0.79.0
 Provides:	XFree86 = %{epoch}:%{version}-%{release}
+Obsoletes:	XFree86
 Obsoletes:	xpm-progs
 Obsoletes:	xterm
-Obsoletes:	XFree86
 # for /usr/X11R6/bin/mkfontdir
 Obsoletes:	XFree86-font-utils
 %ifarch sparc sparc64 sparcv9
@@ -391,9 +391,9 @@ Summary(pl):	Wsparcie OpenGL dla systemu X11R6 - biblioteka GL
 Group:		X11/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	XFree86-OpenGL-libGL = %{epoch}:%{version}-%{release}
-Obsoletes:	XFree86-OpenGL-libGL
 Obsoletes:	X11-driver-firegl
 Obsoletes:	X11-driver-nvidia
+Obsoletes:	XFree86-OpenGL-libGL
 Obsoletes:	XFree86-driver-firegl
 Obsoletes:	XFree86-driver-nvidia
 
@@ -446,9 +446,9 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-OpenGL-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Requires:	OpenGL-devel-base
-Provides:	OpenGL-devel = 1.5
 Provides:	OpenGL-GLU-devel = 1.3
 Provides:	OpenGL-GLX-devel = 1.4
+Provides:	OpenGL-devel = 1.5
 Provides:	XFree86-OpenGL-devel = %{epoch}:%{version}-%{release}
 Obsoletes:	Mesa-devel
 Obsoletes:	XFree86-OpenGL-devel
@@ -466,8 +466,8 @@ Summary:	X11R6 static libraries with OpenGL
 Summary(pl):	Biblioteki statyczne do X11R6 ze wsparciem dla OpenGL
 Group:		X11/Development/Libraries
 Requires:	%{name}-OpenGL-devel = %{epoch}:%{version}-%{release}
-Provides:	OpenGL-static = 1.5
 Provides:	OpenGL-GLU-static = 1.3
+Provides:	OpenGL-static = 1.5
 Provides:	XFree86-OpenGL-static = %{epoch}:%{version}-%{release}
 Obsoletes:	Mesa-static
 Obsoletes:	XFree86-OpenGL-static
@@ -670,8 +670,9 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-imake = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	fontconfig-devel >= 1:2.2.0
-Provides:	libXvMCW-devel
+Requires:	pkgconfig
 Provides:	XFree86-devel = %{epoch}:%{version}-%{release}
+Provides:	libXvMCW-devel
 Provides:	render = 0.8
 Provides:	xcursor-devel = 1.1.2
 Provides:	xft-devel = 2.1.6
@@ -789,8 +790,8 @@ Summary:	ATI video driver
 Summary(pl):	Sterownik do kart ATI
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
-Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Requires:	%{name}-driver-i2c = %{epoch}:%{version}-%{release}
+Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-ATI
 Obsoletes:	XFree86-Mach32
 Obsoletes:	XFree86-Mach64
@@ -1447,16 +1448,16 @@ Group:		X11/Libraries
 Requires(post,postun):	/sbin/ldconfig
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	glibc >= 6:2.3.5-7.6
-Provides:	libXvMCW
 Provides:	XFree86-libs = %{epoch}:%{version}-%{release}
-Provides:	xcursor = 1.1.2
-Provides:	xft = 2.1.6
-Provides:	xpm
-Provides:	xrender = 0.8.4
 #Provides:	libXcomposite
 #Provides:	libXdamage
 #Provides:	libXfixes
 #Provides:	libXrender
+Provides:	libXvMCW
+Provides:	xcursor = 1.1.2
+Provides:	xft = 2.1.6
+Provides:	xpm
+Provides:	xrender = 0.8.4
 Obsoletes:	libXvMCW
 %ifarch sparc sparc64 sparcv9
 Obsoletes:	X11R6.1-libs
@@ -2032,7 +2033,7 @@ install -d $RPM_BUILD_ROOT/etc/{pam.d,rc.d/init.d,security/console.apps,sysconfi
 PWD=`pwd`
 %{__make} -C xc	install	install.man \
 	DESTDIR="$RPM_BUILD_ROOT" \
-	DOCDIR="/usr/share/doc/%{name}-%{version}" \
+	DOCDIR="%{_docdir}/%{name}-%{version}" \
 	INSTBINFLAGS="-m 755" \
 	INSTPGMFLAGS="-m 755" \
 	RAWCPP="/lib/cpp" \
@@ -2132,14 +2133,14 @@ ln -sf %{_fontsdir} $RPM_BUILD_ROOT%{_libx11dir}/fonts
 rm -f $RPM_BUILD_ROOT%{_libx11dir}/xkb/xkbcomp
 ln -sf %{_bindir}/xkbcomp $RPM_BUILD_ROOT%{_sysconfdir}/X11/xkb/xkbcomp
 
-ln -sf /usr/share/doc/%{name}-%{version} $RPM_BUILD_ROOT%{_libx11dir}/doc
+ln -sf %{_docdir}/%{name}-%{version} $RPM_BUILD_ROOT%{_libx11dir}/doc
 
 rm -f $RPM_BUILD_ROOT%{_libx11dir}/config/host.def
 
 :> $RPM_BUILD_ROOT%{_libx11dir}/config/host.def
 :> $RPM_BUILD_ROOT%{_sysconfdir}/X11/xorg.conf
 
-rm -rf $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/html
+rm -rf $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/html
 
 # resolve conflict with man-pages
 mv -f $RPM_BUILD_ROOT%{_mandir}/man4/{mouse.4,mouse-x.4}
@@ -2147,10 +2148,10 @@ mv -f $RPM_BUILD_ROOT%{_mandir}/man4/{mouse.4,mouse-x.4}
 # help rpm to detect deps
 chmod 755 $RPM_BUILD_ROOT%{_libdir}/modules/dri/*.so
 
-gzip -9nf $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/*
+gzip -9nf $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/*
 
 # don't gzip README.* files, they are needed by XF86Setup
-gunzip $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/README.*
+gunzip $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/README.*
 
 install -d $RPM_BUILD_ROOT/etc/ld.so.conf.d
 echo '%{_libdir}' > $RPM_BUILD_ROOT/etc/ld.so.conf.d/X11-%{_lib}.conf
