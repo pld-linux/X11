@@ -23,3 +23,14 @@
  #endif
  #endif
  
+--- xc.org/programs/Xserver/hw/xfree86/parser/Imakefile.org	2006-01-01 20:23:00.400963000 +0100
++++ xc/programs/Xserver/hw/xfree86/parser/Imakefile	2006-01-01 20:49:54.830963000 +0100
+@@ -11,6 +11,8 @@
+ 
+ #define UseDBMalloc	NO
+ 
++#define	IncludeSharedObjectInNormalLib
++
+ #if UseDBMalloc
+ SYS_LIBRARIES=-ldbmalloc
+ DBMALLOCDEFINE=-DDBMALLOC
