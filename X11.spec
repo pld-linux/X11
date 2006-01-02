@@ -393,6 +393,7 @@ Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	XFree86-OpenGL-libGL = %{epoch}:%{version}-%{release}
 Obsoletes:	X11-driver-firegl
 Obsoletes:	X11-driver-nvidia
+Obsoletes:	XFree86-Mesa-libGL
 Obsoletes:	XFree86-OpenGL-libGL
 Obsoletes:	XFree86-driver-firegl
 Obsoletes:	XFree86-driver-nvidia
@@ -558,7 +559,6 @@ Requires:	/usr/X11R6/lib/X11/rgb.txt
 Requires:	X11-fonts-base
 Requires:	pam >= 0.79.0
 Provides:	XFree86-Xserver = %{epoch}:%{version}-%{release}
-Obsoletes:	XFree86-Xserver
 Obsoletes:	XFree86-Mono
 Obsoletes:	XFree86-SVGA
 Obsoletes:	XFree86-VGA16
@@ -566,9 +566,13 @@ Obsoletes:	XFree86-VGA16
 Obsoletes:	XFree86-Sun
 Obsoletes:	XFree86-Sun24
 # still not supported in 4.2.0:
-#Obsoletes:	XFree86-Mach8 XFree86-8514 XFree86-AGX XFree86-P9000
+#Obsoletes:	XFree86-8514
+#Obsoletes:	XFree86-AGX
+#Obsoletes:	XFree86-Mach8
+#Obsoletes:	XFree86-P9000
 # (and many drivers from XF86_SVGA server... and some from others)
 Obsoletes:	XFree86-XF86Setup
+Obsoletes:	XFree86-Xserver
 Obsoletes:	Xconfigurator
 
 %description Xserver
