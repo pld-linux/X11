@@ -1474,6 +1474,7 @@ Obsoletes:	XFree86-xrender
 Obsoletes:	Xft
 Obsoletes:	xcursor
 Obsoletes:	xft
+Obsoletes:	xorg-x11-libs-data
 Obsoletes:	xpm
 Obsoletes:	xrender
 
@@ -1916,6 +1917,7 @@ Provides:	xfs = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-xfs
 Obsoletes:	xfs
 Obsoletes:	xfsft
+Obsoletes:	xorg-x11-xfs
 
 %description xfs
 This is a font server for XOrg X11. You can serve fonts to other X
