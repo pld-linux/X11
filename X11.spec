@@ -674,7 +674,6 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-imake = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	fontconfig-devel >= 1:2.2.0
-Requires:	pkgconfig
 Provides:	XFree86-devel = %{epoch}:%{version}-%{release}
 Provides:	libXvMCW-devel
 Provides:	render = 0.8
