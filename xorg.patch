@@ -12,7 +12,7 @@ http://glen.alkohol.ee/xkb/
 +
 +    include "pc/us_ee"
 +};
---- /dev/null	2006-01-07 01:47:26.000000000 +0200
+--- /dev/null	2006-01-13 00:14:27.000000000 +0200
 +++ us_ee	2006-01-23 10:22:25.000000000 +0200
 @@ -0,0 +1,63 @@
 +// $XFree86$
@@ -78,3 +78,14 @@ http://glen.alkohol.ee/xkb/
 +};
 +
 +// vim:ts=8:sw=8:encoding=iso8859-15
+--- Imakefile~	2005-10-09 21:05:42.000000000 +0300
++++ Imakefile	2005-12-24 17:09:12.000000000 +0200
+@@ -20,7 +20,7 @@
+ 		ro ru \
+ 		se si sk srp sy \
+ 		th tj tr \
+-		ua us uz \
++		ua us us_ee uz \
+ 		vn 
+ 
+ all::
