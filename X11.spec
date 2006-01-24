@@ -28,7 +28,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.9.0
-Release:	3
+Release:	4
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -106,6 +106,7 @@ Patch26:	%{name}-xterm-256colors.patch
 Patch27:	%{name}-makefile-fastbuild.patch
 Patch28:	%{name}-dri-ffb-compile.patch
 Patch29:	%{name}-radeon-entervt.patch
+Patch30:	%{name}-acpi_event_loop_fix.patch
 # updated from http://dl.sourceforge.net/i810fb/i810fb-xfree86-420.tar.bz2 : i810fb-xfree420.diff
 Patch31:	%{name}-i810fb.patch
 Patch50:	%{name}-glibc-locale_sync.patch
@@ -1984,6 +1985,7 @@ X11-libs.
 rm -f xc/config/cf/host.def
 
 %patch29 -p1
+%patch30 -p0
 %patch31 -p0
 # ankry, FIXME :)
 # %patch50 -p1
