@@ -1,6 +1,6 @@
 http://glen.alkohol.ee/xkb/
---- us	2004-09-10 00:26:13.000000000 +0300
-+++ us-gentoo	2004-09-16 00:06:23.000000000 +0300
+--- us.orig	2004-09-10 00:26:13.000000000 +0300
++++ us	2006-01-23 10:23:54.000000000 +0200
 @@ -120,3 +120,10 @@
  
      include "level3(ralt_switch_multikey)"
@@ -8,19 +8,26 @@ http://glen.alkohol.ee/xkb/
 +
 +partial alphanumeric_keys
 +xkb_symbols "ee" {
-+    name[Group1]="US/Estonian";
++    name[Group1]="US/Estonia";
 +
 +    include "pc/us_ee"
 +};
---- /dev/null	2005-09-16 18:21:17.000000000 +0300
-+++ us_ee	2005-05-20 14:33:45.000000000 +0300
-@@ -0,0 +1,58 @@
+--- /dev/null	2006-01-07 01:47:26.000000000 +0200
++++ us_ee	2006-01-23 10:22:25.000000000 +0200
+@@ -0,0 +1,63 @@
 +// $XFree86$
 +
 +// Based on pc/us_intl keyboard map.
-+// glen@delfi.ee
++// Elan Ruusamäe <glen@delfi.ee>
 +//
 +// $Log$
++// Revision 1.9  2006/01/23 08:22:25  glen
++// - updated to X11 6.9.0
++// - set group name to country name
++//
++// Revision 1.8  2005/10/11 06:35:55  glen
++// - add vim encoding
++//
 +// Revision 1.7  2005/05/20 11:33:45  glen
 +// - unified tabs
 +//
@@ -46,9 +53,8 @@ http://glen.alkohol.ee/xkb/
 +partial default alphanumeric_keys
 +xkb_symbols "basic" {
 +
-+	name[Group1]="US/Estonian";
-+
 +	include "pc/us"
++	name[Group1]="US/Estonia";
 +
 +	key <AD11> { [ bracketleft,  braceleft,  udiaeresis, Udiaeresis ] };
 +	key <AD12> { [ bracketright, braceright, otilde,     Otilde     ] };
@@ -68,19 +74,7 @@ http://glen.alkohol.ee/xkb/
 +
 +	key <AE03> { [           3,  numbersign, sterling,   sterling   ] };
 +
-+
-+	include "level3(ralt_switch_multikey)"
++	include "level3(ralt_switch)"
 +};
 +
-+// vim:ts=8:sw=8
---- Imakefile~	2005-10-09 21:05:42.000000000 +0300
-+++ Imakefile	2005-12-24 17:09:12.000000000 +0200
-@@ -20,7 +20,7 @@
- 		ro ru \
- 		se si sk srp sy \
- 		th tj tr \
--		ua us uz \
-+		ua us us_ee uz \
- 		vn 
- 
- all::
++// vim:ts=8:sw=8:encoding=iso8859-15
