@@ -1,0 +1,22 @@
+--- X11-6.9.0/xc/config/cf/xfree86.cf.fix	2006-01-29 19:26:27.691443000 +0100
++++ X11-6.9.0/xc/config/cf/xfree86.cf	2006-01-29 19:30:51.181443000 +0100
+@@ -399,7 +399,7 @@
+ 
+ # ifndef DriDrivers
+ #  define DriDrivers		gamma i810 i830 mga r128 radeon r200 r300 \
+-				sis tdfx DevelDRIDrivers
++				sis tdfx unichrome DevelDRIDrivers
+ # endif
+ #endif
+ 
+--- X11-6.9.0/xc/config/cf/xorg.cf.fix	2006-01-29 19:39:55.301443000 +0100
++++ X11-6.9.0/xc/config/cf/xorg.cf	2006-01-29 19:43:27.541443000 +0100
+@@ -425,7 +425,7 @@
+    /* SiS is 64-bit unclean as of this writing. */
+ #   define i386DRIDrivers /**/
+ #  endif
+-#  define DriDrivers		i386DRIDrivers mga r128 radeon r200 r300 tdfx
++#  define DriDrivers		i386DRIDrivers mga r128 radeon r200 r300 tdfx unichrome
+ # endif
+ #endif /* i386Architecture || ia64Architecture */
+ 
