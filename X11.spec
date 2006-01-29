@@ -123,6 +123,7 @@ Patch69:	%{name}-radeon-dynamic-clocks.patch
 Patch71:	%{name}-radeon-set-fb-location.patch
 Patch72:	http://glen.alkohol.ee/xkb/xorg.patch
 Patch73:	%{name}-r300.patch
+Patch74:	%{name}-unichrome.patch
 
 #head-patch
 #ftp://ftp.linux.cz/pub/linux/people/jan_kasprzak/xorg-dualhead/
@@ -2002,6 +2003,8 @@ rm -f xc/config/cf/host.def
 %{__patch} -d xc/programs/xkbcomp/symbols/pc < %{PATCH72}
 
 %{?with_r300:%patch73 -p1}
+%{?with_r300:%patch74 -p1}
+# patch74 required patch73
 %{?with_dualhead:%patch100 -p1}
 
 sed -i -e 's#krb5/##g' xc/lib/Xau/*.* xc/programs/xdm/greeter/*.* \
@@ -3021,6 +3024,9 @@ fi
 %files driver-via
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/via_drv.so
+%ifarch %{ix86}
+%attr(755,root,root) %{_libdir}/modules/dri/unichrome_dri.so
+%endif
 %{_mandir}/man4/via.4*
 %endif
 
