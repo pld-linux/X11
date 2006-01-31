@@ -114,6 +114,7 @@ Patch60:	%{name}-oldkeyb.patch
 Patch61:	%{name}-sparc64-asmfix.patch
 Patch62:	%{name}-sparc64-v9fix.patch
 Patch63:	%{name}-pci-build.patch
+Patch64:	%{name}-xkbcomp-level.patch
 # XFree86-tdfx-fix-vtswitch-font-corruption.patch - issue still not fixed,
 # but patch doesn't help either; however, it occurs in text mode only, not
 # with tdfxfb, which is worth using anyway
@@ -1995,6 +1996,7 @@ rm -f xc/config/cf/host.def
 # %patch61 -p1
 %patch62 -p1
 %patch63 -p1
+%patch64 -p1
 
 # FIXME, is this still needed?
 # %patch69 -p0
