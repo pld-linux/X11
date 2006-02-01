@@ -76,6 +76,7 @@ Source50:	xcalc.png
 Source51:	xload.png
 Source52:	xmag.png
 Source53:	http://oss.sgi.com/projects/ogl-sample/ABI/glext.h
+Source54:	XvMCConfig
 # NoSource53-md5:	0c40bd4545aa630e139043c2b12f0807
 Patch1:		%{name}-PLD.patch
 Patch2:		%{name}-enableglide.patch
@@ -2170,6 +2171,8 @@ echo '%{_libdir}' > $RPM_BUILD_ROOT/etc/ld.so.conf.d/X11-%{_lib}.conf
 
 chmod -R u+w $RPM_BUILD_ROOT
 
+cp -a %{SOURCE54} $RPM_BUILD_ROOT%{_sysconfdir}/X11/XvMCConfig
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -2618,6 +2621,7 @@ fi
 %{_libx11dir}/getconfig
 
 %config(missingok,noreplace) %verify(not md5 mtime size) %{_sysconfdir}/X11/xorg.conf
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/X11/XvMCConfig
 %attr(640,root,root) %config %verify(not md5 mtime size) /etc/pam.d/xserver
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.xserver
 %config(missingok) /etc/security/console.apps/xserver
