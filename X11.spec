@@ -689,7 +689,6 @@ Provides:	xrender-devel = 0.8.4
 #Provides:	libXdamage-devel
 #Provides:	libXfixes-devel
 #Provides:	libXrender-devel
-Obsoletes:	libXvMCW-devel
 %ifarch sparc sparc64 sparcv9
 Obsoletes:	X11R6.1-devel
 %endif
@@ -700,6 +699,7 @@ Obsoletes:	XFree86-xft-devel
 Obsoletes:	XFree86-xft2-devel
 Obsoletes:	XFree86-xrender-devel
 Obsoletes:	Xft-devel
+Obsoletes:	libXvMCW-devel
 Obsoletes:	render
 Obsoletes:	xcursor-devel
 Obsoletes:	xft-devel
@@ -1464,7 +1464,6 @@ Provides:	xcursor = 1.1.2
 Provides:	xft = 2.1.6
 Provides:	xpm
 Provides:	xrender = 0.8.4
-Obsoletes:	libXvMCW
 %ifarch sparc sparc64 sparcv9
 Obsoletes:	X11R6.1-libs
 %endif
@@ -1474,6 +1473,7 @@ Obsoletes:	XFree86-xft
 Obsoletes:	XFree86-xft2
 Obsoletes:	XFree86-xrender
 Obsoletes:	Xft
+Obsoletes:	libXvMCW
 Obsoletes:	xcursor
 Obsoletes:	xft
 Obsoletes:	xorg-x11-libs-data
