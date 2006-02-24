@@ -150,7 +150,7 @@ BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	ncurses-devel
 BuildRequires:	pam-devel
-BuildRequires:	rpmbuild(macros) >= 1.213
+BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRequires:	utempter-devel
 BuildRequires:	zlib-devel
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
@@ -2210,18 +2210,16 @@ sed -i -e "/^%(echo %{_libdir} | sed -e 's,/,\\/,g')$/d" /etc/ld.so.conf
 %post xdm
 /sbin/chkconfig --add xdm
 if [ -f /var/lock/subsys/xdm ]; then
-	echo "Run \"/etc/rc.d/init.d/xdm restart\" to restart xdm." >&2
+	echo "Run \"/sbin/service xdm restart\" to restart xdm." >&2
 	echo "WARNING: it will terminate all sessions opened from xdm!" >&2
 else
-	echo "Run \"/etc/rc.d/init.d/xdm start\" to start xdm." >&2
+	echo "Run \"/sbin/service xdm start\" to start xdm." >&2
 fi
 
 %preun xdm
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/xdm ]; then
-		/etc/rc.d/init.d/xdm stop >&2
-	fi
 	/sbin/chkconfig --del xdm
+	%service xdm stop
 fi
 
 %pre xfs
@@ -2230,17 +2228,11 @@ fi
 
 %post xfs
 /sbin/chkconfig --add xfs
-if [ -f /var/lock/subsys/xfs ]; then
-	/etc/rc.d/init.d/xfs restart >&2
-else
-	echo "Run \"/etc/rc.d/init.d/xfs start\" to start font server." >&2
-fi
+%service xfs restart "font server"
 
 %preun xfs
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/xfs ]; then
-		/etc/rc.d/init.d/xfs stop >&2
-	fi
+	%service xfs stop
 	/sbin/chkconfig --del xfs
 fi
 
@@ -2257,7 +2249,7 @@ fi
 %groupadd -P %{name}-xfs -g 56 -r -f xfs
 %useradd -P %{name}-xfs -u 56 -r -d /etc/X11/fs -s /bin/false -c "X Font Server" -g xfs xfs
 /sbin/chkconfig --add xfs
-/etc/rc.d/init.d/xfs start >&2
+/sbin/service xfs start >&2
 
 %triggerpostun Xserver -- XFree86-Xserver
 if [ -s /etc/X11/XF86Config.rpmsave ]; then
