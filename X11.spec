@@ -28,7 +28,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.9.0
-Release:	6
+Release:	7
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -78,6 +78,7 @@ Source52:	xmag.png
 Source53:	http://oss.sgi.com/projects/ogl-sample/ABI/glext.h
 Source54:	XvMCConfig
 # NoSource53-md5:	0c40bd4545aa630e139043c2b12f0807
+Patch0:		http://xorg.freedesktop.org/releases/X11R6.9.0/patches/x11r6.9.0-geteuid.diff
 Patch1:		%{name}-PLD.patch
 Patch2:		%{name}-enableglide.patch
 Patch3:		%{name}-DisableDebug.patch
@@ -1958,6 +1959,9 @@ X11-libs.
 
 %prep
 %setup -qc -a1 -a2 -a7
+cd xc
+%patch0 -p0
+cd ..
 %patch1 -p1
 %{?with_glide:%patch2 -p0}
 %patch3 -p0
