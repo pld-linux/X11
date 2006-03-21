@@ -1996,8 +1996,7 @@ rm -f xc/config/cf/host.def
 %patch30 -p0
 %patch31 -p0
 %patch32 -p0
-# ankry, FIXME :)
-# %patch50 -p1
+%patch50 -p1
 %patch60 -p0
 # FIXME
 # %patch61 -p1
