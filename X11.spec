@@ -7,7 +7,6 @@
 # - -Xprint seem to be Xprt configuration files - if they aren't used by
 #   some (possibly remote) X client, merge them into -Xprt
 # - where to take dtpdmd from?
-# - http://security.gentoo.org/glsa/glsa-200509-07.xml
 #
 # Conditional build:
 %bcond_without	glide		# don't build glide driver
