@@ -1,9 +1,0 @@
-diff -urN X11-6.7.0.orig/xc/programs/xkbcomp/rules/Imakefile X11-6.7.0/xc/programs/xkbcomp/rules/Imakefile
---- X11-6.7.0.orig/xc/programs/xkbcomp/rules/Imakefile	2004-05-26 15:12:16.000000000 +0200
-+++ X11-6.7.0/xc/programs/xkbcomp/rules/Imakefile	2004-05-26 15:14:15.000000000 +0200
-@@ -9,4 +9,5 @@
- InstallMultiple($(DATAFILES),$(LIBDIR)/xkb/rules)
- InstallMultiple($(LISTFILES),$(LIBDIR)/xkb/rules)
- InstallCreateLink($(LIBDIR)/xkb/rules,xorg,xfree86)
-+InstallCreateLink($(LIBDIR)/xkb/rules,xorg.lst,xfree86.lst)
- DependTarget()
