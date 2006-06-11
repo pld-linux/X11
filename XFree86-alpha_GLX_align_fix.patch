@@ -1,16 +1,18 @@
-This patch by Brian Paul.
-
---- XFree86-4.1.0/xc/lib/GL/glx/Imakefile~	Wed Jun 20 16:32:13 2001
-+++ XFree86-4.1.0/xc/lib/GL/glx/Imakefile	Wed Jun 20 16:33:55 2001
-@@ -87,7 +87,11 @@
- 		vertarr.o \
- 	        xfont.o
+--- xc/lib/GL/glx/Imakefile	2006-02-20 01:14:35.000000000 +0100
++++ xc/lib/GL/glx/Imakefile-new	2006-06-11 03:21:31.564753888 +0200
+@@ -149,8 +149,13 @@
+ 		glx_query.o \
+ 		glx_texture_compression.o
  
+-     GLX_DEFS = GlxDefines VidModeExtensionDefines \
+-	        -DDEFAULT_DRIVER_DIR=\"$(MODULEDIR)/dri\"
 +#if defined(AlphaArchitecture)
-+     GLX_DEFS = GlxDefines VidModeExtensionDefines -D__GLX_ALIGN64
++     GLX_DEFS = GlxDefines VidModeExtensionDefines -D__GLX_ALIGN64 \
++               -DDEFAULT_DRIVER_DIR=\"$(MODULEDIR)/dri\"
 +#else
-      GLX_DEFS = GlxDefines VidModeExtensionDefines
++      GLX_DEFS = GlxDefines VidModeExtensionDefines \
++                -DDEFAULT_DRIVER_DIR=\"$(MODULEDIR)/dri\"
 +#endif
  
- #if BuildXF86DRI
-      DRI_INCS = -I$(GLXLIBSRC)/dri
+ #ifdef i386Architecture
+       ASM_DIR = x86

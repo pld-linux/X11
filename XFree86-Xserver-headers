@@ -1,6 +1,6 @@
 include/fonts/font.h
-lib/GL/dri/xf86dri.h
-lib/GL/dri/xf86dristr.h
+lib/GL/glx/xf86dri.h
+lib/GL/glx/xf86dristr.h
 programs/Xserver/GL/dri/dri.h
 programs/Xserver/GL/dri/sarea.h
 programs/Xserver/Xext/dgaproc.h

@@ -10,17 +10,3 @@ diff -urN xc.orig/programs/xman/Imakefile xc/programs/xman/Imakefile
  # endif
  #elif defined(OpenBSDArchitecture) || defined(NetBSDArchitecture) || \
      defined(DarwinArchitecture)
-diff -urN xc.orig/programs/xman/xman.man xc/programs/xman/xman.man
---- xc.orig/programs/xman/xman.man	Mon Dec 30 15:54:14 2002
-+++ xc/programs/xman/xman.man	Mon Dec 30 18:12:17 2002
-@@ -93,8 +93,8 @@
- .SH "BSD AND LINUX SYSTEMS"        
- .PP
- In newer BSD and Linux systems, \fIXman\fP will search for a file named
--\fI/etc/man.conf\fP which will contain the list of directories containing
--manual pages. See \fIman.conf\fP(5) for a complete description of the file
-+\fI/etc/man.config\fP which will contain the list of directories containing
-+manual pages. See \fIman.config\fP(5) for a complete description of the file
- format.
- .SH "THE MANDESC FILE"        
- .PP

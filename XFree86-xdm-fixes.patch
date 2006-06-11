@@ -23,37 +23,6 @@ diff -urN xc.orig/programs/xdm/Imakefile xc/programs/xdm/Imakefile
  InstallAppDefaults(Chooser)
  #endif
  #if BuildBoth
-diff -urN xc.orig/programs/xdm/config/Imakefile xc/programs/xdm/config/Imakefile
---- xc.orig/programs/xdm/config/Imakefile	Mon Dec 30 15:54:07 2002
-+++ xc/programs/xdm/config/Imakefile	Mon Dec 30 18:38:58 2002
-@@ -9,13 +9,7 @@
- 
- all:: Xservers.ws xdm-config Xservers Xresources
- 
--#if defined(i386Architecture) && (defined(KNetBSDArchitecture) || defined(KOpenBSDArchitecture))
--DEFAULTVT=vt05
--#endif
--
--#if defined(LinuxDistribution) && (LinuxDistribution == LinuxDebian)
--DEFAULTVT=vt7
--#endif
-+DEFAULTVT=vt9
- 
- #ifndef XdmPixmap
- # define XdmPixmap XFree86.xpm
-@@ -39,7 +33,11 @@
- #endif
- 
- CppFileTarget(Xservers.ws,Xserv.ws.cpp,-DBINDIR=$(BINDIR) -DDEFAULTVT=$(DEFAULTVT),NullParameter)
--CppFileTarget(xdm-config,xdm-conf.cpp,-DXDMDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR) -DSU=$(SU) -DCHOOSERPATH=$(CHOOSERPATH),NullParameter)
-+#ifdef LinuxArchitecture
-+CppFileTarget(xdm-config,xdm-conf.cpp,$(XPM_DEFINES) -DLINUX=1 -DXDMDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR) -DXDMVARDIR=$(XDMVARDIR) -DCHOOSERPATH="$(BINDIR)/chooser",NullParameter)
-+#else
-+CppFileTarget(xdm-config,xdm-conf.cpp,$(XPM_DEFINES) -DXDMDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR) -DCHOOSERPATH="$(BINDIR)/chooser",NullParameter)
-+#endif /* LinuxArchitecture */
- CppFileTarget(Xresources,Xres.cpp,$(XPM_DEFINES),NullParameter)
- 
- LinkFile(Xservers,Xservers.$(SERVERSTYPE))
 diff -urN xc.org/programs/xdm/config/Xres.cpp xc/programs/xdm/config/Xres.cpp
 --- xc.org/programs/xdm/config/Xres.cpp	2003-11-23 23:32:35.000000000 +0100
 +++ xc/programs/xdm/config/Xres.cpp	2003-11-23 23:33:41.000000000 +0100
@@ -77,3 +46,33 @@ diff -urN xc.org/programs/xdm/config/Xres.cpp xc/programs/xdm/config/Xres.cpp
  #endif /* XPM */
  xlogin*failColor: red
  *Foreground: black
+--- xc/programs/xdm/config/Imakefile.orig	2006-01-09 16:01:05.000000000 +0100
++++ xc/programs/xdm/config/Imakefile	2006-06-11 02:49:16.806881792 +0200
+@@ -4,13 +4,7 @@
+ 
+ all:: Xservers.ws xdm-config Xservers Xresources
+ 
+-#if (defined(i386Architecture) || defined(AMD64Architecture)) && (defined(KNetBSDArchitecture) || defined(KOpenBSDArchitecture))
+-DEFAULTVT=vt05
+-#endif
+-
+-#if defined(LinuxDistribution) && (LinuxDistribution == LinuxDebian)
+-DEFAULTVT=vt7
+-#endif
++DEFAULTVT=vt9
+ 
+ #ifndef XdmPixmap
+ # define XdmPixmap XFree86.xpm
+@@ -36,7 +30,11 @@
+ #endif
+ 
+ CppFileTarget(Xservers.ws,Xserv.ws.cpp,-DBINDIR=$(BINDIR) -DDEFAULTVT=$(DEFAULTVT),NullParameter)
+-CppFileTarget(xdm-config,xdm-conf.cpp,-DXDMDIR=$(XDMDIR) -DXDMAUTHDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR) -DSU=$(SU) -DCHOOSERPATH=$(CHOOSERPATH),NullParameter)
++#ifdef LinuxArchitecture
++CppFileTarget(xdm-config,xdm-conf.cpp,$(XPM_DEFINES) -DLINUX=1 -DXDMDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR) -DXDMVARDIR=$(XDMVARDIR) -DCHOOSERPATH="$(BINDIR)/chooser",NullParameter)
++#else
++CppFileTarget(xdm-config,xdm-conf.cpp,$(XPM_DEFINES) -DXDMDIR=$(XDMDIR) -DXDMLOGDIR=$(XDMLOGDIR) -DXDMPIDDIR=$(XDMPIDDIR) -DCHOOSERPATH="$(BINDIR)/chooser",NullParameter)
++#endif /* LinuxArchitecture */
+ CppFileTarget(Xresources,Xres.cpp,$(XPM_DEFINES),NullParameter)
+ 
+ LinkFile(Xservers,Xservers.$(SERVERSTYPE))

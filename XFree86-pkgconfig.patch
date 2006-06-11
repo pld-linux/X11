@@ -1,21 +1,21 @@
---- xc/lib/Xcursor/Imakefile~	Thu Sep 26 09:52:01 2002
-+++ xc/lib/Xcursor/Imakefile	Tue Jan 14 01:38:12 2003
-@@ -69,7 +69,7 @@
+--- xc/lib/Xcursor/Imakefile.orig	2005-10-25 18:58:48.000000000 +0200
++++ xc/lib/Xcursor/Imakefile	2006-06-11 03:46:50.029912096 +0200
+@@ -72,7 +72,7 @@
  	RemoveFile($@)
  	sh config-subst $(SUBSTVARS) < xcursor.pc.in > $@
  
--InstallNonExecFile(xcursor.pc,$(USRLIBDIR)/pkgconfig)
+-InstallNonExecFile(xcursor.pc,$(PKGCONFIGDIR))
 +InstallNonExecFile(xcursor.pc,/usr/lib/pkgconfig)
  
  clean::
  	RemoveFile(xcursor.pc)
---- xc/lib/Xft/Imakefile~	Thu Nov 14 22:01:18 2002
-+++ xc/lib/Xft/Imakefile	Tue Jan 14 03:09:43 2003
-@@ -132,7 +132,7 @@
+--- xc/lib/Xft/Imakefile.orig	2005-10-25 18:58:48.000000000 +0200
++++ xc/lib/Xft/Imakefile	2006-06-11 03:47:20.687251472 +0200
+@@ -135,7 +135,7 @@
  	RemoveFile($@)
  	sh config/config-subst $(SUBSTVARS) < xft.pc.in > $@
  
--InstallNonExecFile(xft.pc,$(USRLIBDIR)/pkgconfig)
+-InstallNonExecFile(xft.pc,$(PKGCONFIGDIR))
 +InstallNonExecFile(xft.pc,/usr/lib/pkgconfig)
  
  clean::
