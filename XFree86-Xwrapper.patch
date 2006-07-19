@@ -121,7 +121,7 @@ diff -urN xc.orig/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c xc/pro
  SpecialCObjectRule(oscolor,$(ICONFIGFILES),$(DBM_DEFINES))
  #endif
  
-+#if UseXserverWrapper
++#if UseXserverWrapper && XF86Server
 +AllTarget(wrapper.o)
 +
 +       WRAPPER_DEFINES = -DXSERVER_PATH=\"/etc/X11/X\"
