@@ -107,10 +107,17 @@ diff -urN xc.orig/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c xc/pro
  	}
  
  	/*
-diff -urN xc.orig/programs/Xserver/os/Imakefile xc/programs/Xserver/os/Imakefile
---- xc.orig/programs/Xserver/os/Imakefile	Mon Dec 30 15:53:58 2002
-+++ xc/programs/Xserver/os/Imakefile	Mon Dec 30 17:31:52 2002
-@@ -166,6 +167,14 @@
+--- xc/programs/Xserver/os/Imakefile.orig	2006-02-19 16:51:31.000000000 +0100
++++ xc/programs/Xserver/os/Imakefile	2006-07-19 21:30:56.576028250 +0200
+@@ -193,6 +193,7 @@
+ 		  -I$(SERVERSRC)/Xext -I$(SERVERSRC)/render \
+ 		  -I$(SERVERSRC)/lbx -I$(SERVERSRC)/Xprint \
+ 		  -I$(TOP)/lib/Xau Krb5Includes
++  EXTRA_DEFINES = -DUSE_PAM
+  DEPEND_DEFINES = $(DBM_DEFINES) $(XDMCP_DEFINES) \
+ 		  $(TRANS_INCLUDES) $(CONNECTION_FLAGS) DependDefines
+        LINTLIBS = ../dix/llib-ldix.ln
+@@ -239,6 +240,14 @@
  SpecialCObjectRule(oscolor,$(ICONFIGFILES),$(DBM_DEFINES))
  #endif
  
@@ -468,4 +475,3 @@ diff -urN xc.orig/programs/xinit/xinit.c xc/programs/xinit/xinit.c
  #else
  	    (**argv != '/' && **argv != '\\' && **argv != '.' &&
  	     !(isalpha(**argv) && (*argv)[1]==':'))) {
-
