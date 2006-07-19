@@ -80,11 +80,12 @@ diff -urN xc.orig/programs/Xserver/Imakefile xc/programs/Xserver/Imakefile
  #include <Server.tmpl>
  
  #ifdef XFree86Version
-@@ -1146,6 +1141,11 @@
+@@ -1146,6 +1141,12 @@
  #endif /* XnestServer */
  
  
 +#if UseXserverWrapper
++all:: Xwrapper
 +SetUIDProgramTarget(Xwrapper,os/wrapper.o,NullParameter,$(PAMLIBS),NullParameter)
 +InstallProgramWithFlags(Xwrapper,$(BINDIR),$(INSTUIDFLAGS))
 +#endif
