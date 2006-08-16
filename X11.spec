@@ -27,7 +27,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.9.0
-Release:	9
+Release:	10
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -2123,7 +2123,7 @@ install %{SOURCE9} $RPM_BUILD_ROOT/etc/pam.d/xserver
 install %{SOURCE10} $RPM_BUILD_ROOT/etc/rc.d/init.d/xdm
 install %{SOURCE11} $RPM_BUILD_ROOT/etc/rc.d/init.d/xfs
 install %{SOURCE12} $RPM_BUILD_ROOT%{_sysconfdir}/X11/fs/config
-install %{SOURCE13} $RPM_BUILD_ROOT%{_appdefsdir}/pl/XTerm
+install %{SOURCE13} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/XTerm
 
 install %{SOURCE14} $RPM_BUILD_ROOT/etc/sysconfig/xdm
 install %{SOURCE15} $RPM_BUILD_ROOT/etc/sysconfig/xfs
@@ -2278,7 +2278,6 @@ fi
 %{_appdefsdir}/XLogo-color
 %{_appdefsdir}/XSm
 %{_appdefsdir}/XTerm
-%lang(pl) %{_appdefsdir}/pl/XTerm
 %{_appdefsdir}/XTerm-color
 
 %attr(755,root,root) %{_libx11dir}/lbxproxy
