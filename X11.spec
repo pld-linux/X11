@@ -2123,7 +2123,7 @@ install %{SOURCE9} $RPM_BUILD_ROOT/etc/pam.d/xserver
 install %{SOURCE10} $RPM_BUILD_ROOT/etc/rc.d/init.d/xdm
 install %{SOURCE11} $RPM_BUILD_ROOT/etc/rc.d/init.d/xfs
 install %{SOURCE12} $RPM_BUILD_ROOT%{_sysconfdir}/X11/fs/config
-install %{SOURCE13} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/XTerm
+install %{SOURCE13} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/XTerm.pl
 
 install %{SOURCE14} $RPM_BUILD_ROOT/etc/sysconfig/xdm
 install %{SOURCE15} $RPM_BUILD_ROOT/etc/sysconfig/xfs
