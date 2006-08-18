@@ -1,55 +1,33 @@
-NXTerm.JoinSession:			False
-*SimpleMenu*BackingStore:		NotUseful
-*SimpleMenu*menuLabel.font: 		-misc-*-*-*-*-*-15-*-*-*-*-*-*-2
-*SimpleMenu*menuLabel.vertSpace:	100
-*SimpleMenu*HorizontalMargins:		16
-*SimpleMenu*Sme.height:			16
-*SimpleMenu*Cursor:			left_ptr
-*saveLines:				1500
-*eightBitInput:				True
-*scrollBar:				True
-*fullCursor:				True
-*reverseWrap:				True
-*titleBar:				True
-*dynamicColors:				True
 
-! Kolory
-*XTerm*cursorColor:			blue
-*XTerm*cursorBlink:			yes
-*XTerm*background:			black
-*XTerm*foreground:			white
-*XTerm*SimpleMenu.background:		#00aaff
-*XTerm*SimpleMenu.foreground:		black
+*saveLines: 1024
 
-! *VT100.geometry:			100x40
-*VT100*colorULMode: 			on
-*VT100*underLine:			on
-*VT100*colorBDMode:			on
+*SimpleMenu*BackingStore: NotUseful
+*SimpleMenu*menuLabel.font: -adobe-helvetica-bold-r-normal--*-120-*-*-*-*-iso8859-*
+*SimpleMenu*menuLabel.vertSpace: 	100
+*SimpleMenu*HorizontalMargins: 16
+*SimpleMenu*Sme.height:	16
 
-*VT100*color0:				black
-*VT100*color1:				red3
-*VT100*color2:				green3
-*VT100*color3:				yellow3
-*VT100*color4:				blue3
-*VT100*color5:				magenta3
-*VT100*color6:				cyan3
-*VT100*color7:				gray90
-*VT100*color8:				gray30
-*VT100*color9:				red
-*VT100*color10:				green
-*VT100*color11:				yellow
-*VT100*color12:				blue
-*VT100*color13:				magenta
-*VT100*color14:				cyan
-*VT100*color15:				white
-*VT100*colorBD: 			white
-*VT100*colorUL:				green
+*SimpleMenu*Cursor: left_ptr
 
 *mainMenu.Label:			Opcje g³ówne
+*mainMenu*toolbar*Label:		Pasek narzêdziowy
 *mainMenu*securekbd*Label:		Zabezpiecz klawiaturê
-*mainMenu*allowsends*Label:		Allow SendEvents
-*mainMenu*logging*Label:		Log to File
+*mainMenu*allowsends*Label:		Zezwalaj SendEvents
 *mainMenu*redraw*Label:			Od¶wie¿ zawarto¶æ okna
+*mainMenu*logging*Label:		Loguj do pliku
+*mainMenu*print*Label:			Drukuj okno
+*mainMenu*print-redir*Label:		Przekieruj na drukarkê
+*mainMenu*eightBit*Label:		8-bitowe sekwencje kontrolne
+*mainMenu*backarrow key*Label:		Backarrow Key (BS/DEL)
+*mainMenu*num-lock*Label:		Alt/NumLock Modifiers
+*mainMenu*alt-esc*Label:		Alt Sends Escape
+*mainMenu*meta-esc*Label:		Meta Sends Escape
+*mainMenu*delete-is-del*Label:		Delete is DEL
+*mainMenu*oldFunctionKeys*Label:	Old Function-Keys
+*mainMenu*sunFunctionKeys*Label:	Sun Function-Keys
+*mainMenu*sunKeyboard*Label:		VT220 Keyboard
+*mainMenu*hpFunctionKeys*Label:		HP Function-Keys
+*mainMenu*scoFunctionKeys*Label:	SCO Function-Keys
 *mainMenu*suspend*Label:		Wy¶lij sygna³ STOP
 *mainMenu*continue*Label:		Wy¶lij sygna³ CONT
 *mainMenu*interrupt*Label:		Wy¶lij sygna³ INT
@@ -57,15 +35,14 @@ NXTerm.JoinSession:			False
 *mainMenu*terminate*Label:		Wy¶lij sygna³ TERM
 *mainMenu*kill*Label:			Wy¶lij sygna³ KILL
 *mainMenu*quit*Label:			Koniec
-*mainMenu*eightBit*Label:		8-Bit Controls
 
 *vtMenu.Label:				Opcje terminala
 *vtMenu*scrollbar*Label:		W³±cz pasek przewijania
-*vtMenu*jumpscroll*Label:		Enable Jump Scroll
+*vtMenu*jumpscroll*Label:		W³±cz Jump Scroll
 *vtMenu*reversevideo*Label:		Zamieñ kolory t³a i fontu
-*vtMenu*autowrap*Label:			Enable Auto Wraparound
-*vtMenu*reversewrap*Label:		Enable Reverse Wraparound
-*vtMenu*autolinefeed*Label:		Enable Auto Linefeed
+*vtMenu*autowrap*Label:			W³±cz automatyczne zawijanie linii
+*vtMenu*reversewrap*Label:		W³±cz odwrotne zawijanie linii
+*vtMenu*autolinefeed*Label:		W³±cz Auto Linefeed
 *vtMenu*appcursor*Label:		W³acz dla aplikacji klawiaturê kursorów
 *vtMenu*appkeypad*Label:		W³acz dla aplikacji klawiaturê numeryczn±
 *vtMenu*scrollkey*Label:		Przewijaj w dó³ po naci¶niêciu klawisza
@@ -73,16 +50,18 @@ NXTerm.JoinSession:			False
 *vtMenu*allow132*Label:			Zezwól na prze³±czanie 80/132 kolumn
 *vtMenu*cursesemul*Label:		W³acz emulacjê kursora
 *vtMenu*visualbell*Label:		W³±cz sygna³ wizualny
-*vtMenu*marginbell*Label:		Enable Margin Bell
-*vtMenu*altscreen*Label:		Show Alternate Screen
+*vtMenu*poponbell*Label:		Enable Pop on Bell
+*vtMenu*marginbell*Label:		W³±cz dzwonek marginesu
+*vtMenu*cursorblink*Label:		Enable Blinking Cursor
+*vtMenu*titeInhibit*Label:  Enable Alternate Screen Switching
+*vtMenu*activeicon*Label: Enable Active Icon
 *vtMenu*softreset*Label:		Wykonaj miekki reset
 *vtMenu*hardreset*Label:		Wykonaj pe³ny reset
 *vtMenu*clearsavedlines*Label:		Reset i wyczyszcznie bufora terminala
 *vtMenu*tekshow*Label:			Poka¿ okno Tektronic
 *vtMenu*tekmode*Label:			Prze³±cz w tryb Tek
 *vtMenu*vthide*Label:			Ukryj okno terminala
-
-*font:				-misc-*-bold-*-*-*-15-*-*-*-*-*-*-2
+*vtMenu*altscreen*Label:		Poka¿ alternatywny obraz
 
 *fontMenu.Label:			Font terminala
 *fontMenu*fontdefault*Label:		Domy¶lny   (iso-8859-2)
@@ -101,14 +80,27 @@ NXTerm.JoinSession:			False
 *VT100*font6:				-misc-fixed-medium-r-*-*-20-*-*-*-*-*-*-2
 *fontMenu*fontescape*Label:		Escape Sequence
 *fontMenu*fontsel*Label:		Zaznaczony
+
 !fontescape and fontsel overridden by application
 
-*visualBell:				off
+*fontMenu*font-linedrawing*Label:	Czcionka do rysowania linii
+*fontMenu*font-doublesize*Label:	Czcionka o podwójnym rozmiarze
+*fontMenu*font-loadable*Label:		Programowe fonty VT220
+*fontMenu*render-font*Label:		Fonty TrueType
+*fontMenu*utf8-mode*Label:		UTF-8
+
+*VT100.utf8Fonts.font2:	-misc-fixed-medium-r-normal--8-80-75-75-c-50-iso10646-1
+*VT100.utf8Fonts.font:	-misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso10646-1
+*VT100.utf8Fonts.font3:	-misc-fixed-medium-r-normal--14-130-75-75-c-70-iso10646-1
+*VT100.utf8Fonts.font4:	-misc-fixed-medium-r-normal--13-120-75-75-c-80-iso10646-1
+*VT100.utf8Fonts.font5:	-misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
+*VT100.utf8Fonts.font6:	-misc-fixed-medium-r-normal--20-200-75-75-c-100-iso10646-1
+
 *tekMenu.Label:				Opcje terminala Tektronix
-*tekMenu*tektextlarge*Label:		Large Characters
-*tekMenu*tektext2*Label:		#2 Size Characters
-*tekMenu*tektext3*Label:		#3 Size Characters
-*tekMenu*tektextsmall*Label:		Small Characters
+*tekMenu*tektextlarge*Label:		Du¿a czcionka
+*tekMenu*tektext2*Label:		Rozmiar #2 czcionki
+*tekMenu*tektext3*Label:		Rozmiar #3 czcionki
+*tekMenu*tektextsmall*Label:		Ma³a czcionka
 *tekMenu*tekpage*Label:			PAGE
 *tekMenu*tekreset*Label:		RESET
 *tekMenu*tekcopy*Label:			COPY
@@ -116,10 +108,11 @@ NXTerm.JoinSession:			False
 *tekMenu*vtmode*Label:			Prze³±cz na tryb terminala
 *tekMenu*tekhide*Label:			Ukryj okno Tektronic
 
-*tek4014*fontLarge:			9x15
-*tek4014*font2:				8x13
-*tek4014*font3:				6x13
-*tek4014*fontSmall:			6x10
+*tek4014*fontLarge: 9x15
+*tek4014*font2: 8x13
+*tek4014*font3: 6x13
+*tek4014*fontSmall: 6x10
+
 
 ! This file causes when loaded using xrdb correct behaviour of xterm
 ! if you are using enclosed xterm.tcap and xterm.ti.
@@ -283,3 +276,69 @@ NXTerm.JoinSession:			False
 	a<Key>x: string(0x1b) string("x")\n\
 	a<Key>y: string(0x1b) string("y")\n\
 	a<Key>z: string(0x1b) string("z")
+
+! If xterm is built with a toolbar, the widget hierarchy looks like this,
+! showing widget name / class names.  The complete menu hierarchy is built
+! at startup because it is needed to make the layout work for the menubar:
+!
+!	xterm/XTerm
+!		form/Form
+!			menubar/Box
+!				mainMenuButton/MenuButton
+!					mainMenu/SimpleMenu
+!						menuLabel/SmeBSB
+!						toolbar/SmeBSB
+!						...
+!					vtMenu/SimpleMenu
+!						menuLabel/SmeBSB
+!						scrollbar/SmeBSB
+!						...
+!					fontMenu/SimpleMenu
+!						menuLabel/SmeBSB
+!						fontdefault/SmeBSB
+!						...
+!					tekMenu/SimpleMenu
+!						menuLabel/SmeBSB
+!						fontdefault/SmeBSB
+!						...
+!			vt100/VT100
+!			tektronix/TopLevelShell
+!				shellext/VendorShellExt
+!					tek4014/Tek4014 
+!
+! If built without a toolbar, the widget hierarchy is simpler, because there
+! is no form, and the popup menu widgets are created only when they are first
+! used.
+!
+!	xterm/XTerm
+!		shellext/VendorShellExt
+!			mainMenu/SimpleMenu
+!				menuLabel/SmeBSB
+!				...
+!			...
+!		vt100/VT100
+!		tektronix/TopLevelShell
+!			shellext/VendorShellExt
+!				tek4014/Tek4014 
+!
+! A more complete list of the widget/class names can be obtained using editres
+! to dump a file.  Some widget names are not available until the corresponding
+! menu has been created.
+
+! These resources reduce space around the menubar, by eliminating padding in
+! the enclosing form (Thickness) and the border of the Box which represents
+! the menubar widget.
+*form.Thickness: 0
+*menubar.borderWidth: 0
+
+! If we wanted to eliminate the border of the popup menus, we could do this
+! instead, since they are children of the menubar:
+!*menubar.*.borderWidth: 0
+
+! Eliminate the border of the buttons in the menubar, so the only line around
+! the text is for the highlighted button:
+*MenuButton*borderWidth: 0
+
+! Set a border for the menus to make them simpler to distinguish against the
+! vt100 widget:
+*SimpleMenu*borderWidth: 2
