@@ -27,7 +27,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.9.0
-Release:	8
+Release:	11
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -112,6 +112,8 @@ Patch30:	%{name}-acpi_event_loop_fix.patch
 Patch31:	%{name}-i810fb.patch
 # https://bugs.freedesktop.org/show_bug.cgi?id=4320
 Patch32:	%{name}-compositefastpath.patch
+Patch33:	ftp://ftp.x.org/pub/X11R6.9.0/patches/x11r6.9.0-mitri.diff
+Patch34:	%{name}-intel.patch
 Patch50:	%{name}-glibc-locale_sync.patch
 Patch60:	%{name}-oldkeyb.patch
 Patch61:	%{name}-sparc64-asmfix.patch
@@ -1960,7 +1962,9 @@ X11-libs.
 %setup -qc -a1 -a2 -a7
 cd xc
 %patch0 -p0
+%patch33 -p0
 cd ..
+%patch34 -p1
 %patch1 -p1
 %{?with_glide:%patch2 -p0}
 %patch3 -p0
@@ -2121,7 +2125,7 @@ install %{SOURCE9} $RPM_BUILD_ROOT/etc/pam.d/xserver
 install %{SOURCE10} $RPM_BUILD_ROOT/etc/rc.d/init.d/xdm
 install %{SOURCE11} $RPM_BUILD_ROOT/etc/rc.d/init.d/xfs
 install %{SOURCE12} $RPM_BUILD_ROOT%{_sysconfdir}/X11/fs/config
-install %{SOURCE13} $RPM_BUILD_ROOT%{_appdefsdir}/pl/XTerm
+install %{SOURCE13} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/XTerm.pl
 
 install %{SOURCE14} $RPM_BUILD_ROOT/etc/sysconfig/xdm
 install %{SOURCE15} $RPM_BUILD_ROOT/etc/sysconfig/xfs
@@ -2276,7 +2280,6 @@ fi
 %{_appdefsdir}/XLogo-color
 %{_appdefsdir}/XSm
 %{_appdefsdir}/XTerm
-%lang(pl) %{_appdefsdir}/pl/XTerm
 %{_appdefsdir}/XTerm-color
 
 %attr(755,root,root) %{_libx11dir}/lbxproxy
