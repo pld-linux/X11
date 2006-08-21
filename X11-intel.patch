@@ -1,0 +1,42 @@
+diff -u -r1.18 xf86pciBus.c
+--- X11-6.9.0/xc/programs/Xserver/hw/xfree86/common/xf86pciBus.c	25 Mar 2006 19:52:03 -0000	1.18
++++ X11-6.9.0/xc/programs/Xserver/hw/xfree86/common/xf86pciBus.c	26 Apr 2006 04:14:04 -0000
+@@ -1774,7 +1774,16 @@
+ 		PciBus->brfunc = pcrp->funcnum;
+ 
+ 		PciBus->subclass = sub_class;
+-		PciBus->interface = pcrp->pci_prog_if;
++
++		/* The Intel bridges don't report as transparent
++		   but guess what they are - from Linux kernel - airlied */
++		if ((pcrp->pci_vendor == PCI_VENDOR_INTEL) && 
++		   ((pcrp->pci_device & 0xff00) == 0x2400)) {
++			xf86MsgVerb(X_INFO, 3, "Intel Bridge workaround enabled\n");
++			PciBus->interface = PCI_IF_BRIDGE_PCI_SUBTRACTIVE;
++		} else {
++			PciBus->interface = pcrp->pci_prog_if;
++		}
+ 
+ 		if (pBusInfo && pBusInfo->funcs->pciControlBridge)
+ 		    PciBus->brcontrol =
+Index: os-support/shared/stdResource.c
+===================================================================
+RCS file: /cvs/xorg/xserver/xorg/hw/xfree86/os-support/shared/stdResource.c,v
+retrieving revision 1.4
+diff -u -r1.4 stdResource.c
+--- X11-6.9.0/xc/programs/Xserver/hw/xfree86/os-support/shared/stdResource.c	25 Mar 2006 19:52:04 -0000	1.4
++++ X11-6.9.0/xc/programs/Xserver/hw/xfree86/os-support/shared/stdResource.c	26 Apr 2006 04:14:04 -0000
+@@ -150,10 +150,11 @@
+     ret = xf86AddResToList(ret, &range, -1);
+     RANGE(range, 0xfee00000, 0xfeefffff, ResExcMemBlock | ResBios);
+     ret = xf86AddResToList(ret, &range, -1);
+-#endif
++    /* airlied - remove BIOS range it shouldn't be here 
++       this should use E820 - or THE OS */
+     RANGE(range, 0xffe00000, 0xffffffff, ResExcMemBlock | ResBios);
+     ret = xf86AddResToList(ret, &range, -1);
+-
++#endif
+     /*
+      * Fallback would be to claim well known ports in the 0x0 - 0x3ff range
+      * along with their sparse I/O aliases, but that's too imprecise.  Instead
