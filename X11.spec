@@ -840,10 +840,10 @@ Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
 # -libs already required by -OpenGL-libGL
 %endif
 
-%description driver-r128
+%description driver-r128-dri
 DRI modules for ATI Rage 128 video driver.
 
-%description driver-r128 -l pl
+%description driver-r128-dri -l pl
 Modu³y DRI dla sterownika do kart ATI Rage 128.
 
 %package driver-radeon
