@@ -27,7 +27,7 @@ Summary(uk):	‚¡⁄œ◊¶ €“…∆‘…, –“œ«“¡Õ… ‘¡ ƒœÀ’Õ≈Œ‘¡√¶— ƒÃ— “œ¬œﬁœß ”‘¡Œ√¶ß –¶ƒ X
 Summary(zh_CN):	XOrg X11 ¥∞ø⁄œµÕ≥∑˛ŒÒ∆˜∫Õª˘±æ≥Ã–Ú
 Name:		X11
 Version:	6.9.0
-Release:	11
+Release:	11.1
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -819,12 +819,6 @@ Summary(pl):	Sterownik do kart ATI Rage 128
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
-%ifarch %{ix86} ia64 %{x8664} alpha ppc arm
-# for dri
-Requires:	%{name}-OpenGL-core = %{epoch}:%{version}-%{release}
-Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
-# -libs already required by -OpenGL-libGL
-%endif
 Obsoletes:	XFree86-Rage128
 Obsoletes:	XFree86-driver-r128
 
@@ -834,6 +828,24 @@ ATI Rage 128 video driver.
 %description driver-r128 -l pl
 Sterownik do kart ATI Rage 128.
 
+%package driver-r128-dri
+Summary:	DRI modules for ATI Rage 128 video driver
+Summary(pl):	Modu≥y DRI dla sterownika do kart ATI Rage 128
+Group:		X11/Servers
+Requires:	%{name}-driver-r128 = %{epoch}:%{version}-%{release}
+%ifarch %{ix86} ia64 %{x8664} alpha ppc arm
+# for dri
+Requires:	%{name}-OpenGL-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
+# -libs already required by -OpenGL-libGL
+%endif
+
+%description driver-r128
+DRI modules for ATI Rage 128 video driver.
+
+%description driver-r128 -l pl
+Modu≥y DRI dla sterownika do kart ATI Rage 128.
+
 %package driver-radeon
 Summary:	ATI Radeon video driver
 Summary(pl):	Sterownik do kart ATI Radeon
@@ -841,12 +853,6 @@ Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-driver-ati = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
-%ifarch %{ix86} ia64 %{x8664} alpha ppc arm
-# for dri
-Requires:	%{name}-OpenGL-core = %{epoch}:%{version}-%{release}
-Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
-# -libs already required by -OpenGL-libGL
-%endif
 Obsoletes:	XFree86-driver-radeon
 
 %description driver-radeon
@@ -854,6 +860,24 @@ ATI Radeon video driver.
 
 %description driver-radeon -l pl
 Sterownik do kart ATI Radeon.
+
+%package driver-radeon-dri
+Summary:	DRI modules for ATI Radeon video driver
+Summary(pl):	Modu≥y DRI dla sterownika do kart ATI Radeon
+Group:		X11/Servers
+Requires:	%{name}-driver-radeon = %{epoch}:%{version}-%{release}
+%ifarch %{ix86} ia64 %{x8664} alpha ppc arm
+# for dri
+Requires:	%{name}-OpenGL-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
+# -libs already required by -OpenGL-libGL
+%endif
+
+%description driver-radeon-dri
+DRI modules for ATI Radeon video driver.
+
+%description driver-radeon-dri -l pl
+Modu≥y DRI dla sterownika do kart ATI Radeon.
 
 %package driver-chips
 Summary:	Chips and Technologies video driver
@@ -951,12 +975,6 @@ Summary(pl):	Sterownik do kart GLINT i Permedia
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
-%ifarch %{ix86} ia64 %{x8664} alpha ppc arm
-# for dri
-Requires:	%{name}-OpenGL-core = %{epoch}:%{version}-%{release}
-Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
-# -libs already required by -OpenGL-libGL
-%endif
 Obsoletes:	XFree86-3DLabs
 Obsoletes:	XFree86-driver-glint
 
@@ -965,6 +983,24 @@ GLINT/Permedia video driver.
 
 %description driver-glint -l pl
 Sterownik do kart GLINT i Permedia.
+
+%package driver-glint-dri
+Summary:	DRI modules for GLINT/Permedia video driver
+Summary(pl):	Modu≥y DRI dla sterownika do kart GLINT i Permedia
+Group:		X11/Servers
+Requires:	%{name}-driver-glint = %{epoch}:%{version}-%{release}
+%ifarch %{ix86} ia64 %{x8664} alpha ppc arm
+# for dri
+Requires:	%{name}-OpenGL-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
+# -libs already required by -OpenGL-libGL
+%endif
+
+%description driver-glint-dri
+DRI modules for GLINT/Permedia video driver.
+
+%description driver-glint-dri -l pl
+Modu≥y DRI dla sterownika do kart GLINT i Permedia.
 
 %package driver-i128
 Summary:	Number 9 I128 video driver
@@ -1015,12 +1051,6 @@ Summary(pl):	Sterownik do grafiki na uk≥adach Intel i810/i815/i830
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
-%ifarch %{ix86} ia64
-# for dri
-Requires:	%{name}-OpenGL-core = %{epoch}:%{version}-%{release}
-Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
-# -libs already required by -OpenGL-libGL
-%endif
 Obsoletes:	XFree86-driver-i810
 Obsoletes:	XFree86-i810
 
@@ -1029,6 +1059,24 @@ Intel i810/i815/i830 video driver.
 
 %description driver-i810 -l pl
 Sterownik do grafiki na uk≥adach Intel i810/i815/i830.
+
+%package driver-i810-dri
+Summary:	DRI modules dor Intel i810/i815/i830 video driver
+Summary(pl):	Modu≥y DRI dla sterownika do grafiki na uk≥adach Intel i810/i815/i830
+Group:		X11/Servers
+Requires:	%{name}-driver-i810 = %{epoch}:%{version}-%{release}
+%ifarch %{ix86} ia64
+# for dri
+Requires:	%{name}-OpenGL-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
+# -libs already required by -OpenGL-libGL
+%endif
+
+%description driver-i810-dri
+DRI modules dor Intel i810/i815/i830 video driver.
+
+%description driver-i810-dri -l pl
+Modu≥y DRI dla sterownika do grafiki na uk≥adach Intel i810/i815/i830.
 
 %package driver-imstt
 Summary:	Integrated Micro Solutions Twin Turbo 128 driver
@@ -1050,12 +1098,6 @@ Summary(pl):	Sterownik do kart Matrox
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
-%ifarch %{ix86} ia64 %{x8664} alpha ppc arm
-# for dri
-Requires:	%{name}-OpenGL-core = %{epoch}:%{version}-%{release}
-Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
-# -libs already required by -OpenGL-libGL
-%endif
 Obsoletes:	XFree86-driver-mga
 Obsoletes:	XFree86-mga
 
@@ -1064,6 +1106,24 @@ Matrox video driver.
 
 %description driver-mga -l pl
 Sterownik do kart Matrox.
+
+%package driver-mga-dri
+Summary:	DRI modules for Matrox video driver
+Summary(pl):	Moduly DRI dla sterownika do kart Matrox
+Group:		X11/Servers
+Requires:	%{name}-driver-mga = %{epoch}:%{version}-%{release}
+%ifarch %{ix86} ia64 %{x8664} alpha ppc arm
+# for dri
+Requires:	%{name}-OpenGL-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
+# -libs already required by -OpenGL-libGL
+%endif
+
+%description driver-mga-dri
+DRI modules for Matrox video driver.
+
+%description driver-mga-dri -l pl
+Moduly DRI dla sterownika do kart Matrox.
 
 %package driver-neomagic
 Summary:	NeoMagic video driver
@@ -1207,12 +1267,6 @@ Summary(pl):	Sterownik do kart na uk≥adach SiS
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
-%ifarch %{ix86} ia64
-# for dri
-Requires:	%{name}-OpenGL-core = %{epoch}:%{version}-%{release}
-Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
-# -libs already required by -OpenGL-libGL
-%endif
 Obsoletes:	XFree86-SiS
 Obsoletes:	XFree86-driver-sis
 
@@ -1221,6 +1275,24 @@ SiS video driver.
 
 %description driver-sis -l pl
 Sterownik do kart na uk≥adach SiS.
+
+%package driver-sis-dri
+Summary:	DRI modules for SiS video driver
+Summary(pl):	Modu≥y DRI dla sterownika do kart na uk≥adach SiS
+Group:		X11/Servers
+Requires:	%{name}-driver-sis = %{epoch}:%{version}-%{release}
+%ifarch %{ix86} ia64
+# for dri
+Requires:	%{name}-OpenGL-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
+# -libs already required by -OpenGL-libGL
+%endif
+
+%description driver-sis-dri
+DRI modules for SiS video driver.
+
+%description driver-sis-dri -l pl
+Modu≥y DRI dla sterownika do kart na uk≥adach SiS.
 
 %package driver-sisusb
 Summary:	Video driver for SiS video chips connected via a Net2280-based USB dongle
@@ -1348,14 +1420,6 @@ Summary(pl):	Sterownik do kart 3Dfx
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
-%ifarch %{ix86} ia64 alpha arm ppc
-# for dri
-Requires:	%{name}-OpenGL-core = %{epoch}:%{version}-%{release}
-Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
-# -libs already required by -OpenGL-libGL
-# dlopens libglide3x.so
-Requires:	Glide3-DRI
-%endif
 Obsoletes:	XFree86-3dfx
 Obsoletes:	XFree86-driver-tdfx
 
@@ -1368,6 +1432,26 @@ Voodoo4 or Voodoo5 it requires Glide_V5-DRI package.
 Sterownik do kart 3Dfx: Voodoo Banshee, Voodoo3, Voodoo4, Voodoo5.
 Sterownik DRI wymaga pakietu Glide_V3-DRI do kart Banshee lub Voodoo3,
 a Glide_V5-DRI do kart Voodoo4 lub Voodoo5.
+
+%package driver-tdfx-dri
+Summary:	DRI modules for 3Dfx video driver
+Summary(pl):	Modu≥y DRI dla sterownika do kart 3Dfx
+Group:		X11/Servers
+Requires:	%{name}-driver-tdfx = %{epoch}:%{version}-%{release}
+%ifarch %{ix86} ia64 alpha arm ppc
+# for dri
+Requires:	%{name}-OpenGL-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
+# -libs already required by -OpenGL-libGL
+# dlopens libglide3x.so
+Requires:	Glide3-DRI
+%endif
+
+%description driver-tdfx-dri
+DRI modules for 3Dfx video driver.
+
+%description driver-tdfx-dri -l pl
+Modu≥y DRI dla sterownika do kart 3Dfx.
 
 %package driver-tga
 Summary:	TGA video driver
@@ -2125,7 +2209,7 @@ install %{SOURCE9} $RPM_BUILD_ROOT/etc/pam.d/xserver
 install %{SOURCE10} $RPM_BUILD_ROOT/etc/rc.d/init.d/xdm
 install %{SOURCE11} $RPM_BUILD_ROOT/etc/rc.d/init.d/xfs
 install %{SOURCE12} $RPM_BUILD_ROOT%{_sysconfdir}/X11/fs/config
-install %{SOURCE13} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/XTerm.pl
+install %{SOURCE13} $RPM_BUILD_ROOT%{_appdefsdir}/pl/XTerm
 
 install %{SOURCE14} $RPM_BUILD_ROOT/etc/sysconfig/xdm
 install %{SOURCE15} $RPM_BUILD_ROOT/etc/sysconfig/xfs
@@ -2280,6 +2364,7 @@ fi
 %{_appdefsdir}/XLogo-color
 %{_appdefsdir}/XSm
 %{_appdefsdir}/XTerm
+%lang(pl) %{_appdefsdir}/pl/XTerm
 %{_appdefsdir}/XTerm-color
 
 %attr(755,root,root) %{_libx11dir}/lbxproxy
@@ -2771,10 +2856,12 @@ fi
 %files driver-glint
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/glint_drv.so
+%{_mandir}/man4/glint.4*
+
 %ifarch %{ix86} ia64 %{x8664} alpha ppc arm
+#%files driver-glint-dri
 #%attr(755,root,root) %{_libdir}/modules/dri/gamma_dri.so
 %endif
-%{_mandir}/man4/glint.4*
 
 # Devel: sparc sparc64
 %ifarch %{ix86} ia64 %{x8664}
@@ -2805,11 +2892,13 @@ fi
 %files driver-i810
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/i810_drv.so
+%{_mandir}/man4/i810.4*
+
+%files driver-i810-dri
 %ifarch %{ix86} ia64
 %attr(755,root,root) %{_libdir}/modules/dri/i810_dri.so
 %endif
 %attr(755,root,root) %{_libdir}/modules/dri/i915_dri.so
-%{_mandir}/man4/i810.4*
 %endif
 
 # Devel: %{ix86} sparc sparc64 ppc %{x8664}
@@ -2824,10 +2913,12 @@ fi
 %files driver-mga
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/mga_drv.so
+%{_mandir}/man4/mga.4*
+
 %ifarch %{ix86} ia64 %{x8664} alpha ppc arm
+%files driver-mga-dri
 %attr(755,root,root) %{_libdir}/modules/dri/mga_dri.so
 %endif
-%{_mandir}/man4/mga.4*
 %endif
 
 # Devel: sparc sparc64
@@ -2870,22 +2961,26 @@ fi
 %files driver-r128
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/r128*_drv.so
+%{_mandir}/man4/r128.4*
+
 %ifarch %{ix86} ia64 %{x8664} alpha ppc arm
+%files driver-r128-dri
 %attr(755,root,root) %{_libdir}/modules/dri/r128_dri.so
 %endif
-%{_mandir}/man4/r128.4*
 
 %files driver-radeon
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/radeon*_drv.so
+%{_mandir}/man4/radeon.4*
+
 %ifarch %{ix86} ia64 %{x8664} alpha ppc arm
+%files driver-radeon-dri
 %attr(755,root,root) %{_libdir}/modules/dri/radeon_dri.so
 %attr(755,root,root) %{_libdir}/modules/dri/r200_dri.so
 %if %{with r300}
 %attr(755,root,root) %{_libdir}/modules/dri/r300_dri.so
 %endif
 %endif
-%{_mandir}/man4/radeon.4*
 
 # Devel: sparc sparc64
 %ifarch %{ix86} ia64 %{x8664} alpha
@@ -2931,10 +3026,12 @@ fi
 %files driver-sis
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/sis_drv.so
+%{_mandir}/man4/sis.4*
+
 %ifarch %{ix86} ia64
+%files driver-sis-dri
 %attr(755,root,root) %{_libdir}/modules/dri/sis_dri.so
 %endif
-%{_mandir}/man4/sis.4*
 %endif
 
 %files driver-sisusb
@@ -2997,10 +3094,12 @@ fi
 %files driver-tdfx
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/drivers/tdfx_drv.so
+%{_mandir}/man4/tdfx.4*
+
 %ifarch %{ix86} ia64 alpha arm
+%files driver-tdfx-dri
 %attr(755,root,root) %{_libdir}/modules/dri/tdfx_dri.so
 %endif
-%{_mandir}/man4/tdfx.4*
 %endif
 
 # Devel: sparc sparc64
