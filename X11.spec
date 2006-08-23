@@ -97,7 +97,7 @@ Patch16:	%{name}-mga-busmstr.patch
 Patch17:	%{name}-agpgart-load.patch
 Patch18:	%{name}-XTerm.ad.patch
 Patch19:	%{name}-llh.patch
-Patch20:	XFree86-xman-manpaths.patch
+Patch20:	%{name}-xman-manpaths.patch
 Patch21:	%{name}-clearrts.patch
 Patch22:	XFree86-Xfont-Type1-large-DoS.patch
 Patch23:	%{name}-GLcore-strip-a-workaround.patch
