@@ -1,104 +1,5 @@
-Index: xc/config/util/chownxterm.c
-===================================================================
-RCS file: /cvs/xorg/xc/config/util/chownxterm.c,v
-retrieving revision 1.1.1.1
-diff -u -r1.1.1.1 chownxterm.c
---- xc/config/util/chownxterm.c	14 Nov 2003 16:48:20 -0000	1.1.1.1
-+++ xc/config/util/chownxterm.c	5 Jun 2006 10:35:10 -0000
-@@ -41,8 +41,10 @@
- 
- void help()
- {
--    setgid(getgid());
--    setuid(getuid());
-+    if (setgid(getgid()) == -1) 
-+	exit(1);
-+    if (setuid(getuid()) == -1)
-+	exit(1);
-     printf("chown-xterm makes %s suid root\n", XTERM_PATH);
-     printf("This is necessary on Ultrix for /dev/tty operation.\n");
-     exit(0);
-@@ -51,8 +53,10 @@
- void print_error(err_string)
-     char *err_string;
- {
--    setgid(getgid());
--    setuid(getuid());
-+    if (setgid(getgid()) == -1)
-+	exit(1);
-+    if (setuid(getuid()) == -1)
-+	exit(1);
-     fprintf(stderr, "%s: \"%s\"", prog_name, err_string);
-     perror(" failed");
-     exit(1);
-Index: xc/lib/X11/lcFile.c
-===================================================================
-RCS file: /cvs/xorg/xc/lib/X11/lcFile.c,v
-retrieving revision 1.6
-diff -u -r1.6 lcFile.c
---- xc/lib/X11/lcFile.c	13 May 2005 22:53:44 -0000	1.6
-+++ xc/lib/X11/lcFile.c	5 Jun 2006 10:35:14 -0000
-@@ -269,7 +269,11 @@
- 	    if (seteuid(0) != 0) {
- 		priv = 0;
- 	    } else {
--		seteuid(oldeuid);
-+		if (seteuid(oldeuid) == -1) {
-+		    /* XXX ouch, coudn't get back to original uid 
-+		     what can we do ??? */
-+		    _exit(127);
-+		}
- 		priv = 1;
- 	    }
- #endif
-Index: xc/lib/xtrans/Xtranslcl.c
-===================================================================
-RCS file: /cvs/xorg/xc/lib/xtrans/Xtranslcl.c,v
-retrieving revision 1.4
-diff -u -r1.4 Xtranslcl.c
---- xc/lib/xtrans/Xtranslcl.c	8 Nov 2005 06:33:26 -0000	1.4
-+++ xc/lib/xtrans/Xtranslcl.c	5 Jun 2006 10:35:15 -0000
-@@ -360,7 +360,10 @@
- 	uid_t       saved_euid;
- 
- 	saved_euid = geteuid();
--	setuid( getuid() ); /** sets the euid to the actual/real uid **/
-+	/** sets the euid to the actual/real uid **/
-+	if (setuid( getuid() ) == -1) {
-+		exit(1);
-+	}
- 	if( chown( slave, saved_euid, -1 ) < 0 ) {
- 		exit( 1 );
- 		}
-@@ -369,7 +372,13 @@
-     }
- 
-     waitpid(saved_pid, &exitval, 0);
--
-+    if (WIFEXITED(exitval) && WEXITSTATUS(exitval) != 0) {
-+	close(fd);
-+	close(server);
-+	PRMSG(1, "PTSOpenClient: cannot set the owner of %s\n",
-+	      slave, 0, 0);
-+	return(-1);
-+    }
-     if (chmod(slave, 0666) < 0) {
- 	close(fd);
- 	close(server);
-Index: xc/programs/Xserver/hw/xfree86/common/xf86Init.c
-===================================================================
-RCS file: /cvs/xorg/xc/programs/Xserver/hw/xfree86/common/xf86Init.c,v
-retrieving revision 1.29
-diff -u -r1.29 xf86Init.c
 --- xc/programs/Xserver/hw/xfree86/common/xf86Init.c	14 Dec 2005 20:12:00 -0000	1.29
 +++ xc/programs/Xserver/hw/xfree86/common/xf86Init.c	5 Jun 2006 10:35:19 -0000
-@@ -1,5 +1,5 @@
- /* $XFree86: xc/programs/Xserver/hw/xfree86/common/xf86Init.c,v 3.212 2004/01/27 01:31:45 dawes Exp $ */
--/* $XdotOrg: xc/programs/Xserver/hw/xfree86/common/xf86Init.c,v 1.29 2005-12-14 20:12:00 ajax Exp $ */
-+/* $XdotOrg: xc/programs/Xserver/hw/xfree86/common/xf86Init.c,v 1.29 2005/12/14 20:12:00 ajax Exp $ */
- 
- /*
-  * Loosely based on code bearing the following copyright:
 @@ -1905,7 +1905,11 @@
            FatalError("xf86RunVtInit: fork failed (%s)\n", strerror(errno));
            break;
@@ -112,11 +13,6 @@ diff -u -r1.29 xf86Init.c
            /* set stdin, stdout to the consoleFd */
            for (i = 0; i < 2; i++) {
              if (xf86Info.consoleFd != i) {
-Index: xc/programs/Xserver/hw/xfree86/os-support/shared/libc_wrapper.c
-===================================================================
-RCS file: /cvs/xorg/xc/programs/Xserver/hw/xfree86/os-support/shared/libc_wrapper.c,v
-retrieving revision 1.9
-diff -u -r1.9 libc_wrapper.c
 --- xc/programs/Xserver/hw/xfree86/os-support/shared/libc_wrapper.c	3 Jul 2005 08:53:48 -0000	1.9
 +++ xc/programs/Xserver/hw/xfree86/os-support/shared/libc_wrapper.c	5 Jun 2006 10:35:19 -0000
 @@ -1270,7 +1270,10 @@
@@ -131,11 +27,6 @@ diff -u -r1.9 libc_wrapper.c
  #if !defined(SELF_CONTAINED_WRAPPER)
          /* set stdin, stdout to the consoleFD, and leave stderr alone */
          for (i = 0; i < 2; i++)
-Index: xc/programs/Xserver/hw/xfree86/parser/write.c
-===================================================================
-RCS file: /cvs/xorg/xc/programs/Xserver/hw/xfree86/parser/write.c,v
-retrieving revision 1.3
-diff -u -r1.3 write.c
 --- xc/programs/Xserver/hw/xfree86/parser/write.c	3 Jul 2005 07:01:37 -0000	1.3
 +++ xc/programs/Xserver/hw/xfree86/parser/write.c	5 Jun 2006 10:35:19 -0000
 @@ -170,7 +170,10 @@
@@ -150,19 +41,8 @@ diff -u -r1.3 write.c
  			ret = doWriteConfigFile(filename, cptr);
  			exit(ret);
  			break;
-Index: xc/programs/Xserver/os/utils.c
-===================================================================
-RCS file: /cvs/xorg/xc/programs/Xserver/os/utils.c,v
-retrieving revision 1.21
-diff -u -r1.21 utils.c
 --- xc/programs/Xserver/os/utils.c	8 Nov 2005 06:33:30 -0000	1.21
 +++ xc/programs/Xserver/os/utils.c	5 Jun 2006 10:35:20 -0000
-@@ -1,4 +1,4 @@
--/* $XdotOrg: xc/programs/Xserver/os/utils.c,v 1.21 2005-11-08 06:33:30 jkj Exp $ */
-+/* $XdotOrg: xc/programs/Xserver/os/utils.c,v 1.21 2005/11/08 06:33:30 jkj Exp $ */
- /* $Xorg: utils.c,v 1.5 2001/02/09 02:05:24 xorgcvs Exp $ */
- /*
- 
 @@ -1718,8 +1718,10 @@
      case -1:	/* error */
  	p = -1;
@@ -202,19 +82,8 @@ diff -u -r1.21 utils.c
  	if (*type == 'r') {
  	    if (pdes[1] != 1) {
  		/* stdout */
-Index: xc/programs/xdm/session.c
-===================================================================
-RCS file: /cvs/xorg/xc/programs/xdm/session.c,v
-retrieving revision 1.3
-diff -u -r1.3 session.c
 --- xc/programs/xdm/session.c	8 Nov 2005 06:33:31 -0000	1.3
 +++ xc/programs/xdm/session.c	5 Jun 2006 10:35:21 -0000
-@@ -1,4 +1,4 @@
--/* $XdotOrg: xc/programs/xdm/session.c,v 1.3 2005-11-08 06:33:31 jkj Exp $ */
-+/* $XdotOrg: xc/programs/xdm/session.c,v 1.3 2005/11/08 06:33:31 jkj Exp $ */
- /* $Xorg: session.c,v 1.8 2001/02/09 02:05:40 xorgcvs Exp $ */
- /*
- 
 @@ -488,8 +488,14 @@
      else
  	ResetServer (d);
@@ -232,11 +101,6 @@ diff -u -r1.3 session.c
  	RemoveUserAuthorization (d, &verify);
  #ifdef K5AUTH
  	/* do like "kdestroy" program */
-Index: xc/programs/xdm/xdmshell.c
-===================================================================
-RCS file: /cvs/xorg/xc/programs/xdm/xdmshell.c,v
-retrieving revision 1.3
-diff -u -r1.3 xdmshell.c
 --- xc/programs/xdm/xdmshell.c	14 Jul 2005 22:58:25 -0000	1.3
 +++ xc/programs/xdm/xdmshell.c	5 Jun 2006 10:35:21 -0000
 @@ -183,7 +183,11 @@
@@ -252,11 +116,6 @@ diff -u -r1.3 xdmshell.c
  
      /*
       * exec /usr/bin/X11/xdm -nodaemon -udpPort 0
-Index: xc/programs/xf86dga/dga.c
-===================================================================
-RCS file: /cvs/xorg/xc/programs/xf86dga/dga.c,v
-retrieving revision 1.2
-diff -u -r1.2 dga.c
 --- xc/programs/xf86dga/dga.c	23 Apr 2004 19:54:47 -0000	1.2
 +++ xc/programs/xf86dga/dga.c	5 Jun 2006 10:35:21 -0000
 @@ -16,6 +16,7 @@
@@ -279,20 +138,8 @@ diff -u -r1.2 dga.c
  #endif
  
     XF86DGASetViewPort(dis, DefaultScreen(dis), 0, 0);
-Index: xc/programs/xinit/xinit.c
-===================================================================
-RCS file: /cvs/xorg/xc/programs/xinit/xinit.c,v
-retrieving revision 1.4
-diff -u -r1.4 xinit.c
 --- xc/programs/xinit/xinit.c	4 Oct 2005 01:27:34 -0000	1.4
 +++ xc/programs/xinit/xinit.c	5 Jun 2006 10:35:21 -0000
-@@ -1,5 +1,5 @@
- /* $Xorg: xinit.c,v 1.5 2001/02/09 02:05:49 xorgcvs Exp $ */
--/* $XdotOrg: xc/programs/xinit/xinit.c,v 1.4 2005-10-04 01:27:34 ajax Exp $ */
-+/* $XdotOrg: xc/programs/xinit/xinit.c,v 1.4 2005/10/04 01:27:34 ajax Exp $ */
- 
- /*
- 
 @@ -692,7 +692,10 @@
  startClient(char *client[])
  {
@@ -305,11 +152,6 @@ diff -u -r1.4 xinit.c
  		setpgrp(0, getpid());
  		environ = newenviron;
  #ifdef __UNIXOS2__
-Index: xc/programs/xload/xload.c
-===================================================================
-RCS file: /cvs/xorg/xc/programs/xload/xload.c,v
-retrieving revision 1.2
-diff -u -r1.2 xload.c
 --- xc/programs/xload/xload.c	23 Apr 2004 19:54:57 -0000	1.2
 +++ xc/programs/xload/xload.c	5 Jun 2006 10:35:21 -0000
 @@ -34,7 +34,7 @@
@@ -341,11 +183,6 @@ diff -u -r1.2 xload.c
  
      XtSetLanguageProc(NULL, (XtLanguageProc) NULL, NULL);
  
-Index: xc/programs/xterm/main.c
-===================================================================
-RCS file: /cvs/xorg/xc/programs/xterm/main.c,v
-retrieving revision 1.8
-diff -u -r1.8 main.c
 --- xc/programs/xterm/main.c	14 Dec 2005 23:28:27 -0000	1.8
 +++ xc/programs/xterm/main.c	5 Jun 2006 10:35:22 -0000
 @@ -1592,8 +1592,10 @@
@@ -380,11 +217,6 @@ diff -u -r1.8 main.c
  #define get_pty(pty, from) really_get_pty(pty, from)
  #endif
  
-Index: xc/programs/xterm/misc.c
-===================================================================
-RCS file: /cvs/xorg/xc/programs/xterm/misc.c,v
-retrieving revision 1.6
-diff -u -r1.6 misc.c
 --- xc/programs/xterm/misc.c	14 Dec 2005 23:28:27 -0000	1.6
 +++ xc/programs/xterm/misc.c	5 Jun 2006 10:35:22 -0000
 @@ -1094,8 +1094,10 @@
@@ -413,11 +245,6 @@ diff -u -r1.6 misc.c
  
  	    execl(shell, shell, "-c", &screen->logfile[1], (void *) 0);
  
-Index: xc/programs/xterm/print.c
-===================================================================
-RCS file: /cvs/xorg/xc/programs/xterm/print.c,v
-retrieving revision 1.5
-diff -u -r1.5 print.c
 --- xc/programs/xterm/print.c	5 Aug 2005 16:13:04 -0000	1.5
 +++ xc/programs/xterm/print.c	5 Jun 2006 10:35:22 -0000
 @@ -387,9 +387,11 @@
