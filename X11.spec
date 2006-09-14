@@ -120,6 +120,8 @@ Patch60:	%{name}-oldkeyb.patch
 Patch61:	%{name}-sparc64-asmfix.patch
 Patch62:	%{name}-sparc64-v9fix.patch
 Patch63:	%{name}-pci-build.patch
+# from http://xorg.freedesktop.org/releases/X11R6.9.0/patches/x11r6.9.0-setuid.diff, but existing chunks removed.
+Patch64:	x11r6.9.0-setuid.diff
 # XFree86-tdfx-fix-vtswitch-font-corruption.patch - issue still not fixed,
 # but patch doesn't help either; however, it occurs in text mode only, not
 # with tdfxfb, which is worth using anyway
@@ -2047,6 +2049,7 @@ X11-libs.
 %setup -qc -a1 -a2 -a7
 cd xc
 %patch0 -p0
+%patch64 -p1
 %patch33 -p0
 %patch35 -p0
 cd ..
