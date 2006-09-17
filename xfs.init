@@ -60,7 +60,7 @@ case "$1" in
 		killproc xfs -USR1
 		RETVAL=$?
 	else
-		msg_not_running "X Font Server" >&2
+		msg_not_running "X Font Server"
 		exit 7
 	fi
 	;;
