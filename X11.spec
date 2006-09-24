@@ -27,7 +27,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.9.0
-Release:	15
+Release:	16
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -115,6 +115,7 @@ Patch32:	%{name}-compositefastpath.patch
 Patch33:	ftp://ftp.x.org/pub/X11R6.9.0/patches/x11r6.9.0-mitri.diff
 Patch34:	%{name}-intel.patch
 Patch35:	http://xorg.freedesktop.org/releases/X11R6.9.0/patches/x11r6.9.0-cidfonts.diff
+Patch36:	%{name}-i810_945GM.patch
 Patch50:	%{name}-glibc-locale_sync.patch
 Patch60:	%{name}-oldkeyb.patch
 Patch61:	%{name}-sparc64-asmfix.patch
@@ -2089,6 +2090,7 @@ rm -f xc/config/cf/host.def
 %patch30 -p0
 %patch31 -p0
 %patch32 -p0
+%patch36 -p0
 %patch50 -p1
 %patch60 -p0
 # FIXME
