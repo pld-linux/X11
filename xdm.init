@@ -27,7 +27,7 @@ case "$1" in
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/xdm ]; then
 		msg_starting "X Display Manager"
-		daemon /usr/X11R6/bin/xdm
+		daemon xdm
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/xdm
 	else
