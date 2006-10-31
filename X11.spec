@@ -27,7 +27,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.9.0
-Release:	16
+Release:	17
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -161,6 +161,7 @@ BuildRequires:	zlib-devel
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-xauth = %{epoch}:%{version}-%{release}
 Requires:	pam >= 0.79.0
+Requires:	filesystem >= 2.0-1
 Provides:	XFree86 = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86
 Obsoletes:	xpm-progs
@@ -175,12 +176,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
-%define		_soundsdir	/usr/share/sounds
-%define		_wallpapersdir	/usr/share/wallpapers
 %define		_themesdir	/usr/share/themes
 %define		_wmpropsdir	/usr/share/wm-properties
 %define		_xsessdir	/usr/share/xsessions
-%define		_wmstylesdir	/etc/sysconfig/wmstyle
 %define		_libx11dir	%{_prefix}/lib/X11
 %define		_appdefsdir	%{_libx11dir}/app-defaults
 
@@ -1906,6 +1904,7 @@ Summary(ru):	Простой оконный менеджер
 Summary(uk):	Простий в╕конний менеджер
 Group:		X11/Window Managers
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires:	filesystem >= 2.0-1
 Provides:	twm = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-twm
 Obsoletes:	twm
@@ -2130,7 +2129,7 @@ PWD=`pwd`
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc/{pam.d,rc.d/init.d,security/console.apps,sysconfig,xdg} \
+install -d $RPM_BUILD_ROOT/etc/{pam.d,rc.d/init.d,security/console.apps,sysconfig} \
 	$RPM_BUILD_ROOT%{_sysconfdir}/X11/fs \
 	$RPM_BUILD_ROOT%{_appdefsdir}/{cs,da,de,es,fr,hu,it,ja,ko,nl,pl,pt,ru,sk,zh_CN.gb2312,zh_TW.big5} \
 	$RPM_BUILD_ROOT%{_datadir}/misc \
@@ -2138,8 +2137,8 @@ install -d $RPM_BUILD_ROOT/etc/{pam.d,rc.d/init.d,security/console.apps,sysconfi
 	$RPM_BUILD_ROOT/usr/{bin,include,lib} \
 	$RPM_BUILD_ROOT/var/{log,lib/xkb} \
 	$RPM_BUILD_ROOT{%{_desktopdir},%{_iconsdir},%{_pixmapsdir}/mini} \
-	$RPM_BUILD_ROOT{%{_wmpropsdir},%{_soundsdir},%{_themesdir}/{Default,ThinIce,Metal,Industrial}} \
-	$RPM_BUILD_ROOT{%{_xsessdir},%{_wallpapersdir},%{_wmstylesdir}} \
+	$RPM_BUILD_ROOT{%{_wmpropsdir},%{_themesdir}/{ThinIce,Metal,Industrial}} \
+	$RPM_BUILD_ROOT%{_xsessdir} \
 	$RPM_BUILD_ROOT%{_pkgconfigdir}
 
 PWD=`pwd`
@@ -2381,7 +2380,6 @@ fi
 %attr(755,root,root) %{_libx11dir}/xinit
 %attr(755,root,root) %{_libx11dir}/xsm
 
-%dir /etc/X11/xinit
 %dir /etc/X11/lbxproxy
 /etc/X11/lbxproxy/*
 %dir /etc/X11/proxymngr
@@ -3152,9 +3150,6 @@ fi
 %files libs
 %defattr(644,root,root,755)
 /etc/ld.so.conf.d/*.conf
-%dir %{_sysconfdir}/xdg
-%dir %{_themesdir}
-%dir %{_themesdir}/Default
 %dir %{_themesdir}/ThinIce
 %dir %{_themesdir}/Metal
 %dir %{_themesdir}/Industrial
@@ -3188,14 +3183,7 @@ fi
 /usr/include/X11
 %dir %{_sbindir}
 %dir %{_datadir}/misc
-%dir %{_iconsdir}
-%dir %{_pixmapsdir}
 %dir %{_pixmapsdir}/mini
-%dir %{_soundsdir}
-%dir %{_wallpapersdir}
-%dir %{_wmpropsdir}
-%dir %{_xsessdir}
-%dir %{_wmstylesdir}
 %attr(755,root,root) %{_libdir}/libFS.so.*.*
 %attr(755,root,root) %{_libdir}/lib*XvMC*.so.*.*
 %attr(755,root,root) %{_libdir}/libICE.so.*.*
