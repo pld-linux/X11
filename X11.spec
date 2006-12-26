@@ -941,20 +941,6 @@ Non-accelerated video driver for framebuffer device.
 %description driver-fbdev -l pl
 Nieakcelerowany sterownik korzystaj±cy z framebuffera.
 
-%package driver-ffb
-Summary:	Video driver for DRI sparc framebuffer device
-Summary(pl):	Sterownik do framebuffera DRI na sparc
-Group:		X11/Servers
-Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
-Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
-Obsoletes:	XFree86-driver-ffb
-
-%description driver-ffb
-Video driver for DRI sparc framebuffer device.
-
-%description driver-ffb -l pl
-Sterownik do framebuffera DRI na sparc.
-
 %package driver-glide
 Summary:	3Dfx Voodoo1 and Voodoo2 video driver
 Summary(pl):	Sterownik do kart 3Dfx Voodoo1 i Voodoo2
