@@ -27,7 +27,7 @@ Summary(uk):	Базов╕ шрифти, програми та документац╕я для робочо╖ станц╕╖ п╕д X
 Summary(zh_CN):	XOrg X11 ╢╟©зо╣мЁ╥ЧнЯфВ╨м╩Ы╠╬ЁлпР
 Name:		X11
 Version:	6.9.0
-Release:	18
+Release:	19
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -126,6 +126,7 @@ Patch64:	x11r6.9.0-setuid.diff
 # XFree86-tdfx-fix-vtswitch-font-corruption.patch - issue still not fixed,
 # but patch doesn't help either; however, it occurs in text mode only, not
 # with tdfxfb, which is worth using anyway
+Patch65:	x11r6.9.0-dbe-render.diff
 
 # radeon
 Patch69:	%{name}-radeon-dynamic-clocks.patch
@@ -2037,6 +2038,7 @@ X11-libs.
 cd xc
 %patch0 -p0
 %patch64 -p1
+%patch65 -p1
 %patch33 -p0
 %patch35 -p0
 cd ..
