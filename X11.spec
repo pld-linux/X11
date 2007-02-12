@@ -14,17 +14,17 @@
 %bcond_with	dualhead	# apply dualhead patch
 
 Summary:	XOrg X11 Window System servers and basic programs
-Summary(de.UTF-8):   XOrg X11 Window-System-Server und grundlegende Programme
-Summary(es.UTF-8):   Programas básicos y servidores para el sistema de ventanas XOrg X11
-Summary(fr.UTF-8):   Serveurs du système XOrg X11 et programmes de base
-Summary(ja.UTF-8):   XOrg X11 window system のサーバと基本的なプログラム
-Summary(ko.UTF-8):   X에 필요한 기본적인 글꼴과 프로그램과 문서들
-Summary(pl.UTF-8):   XOrg X11 Window System wraz z podstawowymi programami
-Summary(pt_BR.UTF-8):   Programas básicos e servidores para o sistema de janelas XOrg X11
-Summary(ru.UTF-8):   Базовые шрифты, программы и документация для рабочей станции под X
-Summary(tr.UTF-8):   XOrg X11 Pencereleme Sistemi sunucuları ve temel programlar
-Summary(uk.UTF-8):   Базові шрифти, програми та документація для робочої станції під X
-Summary(zh_CN.UTF-8):   XOrg X11 窗口系统服务器和基本程序
+Summary(de.UTF-8):	XOrg X11 Window-System-Server und grundlegende Programme
+Summary(es.UTF-8):	Programas básicos y servidores para el sistema de ventanas XOrg X11
+Summary(fr.UTF-8):	Serveurs du système XOrg X11 et programmes de base
+Summary(ja.UTF-8):	XOrg X11 window system のサーバと基本的なプログラム
+Summary(ko.UTF-8):	X에 필요한 기본적인 글꼴과 프로그램과 문서들
+Summary(pl.UTF-8):	XOrg X11 Window System wraz z podstawowymi programami
+Summary(pt_BR.UTF-8):	Programas básicos e servidores para o sistema de janelas XOrg X11
+Summary(ru.UTF-8):	Базовые шрифты, программы и документация для рабочей станции под X
+Summary(tr.UTF-8):	XOrg X11 Pencereleme Sistemi sunucuları ve temel programlar
+Summary(uk.UTF-8):	Базові шрифти, програми та документація для робочої станції під X
+Summary(zh_CN.UTF-8):	XOrg X11 窗口系统服务器和基本程序
 Name:		X11
 Version:	6.9.0
 Release:	19
@@ -308,7 +308,7 @@ X Window System надає базу для розробки графічних �
 
 %package common
 Summary:	XOrg X11 files required both on server and client side
-Summary(pl.UTF-8):   Pliki XOrg X11 wymagane zarówno po stronie serwera jak i klienta
+Summary(pl.UTF-8):	Pliki XOrg X11 wymagane zarówno po stronie serwera jak i klienta
 Group:		X11
 Provides:	XFree86-common = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-common
@@ -321,7 +321,7 @@ Pliki XOrg X11 wymagane zarówno po stronie serwera jak i klienta.
 
 %package Xprint
 Summary:	Xprint tool
-Summary(pl.UTF-8):   Narzędzie Xprint
+Summary(pl.UTF-8):	Narzędzie Xprint
 Group:		X11
 # for /etc/X11/xserver
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -334,7 +334,7 @@ Narzędzie Xprint.
 
 %package DPS
 Summary:	Display PostScript
-Summary(pl.UTF-8):   Display PostScript
+Summary(pl.UTF-8):	Display PostScript
 Group:		X11/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	DPS
@@ -352,7 +352,7 @@ wyświetlania informacji na ekranie.
 
 %package DPS-devel
 Summary:	Header files for Display PostScript
-Summary(pl.UTF-8):   Pliki nagłówkowe dla Display PostScript
+Summary(pl.UTF-8):	Pliki nagłówkowe dla Display PostScript
 Group:		X11/Development/Libraries
 Requires:	%{name}-DPS = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
@@ -368,7 +368,7 @@ Pliki nagłówkowe biblioteki X-Window Display PostScript.
 
 %package DPS-static
 Summary:	Display PostScript static libraries
-Summary(pl.UTF-8):   Biblioteki statyczne Display PostScript
+Summary(pl.UTF-8):	Biblioteki statyczne Display PostScript
 Group:		X11/Development/Libraries
 Requires:	%{name}-DPS-devel = %{epoch}:%{version}-%{release}
 Provides:	XFree86-DPS-static = %{epoch}:%{version}-%{release}
@@ -383,7 +383,7 @@ Statyczne biblioteki X-Window Display PostScript.
 
 %package OpenGL-core
 Summary:	OpenGL support extension modules for Xserver
-Summary(pl.UTF-8):   Moduły rozszerzeń X serwera obsługujące OpenGL
+Summary(pl.UTF-8):	Moduły rozszerzeń X serwera obsługujące OpenGL
 Group:		X11/Servers
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Provides:	XFree86-OpenGL-core = %{epoch}:%{version}-%{release}
@@ -397,7 +397,7 @@ Moduły rozszerzeń X serwera obsługujące OpenGL.
 
 %package OpenGL-libGL
 Summary:	OpenGL support for X11R6 - GL library
-Summary(pl.UTF-8):   Wsparcie OpenGL dla systemu X11R6 - biblioteka GL
+Summary(pl.UTF-8):	Wsparcie OpenGL dla systemu X11R6 - biblioteka GL
 Group:		X11/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	XFree86-OpenGL-libGL = %{epoch}:%{version}-%{release}
@@ -416,7 +416,7 @@ Wsparcie OpenGL dla systemu X11R6 - biblioteka GL.
 
 %package OpenGL-libs
 Summary:	OpenGL libraries for X11R6
-Summary(pl.UTF-8):   Biblioteki OpenGL dla systemu X11R6
+Summary(pl.UTF-8):	Biblioteki OpenGL dla systemu X11R6
 Group:		X11/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	OpenGL = 1.5
@@ -434,7 +434,7 @@ Biblioteki OpenGL dla systemu X11R6.
 
 %package OpenGL-devel-base
 Summary:	OpenGL for X11R6 development (GL and GLX only)
-Summary(pl.UTF-8):   Pliki nagłówkowe OpenGL dla systemu X11R6 (tylko GL i GLX)
+Summary(pl.UTF-8):	Pliki nagłówkowe OpenGL dla systemu X11R6 (tylko GL i GLX)
 Group:		X11/Development/Libraries
 Requires:	%{name}-OpenGL-devel = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
@@ -452,7 +452,7 @@ Podstawowe pliki nagłówkowe (tylko GL i GLX) OpenGL dla systemu X11R6.
 
 %package OpenGL-devel
 Summary:	OpenGL for X11R6 development
-Summary(pl.UTF-8):   Pliki nagłówkowe OpenGL dla systemu X11R6
+Summary(pl.UTF-8):	Pliki nagłówkowe OpenGL dla systemu X11R6
 Group:		X11/Development/Libraries
 Requires:	%{name}-OpenGL-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
@@ -474,7 +474,7 @@ Pliki nagłówkowe i manuale do OpenGL dla systemu X11R6.
 
 %package OpenGL-static
 Summary:	X11R6 static libraries with OpenGL
-Summary(pl.UTF-8):   Biblioteki statyczne do X11R6 ze wsparciem dla OpenGL
+Summary(pl.UTF-8):	Biblioteki statyczne do X11R6 ze wsparciem dla OpenGL
 Group:		X11/Development/Libraries
 Requires:	%{name}-OpenGL-devel = %{epoch}:%{version}-%{release}
 Provides:	OpenGL-GLU-static = 1.3
@@ -491,9 +491,9 @@ Biblioteki statyczne zawierające wsparcie dla OpenGL do X11R6.
 
 %package Xnest
 Summary:	XOrg X11 Xnest server
-Summary(pl.UTF-8):   Serwer XOrg X11 Xnest
-Summary(ru.UTF-8):   "Вложенный" сервер XOrg X11
-Summary(uk.UTF-8):   "Вкладений" сервер XOrg X11
+Summary(pl.UTF-8):	Serwer XOrg X11 Xnest
+Summary(ru.UTF-8):	"Вложенный" сервер XOrg X11
+Summary(uk.UTF-8):	"Вкладений" сервер XOrg X11
 Group:		X11/Servers
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -537,7 +537,7 @@ Xnest - це сервер X Window System, який працює у вікні X
 
 %package Xprt
 Summary:	X print server
-Summary(pl.UTF-8):   X serwer z rozszerzeniem Xprint
+Summary(pl.UTF-8):	X serwer z rozszerzeniem Xprint
 Group:		X11/Servers
 Requires:	%{name}-Xprint = %{epoch}:%{version}-%{release}
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
@@ -557,10 +557,10 @@ Xprt jest X serwerem z rozszerzeniem Xprint.
 
 %package Xserver
 Summary:	XOrg X11 X display server
-Summary(de.UTF-8):   XOrg X11 Server
-Summary(fr.UTF-8):   Serveur XOrg X11
-Summary(pl.UTF-8):   Serwer XOrg X11
-Summary(tr.UTF-8):   XOrg X11 sunucusu
+Summary(de.UTF-8):	XOrg X11 Server
+Summary(fr.UTF-8):	Serveur XOrg X11
+Summary(pl.UTF-8):	Serwer XOrg X11
+Summary(tr.UTF-8):	XOrg X11 sunucusu
 Group:		X11/Servers
 Requires(pre):	sed >= 4.0
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
@@ -599,9 +599,9 @@ akceleracji). Inne sterowniki można znaleźć w pakietach X11-driver-*.
 
 %package Xvfb
 Summary:	XOrg X11 Xvfb server
-Summary(pl.UTF-8):   Serwer XOrg X11 Xvfb
-Summary(ru.UTF-8):   Сервер XOrg X11 для виртуального фреймбуфера
-Summary(uk.UTF-8):   Сервер XOrg X11 для віртуального фреймбуфера
+Summary(pl.UTF-8):	Serwer XOrg X11 Xvfb
+Summary(ru.UTF-8):	Сервер XOrg X11 для виртуального фреймбуфера
+Summary(uk.UTF-8):	Сервер XOrg X11 для віртуального фреймбуфера
 Group:		X11/Servers
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -674,12 +674,12 @@ Xvfb (X Virtual Frame Buffer) - це X-сервер, здатний працюв
 
 %package devel
 Summary:	X11R6 headers and programming man pages
-Summary(de.UTF-8):   X11R6 Headers und man pages für Programmierer
-Summary(fr.UTF-8):   Pages man de programmation
-Summary(pl.UTF-8):   Pliki nagłówkowe X11R6
-Summary(ru.UTF-8):   Библиотеки разработчика, хедера и документация по программированию X11R6
-Summary(tr.UTF-8):   X11R6 ile geliştirme için gerekli dosyalar
-Summary(uk.UTF-8):   Бібліотеки програміста, хедери та документація по програмуванню X11R6
+Summary(de.UTF-8):	X11R6 Headers und man pages für Programmierer
+Summary(fr.UTF-8):	Pages man de programmation
+Summary(pl.UTF-8):	Pliki nagłówkowe X11R6
+Summary(ru.UTF-8):	Библиотеки разработчика, хедера и документация по программированию X11R6
+Summary(tr.UTF-8):	X11R6 ile geliştirme için gerekli dosyalar
+Summary(uk.UTF-8):	Бібліотеки програміста, хедери та документація по програмуванню X11R6
 Group:		X11/Development/Libraries
 Requires:	%{name}-imake = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
@@ -756,7 +756,7 @@ X11-devel містить бібліотеки, хедери та докумен�
 
 %package Xserver-devel
 Summary:	Header files for XOrg X11 Xserver drivers/extensions development
-Summary(pl.UTF-8):   Pliki nagłówkowe do tworzenia sterowników/rozszerzeń X serwera XOrg X11
+Summary(pl.UTF-8):	Pliki nagłówkowe do tworzenia sterowników/rozszerzeń X serwera XOrg X11
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Provides:	XFree86-Xserver-devel = %{epoch}:%{version}-%{release}
@@ -771,7 +771,7 @@ X11.
 
 %package driver-apm
 Summary:	Alliance Promotion video driver
-Summary(pl.UTF-8):   Sterownik do kart Alliance Promotion
+Summary(pl.UTF-8):	Sterownik do kart Alliance Promotion
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -786,7 +786,7 @@ Sterownik do kart Alliance Promotion.
 
 %package driver-ark
 Summary:	Ark Logic video driver
-Summary(pl.UTF-8):   Sterownik do kart Ark Logic
+Summary(pl.UTF-8):	Sterownik do kart Ark Logic
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -800,7 +800,7 @@ Sterownik do kart Ark Logic.
 
 %package driver-ati
 Summary:	ATI video driver
-Summary(pl.UTF-8):   Sterownik do kart ATI
+Summary(pl.UTF-8):	Sterownik do kart ATI
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-driver-i2c = %{epoch}:%{version}-%{release}
@@ -818,7 +818,7 @@ Sterownik do kart ATI.
 
 %package driver-r128
 Summary:	ATI Rage 128 video driver
-Summary(pl.UTF-8):   Sterownik do kart ATI Rage 128
+Summary(pl.UTF-8):	Sterownik do kart ATI Rage 128
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -833,7 +833,7 @@ Sterownik do kart ATI Rage 128.
 
 %package driver-r128-dri
 Summary:	DRI modules for ATI Rage 128 video driver
-Summary(pl.UTF-8):   Moduły DRI dla sterownika do kart ATI Rage 128
+Summary(pl.UTF-8):	Moduły DRI dla sterownika do kart ATI Rage 128
 Group:		X11/Servers
 Requires:	%{name}-driver-r128 = %{epoch}:%{version}-%{release}
 %ifarch %{ix86} ia64 %{x8664} alpha ppc arm
@@ -851,7 +851,7 @@ Moduły DRI dla sterownika do kart ATI Rage 128.
 
 %package driver-radeon
 Summary:	ATI Radeon video driver
-Summary(pl.UTF-8):   Sterownik do kart ATI Radeon
+Summary(pl.UTF-8):	Sterownik do kart ATI Radeon
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-driver-ati = %{epoch}:%{version}-%{release}
@@ -866,7 +866,7 @@ Sterownik do kart ATI Radeon.
 
 %package driver-radeon-dri
 Summary:	DRI modules for ATI Radeon video driver
-Summary(pl.UTF-8):   Moduły DRI dla sterownika do kart ATI Radeon
+Summary(pl.UTF-8):	Moduły DRI dla sterownika do kart ATI Radeon
 Group:		X11/Servers
 Requires:	%{name}-driver-radeon = %{epoch}:%{version}-%{release}
 %ifarch %{ix86} ia64 %{x8664} alpha ppc arm
@@ -884,7 +884,7 @@ Moduły DRI dla sterownika do kart ATI Radeon.
 
 %package driver-chips
 Summary:	Chips and Technologies video driver
-Summary(pl.UTF-8):   Sterownik do kart na układach Chips and Technologies
+Summary(pl.UTF-8):	Sterownik do kart na układach Chips and Technologies
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -899,7 +899,7 @@ Sterownik do kart na układach Chips and Technologies.
 
 %package driver-cirrus
 Summary:	Cirrus Logic video driver
-Summary(pl.UTF-8):   Sterownik do kart Cirrus Logic
+Summary(pl.UTF-8):	Sterownik do kart Cirrus Logic
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -914,7 +914,7 @@ Sterownik do kart Cirrus Logic.
 
 %package driver-cyrix
 Summary:	Cyrix video driver
-Summary(pl.UTF-8):   Sterownik do grafiki na układzie Cyrix MediaGX
+Summary(pl.UTF-8):	Sterownik do grafiki na układzie Cyrix MediaGX
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -929,7 +929,7 @@ Sterownik do grafiki na układzie Cyrix MediaGX.
 
 %package driver-fbdev
 Summary:	Video driver for framebuffer device
-Summary(pl.UTF-8):   Sterownik korzystający z framebuffera
+Summary(pl.UTF-8):	Sterownik korzystający z framebuffera
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -944,7 +944,7 @@ Nieakcelerowany sterownik korzystający z framebuffera.
 
 %package driver-glide
 Summary:	3Dfx Voodoo1 and Voodoo2 video driver
-Summary(pl.UTF-8):   Sterownik do kart 3Dfx Voodoo1 i Voodoo2
+Summary(pl.UTF-8):	Sterownik do kart 3Dfx Voodoo1 i Voodoo2
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -960,7 +960,7 @@ Sterownik do kart Voodoo1 i Voodoo2 firmy 3Dfx.
 
 %package driver-glint
 Summary:	GLINT/Permedia video driver
-Summary(pl.UTF-8):   Sterownik do kart GLINT i Permedia
+Summary(pl.UTF-8):	Sterownik do kart GLINT i Permedia
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -975,7 +975,7 @@ Sterownik do kart GLINT i Permedia.
 
 %package driver-glint-dri
 Summary:	DRI modules for GLINT/Permedia video driver
-Summary(pl.UTF-8):   Moduły DRI dla sterownika do kart GLINT i Permedia
+Summary(pl.UTF-8):	Moduły DRI dla sterownika do kart GLINT i Permedia
 Group:		X11/Servers
 Requires:	%{name}-driver-glint = %{epoch}:%{version}-%{release}
 %ifarch %{ix86} ia64 %{x8664} alpha ppc arm
@@ -993,7 +993,7 @@ Moduły DRI dla sterownika do kart GLINT i Permedia.
 
 %package driver-i128
 Summary:	Number 9 I128 video driver
-Summary(pl.UTF-8):   Sterownik do kart Number 9 I128
+Summary(pl.UTF-8):	Sterownik do kart Number 9 I128
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1008,7 +1008,7 @@ Sterownik do kart Number 9 I128.
 
 %package driver-i2c
 Summary:	I2C drivers
-Summary(pl.UTF-8):   Sterowniki I2C
+Summary(pl.UTF-8):	Sterowniki I2C
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1021,7 +1021,7 @@ Sterowniki I2C.
 
 %package driver-i740
 Summary:	Intel i740 video driver
-Summary(pl.UTF-8):   Sterownik do kart na układzie Intel i740
+Summary(pl.UTF-8):	Sterownik do kart na układzie Intel i740
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1036,7 +1036,7 @@ Sterownik do kart na układzie Intel i740.
 
 %package driver-i810
 Summary:	Intel i810/i815/i830 video driver
-Summary(pl.UTF-8):   Sterownik do grafiki na układach Intel i810/i815/i830
+Summary(pl.UTF-8):	Sterownik do grafiki na układach Intel i810/i815/i830
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1051,7 +1051,7 @@ Sterownik do grafiki na układach Intel i810/i815/i830.
 
 %package driver-i810-dri
 Summary:	DRI modules dor Intel i810/i815/i830 video driver
-Summary(pl.UTF-8):   Moduły DRI dla sterownika do grafiki na układach Intel i810/i815/i830
+Summary(pl.UTF-8):	Moduły DRI dla sterownika do grafiki na układach Intel i810/i815/i830
 Group:		X11/Servers
 Requires:	%{name}-driver-i810 = %{epoch}:%{version}-%{release}
 %ifarch %{ix86} ia64
@@ -1069,7 +1069,7 @@ Moduły DRI dla sterownika do grafiki na układach Intel i810/i815/i830.
 
 %package driver-imstt
 Summary:	Integrated Micro Solutions Twin Turbo 128 driver
-Summary(pl.UTF-8):   Sterownik do kart Integrated Micro Solutions Twin Turbo 128
+Summary(pl.UTF-8):	Sterownik do kart Integrated Micro Solutions Twin Turbo 128
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1083,7 +1083,7 @@ Sterownik do kart Integrated Micro Solutions Twin Turbo 128.
 
 %package driver-mga
 Summary:	Matrox video driver
-Summary(pl.UTF-8):   Sterownik do kart Matrox
+Summary(pl.UTF-8):	Sterownik do kart Matrox
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1098,7 +1098,7 @@ Sterownik do kart Matrox.
 
 %package driver-mga-dri
 Summary:	DRI modules for Matrox video driver
-Summary(pl.UTF-8):   Moduly DRI dla sterownika do kart Matrox
+Summary(pl.UTF-8):	Moduly DRI dla sterownika do kart Matrox
 Group:		X11/Servers
 Requires:	%{name}-driver-mga = %{epoch}:%{version}-%{release}
 %ifarch %{ix86} ia64 %{x8664} alpha ppc arm
@@ -1116,7 +1116,7 @@ Moduly DRI dla sterownika do kart Matrox.
 
 %package driver-neomagic
 Summary:	NeoMagic video driver
-Summary(pl.UTF-8):   Sterownik do kart NeoMagic
+Summary(pl.UTF-8):	Sterownik do kart NeoMagic
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1131,7 +1131,7 @@ Sterownik do kart NeoMagic.
 
 %package driver-newport
 Summary:	Newport (XL) adapters video driver
-Summary(pl.UTF-8):   Sterownik do kart Newport (XL)
+Summary(pl.UTF-8):	Sterownik do kart Newport (XL)
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1147,7 +1147,7 @@ SGI Indy i Indigo).
 
 %package driver-nsc
 Summary:	National Semiconductors GEODE family video driver
-Summary(pl.UTF-8):   Sterownik dla kart na układach z rodziny GEODE firmy National Semiconductors
+Summary(pl.UTF-8):	Sterownik dla kart na układach z rodziny GEODE firmy National Semiconductors
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1164,7 +1164,7 @@ SC1400 oraz GX2 (układ towarzyszący 5535).
 
 %package driver-nv
 Summary:	nVidia video driver
-Summary(pl.UTF-8):   Sterownik do kart na układach firmy nVidia
+Summary(pl.UTF-8):	Sterownik do kart na układach firmy nVidia
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1179,7 +1179,7 @@ Sterownik do kart na układach firmy nVidia: Riva128, RivaTNT, GeForce.
 
 %package driver-rendition
 Summary:	Rendition video driver
-Summary(pl.UTF-8):   Sterownik do kart Rendition
+Summary(pl.UTF-8):	Sterownik do kart Rendition
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1194,7 +1194,7 @@ Sterownik do kart Verite firmowanych przez Rendition/Micron.
 
 %package driver-s3virge
 Summary:	S3 ViRGE/Trio3D video driver
-Summary(pl.UTF-8):   Sterownik do kart na układach S3 ViRGE i Trio3D
+Summary(pl.UTF-8):	Sterownik do kart na układach S3 ViRGE i Trio3D
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1209,7 +1209,7 @@ Sterownik do kart na układach S3 ViRGE i Trio3D.
 
 %package driver-s3
 Summary:	S3 Trio video driver
-Summary(pl.UTF-8):   Sterownik do kart na układach S3 Trio
+Summary(pl.UTF-8):	Sterownik do kart na układach S3 Trio
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1224,7 +1224,7 @@ Sterownik do kart na układach S3 Trio.
 
 %package driver-savage
 Summary:	S3 Savage video driver
-Summary(pl.UTF-8):   Sterownik do kart na układach S3 Savage
+Summary(pl.UTF-8):	Sterownik do kart na układach S3 Savage
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1238,7 +1238,7 @@ Sterownik do kart na układach S3 Savage.
 
 %package driver-siliconmotion
 Summary:	Silicon Motion video driver
-Summary(pl.UTF-8):   Sterownik do kart na układach Silicon Motion
+Summary(pl.UTF-8):	Sterownik do kart na układach Silicon Motion
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1252,7 +1252,7 @@ Sterownik do kart na układach Lynx firmy Silicon Motion.
 
 %package driver-sis
 Summary:	SiS video driver
-Summary(pl.UTF-8):   Sterownik do kart na układach SiS
+Summary(pl.UTF-8):	Sterownik do kart na układach SiS
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1267,7 +1267,7 @@ Sterownik do kart na układach SiS.
 
 %package driver-sis-dri
 Summary:	DRI modules for SiS video driver
-Summary(pl.UTF-8):   Moduły DRI dla sterownika do kart na układach SiS
+Summary(pl.UTF-8):	Moduły DRI dla sterownika do kart na układach SiS
 Group:		X11/Servers
 Requires:	%{name}-driver-sis = %{epoch}:%{version}-%{release}
 %ifarch %{ix86} ia64
@@ -1285,7 +1285,7 @@ Moduły DRI dla sterownika do kart na układach SiS.
 
 %package driver-sisusb
 Summary:	Video driver for SiS video chips connected via a Net2280-based USB dongle
-Summary(pl.UTF-8):   Sterownik obrazu dla układów SiS podłączonych poprzez przejściówkę USB Net2280
+Summary(pl.UTF-8):	Sterownik obrazu dla układów SiS podłączonych poprzez przejściówkę USB Net2280
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1306,7 +1306,7 @@ Uwaga: wymaga sterownika jądra Linuksa (załączonego w wersji Linuksa
 
 %package driver-sunbw2
 Summary:	sunbw2 - Sun BW2 video driver
-Summary(pl.UTF-8):   Sterownik do monochromatycznego framebuffera BW2 na Sunie
+Summary(pl.UTF-8):	Sterownik do monochromatycznego framebuffera BW2 na Sunie
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1321,7 +1321,7 @@ Sterownik do monochromatycznego framebuffera BW2 na Sunie.
 
 %package driver-suncg14
 Summary:	suncg14 - Sun CG14 video driver
-Summary(pl.UTF-8):   Sterownik do kolorowego framebuffera CG14 na Sunie
+Summary(pl.UTF-8):	Sterownik do kolorowego framebuffera CG14 na Sunie
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1335,7 +1335,7 @@ Sterownik do kolorowego framebuffera CG14 na Sunie.
 
 %package driver-suncg3
 Summary:	suncg3 - Sun CG3 video cards driver
-Summary(pl.UTF-8):   Sterownik do kolorowego framebuffera CG3 na Sunie
+Summary(pl.UTF-8):	Sterownik do kolorowego framebuffera CG3 na Sunie
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1349,7 +1349,7 @@ Sterownik do kolorowego framebuffera CG3 na Sunie.
 
 %package driver-suncg6
 Summary:	suncg6 - Sun GX and Turbo GX video driver
-Summary(pl.UTF-8):   Sterownik do grafiki GX i Turbo GX na Sunie
+Summary(pl.UTF-8):	Sterownik do grafiki GX i Turbo GX na Sunie
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1363,7 +1363,7 @@ Sterownik do grafiki GX i Turbo GX na Sunie.
 
 %package driver-sunffb
 Summary:	sunffb - Sun Creator, Creator 3D and Elite 3D video cards driver
-Summary(pl.UTF-8):   Sterownik do kart Sun Creator, Creator 3D, Elite 3D
+Summary(pl.UTF-8):	Sterownik do kart Sun Creator, Creator 3D, Elite 3D
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1377,7 +1377,7 @@ Sterownik do kart Sun Creator, Creator 3D, Elite 3D.
 
 %package driver-sunleo
 Summary:	sunleo - Sun Leo (ZX) video cards driver
-Summary(pl.UTF-8):   Sterownik do kart Sun Leo (ZX)
+Summary(pl.UTF-8):	Sterownik do kart Sun Leo (ZX)
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1391,7 +1391,7 @@ Sterownik do kart Sun Leo (ZX).
 
 %package driver-suntcx
 Summary:	suntcx - Sun TCX video cards driver
-Summary(pl.UTF-8):   Sterownik do kart Sun TCX
+Summary(pl.UTF-8):	Sterownik do kart Sun TCX
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1405,7 +1405,7 @@ Sterownik do kart Sun TCX.
 
 %package driver-tdfx
 Summary:	3Dfx video driver
-Summary(pl.UTF-8):   Sterownik do kart 3Dfx
+Summary(pl.UTF-8):	Sterownik do kart 3Dfx
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1424,7 +1424,7 @@ a Glide_V5-DRI do kart Voodoo4 lub Voodoo5.
 
 %package driver-tdfx-dri
 Summary:	DRI modules for 3Dfx video driver
-Summary(pl.UTF-8):   Moduły DRI dla sterownika do kart 3Dfx
+Summary(pl.UTF-8):	Moduły DRI dla sterownika do kart 3Dfx
 Group:		X11/Servers
 Requires:	%{name}-driver-tdfx = %{epoch}:%{version}-%{release}
 %ifarch %{ix86} ia64 alpha arm ppc
@@ -1444,7 +1444,7 @@ Moduły DRI dla sterownika do kart 3Dfx.
 
 %package driver-tga
 Summary:	TGA video driver
-Summary(pl.UTF-8):   Sterownik do kart TGA
+Summary(pl.UTF-8):	Sterownik do kart TGA
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1459,7 +1459,7 @@ Sterownik do kart TGA.
 
 %package driver-trident
 Summary:	Trident video driver
-Summary(pl.UTF-8):   Sterownik do kart Trident
+Summary(pl.UTF-8):	Sterownik do kart Trident
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1474,7 +1474,7 @@ Sterownik do kart Trident.
 
 %package driver-tseng
 Summary:	Tseng Labs video driver
-Summary(pl.UTF-8):   Sterownik do kart Tseng Labs
+Summary(pl.UTF-8):	Sterownik do kart Tseng Labs
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1490,7 +1490,7 @@ Sterownik do kart firmy Tseng Labs.
 
 %package driver-via
 Summary:	VIA CLE266 driver
-Summary(pl.UTF-8):   Sterownik do kart VIA CLE266
+Summary(pl.UTF-8):	Sterownik do kart VIA CLE266
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1504,7 +1504,7 @@ Sterownik do kart VIA CLE266.
 
 %package driver-vmware
 Summary:	VMWare SVGA emulated video driver
-Summary(pl.UTF-8):   Sterownik do emulacji karty SVGA dostępnej pod VMware
+Summary(pl.UTF-8):	Sterownik do emulacji karty SVGA dostępnej pod VMware
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1520,13 +1520,13 @@ jeśli uruchamiasz Linuksa na wirtualnej maszynie VMware.
 
 %package libs
 Summary:	X11R6 shared libraries
-Summary(de.UTF-8):   X11R6 shared Libraries
-Summary(es.UTF-8):   Bibliotecas compartidas X11R6
-Summary(fr.UTF-8):   Bibliothèques partagées X11R6
-Summary(pl.UTF-8):   Biblioteki dzielone dla X11R6
-Summary(pt_BR.UTF-8):   Bibliotecas compartilhadas X11R6
-Summary(ru.UTF-8):   Разделяемые библиотеки для X Window System (X11R6.4)
-Summary(uk.UTF-8):   Бібліотеки спільного використання для X Window System (X11R6.4)
+Summary(de.UTF-8):	X11R6 shared Libraries
+Summary(es.UTF-8):	Bibliotecas compartidas X11R6
+Summary(fr.UTF-8):	Bibliothèques partagées X11R6
+Summary(pl.UTF-8):	Biblioteki dzielone dla X11R6
+Summary(pt_BR.UTF-8):	Bibliotecas compartilhadas X11R6
+Summary(ru.UTF-8):	Разделяемые библиотеки для X Window System (X11R6.4)
+Summary(uk.UTF-8):	Бібліотеки спільного використання для X Window System (X11R6.4)
 Group:		X11/Libraries
 Requires(post,postun):	/sbin/ldconfig
 Requires(triggerpostun):	sed >= 4.0
@@ -1641,7 +1641,7 @@ X11-libs містить бібліотеки спільного використ
 
 %package modules
 Summary:	Modules with X servers extensions
-Summary(pl.UTF-8):   Wspólne dla wszystkich X serwerów moduły rozszerzeń
+Summary(pl.UTF-8):	Wspólne dla wszystkich X serwerów moduły rozszerzeń
 Group:		X11/Servers
 Provides:	XFree86-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-module-PEX
@@ -1656,9 +1656,9 @@ Wspólne dla wszystkich X serwerów moduły rozszerzeń.
 
 %package setup
 Summary:	Graphical configuration tool for XOrg X11
-Summary(pl.UTF-8):   Graficzny konfigurator dla XOrg X11
-Summary(ru.UTF-8):   Утилита для конфигурации XOrg X11
-Summary(uk.UTF-8):   Утиліта для конфігурування XOrg X11
+Summary(pl.UTF-8):	Graficzny konfigurator dla XOrg X11
+Summary(ru.UTF-8):	Утилита для конфигурации XOrg X11
+Summary(uk.UTF-8):	Утиліта для конфігурування XOrg X11
 Group:		X11
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Provides:	XFree86-setup = %{epoch}:%{version}-%{release}
@@ -1685,9 +1685,9 @@ standardowej 16-kolorowej VGA.
 
 %package static
 Summary:	X11R6 static libraries
-Summary(pl.UTF-8):   Biblioteki statyczne X11R6
-Summary(ru.UTF-8):   Статические библиотеки X11R6
-Summary(uk.UTF-8):   Статичні бібліотеки X11R6
+Summary(pl.UTF-8):	Biblioteki statyczne X11R6
+Summary(ru.UTF-8):	Статические библиотеки X11R6
+Summary(uk.UTF-8):	Статичні бібліотеки X11R6
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Provides:	XFree86-static = %{epoch}:%{version}-%{release}
@@ -1725,9 +1725,9 @@ X11-static містить статичні бібліотеки, необхід�
 
 %package tools
 Summary:	Various tools for XOrg X11
-Summary(pl.UTF-8):   Różne narzędzia dla XOrg X11
-Summary(ru.UTF-8):   Разнообразные утилиты для XOrg X11
-Summary(uk.UTF-8):   Різноманітні утиліти для XOrg X11
+Summary(pl.UTF-8):	Różne narzędzia dla XOrg X11
+Summary(ru.UTF-8):	Разнообразные утилиты для XOrg X11
+Summary(uk.UTF-8):	Різноманітні утиліти для XOrg X11
 Group:		X11
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
@@ -1797,7 +1797,7 @@ Xconfigurator, X11-xfs та X11-libs. Можливо, вам треба вста
 
 %package -n XcursorTheme-handhelds
 Summary:	Cursors Theme "handhelds"
-Summary(pl.UTF-8):   Motyw kursorów "handhelds"
+Summary(pl.UTF-8):	Motyw kursorów "handhelds"
 Group:		Themes
 #Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	XFree86-libs
@@ -1811,7 +1811,7 @@ Motyw kursorów "handhelds" dla X11.
 
 %package -n XcursorTheme-redglass
 Summary:	Cursors theme "redglass"
-Summary(pl.UTF-8):   Motyw kursorów "redglass"
+Summary(pl.UTF-8):	Motyw kursorów "redglass"
 Group:		Themes
 #Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	XFree86-libs
@@ -1825,7 +1825,7 @@ Motyw kursorów "redglass" dla X11.
 
 %package -n XcursorTheme-whiteglass
 Summary:	Cursors theme "whiteglass"
-Summary(pl.UTF-8):   Motyw kursorów "whiteglass"
+Summary(pl.UTF-8):	Motyw kursorów "whiteglass"
 Group:		Themes
 #Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	XFree86-libs
@@ -1839,7 +1839,7 @@ Motyw kursorów "whiteglass" dla X11.
 
 %package imake
 Summary:	C preprocessor interface to the make utility
-Summary(pl.UTF-8):   Miedzymordzie do make oparte o preprocesor C
+Summary(pl.UTF-8):	Miedzymordzie do make oparte o preprocesor C
 Group:		Development/Building
 Provides:	imake = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-imake
@@ -1862,7 +1862,7 @@ być kompilowane.
 
 %package sessreg
 Summary:	sessreg - manage utmp/wtmp entries for non-init clients
-Summary(pl.UTF-8):   Program do zarządzania wpisami w utmp/wtmp
+Summary(pl.UTF-8):	Program do zarządzania wpisami w utmp/wtmp
 Group:		X11
 Provides:	sessreg = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-sessreg
@@ -1886,9 +1886,9 @@ indeksowanych położeniem w /etc/ttys.
 
 %package twm
 Summary:	Tab Window Manager for the X Window System
-Summary(pl.UTF-8):   Twm - podstawowy zarządca okien dla X Window System
-Summary(ru.UTF-8):   Простой оконный менеджер
-Summary(uk.UTF-8):   Простий віконний менеджер
+Summary(pl.UTF-8):	Twm - podstawowy zarządca okien dla X Window System
+Summary(ru.UTF-8):	Простой оконный менеджер
+Summary(uk.UTF-8):	Простий віконний менеджер
 Group:		X11/Window Managers
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	filesystem >= 2.0-1
@@ -1916,7 +1916,7 @@ definiowalne przypisania klawiszy i przycisków myszy.
 
 %package xauth
 Summary:	xauth - X authority file utility
-Summary(pl.UTF-8):   xauth - narzędzie do plików X authority
+Summary(pl.UTF-8):	xauth - narzędzie do plików X authority
 Group:		X11
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	xauth = %{epoch}:%{version}-%{release}
@@ -1939,9 +1939,9 @@ logowania lub udostępnienia innym użytkownikom).
 
 %package xdm
 Summary:	xdm - X Display Manager with support for XDMCP, host chooser
-Summary(pl.UTF-8):   XDM - zarządca ekranów z obsługą XDMCP i wybieraniem hostów
-Summary(ru.UTF-8):   Менеджер дисплея X
-Summary(uk.UTF-8):   Менеджер дисплею X
+Summary(pl.UTF-8):	XDM - zarządca ekranów z obsługą XDMCP i wybieraniem hostów
+Summary(ru.UTF-8):	Менеджер дисплея X
+Summary(uk.UTF-8):	Менеджер дисплею X
 Group:		X11
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{epoch}:%{version}-%{release}
@@ -1979,9 +1979,9 @@ terminali oraz standardem X Consortium XDMCP.
 
 %package xfs
 Summary:	Font server for XOrg X11
-Summary(pl.UTF-8):   Serwer fontów dla XOrg X11
-Summary(ru.UTF-8):   Фонтсервер для X Window System
-Summary(uk.UTF-8):   Фонтсервер для X Window System
+Summary(pl.UTF-8):	Serwer fontów dla XOrg X11
+Summary(ru.UTF-8):	Фонтсервер для X Window System
+Summary(uk.UTF-8):	Фонтсервер для X Window System
 Group:		X11
 Requires(post,preun):	/sbin/chkconfig
 Requires(postun):	/usr/sbin/groupdel
