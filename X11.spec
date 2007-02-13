@@ -78,6 +78,9 @@ Source52:	xmag.png
 Source53:	http://oss.sgi.com/projects/ogl-sample/ABI/glext.h
 Source54:	XvMCConfig
 # NoSource53-md5:	0c40bd4545aa630e139043c2b12f0807
+#via_openchrome
+Source55:	xorg-via_openchrome_vt3336_branch_snap20070212.patch.tar.bz2
+# Source55-md5:       f864012ad05bf2cc7f21b94df55cbdb3
 Patch0:		http://xorg.freedesktop.org/releases/X11R6.9.0/patches/x11r6.9.0-geteuid.diff
 Patch1:		%{name}-PLD.patch
 Patch2:		%{name}-enableglide.patch
@@ -139,8 +142,6 @@ Patch74:	%{name}-unichrome.patch
 #head-patch
 #ftp://ftp.linux.cz/pub/linux/people/jan_kasprzak/xorg-dualhead/
 Patch100:	ftp://ftp.linux.cz/pub/linux/people/jan_kasprzak/xorg-dualhead/xorg-x11-6.8.1-dualhead.patch
-#via_openchrome
-Patch101:	org-via_openchrome_vt3336_branch_snap20070212.patch
 
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
@@ -2099,7 +2100,8 @@ rm -f xc/config/cf/host.def
 %{?with_r300:%patch74 -p1}
 # patch74 required patch73
 %{?with_dualhead:%patch100 -p1}
-%{?with_via_openchrome:%patch101 -p1}
+%{?with_via_openchrome: bzip2 -dc %{SOURCE55} |tar -x --to-stdout | %{__patch} -p1 -s}
+
 
 sed -i -e 's#krb5/##g' xc/lib/Xau/*.* xc/programs/xdm/greeter/*.* \
 	xc/programs/xdm/*.* xc/programs/Xserver/os/*.*
