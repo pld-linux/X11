@@ -12,6 +12,7 @@
 %bcond_without	glide		# don't build glide driver
 %bcond_without	r300		# r300_dri.so
 %bcond_with	dualhead	# apply dualhead patch
+%bcond_with	via_openchrome	# apply via drivers from openchrome instead xorg
 
 Summary:	XOrg X11 Window System servers and basic programs
 Summary(de.UTF-8):	XOrg X11 Window-System-Server und grundlegende Programme
@@ -138,6 +139,8 @@ Patch74:	%{name}-unichrome.patch
 #head-patch
 #ftp://ftp.linux.cz/pub/linux/people/jan_kasprzak/xorg-dualhead/
 Patch100:	ftp://ftp.linux.cz/pub/linux/people/jan_kasprzak/xorg-dualhead/xorg-x11-6.8.1-dualhead.patch
+#via_openchrome
+Patch101:	org-via_openchrome_vt3336_branch_snap20070212.patch
 
 URL:		http://www.x.org/
 BuildRequires:	/usr/bin/perl
@@ -2096,6 +2099,7 @@ rm -f xc/config/cf/host.def
 %{?with_r300:%patch74 -p1}
 # patch74 required patch73
 %{?with_dualhead:%patch100 -p1}
+%{?with_via_openchrome:%patch101 -p1}
 
 sed -i -e 's#krb5/##g' xc/lib/Xau/*.* xc/programs/xdm/greeter/*.* \
 	xc/programs/xdm/*.* xc/programs/Xserver/os/*.*
