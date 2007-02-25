@@ -79,7 +79,8 @@ Source53:	http://oss.sgi.com/projects/ogl-sample/ABI/glext.h
 Source54:	XvMCConfig
 # NoSource53-md5:	0c40bd4545aa630e139043c2b12f0807
 #via_openchrome
-Source55:	xorg-via_openchrome_vt3336_branch_snap20070212.patch.tar.bz2
+#Source55:	xorg-via_openchrome_vt3336_branch_snap20070212.patch.tar.bz2
+Source55:	http://kolodko1.webpark.pl/xorg-via_openchrome_vt3336_branch_snap20070212.patch.tar.bz2
 # Source55-md5:       f864012ad05bf2cc7f21b94df55cbdb3
 Patch0:		http://xorg.freedesktop.org/releases/X11R6.9.0/patches/x11r6.9.0-geteuid.diff
 Patch1:		%{name}-PLD.patch
