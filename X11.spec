@@ -28,7 +28,7 @@ Summary(uk.UTF-8):	Базові шрифти, програми та докуме
 Summary(zh_CN.UTF-8):	XOrg X11 窗口系统服务器和基本程序
 Name:		X11
 Version:	6.9.0
-Release:	19
+Release:	20
 Epoch:		1
 License:	MIT/X Consortium/BSD (see README)
 Group:		X11
@@ -2102,10 +2102,6 @@ rm -f xc/config/cf/host.def
 # patch74 required patch73
 %{?with_dualhead:%patch100 -p1}
 %{?with_via_openchrome: bzip2 -dc %{SOURCE55} |tar -x --to-stdout | %{__patch} -p1 -s}
-
-
-sed -i -e 's#krb5/##g' xc/lib/Xau/*.* xc/programs/xdm/greeter/*.* \
-	xc/programs/xdm/*.* xc/programs/Xserver/os/*.*
 
 %build
 PWD=`pwd`
