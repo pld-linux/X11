@@ -1,1 +1,7 @@
-#XvMCNVIDIA_dynamic.so.1
+
+# Please put proper library name in the first line of this file.
+# Available libraries:
+#libI810XvMC.so.1
+#libXvMCNVIDIA_dynamic.so.1
+#libviaXvMC.so.1
+#libviaXvMCPro.so.1
