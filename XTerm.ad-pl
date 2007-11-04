@@ -342,3 +342,7 @@
 ! Set a border for the menus to make them simpler to distinguish against the
 ! vt100 widget:
 *SimpleMenu*borderWidth: 2
+
+! Set polish diacritical letters (¡£¦¬¯±³¶¼¿ with ÆÊÑÓæêñó already set) the same class as regular letters
+! in order to properly match while double-click word selection
+*charClass: 161:48,163:48,166:48,172:48,175:48,177:48,179:48,182:48,188:48,191:48,198:48,202:48,209:48,211:48,230:48,234:48,241:48,243:48
