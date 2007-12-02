@@ -19,11 +19,7 @@ if [ -f /etc/sysconfig/xfs ]; then
 	. /etc/sysconfig/xfs
 fi
 
-RETVAL=0
-# See how we were called.
-case "$1" in
-  start)
-	# Check if the service is already running?
+start() {
 	if [ ! -f /var/lock/subsys/xfs ]; then
 		msg_starting "X Font Server"
 		rm -fr /tmp/.font-unix
@@ -35,8 +31,9 @@ case "$1" in
 	else
 		msg_already_running "X Font Server"
 	fi
-	;;
-  stop)
+}
+
+stop() {
 	if [ -f /var/lock/subsys/xfs ]; then
 		msg_stopping "X Font Server"
 		killproc xfs
@@ -44,28 +41,54 @@ case "$1" in
 	else
 		msg_not_running "X Font Server"
 	fi
-	;;
-  status)
-	status xfs
-	exit $?
-	;;
-  restart)
-	$0 stop
-	$0 start
-	exit $?
-	;;
-  reload|force-reload)
+}
+
+reload() {
 	if [ -f /var/lock/subsys/xfs ]; then
 		msg_reloading "X Font Server"
 		killproc xfs -USR1
 		RETVAL=$?
 	else
 		msg_not_running "X Font Server"
-		exit 7
+		RETVAL=7
 	fi
+}
+
+condrestart() {
+	if [ -f /var/lock/subsys/xfs ]; then
+		stop
+		start
+	else
+		msg_not_running xfs
+		RETVAL=$1
+	fi
+}
+
+RETVAL=0
+# See how we were called.
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  restart)
+	stop
+	start
+	;;
+  try-restart)
+	condrestart 0
+	;;
+  reload|force-reload)
+	reload
+	;;
+  status)
+	status xfs
+	exit $?
 	;;
   *)
-	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
+	msg_usage "$0 {start|stop|restart|try-restart|reload|force-reload|status}"
 	exit 3
 esac
 
