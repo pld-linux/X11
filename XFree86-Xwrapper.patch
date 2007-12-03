@@ -86,7 +86,7 @@ diff -urN xc.orig/programs/Xserver/Imakefile xc/programs/Xserver/Imakefile
  
 +#if UseXserverWrapper
 +all:: Xwrapper
-+SetUIDProgramTarget(Xwrapper,os/wrapper.o,NullParameter,$(PAMLIBS),NullParameter)
++SetUIDProgramTarget(Xwrapper,os/wrapper.o,NullParameter,$(SERVERPAMLIBRARIES),NullParameter)
 +InstallProgramWithFlags(Xwrapper,$(BINDIR),$(INSTUIDFLAGS))
 +#endif
 +
@@ -110,22 +110,14 @@ diff -urN xc.orig/programs/Xserver/hw/xfree86/os-support/linux/lnx_init.c xc/pro
  	/*
 --- xc/programs/Xserver/os/Imakefile.orig	2006-02-19 16:51:31.000000000 +0100
 +++ xc/programs/Xserver/os/Imakefile	2006-07-19 21:30:56.576028250 +0200
-@@ -193,6 +193,7 @@
- 		  -I$(SERVERSRC)/Xext -I$(SERVERSRC)/render \
- 		  -I$(SERVERSRC)/lbx -I$(SERVERSRC)/Xprint \
- 		  -I$(TOP)/lib/Xau Krb5Includes
-+  EXTRA_DEFINES = -DUSE_PAM
-  DEPEND_DEFINES = $(DBM_DEFINES) $(XDMCP_DEFINES) \
- 		  $(TRANS_INCLUDES) $(CONNECTION_FLAGS) DependDefines
-        LINTLIBS = ../dix/llib-ldix.ln
-@@ -239,6 +240,14 @@
+@@ -239,6 +241,14 @@
  SpecialCObjectRule(oscolor,$(ICONFIGFILES),$(DBM_DEFINES))
  #endif
  
 +#if UseXserverWrapper && XF86Server
 +AllTarget(wrapper.o)
 +
-+       WRAPPER_DEFINES = -DXSERVER_PATH=\"/etc/X11/X\"
++       WRAPPER_DEFINES = -DXSERVER_PATH=\"/etc/X11/X\" $(PAMDEFINES)
 +
 +SpecialCObjectRule(wrapper,NullParameter,$(WRAPPER_DEFINES))
 +#endif
