@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=X Clipboard
 Name[af]=X Klipbord
 Name[ar]=حافظة اكس
@@ -85,7 +84,7 @@ Comment[zh_CN]=剪贴板查看器
 Comment[zh_TW]=剪貼簿檢視器
 Comment[zu]=Umboniseli Webhodi eliciphizekayo
 Exec=xclipboard
-Icon=xclipboard.png
+Icon=xclipboard
 Type=Application
 Terminal=false
 Categories=Utility;

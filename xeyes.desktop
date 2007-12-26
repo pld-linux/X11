@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=X Eyes
 Name[af]=X Oë
 Name[az]=X Gözlər
@@ -36,7 +35,7 @@ Name[zu]=Amehlo ka X
 Comment=Eyes following the X mouse
 Comment[pl]=Oczy podążające za kursorem myszy w X
 Exec=xeyes
-Icon=xeyes.png
+Icon=xeyes
 Terminal=false
 Type=Application
 Categories=Amusement;

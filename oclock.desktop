@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=OClock
 Name[af]=Horlosie
 Name[be]=Гадзіннік
@@ -59,7 +58,7 @@ Comment[zh_TW]=時鐘
 Comment[zu]=Iwashi
 Exec=oclock
 Terminal=false
-Icon=oclock.png
+Icon=oclock
 Type=Application
 Categories=Utility;Clock;
 # vi: encoding=utf-8

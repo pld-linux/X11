@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=X Editor
 Name[af]=X Redigeerder
 Name[az]=X Editoru
@@ -81,7 +80,7 @@ Comment[zh_CN]=文本编辑器
 Comment[zh_TW]=文字編輯器
 Comment[zu]=Umhleli Wokubhaliweyo 
 Exec=xedit %f
-Icon=xedit.png
+Icon=xedit
 Type=Application
 Terminal=false
 Categories=TextEditor;

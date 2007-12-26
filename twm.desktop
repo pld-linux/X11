@@ -1,11 +1,9 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=Twm
 Comment=Tab Window Manager
 Comment[pl]=Prosty zarządca okien twm
 Exec=twm
 TryExec=twm
-
 [Window Manager]
 SessionManaged=false
 # vi: encoding=utf-8
