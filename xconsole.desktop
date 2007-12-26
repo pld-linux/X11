@@ -40,7 +40,6 @@ Comment[sl]=Konzola za okna X
 Comment[sv]=X Konsolvisare
 Exec=xconsole
 Icon=xconsole
-TerminalOptions=
 Terminal=false
 Type=Application
 Categories=System;
