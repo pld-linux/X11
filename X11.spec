@@ -14,17 +14,17 @@
 %bcond_with	dualhead	# apply dualhead patch
 
 Summary:	XOrg X11 Window System servers and basic programs
-Summary(de):	XOrg X11 Window-System-Server und grundlegende Programme
-Summary(es):	Programas básicos y servidores para el sistema de ventanas XOrg X11
-Summary(fr):	Serveurs du système XOrg X11 et programmes de base
-Summary(ja):	XOrg X11 window system ¤Î¥µ¡¼¥Ð¤È´ðËÜÅª¤Ê¥×¥í¥°¥é¥à
-Summary(ko):	X¿¡ ÇÊ¿äÇÑ ±âº»ÀûÀÎ ±Û²Ã°ú ÇÁ·Î±×·¥°ú ¹®¼­µé
-Summary(pl):	XOrg X11 Window System wraz z podstawowymi programami
-Summary(pt_BR):	Programas básicos e servidores para o sistema de janelas XOrg X11
-Summary(ru):	âÁÚÏ×ÙÅ ÛÒÉÆÔÙ, ÐÒÏÇÒÁÍÍÙ É ÄÏËÕÍÅÎÔÁÃÉÑ ÄÌÑ ÒÁÂÏÞÅÊ ÓÔÁÎÃÉÉ ÐÏÄ X
-Summary(tr):	XOrg X11 Pencereleme Sistemi sunucularý ve temel programlar
-Summary(uk):	âÁÚÏ×¦ ÛÒÉÆÔÉ, ÐÒÏÇÒÁÍÉ ÔÁ ÄÏËÕÍÅÎÔÁÃ¦Ñ ÄÌÑ ÒÏÂÏÞÏ§ ÓÔÁÎÃ¦§ Ð¦Ä X
-Summary(zh_CN):	XOrg X11 ´°¿ÚÏµÍ³·þÎñÆ÷ºÍ»ù±¾³ÌÐò
+Summary(de.UTF-8):	XOrg X11 Window-System-Server und grundlegende Programme
+Summary(es.UTF-8):	Programas bÃ¡sicos y servidores para el sistema de ventanas XOrg X11
+Summary(fr.UTF-8):	Serveurs du systÃ¨me XOrg X11 et programmes de base
+Summary(ja.UTF-8):	XOrg X11 window system ã®ã‚µãƒ¼ãƒã¨åŸºæœ¬çš„ãªãƒ—ãƒ­ã‚°ãƒ©ãƒ 
+Summary(ko.UTF-8):	Xì— í•„ìš”í•œ ê¸°ë³¸ì ì¸ ê¸€ê¼´ê³¼ í”„ë¡œê·¸ëž¨ê³¼ ë¬¸ì„œë“¤
+Summary(pl.UTF-8):	XOrg X11 Window System wraz z podstawowymi programami
+Summary(pt_BR.UTF-8):	Programas bÃ¡sicos e servidores para o sistema de janelas XOrg X11
+Summary(ru.UTF-8):	Ð‘Ð°Ð·Ð¾Ð²Ñ‹Ðµ ÑˆÑ€Ð¸Ñ„Ñ‚Ñ‹, Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹ Ð¸ Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð°Ñ†Ð¸Ñ Ð´Ð»Ñ Ñ€Ð°Ð±Ð¾Ñ‡ÐµÐ¹ ÑÑ‚Ð°Ð½Ñ†Ð¸Ð¸ Ð¿Ð¾Ð´ X
+Summary(tr.UTF-8):	XOrg X11 Pencereleme Sistemi sunucularÄ± ve temel programlar
+Summary(uk.UTF-8):	Ð‘Ð°Ð·Ð¾Ð²Ñ– ÑˆÑ€Ð¸Ñ„Ñ‚Ð¸, Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¸ Ñ‚Ð° Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð°Ñ†Ñ–Ñ Ð´Ð»Ñ Ñ€Ð¾Ð±Ð¾Ñ‡Ð¾Ñ— ÑÑ‚Ð°Ð½Ñ†Ñ–Ñ— Ð¿Ñ–Ð´ X
+Summary(zh_CN.UTF-8):	XOrg X11 çª—å£ç³»ç»ŸæœåŠ¡å™¨å’ŒåŸºæœ¬ç¨‹åº
 Name:		X11
 Version:	6.9.0
 Release:	19
@@ -161,14 +161,14 @@ BuildRequires:	utempter-devel
 BuildRequires:	zlib-devel
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-xauth = %{epoch}:%{version}-%{release}
-Requires:	pam >= 0.79.0
 Requires:	filesystem >= 2.0-1
+Requires:	pam >= 0.79.0
 Provides:	XFree86 = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86
-Obsoletes:	xpm-progs
-Obsoletes:	xterm
 # for /usr/X11R6/bin/mkfontdir
 Obsoletes:	XFree86-font-utils
+Obsoletes:	xpm-progs
+Obsoletes:	xterm
 %ifarch sparc sparc64 sparcv9
 Obsoletes:	X11R6.1
 %endif
@@ -208,107 +208,107 @@ which you will need to drive your video hardware. To control your
 video card, you'll need the particular X server package which
 corresponds to your computer's video card.
 
-%description -l de
-X-Window ist eine voll funktionsfähige grafische Benutzeroberfläche
+%description -l de.UTF-8
+X-Window ist eine voll funktionsfÃ¤hige grafische BenutzeroberflÃ¤che
 mit mehreren Fenstern, mehreren Clients und verschiedenen Arten von
 Fenstern. Es kommt auf den meisten Unix-Plattformen zum Einsatz. Die
 Clients lassen sich auch mit Hilfe anderer Fenstersysteme anzeigen.
-Das X-Protokoll gestattet die Ausführung der Applikationen direkt auf
-lokalen Rechnern oder über ein Netz und bietet große Flexibilität bei
+Das X-Protokoll gestattet die AusfÃ¼hrung der Applikationen direkt auf
+lokalen Rechnern oder Ã¼ber ein Netz und bietet groÃŸe FlexibilitÃ¤t bei
 Client-Server-Implementierungen.
 
-%description -l es
-X Window es una interface gráfica completa con múltiples ventanas,
-múltiples clientes y diferentes estilos de ventanas. Se usa en la
-mayoría de las plataformas Unix, y los clientes también pueden
+%description -l es.UTF-8
+X Window es una interface grÃ¡fica completa con mÃºltiples ventanas,
+mÃºltiples clientes y diferentes estilos de ventanas. Se usa en la
+mayorÃ­a de las plataformas Unix, y los clientes tambiÃ©n pueden
 ejecutar en otros sistemas de ventanas populares. El protocolo X
-permite que las aplicaciones puedan ejecutarse tanto en la máquina
-local como a través de la red, y proveer flexibilidad en
+permite que las aplicaciones puedan ejecutarse tanto en la mÃ¡quina
+local como a travÃ©s de la red, y proveer flexibilidad en
 implementaciones cliente/servidor. Este paquete contiene las fuentes
-básicas, programas y documentación para una estación de trabajo X. No
-ofrece un servidor X que acceda tu hardware de vídeo -- estos son
-puestos a disposición en otro paquete.
+bÃ¡sicas, programas y documentaciÃ³n para una estaciÃ³n de trabajo X. No
+ofrece un servidor X que acceda tu hardware de vÃ­deo -- estos son
+puestos a disposiciÃ³n en otro paquete.
 
-%description -l pl
-X Window System jest graficznym interfejsem u¿ytkownika; cechuje siê
-mo¿liwo¶ci± pracy w wielu oknach, z wieloma klientami i do tego w
-ró¿nych wystrojach okien. :) Jest u¿ywany na wiêkszo¶ci platform
-sytemów Unix, a klienci mog± byæ uruchamiani tak¿e pod innymi
-popularnymi systemami okienkowymi. Protokó³ X pozwala na uruchamianie
-aplikacji zarówno z lokalnej maszyny jak i poprzez sieæ - daj±c przez
-to elastyczn± implementacjê architektury klient/serwer.
+%description -l pl.UTF-8
+X Window System jest graficznym interfejsem uÅ¼ytkownika; cechuje siÄ™
+moÅ¼liwoÅ›ciÄ… pracy w wielu oknach, z wieloma klientami i do tego w
+rÃ³Å¼nych wystrojach okien. :) Jest uÅ¼ywany na wiÄ™kszoÅ›ci platform
+sytemÃ³w Unix, a klienci mogÄ… byÄ‡ uruchamiani takÅ¼e pod innymi
+popularnymi systemami okienkowymi. ProtokÃ³Å‚ X pozwala na uruchamianie
+aplikacji zarÃ³wno z lokalnej maszyny jak i poprzez sieÄ‡ - dajÄ…c przez
+to elastycznÄ… implementacjÄ™ architektury klient/serwer.
 
-Pakiet ten nie zawiera X serwera który jest po¶rednikiem z Twoj± kart±
-graficzn± (jest on w innym pakiecie).
+Pakiet ten nie zawiera X serwera ktÃ³ry jest poÅ›rednikiem z TwojÄ… kartÄ…
+graficznÄ… (jest on w innym pakiecie).
 
-%description -l pt_BR
-X Window é uma interface gráfica completa com múltiplas janelas,
-múltiplos clientes e diferentes estilos de janelas. É usado na maioria
-das plataformas Unix, e clientes também podem rodar em outros sistemas
-de janelas populares. O protocolo X permite que aplicações possam
-rodar tanto na máquina local como através da rede, provendo
-flexibilidade em implementações cliente/servidor.
+%description -l pt_BR.UTF-8
+X Window Ã© uma interface grÃ¡fica completa com mÃºltiplas janelas,
+mÃºltiplos clientes e diferentes estilos de janelas. Ã‰ usado na maioria
+das plataformas Unix, e clientes tambÃ©m podem rodar em outros sistemas
+de janelas populares. O protocolo X permite que aplicaÃ§Ãµes possam
+rodar tanto na mÃ¡quina local como atravÃ©s da rede, provendo
+flexibilidade em implementaÃ§Ãµes cliente/servidor.
 
-Este pacote contém as fontes básicas, programas e documentação para
-uma estação de trabalho X. Ele não fornece um servidor X que acessa
-seu hardware de vídeo -- estes são disponibilizados em outro pacote.
+Este pacote contÃ©m as fontes bÃ¡sicas, programas e documentaÃ§Ã£o para
+uma estaÃ§Ã£o de trabalho X. Ele nÃ£o fornece um servidor X que acessa
+seu hardware de vÃ­deo -- estes sÃ£o disponibilizados em outro pacote.
 
-%description -l ru
-X Window System ÐÒÅÄÏÓÔÁ×ÌÑÅÔ ÂÁÚÕ ÄÌÑ ÒÁÚÒÁÂÏÔËÉ ÇÒÁÆÉÞÅÓËÉÈ
-ÉÎÔÅÒÆÅÊÓÏ× ÐÏÌØÚÏ×ÁÔÅÌÑ. ðÏÐÒÏÓÔÕ ÇÏ×ÏÒÑ, X ÒÉÓÕÅÔ ÜÌÅÍÅÎÔÙ GUI ÎÁ
-ÜËÒÁÎÅ ÐÏÌØÚÏ×ÁÔÅÌÑ É ÓÔÏÉÔ ÍÅÔÏÄÙ ÄÌÑ ÐÅÒÅÄÁÞÉ ÄÅÊÓÔ×ÉÊ ÐÏÌØÚÏ×ÁÔÅÌÑ
-ÐÒÉËÌÁÄÎÙÍ ÐÒÏÇÒÁÍÍÁÍ. X ÔÁËÖÅ ÐÏÄÄÅÒÖÉ×ÁÅÔ ÒÁÓÐÒÅÄÅÌÅÎÉÅ ÐÒÉÌÏÖÅÎÉÊ -
-ÚÁÐÕÓË ÐÒÏÇÒÁÍÍ ÎÁ ÕÄÁÌÅÎÎÏÍ ËÏÍÐØÀÔÅÒÅ Ó ××ÏÄÏÍ/×Ù×ÏÄÏÍ ÎÁ
-ÐÏÌØÚÏ×ÁÔÅÌØÓËÕÀ ÍÁÛÉÎÕ. X - ÜÔÏ ÍÏÝÎÁÑ ÓÒÅÄÁ, ÐÏÄÄÅÒÖÉ×ÁÀÝÁÑ
-ÍÎÏÖÅÓÔ×Ï ÐÒÉÌÏÖÅÎÉÊ, ÔÁËÉÈ ËÁË ÉÇÒÙ, ÉÎÓÔÒÕÍÅÎÔÙ ÄÌÑ ÐÒÏÇÒÁÍÍÉÓÔÁ,
-ÇÒÁÆÉÞÅÓËÉÅ ÐÒÏÇÒÁÍÍÙ, ÔÅËÓÔÏ×ÙÅ ÒÅÄÁËÔÏÒÙ É Ô.Ð. XOrg X11 - ÜÔÏ
-×ÅÒÓÉÑ X, ÒÁÂÏÔÁÀÝÁÑ ÎÁ Linux É ÄÒÕÇÉÈ ÓÉÓÔÅÍÁÈ.
+%description -l ru.UTF-8
+X Window System Ð¿Ñ€ÐµÐ´Ð¾ÑÑ‚Ð°Ð²Ð»ÑÐµÑ‚ Ð±Ð°Ð·Ñƒ Ð´Ð»Ñ Ñ€Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ¸ Ð³Ñ€Ð°Ñ„Ð¸Ñ‡ÐµÑÐºÐ¸Ñ…
+Ð¸Ð½Ñ‚ÐµÑ€Ñ„ÐµÐ¹ÑÐ¾Ð² Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ. ÐŸÐ¾Ð¿Ñ€Ð¾ÑÑ‚Ñƒ Ð³Ð¾Ð²Ð¾Ñ€Ñ, X Ñ€Ð¸ÑÑƒÐµÑ‚ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ñ‹ GUI Ð½Ð°
+ÑÐºÑ€Ð°Ð½Ðµ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ Ð¸ ÑÑ‚Ð¾Ð¸Ñ‚ Ð¼ÐµÑ‚Ð¾Ð´Ñ‹ Ð´Ð»Ñ Ð¿ÐµÑ€ÐµÐ´Ð°Ñ‡Ð¸ Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ð¹ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ
+Ð¿Ñ€Ð¸ÐºÐ»Ð°Ð´Ð½Ñ‹Ð¼ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð°Ð¼. X Ñ‚Ð°ÐºÐ¶Ðµ Ð¿Ð¾Ð´Ð´ÐµÑ€Ð¶Ð¸Ð²Ð°ÐµÑ‚ Ñ€Ð°ÑÐ¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð¸Ðµ Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ð¹ -
+Ð·Ð°Ð¿ÑƒÑÐº Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼ Ð½Ð° ÑƒÐ´Ð°Ð»ÐµÐ½Ð½Ð¾Ð¼ ÐºÐ¾Ð¼Ð¿ÑŒÑŽÑ‚ÐµÑ€Ðµ Ñ Ð²Ð²Ð¾Ð´Ð¾Ð¼/Ð²Ñ‹Ð²Ð¾Ð´Ð¾Ð¼ Ð½Ð°
+Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒÑÐºÑƒÑŽ Ð¼Ð°ÑˆÐ¸Ð½Ñƒ. X - ÑÑ‚Ð¾ Ð¼Ð¾Ñ‰Ð½Ð°Ñ ÑÑ€ÐµÐ´Ð°, Ð¿Ð¾Ð´Ð´ÐµÑ€Ð¶Ð¸Ð²Ð°ÑŽÑ‰Ð°Ñ
+Ð¼Ð½Ð¾Ð¶ÐµÑÑ‚Ð²Ð¾ Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ð¹, Ñ‚Ð°ÐºÐ¸Ñ… ÐºÐ°Ðº Ð¸Ð³Ñ€Ñ‹, Ð¸Ð½ÑÑ‚Ñ€ÑƒÐ¼ÐµÐ½Ñ‚Ñ‹ Ð´Ð»Ñ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð¸ÑÑ‚Ð°,
+Ð³Ñ€Ð°Ñ„Ð¸Ñ‡ÐµÑÐºÐ¸Ðµ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹, Ñ‚ÐµÐºÑÑ‚Ð¾Ð²Ñ‹Ðµ Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¾Ñ€Ñ‹ Ð¸ Ñ‚.Ð¿. XOrg X11 - ÑÑ‚Ð¾
+Ð²ÐµÑ€ÑÐ¸Ñ X, Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÑŽÑ‰Ð°Ñ Ð½Ð° Linux Ð¸ Ð´Ñ€ÑƒÐ³Ð¸Ñ… ÑÐ¸ÑÑ‚ÐµÐ¼Ð°Ñ….
 
-üÔÏÔ ÐÁËÅÔ ÓÏÄÅÒÖÉÔ ÂÁÚÏ×ÙÅ ÛÒÉÆÔÙ, ÐÒÏÇÒÁÍÍÙ É ÄÏËÕÍÅÎÔÁÃÉÀ ÄÌÑ
-ÒÁÂÏÞÅÊ ÓÔÁÎÃÉÉ X.
+Ð­Ñ‚Ð¾Ñ‚ Ð¿Ð°ÐºÐµÑ‚ ÑÐ¾Ð´ÐµÑ€Ð¶Ð¸Ñ‚ Ð±Ð°Ð·Ð¾Ð²Ñ‹Ðµ ÑˆÑ€Ð¸Ñ„Ñ‚Ñ‹, Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹ Ð¸ Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð°Ñ†Ð¸ÑŽ Ð´Ð»Ñ
+Ñ€Ð°Ð±Ð¾Ñ‡ÐµÐ¹ ÑÑ‚Ð°Ð½Ñ†Ð¸Ð¸ X.
 
-äÏÐÏÌÎÉÔÅÌØÎÏ ÎÅÏÂÈÏÄÉÍÏ ÕÓÔÁÎÏ×ÉÔØ ÐÁËÅÔÙ Xconfigurator, ÆÏÎÔÓÅÒ×ÅÒ
-xfs É ÂÉÂÌÉÏÔÅËÉ X11-libs. ÷ÏÚÍÏÖÎÏ ÐÒÉÄÅÔÓÑ ÕÓÔÁÎÏ×ÉÔØ ÔÁËÖÅ ÏÄÉÎ ÉÌÉ
-ÂÏÌÅÅ ÐÁËÅÔÏ× ÛÒÉÆÔÏ× XOrg X11.
+Ð”Ð¾Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ Ð¿Ð°ÐºÐµÑ‚Ñ‹ Xconfigurator, Ñ„Ð¾Ð½Ñ‚ÑÐµÑ€Ð²ÐµÑ€
+xfs Ð¸ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸ X11-libs. Ð’Ð¾Ð·Ð¼Ð¾Ð¶Ð½Ð¾ Ð¿Ñ€Ð¸Ð´ÐµÑ‚ÑÑ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ Ñ‚Ð°ÐºÐ¶Ðµ Ð¾Ð´Ð¸Ð½ Ð¸Ð»Ð¸
+Ð±Ð¾Ð»ÐµÐµ Ð¿Ð°ÐºÐµÑ‚Ð¾Ð² ÑˆÑ€Ð¸Ñ„Ñ‚Ð¾Ð² XOrg X11.
 
-îÕ É, ÎÁËÏÎÅÃ, ÅÓÌÉ ×Ù ÓÏÂÉÒÁÅÔÅÓØ ÒÁÚÒÁÂÁÔÙ×ÁÔØ ÐÒÉÌÏÖÅÎÉÑ,
-ÒÁÂÏÔÁÀÝÉÅ ËÁË X-ËÌÉÅÎÔÙ, ×ÁÍ ÔÁËÖÅ ÎÁÄÏ ÂÕÄÅÔ ÕÓÔÁÎÏ×ÉÔØ X11-devel.
+ÐÑƒ Ð¸, Ð½Ð°ÐºÐ¾Ð½ÐµÑ†, ÐµÑÐ»Ð¸ Ð²Ñ‹ ÑÐ¾Ð±Ð¸Ñ€Ð°ÐµÑ‚ÐµÑÑŒ Ñ€Ð°Ð·Ñ€Ð°Ð±Ð°Ñ‚Ñ‹Ð²Ð°Ñ‚ÑŒ Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ,
+Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÑŽÑ‰Ð¸Ðµ ÐºÐ°Ðº X-ÐºÐ»Ð¸ÐµÐ½Ñ‚Ñ‹, Ð²Ð°Ð¼ Ñ‚Ð°ÐºÐ¶Ðµ Ð½Ð°Ð´Ð¾ Ð±ÑƒÐ´ÐµÑ‚ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ X11-devel.
 
-%description -l tr
-X Window sistemi, çoklu pencere, çoklu istemci ve çeþitli pencere
-stilleriyle geniþ özelliklere sahip bir Grafik Kullanýcý Arabirimidir.
-Çoðu UNIX sisteminde çalýþtýðý gibi istemcileri de birçok pencereleme
-sistemiyle çalýþabilir. X protokolu kullanan uygulamalarýn yerel
-makina veya bilgisayar aðý üzerinden çalýþtýrýlabilmesi esnek bir
-istemci/sunucu ortamý saðlar. Bu paket bir X istasyonu için gerekli
-olan temel yazýtiplerini, programlarý ve belgeleri sunar. Ekran
-kartýnýzý sürmek için gerekli olan X sunucusu bu pakete dahil
-deðildir.
+%description -l tr.UTF-8
+X Window sistemi, Ã§oklu pencere, Ã§oklu istemci ve Ã§eÅŸitli pencere
+stilleriyle geniÅŸ Ã¶zelliklere sahip bir Grafik KullanÄ±cÄ± Arabirimidir.
+Ã‡oÄŸu UNIX sisteminde Ã§alÄ±ÅŸtÄ±ÄŸÄ± gibi istemcileri de birÃ§ok pencereleme
+sistemiyle Ã§alÄ±ÅŸabilir. X protokolu kullanan uygulamalarÄ±n yerel
+makina veya bilgisayar aÄŸÄ± Ã¼zerinden Ã§alÄ±ÅŸtÄ±rÄ±labilmesi esnek bir
+istemci/sunucu ortamÄ± saÄŸlar. Bu paket bir X istasyonu iÃ§in gerekli
+olan temel yazÄ±tiplerini, programlarÄ± ve belgeleri sunar. Ekran
+kartÄ±nÄ±zÄ± sÃ¼rmek iÃ§in gerekli olan X sunucusu bu pakete dahil
+deÄŸildir.
 
-%description -l uk
-X Window System ÎÁÄÁ¤ ÂÁÚÕ ÄÌÑ ÒÏÚÒÏÂËÉ ÇÒÁÆ¦ÞÎÉÈ ¦ÎÔÅÒÆÅÊÓ¦×
-ËÏÒÉÓÔÕ×ÁÞÁ. ðÒÏÓÔ¦ÛÅ ËÁÖÕÞÉ, X ÍÁÌÀ¤ ÅÌÅÍÅÎÔÉ GUI ÎÁ ÅËÒÁÎ¦
-ËÏÒÉÓÔÕ×ÁÞÁ ÔÁ ÂÕÄÕ¤ ÍÅÔÏÄÉ ÄÌÑ ÐÅÒÅÄÁÞ¦ Ä¦Ê ËÏÒÉÓÔÕ×ÁÞÁ ÐÒÉËÌÁÄÎÉÍ
-ÐÒÏÇÒÁÍÁÍ. X ÔÁËÏÖ Ð¦ÄÔÒÉÍÕ¤ ÒÏÚÐÏÄ¦Ì ÐÒÉËÌÁÄÎÉÈ ÐÒÏÇÒÁÍ - ÚÁÐÕÓË
-ÐÒÏÇÒÁÍ ÎÁ ×¦ÄÄÁÌÅÎÏÍÕ ËÏÍÐ'ÀÔÅÒ¦ Ú ××ÏÄÏÍ/×É×ÏÄÏÍ ÎÁ ÍÁÛÉÎÕ
-ËÏÒÉÓÔÕ×ÁÞÁ. X - ÃÅ ÐÏÔÕÖÎÅ ÓÅÒÅÄÏ×ÉÝÅ, ÑËÅ Ð¦ÄÔÒÉÍÕ¤ ×ÅÌÉËÕ Ë¦ÌØË¦ÓÔØ
-Ò¦ÚÎÉÈ ÐÒÏÇÒÁÍ, ÔÁËÉÈ ÑË ¦ÇÒÉ, ¦ÎÓÔÒÕÍÅÎÔÉ ÄÌÑ ÐÒÏÇÒÁÍ¦ÓÔÁ, ÇÒÁÆ¦ÞÎ¦
-ÐÒÏÇÒÁÍÉ, ÔÅËÓÔÏ×¦ ÒÅÄÁËÔÏÒÉ ¦ Ô.¦. XOrg X11 - ÃÅ ×ÅÒÓ¦Ñ X, ÑËÁ ÐÒÁÃÀ¤
-ÎÁ Linux ÔÁ ¦ÎÛÉÈ ÓÉÓÔÅÍÁÈ.
+%description -l uk.UTF-8
+X Window System Ð½Ð°Ð´Ð°Ñ” Ð±Ð°Ð·Ñƒ Ð´Ð»Ñ Ñ€Ð¾Ð·Ñ€Ð¾Ð±ÐºÐ¸ Ð³Ñ€Ð°Ñ„Ñ–Ñ‡Ð½Ð¸Ñ… Ñ–Ð½Ñ‚ÐµÑ€Ñ„ÐµÐ¹ÑÑ–Ð²
+ÐºÐ¾Ñ€Ð¸ÑÑ‚ÑƒÐ²Ð°Ñ‡Ð°. ÐŸÑ€Ð¾ÑÑ‚Ñ–ÑˆÐµ ÐºÐ°Ð¶ÑƒÑ‡Ð¸, X Ð¼Ð°Ð»ÑŽÑ” ÐµÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¸ GUI Ð½Ð° ÐµÐºÑ€Ð°Ð½Ñ–
+ÐºÐ¾Ñ€Ð¸ÑÑ‚ÑƒÐ²Ð°Ñ‡Ð° Ñ‚Ð° Ð±ÑƒÐ´ÑƒÑ” Ð¼ÐµÑ‚Ð¾Ð´Ð¸ Ð´Ð»Ñ Ð¿ÐµÑ€ÐµÐ´Ð°Ñ‡Ñ– Ð´Ñ–Ð¹ ÐºÐ¾Ñ€Ð¸ÑÑ‚ÑƒÐ²Ð°Ñ‡Ð° Ð¿Ñ€Ð¸ÐºÐ»Ð°Ð´Ð½Ð¸Ð¼
+Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð°Ð¼. X Ñ‚Ð°ÐºÐ¾Ð¶ Ð¿Ñ–Ð´Ñ‚Ñ€Ð¸Ð¼ÑƒÑ” Ñ€Ð¾Ð·Ð¿Ð¾Ð´Ñ–Ð» Ð¿Ñ€Ð¸ÐºÐ»Ð°Ð´Ð½Ð¸Ñ… Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼ - Ð·Ð°Ð¿ÑƒÑÐº
+Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼ Ð½Ð° Ð²Ñ–Ð´Ð´Ð°Ð»ÐµÐ½Ð¾Ð¼Ñƒ ÐºÐ¾Ð¼Ð¿'ÑŽÑ‚ÐµÑ€Ñ– Ð· Ð²Ð²Ð¾Ð´Ð¾Ð¼/Ð²Ð¸Ð²Ð¾Ð´Ð¾Ð¼ Ð½Ð° Ð¼Ð°ÑˆÐ¸Ð½Ñƒ
+ÐºÐ¾Ñ€Ð¸ÑÑ‚ÑƒÐ²Ð°Ñ‡Ð°. X - Ñ†Ðµ Ð¿Ð¾Ñ‚ÑƒÐ¶Ð½Ðµ ÑÐµÑ€ÐµÐ´Ð¾Ð²Ð¸Ñ‰Ðµ, ÑÐºÐµ Ð¿Ñ–Ð´Ñ‚Ñ€Ð¸Ð¼ÑƒÑ” Ð²ÐµÐ»Ð¸ÐºÑƒ ÐºÑ–Ð»ÑŒÐºÑ–ÑÑ‚ÑŒ
+Ñ€Ñ–Ð·Ð½Ð¸Ñ… Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼, Ñ‚Ð°ÐºÐ¸Ñ… ÑÐº Ñ–Ð³Ñ€Ð¸, Ñ–Ð½ÑÑ‚Ñ€ÑƒÐ¼ÐµÐ½Ñ‚Ð¸ Ð´Ð»Ñ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ñ–ÑÑ‚Ð°, Ð³Ñ€Ð°Ñ„Ñ–Ñ‡Ð½Ñ–
+Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¸, Ñ‚ÐµÐºÑÑ‚Ð¾Ð²Ñ– Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¾Ñ€Ð¸ Ñ– Ñ‚.Ñ–. XOrg X11 - Ñ†Ðµ Ð²ÐµÑ€ÑÑ–Ñ X, ÑÐºÐ° Ð¿Ñ€Ð°Ñ†ÑŽÑ”
+Ð½Ð° Linux Ñ‚Ð° Ñ–Ð½ÑˆÐ¸Ñ… ÑÐ¸ÑÑ‚ÐµÐ¼Ð°Ñ….
 
-ãÅÊ ÐÁËÅÔ Í¦ÓÔÉÔØ ÂÁÚÏ×¦ ÛÒÉÆÔÉ, ÐÒÏÇÒÁÍÉ ÔÁ ÄÏËÕÍÅÎÔÁÃ¦À ÄÌÑ ÒÏÂÏÞÏ§
-ÓÔÁÎÃ¦§ X.
+Ð¦ÐµÐ¹ Ð¿Ð°ÐºÐµÑ‚ Ð¼Ñ–ÑÑ‚Ð¸Ñ‚ÑŒ Ð±Ð°Ð·Ð¾Ð²Ñ– ÑˆÑ€Ð¸Ñ„Ñ‚Ð¸, Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¸ Ñ‚Ð° Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð°Ñ†Ñ–ÑŽ Ð´Ð»Ñ Ñ€Ð¾Ð±Ð¾Ñ‡Ð¾Ñ—
+ÑÑ‚Ð°Ð½Ñ†Ñ–Ñ— X.
 
-äÏÄÁÔËÏ×Ï ÎÅÏÂÈ¦ÄÎÏ ×ÓÔÁÎÏ×ÉÔÉ ÐÁËÅÔÉ Xconfigurator, ÆÏÎÔÓÅÒ×ÅÒ xfs ÔÁ
-Â¦ÂÌ¦ÏÔÅËÉ X11-libs. íÏÖÌÉ×Ï ÔÁËÏÖ ÐÒÉÊÄÅÔØÓÑ ×ÓÔÁÎÏ×ÉÔÉ ÏÄÉÎ ÁÂÏ
-ÄÅË¦ÌØËÁ ÐÁËÅÔ¦× ÛÒÉÆÔ¦× XOrg X11.
+Ð”Ð¾Ð´Ð°Ñ‚ÐºÐ¾Ð²Ð¾ Ð½ÐµÐ¾Ð±Ñ…Ñ–Ð´Ð½Ð¾ Ð²ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚Ð¸ Ð¿Ð°ÐºÐµÑ‚Ð¸ Xconfigurator, Ñ„Ð¾Ð½Ñ‚ÑÐµÑ€Ð²ÐµÑ€ xfs Ñ‚Ð°
+Ð±Ñ–Ð±Ð»Ñ–Ð¾Ñ‚ÐµÐºÐ¸ X11-libs. ÐœÐ¾Ð¶Ð»Ð¸Ð²Ð¾ Ñ‚Ð°ÐºÐ¾Ð¶ Ð¿Ñ€Ð¸Ð¹Ð´ÐµÑ‚ÑŒÑÑ Ð²ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚Ð¸ Ð¾Ð´Ð¸Ð½ Ð°Ð±Ð¾
+Ð´ÐµÐºÑ–Ð»ÑŒÐºÐ° Ð¿Ð°ÐºÐµÑ‚Ñ–Ð² ÑˆÑ€Ð¸Ñ„Ñ‚Ñ–Ð² XOrg X11.
 
-îÕ ¦, ÎÁÒÅÛÔ¦, ÑËÝÏ ×É ÚÂÉÒÁ¤ÔÅÓØ ÒÏÚÒÏÂÌÑÔÉ ÐÒÉËÌÁÄÎ¦ ÐÒÏÇÒÁÍÉ, ÝÏ
-ÐÒÁÃÀÀÔØ ÑË X-ËÌ¦¤ÎÔÉ, ×ÁÍ ÔÁËÏÖ ÔÒÅÂÁ ÂÕÄÅ ×ÓÔÁÎÏ×ÉÔÉ X11-devel.
+ÐÑƒ Ñ–, Ð½Ð°Ñ€ÐµÑˆÑ‚Ñ–, ÑÐºÑ‰Ð¾ Ð²Ð¸ Ð·Ð±Ð¸Ñ€Ð°Ñ”Ñ‚ÐµÑÑŒ Ñ€Ð¾Ð·Ñ€Ð¾Ð±Ð»ÑÑ‚Ð¸ Ð¿Ñ€Ð¸ÐºÐ»Ð°Ð´Ð½Ñ– Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¸, Ñ‰Ð¾
+Ð¿Ñ€Ð°Ñ†ÑŽÑŽÑ‚ÑŒ ÑÐº X-ÐºÐ»Ñ–Ñ”Ð½Ñ‚Ð¸, Ð²Ð°Ð¼ Ñ‚Ð°ÐºÐ¾Ð¶ Ñ‚Ñ€ÐµÐ±Ð° Ð±ÑƒÐ´Ðµ Ð²ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚Ð¸ X11-devel.
 
 %package common
 Summary:	XOrg X11 files required both on server and client side
-Summary(pl):	Pliki XOrg X11 wymagane zarówno po stronie serwera jak i klienta
+Summary(pl.UTF-8):	Pliki XOrg X11 wymagane zarÃ³wno po stronie serwera jak i klienta
 Group:		X11
 Provides:	XFree86-common = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-common
@@ -316,12 +316,12 @@ Obsoletes:	XFree86-common
 %description common
 XOrg X11 files required both on server and client side.
 
-%description common -l pl
-Pliki XOrg X11 wymagane zarówno po stronie serwera jak i klienta.
+%description common -l pl.UTF-8
+Pliki XOrg X11 wymagane zarÃ³wno po stronie serwera jak i klienta.
 
 %package Xprint
 Summary:	Xprint tool
-Summary(pl):	Narzêdzie Xprint
+Summary(pl.UTF-8):	NarzÄ™dzie Xprint
 Group:		X11
 # for /etc/X11/xserver
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -329,12 +329,12 @@ Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 %description Xprint
 Xprint tool.
 
-%description Xprint -l pl
-Narzêdzie Xprint.
+%description Xprint -l pl.UTF-8
+NarzÄ™dzie Xprint.
 
 %package DPS
 Summary:	Display PostScript
-Summary(pl):	Display PostScript
+Summary(pl.UTF-8):	Display PostScript
 Group:		X11/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	DPS
@@ -346,13 +346,13 @@ Obsoletes:	dgs
 X-Window Display PostScript is device-independent imaging model for
 displaying information on a screen.
 
-%description DPS -l pl
-X-Window Display PostScript to niezale¿ny od urz±dzenia model
-wy¶wietlania informacji na ekranie.
+%description DPS -l pl.UTF-8
+X-Window Display PostScript to niezaleÅ¼ny od urzÄ…dzenia model
+wyÅ›wietlania informacji na ekranie.
 
 %package DPS-devel
 Summary:	Header files for Display PostScript
-Summary(pl):	Pliki nag³ówkowe dla Display PostScript
+Summary(pl.UTF-8):	Pliki nagÅ‚Ã³wkowe dla Display PostScript
 Group:		X11/Development/Libraries
 Requires:	%{name}-DPS = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
@@ -363,12 +363,12 @@ Obsoletes:	dgs-devel
 %description DPS-devel
 Header files for develop X-Window Display Postscript.
 
-%description DPS-devel -l pl
-Pliki nag³ówkowe biblioteki X-Window Display PostScript.
+%description DPS-devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe biblioteki X-Window Display PostScript.
 
 %package DPS-static
 Summary:	Display PostScript static libraries
-Summary(pl):	Biblioteki statyczne Display PostScript
+Summary(pl.UTF-8):	Biblioteki statyczne Display PostScript
 Group:		X11/Development/Libraries
 Requires:	%{name}-DPS-devel = %{epoch}:%{version}-%{release}
 Provides:	XFree86-DPS-static = %{epoch}:%{version}-%{release}
@@ -378,12 +378,12 @@ Obsoletes:	dgs-static
 %description DPS-static
 X-Window Display PostScript static libraries.
 
-%description DPS-static -l pl
+%description DPS-static -l pl.UTF-8
 Statyczne biblioteki X-Window Display PostScript.
 
 %package OpenGL-core
 Summary:	OpenGL support extension modules for Xserver
-Summary(pl):	Modu³y rozszerzeñ X serwera obs³uguj±ce OpenGL
+Summary(pl.UTF-8):	ModuÅ‚y rozszerzeÅ„ X serwera obsÅ‚ugujÄ…ce OpenGL
 Group:		X11/Servers
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 Provides:	XFree86-OpenGL-core = %{epoch}:%{version}-%{release}
@@ -392,12 +392,12 @@ Obsoletes:	XFree86-OpenGL-core
 %description OpenGL-core
 OpenGL support extension modules for Xserver.
 
-%description OpenGL-core -l pl
-Modu³y rozszerzeñ X serwera obs³uguj±ce OpenGL.
+%description OpenGL-core -l pl.UTF-8
+ModuÅ‚y rozszerzeÅ„ X serwera obsÅ‚ugujÄ…ce OpenGL.
 
 %package OpenGL-libGL
 Summary:	OpenGL support for X11R6 - GL library
-Summary(pl):	Wsparcie OpenGL dla systemu X11R6 - biblioteka GL
+Summary(pl.UTF-8):	Wsparcie OpenGL dla systemu X11R6 - biblioteka GL
 Group:		X11/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	XFree86-OpenGL-libGL = %{epoch}:%{version}-%{release}
@@ -411,12 +411,12 @@ Obsoletes:	XFree86-driver-nvidia
 %description OpenGL-libGL
 OpenGL support for X11R6 system - GL library.
 
-%description OpenGL-libGL -l pl
+%description OpenGL-libGL -l pl.UTF-8
 Wsparcie OpenGL dla systemu X11R6 - biblioteka GL.
 
 %package OpenGL-libs
 Summary:	OpenGL libraries for X11R6
-Summary(pl):	Biblioteki OpenGL dla systemu X11R6
+Summary(pl.UTF-8):	Biblioteki OpenGL dla systemu X11R6
 Group:		X11/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	OpenGL = 1.5
@@ -429,12 +429,12 @@ Obsoletes:	XFree86-OpenGL-libs
 %description OpenGL-libs
 OpenGL libraries for X11R6 system.
 
-%description OpenGL-libs -l pl
+%description OpenGL-libs -l pl.UTF-8
 Biblioteki OpenGL dla systemu X11R6.
 
 %package OpenGL-devel-base
 Summary:	OpenGL for X11R6 development (GL and GLX only)
-Summary(pl):	Pliki nag³ówkowe OpenGL dla systemu X11R6 (tylko GL i GLX)
+Summary(pl.UTF-8):	Pliki nagÅ‚Ã³wkowe OpenGL dla systemu X11R6 (tylko GL i GLX)
 Group:		X11/Development/Libraries
 Requires:	%{name}-OpenGL-devel = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
@@ -447,12 +447,12 @@ Obsoletes:	XFree86-driver-nvidia-devel
 %description OpenGL-devel-base
 Base headers (GL and GLX only) for OpenGL for X11R6.
 
-%description OpenGL-devel-base -l pl
-Podstawowe pliki nag³ówkowe (tylko GL i GLX) OpenGL dla systemu X11R6.
+%description OpenGL-devel-base -l pl.UTF-8
+Podstawowe pliki nagÅ‚Ã³wkowe (tylko GL i GLX) OpenGL dla systemu X11R6.
 
 %package OpenGL-devel
 Summary:	OpenGL for X11R6 development
-Summary(pl):	Pliki nag³ówkowe OpenGL dla systemu X11R6
+Summary(pl.UTF-8):	Pliki nagÅ‚Ã³wkowe OpenGL dla systemu X11R6
 Group:		X11/Development/Libraries
 Requires:	%{name}-OpenGL-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
@@ -469,12 +469,12 @@ Obsoletes:	glxMesa-devel
 %description OpenGL-devel
 Headers and man pages for OpenGL for X11R6.
 
-%description OpenGL-devel -l pl
-Pliki nag³ówkowe i manuale do OpenGL dla systemu X11R6.
+%description OpenGL-devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe i manuale do OpenGL dla systemu X11R6.
 
 %package OpenGL-static
 Summary:	X11R6 static libraries with OpenGL
-Summary(pl):	Biblioteki statyczne do X11R6 ze wsparciem dla OpenGL
+Summary(pl.UTF-8):	Biblioteki statyczne do X11R6 ze wsparciem dla OpenGL
 Group:		X11/Development/Libraries
 Requires:	%{name}-OpenGL-devel = %{epoch}:%{version}-%{release}
 Provides:	OpenGL-GLU-static = 1.3
@@ -486,14 +486,14 @@ Obsoletes:	XFree86-OpenGL-static
 %description OpenGL-static
 X11R6 static libraries with OpenGL.
 
-%description OpenGL-static -l pl
-Biblioteki statyczne zawieraj±ce wsparcie dla OpenGL do X11R6.
+%description OpenGL-static -l pl.UTF-8
+Biblioteki statyczne zawierajÄ…ce wsparcie dla OpenGL do X11R6.
 
 %package Xnest
 Summary:	XOrg X11 Xnest server
-Summary(pl):	Serwer XOrg X11 Xnest
-Summary(ru):	"÷ÌÏÖÅÎÎÙÊ" ÓÅÒ×ÅÒ XOrg X11
-Summary(uk):	"÷ËÌÁÄÅÎÉÊ" ÓÅÒ×ÅÒ XOrg X11
+Summary(pl.UTF-8):	Serwer XOrg X11 Xnest
+Summary(ru.UTF-8):	"Ð’Ð»Ð¾Ð¶ÐµÐ½Ð½Ñ‹Ð¹" ÑÐµÑ€Ð²ÐµÑ€ XOrg X11
+Summary(uk.UTF-8):	"Ð’ÐºÐ»Ð°Ð´ÐµÐ½Ð¸Ð¹" ÑÐµÑ€Ð²ÐµÑ€ XOrg X11
 Group:		X11/Servers
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -511,33 +511,33 @@ manages the windows and graphics requests for its own clients.
 You will need to install Xnest if you require an X server which will
 run as a client of your real X server (perhaps for testing purposes).
 
-%description Xnest -l pl
+%description Xnest -l pl.UTF-8
 Xnest jest X serwerem uruchamianym w okienku innego X serwera. Xnest
-zachowuje siê jak X klient w stosunku do prawdziwego X serwera, a jak
-X serwer dla w³asnych klientów.
+zachowuje siÄ™ jak X klient w stosunku do prawdziwego X serwera, a jak
+X serwer dla wÅ‚asnych klientÃ³w.
 
-%description Xnest -l ru
-Xnest - ÜÔÏ ÓÅÒ×ÅÒ X Window System, ËÏÔÏÒÙÊ ÒÁÂÏÔÁÅÔ × ÏËÎÅ X. îÁ
-ÓÁÍÏÍ ÄÅÌÅ ÜÔÏ ËÌÉÅÎÔ ÒÅÁÌØÎÏÇÏ X-ÓÅÒ×ÅÒÁ, ËÏÔÏÒÙÊ ÕÐÒÁ×ÌÑÅÔ ÏËÎÁÍÉ É
-ÇÒÁÆÉÞÅÓËÉÍÉ ÚÁÐÒÏÓÁÍÉ ÄÌÑ Xnest × ÔÏ ×ÒÅÍÑ, ËÁË Xnest ÕÐÒÁ×ÌÑÅÔ
-ÏËÎÁÍÉ É ÇÒÁÆÉÞÅÓËÉÍÉ ÚÁÐÒÏÓÁÍÉ ÄÌÑ Ó×ÏÉÈ ÓÏÂÓÔ×ÅÎÎÙÈ ËÌÉÅÎÔÏ×.
+%description Xnest -l ru.UTF-8
+Xnest - ÑÑ‚Ð¾ ÑÐµÑ€Ð²ÐµÑ€ X Window System, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ð¹ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚ Ð² Ð¾ÐºÐ½Ðµ X. ÐÐ°
+ÑÐ°Ð¼Ð¾Ð¼ Ð´ÐµÐ»Ðµ ÑÑ‚Ð¾ ÐºÐ»Ð¸ÐµÐ½Ñ‚ Ñ€ÐµÐ°Ð»ÑŒÐ½Ð¾Ð³Ð¾ X-ÑÐµÑ€Ð²ÐµÑ€Ð°, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ð¹ ÑƒÐ¿Ñ€Ð°Ð²Ð»ÑÐµÑ‚ Ð¾ÐºÐ½Ð°Ð¼Ð¸ Ð¸
+Ð³Ñ€Ð°Ñ„Ð¸Ñ‡ÐµÑÐºÐ¸Ð¼Ð¸ Ð·Ð°Ð¿Ñ€Ð¾ÑÐ°Ð¼Ð¸ Ð´Ð»Ñ Xnest Ð² Ñ‚Ð¾ Ð²Ñ€ÐµÐ¼Ñ, ÐºÐ°Ðº Xnest ÑƒÐ¿Ñ€Ð°Ð²Ð»ÑÐµÑ‚
+Ð¾ÐºÐ½Ð°Ð¼Ð¸ Ð¸ Ð³Ñ€Ð°Ñ„Ð¸Ñ‡ÐµÑÐºÐ¸Ð¼Ð¸ Ð·Ð°Ð¿Ñ€Ð¾ÑÐ°Ð¼Ð¸ Ð´Ð»Ñ ÑÐ²Ð¾Ð¸Ñ… ÑÐ¾Ð±ÑÑ‚Ð²ÐµÐ½Ð½Ñ‹Ñ… ÐºÐ»Ð¸ÐµÐ½Ñ‚Ð¾Ð².
 
-÷ÁÍ ÎÁÄÏ ÕÓÔÁÎÏ×ÉÔØ Xnest ÅÓÌÉ ×ÁÍ ÎÕÖÅÎ X-ÓÅÒ×ÅÒ, ËÏÔÏÒÙÊ ÒÁÂÏÔÁÅÔ
-ËÁË ËÌÉÅÎÔ ×ÁÛÅÇÏ ÒÅÁÌØÎÏÇÏ X-ÓÅÒ×ÅÒÁ (ÓËÏÒÅÅ ×ÓÅÇÏ, × ÔÅÓÔÏ×ÙÈ
-ÃÅÌÑÈ).
+Ð’Ð°Ð¼ Ð½Ð°Ð´Ð¾ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ Xnest ÐµÑÐ»Ð¸ Ð²Ð°Ð¼ Ð½ÑƒÐ¶ÐµÐ½ X-ÑÐµÑ€Ð²ÐµÑ€, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ð¹ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚
+ÐºÐ°Ðº ÐºÐ»Ð¸ÐµÐ½Ñ‚ Ð²Ð°ÑˆÐµÐ³Ð¾ Ñ€ÐµÐ°Ð»ÑŒÐ½Ð¾Ð³Ð¾ X-ÑÐµÑ€Ð²ÐµÑ€Ð° (ÑÐºÐ¾Ñ€ÐµÐµ Ð²ÑÐµÐ³Ð¾, Ð² Ñ‚ÐµÑÑ‚Ð¾Ð²Ñ‹Ñ…
+Ñ†ÐµÐ»ÑÑ…).
 
-%description Xnest -l uk
-Xnest - ÃÅ ÓÅÒ×ÅÒ X Window System, ÑËÉÊ ÐÒÁÃÀ¤ Õ ×¦ËÎ¦ X. æÁËÔÉÞÎÏ ÃÅ
-ËÌ¦¤ÎÔ ÒÅÁÌØÎÏÇÏ X-ÓÅÒ×ÅÒÁ, ÑËÉÊ ËÅÒÕ¤ ×¦ËÎÁÍÉ ÔÁ ÇÒÁÆ¦ÞÎÉÍÉ ÚÁÐÉÔÁÍÉ
-ÄÌÑ Xnest × ÔÏÊ ÞÁÓ, ÑË Xnest ËÅÒÕ¤ ×¦ËÎÁÍÉ ÔÁ ÇÒÁÆ¦ÞÎÉÍÉ ÚÁÐÉÔÁÍÉ ÄÌÑ
-Ó×Ï§È ×ÌÁÓÎÉÈ ËÌ¦¤ÎÔ¦×.
+%description Xnest -l uk.UTF-8
+Xnest - Ñ†Ðµ ÑÐµÑ€Ð²ÐµÑ€ X Window System, ÑÐºÐ¸Ð¹ Ð¿Ñ€Ð°Ñ†ÑŽÑ” Ñƒ Ð²Ñ–ÐºÐ½Ñ– X. Ð¤Ð°ÐºÑ‚Ð¸Ñ‡Ð½Ð¾ Ñ†Ðµ
+ÐºÐ»Ñ–Ñ”Ð½Ñ‚ Ñ€ÐµÐ°Ð»ÑŒÐ½Ð¾Ð³Ð¾ X-ÑÐµÑ€Ð²ÐµÑ€Ð°, ÑÐºÐ¸Ð¹ ÐºÐµÑ€ÑƒÑ” Ð²Ñ–ÐºÐ½Ð°Ð¼Ð¸ Ñ‚Ð° Ð³Ñ€Ð°Ñ„Ñ–Ñ‡Ð½Ð¸Ð¼Ð¸ Ð·Ð°Ð¿Ð¸Ñ‚Ð°Ð¼Ð¸
+Ð´Ð»Ñ Xnest Ð² Ñ‚Ð¾Ð¹ Ñ‡Ð°Ñ, ÑÐº Xnest ÐºÐµÑ€ÑƒÑ” Ð²Ñ–ÐºÐ½Ð°Ð¼Ð¸ Ñ‚Ð° Ð³Ñ€Ð°Ñ„Ñ–Ñ‡Ð½Ð¸Ð¼Ð¸ Ð·Ð°Ð¿Ð¸Ñ‚Ð°Ð¼Ð¸ Ð´Ð»Ñ
+ÑÐ²Ð¾Ñ—Ñ… Ð²Ð»Ð°ÑÐ½Ð¸Ñ… ÐºÐ»Ñ–Ñ”Ð½Ñ‚Ñ–Ð².
 
-÷ÁÍ ÔÒÅÂÁ ×ÓÔÁÎÏ×ÉÔÉ Xnest ÑËÝÏ ×ÁÍ ÐÏÔÒ¦ÂÅÎ X-ÓÅÒ×ÅÒ, ÑËÉÊ ÐÒÁÃÀ¤ ÑË
-ËÌ¦¤ÎÔ ×ÁÛÏÇÏ ÒÅÁÌØÎÏÇÏ X-ÓÅÒ×ÅÒÁ (ÓËÏÒÛÅ ×ÓØÏÇÏ, Õ ÔÅÓÔÏ×ÉÈ Ã¦ÌÑÈ).
+Ð’Ð°Ð¼ Ñ‚Ñ€ÐµÐ±Ð° Ð²ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚Ð¸ Xnest ÑÐºÑ‰Ð¾ Ð²Ð°Ð¼ Ð¿Ð¾Ñ‚Ñ€Ñ–Ð±ÐµÐ½ X-ÑÐµÑ€Ð²ÐµÑ€, ÑÐºÐ¸Ð¹ Ð¿Ñ€Ð°Ñ†ÑŽÑ” ÑÐº
+ÐºÐ»Ñ–Ñ”Ð½Ñ‚ Ð²Ð°ÑˆÐ¾Ð³Ð¾ Ñ€ÐµÐ°Ð»ÑŒÐ½Ð¾Ð³Ð¾ X-ÑÐµÑ€Ð²ÐµÑ€Ð° (ÑÐºÐ¾Ñ€ÑˆÐµ Ð²ÑÑŒÐ¾Ð³Ð¾, Ñƒ Ñ‚ÐµÑÑ‚Ð¾Ð²Ð¸Ñ… Ñ†Ñ–Ð»ÑÑ…).
 
 %package Xprt
 Summary:	X print server
-Summary(pl):	X serwer z rozszerzeniem Xprint
+Summary(pl.UTF-8):	X serwer z rozszerzeniem Xprint
 Group:		X11/Servers
 Requires:	%{name}-Xprint = %{epoch}:%{version}-%{release}
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
@@ -552,15 +552,15 @@ Obsoletes:	XFree86-Xprt
 Xprt provides an X server with the print extension and special DDX
 implementation.
 
-%description Xprt -l pl
+%description Xprt -l pl.UTF-8
 Xprt jest X serwerem z rozszerzeniem Xprint.
 
 %package Xserver
 Summary:	XOrg X11 X display server
-Summary(de):	XOrg X11 Server
-Summary(fr):	Serveur XOrg X11
-Summary(pl):	Serwer XOrg X11
-Summary(tr):	XOrg X11 sunucusu
+Summary(de.UTF-8):	XOrg X11 Server
+Summary(fr.UTF-8):	Serveur XOrg X11
+Summary(pl.UTF-8):	Serwer XOrg X11
+Summary(tr.UTF-8):	XOrg X11 sunucusu
 Group:		X11/Servers
 Requires(pre):	sed >= 4.0
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
@@ -591,17 +591,17 @@ proper driver for your display hardware - package itself contains only
 drivers for VGA and VESA-compliant cards (without acceleration). Other
 drivers can be found in X11-driver-* packages.
 
-%description Xserver -l pl
-Jest to podstawowy X serwer wy¶wietlaj±cy obraz na karcie graficznej.
-Do dzia³ania wymaga odpowiedniego sterownika - sam pakiet zawiera
+%description Xserver -l pl.UTF-8
+Jest to podstawowy X serwer wyÅ›wietlajÄ…cy obraz na karcie graficznej.
+Do dziaÅ‚ania wymaga odpowiedniego sterownika - sam pakiet zawiera
 tylko odpowiedni dla kart VGA oraz SVGA zgodnych z VESA (bez
-akceleracji). Inne sterowniki mo¿na znale¼æ w pakietach X11-driver-*.
+akceleracji). Inne sterowniki moÅ¼na znaleÅºÄ‡ w pakietach X11-driver-*.
 
 %package Xvfb
 Summary:	XOrg X11 Xvfb server
-Summary(pl):	Serwer XOrg X11 Xvfb
-Summary(ru):	óÅÒ×ÅÒ XOrg X11 ÄÌÑ ×ÉÒÔÕÁÌØÎÏÇÏ ÆÒÅÊÍÂÕÆÅÒÁ
-Summary(uk):	óÅÒ×ÅÒ XOrg X11 ÄÌÑ ×¦ÒÔÕÁÌØÎÏÇÏ ÆÒÅÊÍÂÕÆÅÒÁ
+Summary(pl.UTF-8):	Serwer XOrg X11 Xvfb
+Summary(ru.UTF-8):	Ð¡ÐµÑ€Ð²ÐµÑ€ XOrg X11 Ð´Ð»Ñ Ð²Ð¸Ñ€Ñ‚ÑƒÐ°Ð»ÑŒÐ½Ð¾Ð³Ð¾ Ñ„Ñ€ÐµÐ¹Ð¼Ð±ÑƒÑ„ÐµÑ€Ð°
+Summary(uk.UTF-8):	Ð¡ÐµÑ€Ð²ÐµÑ€ XOrg X11 Ð´Ð»Ñ Ð²Ñ–Ñ€Ñ‚ÑƒÐ°Ð»ÑŒÐ½Ð¾Ð³Ð¾ Ñ„Ñ€ÐµÐ¹Ð¼Ð±ÑƒÑ„ÐµÑ€Ð°
 Group:		X11/Servers
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -627,59 +627,59 @@ don't need an X server but insist on having one.
 If you need to test your X server or your X clients, you may want to
 install Xvfb for that purpose.
 
-%description Xvfb -l pl
-Xvfb (X Virtual Frame Buffer) jest X serwerem, który mo¿na uruchamiaæ
-na maszynach bez urz±dzeñ wy¶wietlaj±cych ani fizycznych urz±dzeñ
-wej¶ciowych. Xvfb emuluje prosty framebuffer w pamiêci. Zwykle jest
-u¿ywany do testowania X serwerów, mo¿e te¿ byæ u¿ywany do testowania X
-klientów w rzadko u¿ywanych konfiguracjach ekranu. Mo¿na te¿ u¿yæ Xvfb
-do uruchomienia aplikacji, które w rzeczywisto¶ci nie wymagaj± X
-serwera, ale odmawiaj± uruchomienia bez niego.
+%description Xvfb -l pl.UTF-8
+Xvfb (X Virtual Frame Buffer) jest X serwerem, ktÃ³ry moÅ¼na uruchamiaÄ‡
+na maszynach bez urzÄ…dzeÅ„ wyÅ›wietlajÄ…cych ani fizycznych urzÄ…dzeÅ„
+wejÅ›ciowych. Xvfb emuluje prosty framebuffer w pamiÄ™ci. Zwykle jest
+uÅ¼ywany do testowania X serwerÃ³w, moÅ¼e teÅ¼ byÄ‡ uÅ¼ywany do testowania X
+klientÃ³w w rzadko uÅ¼ywanych konfiguracjach ekranu. MoÅ¼na teÅ¼ uÅ¼yÄ‡ Xvfb
+do uruchomienia aplikacji, ktÃ³re w rzeczywistoÅ›ci nie wymagajÄ… X
+serwera, ale odmawiajÄ… uruchomienia bez niego.
 
-%description Xvfb -l ru
-Xvfb (X Virtual Frame Buffer) - ÜÔÏ X-ÓÅÒ×ÅÒ, ËÏÔÏÒÙÊ ÓÐÏÓÏÂÅÎ
-ÒÁÂÏÔÁÔØ ÎÁ ÍÁÛÉÎÁÈ ÂÅÚ ÄÉÓÐÌÅÊÎÏÊ ÁÐÐÁÒÁÔÕÒÙ É ÆÉÚÉÞÅÓËÉÈ ÕÓÔÒÏÊÓÔ×
-××ÏÄÁ. Xvfb ÜÍÕÌÉÒÕÅÔ ÐÒÏÓÔÅÊÛÉÊ ÆÒÅÊÍÂÕÆÅÒ ÉÓÐÏÌØÚÕÑ ×ÉÒÔÕÁÌØÎÕÀ
-ÐÁÍÑÔØ. Xvfb ÎÅ ÏÔËÒÙ×ÁÅÔ ÎÉËÁËÉÈ ÕÓÔÒÏÊÓÔ×, ×ÅÄÑ ÓÅÂÑ ËÁË ÎÏÒÍÁÌØÎÙÊ
-X-ÓÅÒ×ÅÒ ×Ï ×ÓÅÍ ÏÓÔÁÌØÎÏÍ. ïÂÙÞÎÏ ÏÎ ÉÓÐÏÌØÚÕÅÔÓÑ ÄÌÑ ÐÒÏ×ÅÒËÉ
-ÓÅÒ×ÅÒÏ×. éÓÐÏÌØÚÕÑ Xvfb, ÍÏÖÎÏ ÔÅÓÔÉÒÏ×ÁÔØ ËÏÄ mfb ÉÌÉ cfb ÄÌÑ ÌÀÂÏÊ
-ÇÌÕÂÉÎÙ Ã×ÅÔÁ ÂÅÚ ÉÓÐÏÌØÚÏ×ÁÎÉÑ ÒÅÁÌØÎÏÊ ÁÐÐÁÒÁÔÕÒÙ, ÐÏÄÄÅÒÖÉ×ÁÀÝÅÊ
-ÔÁËÕÀ ÇÌÕÂÉÎÕ. Xvfb ÔÁËÖÅ ÍÏÖÎÏ ÉÓÐÏÌØÚÏ×ÁÔØ ÄÌÑ ÐÒÏ×ÅÒËÉ X-ËÌÉÅÎÔÏ× Ó
-ÎÅÏÂÙÞÎÙÍÉ ÇÌÕÂÉÎÁÍÉ Ã×ÅÔÁ É ËÏÎÆÉÇÕÒÁÃÉÑÍÉ ÜËÒÁÎÁ, ÐÒÏÉÚ×ÏÄÉÔØ
-ÐÁËÅÔÎÕÀ ÏÂÒÁÂÏÔËÕ Ó Xvfb × ËÁÞÅÓÔ×Å ÆÏÎÏ×ÏÇÏ ÒÅÎÄÅÒÅÒÁ, ÐÒÏ×ÏÄÉÔØ
-ÎÁÇÒÕÚÏÞÎÙÅ ÔÅÓÔÙ, ÄÌÑ ÐÏÍÏÝÉ × ÐÏÒÔÉÒÏ×ÁÎÉÉ X-ÓÅÒ×ÅÒÁ ÎÁ ÎÏ×ÕÀ
-ÐÌÁÔÆÏÒÍÕ É ÄÌÑ ÈÉÔÒÏÕÍÎÏÇÏ ÚÁÐÕÓËÁ ÐÒÉÌÏÖÅÎÉÊ, ËÏÔÏÒÙÍ ÒÅÁÌØÎÏ ÎÅ
-ÎÕÖÅÎ X-ÓÅÒ×ÅÒ, ÎÏ ËÏÔÏÒÙÅ ÎÁÓÔÁÉ×ÁÀÔ ÎÁ ÔÏÍ, ÞÔÏÂ ÏÎ ÂÙÌ ÄÏÓÔÕÐÅÎ.
+%description Xvfb -l ru.UTF-8
+Xvfb (X Virtual Frame Buffer) - ÑÑ‚Ð¾ X-ÑÐµÑ€Ð²ÐµÑ€, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ð¹ ÑÐ¿Ð¾ÑÐ¾Ð±ÐµÐ½
+Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ñ‚ÑŒ Ð½Ð° Ð¼Ð°ÑˆÐ¸Ð½Ð°Ñ… Ð±ÐµÐ· Ð´Ð¸ÑÐ¿Ð»ÐµÐ¹Ð½Ð¾Ð¹ Ð°Ð¿Ð¿Ð°Ñ€Ð°Ñ‚ÑƒÑ€Ñ‹ Ð¸ Ñ„Ð¸Ð·Ð¸Ñ‡ÐµÑÐºÐ¸Ñ… ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²
+Ð²Ð²Ð¾Ð´Ð°. Xvfb ÑÐ¼ÑƒÐ»Ð¸Ñ€ÑƒÐµÑ‚ Ð¿Ñ€Ð¾ÑÑ‚ÐµÐ¹ÑˆÐ¸Ð¹ Ñ„Ñ€ÐµÐ¹Ð¼Ð±ÑƒÑ„ÐµÑ€ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÑ Ð²Ð¸Ñ€Ñ‚ÑƒÐ°Ð»ÑŒÐ½ÑƒÑŽ
+Ð¿Ð°Ð¼ÑÑ‚ÑŒ. Xvfb Ð½Ðµ Ð¾Ñ‚ÐºÑ€Ñ‹Ð²Ð°ÐµÑ‚ Ð½Ð¸ÐºÐ°ÐºÐ¸Ñ… ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð², Ð²ÐµÐ´Ñ ÑÐµÐ±Ñ ÐºÐ°Ðº Ð½Ð¾Ñ€Ð¼Ð°Ð»ÑŒÐ½Ñ‹Ð¹
+X-ÑÐµÑ€Ð²ÐµÑ€ Ð²Ð¾ Ð²ÑÐµÐ¼ Ð¾ÑÑ‚Ð°Ð»ÑŒÐ½Ð¾Ð¼. ÐžÐ±Ñ‹Ñ‡Ð½Ð¾ Ð¾Ð½ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ÑÑ Ð´Ð»Ñ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ¸
+ÑÐµÑ€Ð²ÐµÑ€Ð¾Ð². Ð˜ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÑ Xvfb, Ð¼Ð¾Ð¶Ð½Ð¾ Ñ‚ÐµÑÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ ÐºÐ¾Ð´ mfb Ð¸Ð»Ð¸ cfb Ð´Ð»Ñ Ð»ÑŽÐ±Ð¾Ð¹
+Ð³Ð»ÑƒÐ±Ð¸Ð½Ñ‹ Ñ†Ð²ÐµÑ‚Ð° Ð±ÐµÐ· Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ñ Ñ€ÐµÐ°Ð»ÑŒÐ½Ð¾Ð¹ Ð°Ð¿Ð¿Ð°Ñ€Ð°Ñ‚ÑƒÑ€Ñ‹, Ð¿Ð¾Ð´Ð´ÐµÑ€Ð¶Ð¸Ð²Ð°ÑŽÑ‰ÐµÐ¹
+Ñ‚Ð°ÐºÑƒÑŽ Ð³Ð»ÑƒÐ±Ð¸Ð½Ñƒ. Xvfb Ñ‚Ð°ÐºÐ¶Ðµ Ð¼Ð¾Ð¶Ð½Ð¾ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ Ð´Ð»Ñ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ¸ X-ÐºÐ»Ð¸ÐµÐ½Ñ‚Ð¾Ð² Ñ
+Ð½ÐµÐ¾Ð±Ñ‹Ñ‡Ð½Ñ‹Ð¼Ð¸ Ð³Ð»ÑƒÐ±Ð¸Ð½Ð°Ð¼Ð¸ Ñ†Ð²ÐµÑ‚Ð° Ð¸ ÐºÐ¾Ð½Ñ„Ð¸Ð³ÑƒÑ€Ð°Ñ†Ð¸ÑÐ¼Ð¸ ÑÐºÑ€Ð°Ð½Ð°, Ð¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÑŒ
+Ð¿Ð°ÐºÐµÑ‚Ð½ÑƒÑŽ Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÑƒ Ñ Xvfb Ð² ÐºÐ°Ñ‡ÐµÑÑ‚Ð²Ðµ Ñ„Ð¾Ð½Ð¾Ð²Ð¾Ð³Ð¾ Ñ€ÐµÐ½Ð´ÐµÑ€ÐµÑ€Ð°, Ð¿Ñ€Ð¾Ð²Ð¾Ð´Ð¸Ñ‚ÑŒ
+Ð½Ð°Ð³Ñ€ÑƒÐ·Ð¾Ñ‡Ð½Ñ‹Ðµ Ñ‚ÐµÑÑ‚Ñ‹, Ð´Ð»Ñ Ð¿Ð¾Ð¼Ð¾Ñ‰Ð¸ Ð² Ð¿Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ð¸ X-ÑÐµÑ€Ð²ÐµÑ€Ð° Ð½Ð° Ð½Ð¾Ð²ÑƒÑŽ
+Ð¿Ð»Ð°Ñ‚Ñ„Ð¾Ñ€Ð¼Ñƒ Ð¸ Ð´Ð»Ñ Ñ…Ð¸Ñ‚Ñ€Ð¾ÑƒÐ¼Ð½Ð¾Ð³Ð¾ Ð·Ð°Ð¿ÑƒÑÐºÐ° Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ð¹, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ð¼ Ñ€ÐµÐ°Ð»ÑŒÐ½Ð¾ Ð½Ðµ
+Ð½ÑƒÐ¶ÐµÐ½ X-ÑÐµÑ€Ð²ÐµÑ€, Ð½Ð¾ ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð½Ð°ÑÑ‚Ð°Ð¸Ð²Ð°ÑŽÑ‚ Ð½Ð° Ñ‚Ð¾Ð¼, Ñ‡Ñ‚Ð¾Ð± Ð¾Ð½ Ð±Ñ‹Ð» Ð´Ð¾ÑÑ‚ÑƒÐ¿ÐµÐ½.
 
-åÓÌÉ ×ÁÍ ÎÁÄÏ ÔÅÓÔÉÒÏ×ÁÔØ ×ÁÛÉ X-ÓÅÒ×ÅÒÁ ÉÌÉ X-ËÌÉÅÎÔÙ, ×Ù ÍÏÖÅÔÅ
-ÕÓÔÁÎÏ×ÉÔØ ÄÌÑ ÜÔÏÊ ÃÅÌÉ Xvfb.
+Ð•ÑÐ»Ð¸ Ð²Ð°Ð¼ Ð½Ð°Ð´Ð¾ Ñ‚ÐµÑÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð²Ð°ÑˆÐ¸ X-ÑÐµÑ€Ð²ÐµÑ€Ð° Ð¸Ð»Ð¸ X-ÐºÐ»Ð¸ÐµÐ½Ñ‚Ñ‹, Ð²Ñ‹ Ð¼Ð¾Ð¶ÐµÑ‚Ðµ
+ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ Ð´Ð»Ñ ÑÑ‚Ð¾Ð¹ Ñ†ÐµÐ»Ð¸ Xvfb.
 
-%description Xvfb -l uk
-Xvfb (X Virtual Frame Buffer) - ÃÅ X-ÓÅÒ×ÅÒ, ÚÄÁÔÎÉÊ ÐÒÁÃÀ×ÁÔÉ ÎÁ
-ÍÁÛÉÎÁÈ ÂÅÚ ÄÉÓÐÌÅÊÎÏ§ ÁÐÁÒÁÔÕÒÉ ÔÁ ×¦ÚÉÞÎÉÈ ÐÒÉÓÔÒÏ§× ××ÏÄÕ. Xvfb
-ÅÍÕÌÀ¤ ÎÁÊÐÒÏÓÔ¦ÛÉÊ ÆÒÅÊÍÂÕÆÅÒ ×ÉËÏÒÉÓÔÏ×ÕÀÞÉ ×¦ÒÔÕÁÌØÎÕ ÐÁÍ'ÑÔØ. Xvfb
-ÎÅ ×¦ÄËÒÉ×Á¤ Î¦ÑËÉÈ ÐÒÉÓÔÒÏ§×, ×ÅÄÕÞÉ ÓÅÂÅ ÑË ÎÏÒÍÁÌØÎÉÊ X-ÓÅÒ×ÅÒ Õ
-ÒÅÛÔ¦ ×¦ÄÎÏÛÅÎØ. úÁÚ×ÉÞÁÊ ÊÏÇÏ ×ÉËÏÒÉÓÔÏ×ÕÀÔØ ÄÌÑ ÐÅÒÅ×¦ÒËÉ ÓÅÒ×ÅÒ¦×.
-÷ÉËÏÒÉÓÔÏ×ÕÀÞÉ Xvfb, ÍÏÖÎÁ ÔÅÓÔÕ×ÁÔÉ ËÏÄ mfb ÁÂÏ cfb ÄÌÑ ÂÕÄØ-ÑËÏ§
-ÇÌÉÂÉÎÉ ËÏÌØÏÒÕ ÔÁ ËÏÎÆ¦ÇÕÒÁÃ¦§ ÅËÒÁÎÕ ÂÅÚ ×ÉËÏÒÉÓÔÁÎÎÑ ÒÅÁÌØÎÏ§
-ÁÐÁÒÁÔÕÒÉ, ÑËÁ Ð¦ÄÔÒÉÍÕ¤ ÔÁË¦ ÒÅÖÉÍÉ. ôÁËÏÖ Xvfb ÍÏÖÎÁ ×ÉËÏÒÉÓÔÁÔÉ ÄÌÑ
-ÐÅÒÅ×¦ÒËÉ X-ËÌ¦¤ÎÔ¦× Ú ÎÅÚ×ÉÞÎÉÍÉ ÇÌÉÂÉÎÁÍÉ ËÏÌØÏÒÕ ÔÁ ËÏÎÆ¦ÇÕÒÁÃ¦ÑÍÉ
-ÅËÒÁÎÕ, ÐÒÏ×ÏÄÉÔÉ ÐÁËÅÔÎÕ ÏÂÒÏÂËÕ Ú Xvfb Õ ÑËÏÓÔ¦ ÆÏÎÏ×ÏÇÏ ÒÅÎÄÅÒÅÒÁ,
-ÐÒÏ×ÏÄÉÔÉ ÎÁÇÒÕÚÏÞÎ¦ ÔÅÓÔÉ, ÄÌÑ ÄÏÐÏÍÏÇÉ Õ ÐÏÒÔÕ×ÁÎÎ¦ X-ÓÅÒ×ÅÒÁ ÎÁ
-ÎÏ×Õ ÐÌÁÔÆÏÒÍÕ ÔÁ ÚÁÐÕÓËÕ ÐÒÏÇÒÁÍ, ÑËÉÍ ÒÅÁÌØÎÏ ÎÅ ÐÏÔÒ¦ÂÅÎ X-ÓÅÒ×ÅÒ,
-ÁÌÅ ÑË¦ ÎÁÐÏÌÑÇÁÀÔØ ÎÁ ÔÏÍÕ, ÝÏÂ ×¦Î ÂÕ× ÄÏÓÔÕÐÎÉÊ.
+%description Xvfb -l uk.UTF-8
+Xvfb (X Virtual Frame Buffer) - Ñ†Ðµ X-ÑÐµÑ€Ð²ÐµÑ€, Ð·Ð´Ð°Ñ‚Ð½Ð¸Ð¹ Ð¿Ñ€Ð°Ñ†ÑŽÐ²Ð°Ñ‚Ð¸ Ð½Ð°
+Ð¼Ð°ÑˆÐ¸Ð½Ð°Ñ… Ð±ÐµÐ· Ð´Ð¸ÑÐ¿Ð»ÐµÐ¹Ð½Ð¾Ñ— Ð°Ð¿Ð°Ñ€Ð°Ñ‚ÑƒÑ€Ð¸ Ñ‚Ð° Ð²Ñ–Ð·Ð¸Ñ‡Ð½Ð¸Ñ… Ð¿Ñ€Ð¸ÑÑ‚Ñ€Ð¾Ñ—Ð² Ð²Ð²Ð¾Ð´Ñƒ. Xvfb
+ÐµÐ¼ÑƒÐ»ÑŽÑ” Ð½Ð°Ð¹Ð¿Ñ€Ð¾ÑÑ‚Ñ–ÑˆÐ¸Ð¹ Ñ„Ñ€ÐµÐ¹Ð¼Ð±ÑƒÑ„ÐµÑ€ Ð²Ð¸ÐºÐ¾Ñ€Ð¸ÑÑ‚Ð¾Ð²ÑƒÑŽÑ‡Ð¸ Ð²Ñ–Ñ€Ñ‚ÑƒÐ°Ð»ÑŒÐ½Ñƒ Ð¿Ð°Ð¼'ÑÑ‚ÑŒ. Xvfb
+Ð½Ðµ Ð²Ñ–Ð´ÐºÑ€Ð¸Ð²Ð°Ñ” Ð½Ñ–ÑÐºÐ¸Ñ… Ð¿Ñ€Ð¸ÑÑ‚Ñ€Ð¾Ñ—Ð², Ð²ÐµÐ´ÑƒÑ‡Ð¸ ÑÐµÐ±Ðµ ÑÐº Ð½Ð¾Ñ€Ð¼Ð°Ð»ÑŒÐ½Ð¸Ð¹ X-ÑÐµÑ€Ð²ÐµÑ€ Ñƒ
+Ñ€ÐµÑˆÑ‚Ñ– Ð²Ñ–Ð´Ð½Ð¾ÑˆÐµÐ½ÑŒ. Ð—Ð°Ð·Ð²Ð¸Ñ‡Ð°Ð¹ Ð¹Ð¾Ð³Ð¾ Ð²Ð¸ÐºÐ¾Ñ€Ð¸ÑÑ‚Ð¾Ð²ÑƒÑŽÑ‚ÑŒ Ð´Ð»Ñ Ð¿ÐµÑ€ÐµÐ²Ñ–Ñ€ÐºÐ¸ ÑÐµÑ€Ð²ÐµÑ€Ñ–Ð².
+Ð’Ð¸ÐºÐ¾Ñ€Ð¸ÑÑ‚Ð¾Ð²ÑƒÑŽÑ‡Ð¸ Xvfb, Ð¼Ð¾Ð¶Ð½Ð° Ñ‚ÐµÑÑ‚ÑƒÐ²Ð°Ñ‚Ð¸ ÐºÐ¾Ð´ mfb Ð°Ð±Ð¾ cfb Ð´Ð»Ñ Ð±ÑƒÐ´ÑŒ-ÑÐºÐ¾Ñ—
+Ð³Ð»Ð¸Ð±Ð¸Ð½Ð¸ ÐºÐ¾Ð»ÑŒÐ¾Ñ€Ñƒ Ñ‚Ð° ÐºÐ¾Ð½Ñ„Ñ–Ð³ÑƒÑ€Ð°Ñ†Ñ–Ñ— ÐµÐºÑ€Ð°Ð½Ñƒ Ð±ÐµÐ· Ð²Ð¸ÐºÐ¾Ñ€Ð¸ÑÑ‚Ð°Ð½Ð½Ñ Ñ€ÐµÐ°Ð»ÑŒÐ½Ð¾Ñ—
+Ð°Ð¿Ð°Ñ€Ð°Ñ‚ÑƒÑ€Ð¸, ÑÐºÐ° Ð¿Ñ–Ð´Ñ‚Ñ€Ð¸Ð¼ÑƒÑ” Ñ‚Ð°ÐºÑ– Ñ€ÐµÐ¶Ð¸Ð¼Ð¸. Ð¢Ð°ÐºÐ¾Ð¶ Xvfb Ð¼Ð¾Ð¶Ð½Ð° Ð²Ð¸ÐºÐ¾Ñ€Ð¸ÑÑ‚Ð°Ñ‚Ð¸ Ð´Ð»Ñ
+Ð¿ÐµÑ€ÐµÐ²Ñ–Ñ€ÐºÐ¸ X-ÐºÐ»Ñ–Ñ”Ð½Ñ‚Ñ–Ð² Ð· Ð½ÐµÐ·Ð²Ð¸Ñ‡Ð½Ð¸Ð¼Ð¸ Ð³Ð»Ð¸Ð±Ð¸Ð½Ð°Ð¼Ð¸ ÐºÐ¾Ð»ÑŒÐ¾Ñ€Ñƒ Ñ‚Ð° ÐºÐ¾Ð½Ñ„Ñ–Ð³ÑƒÑ€Ð°Ñ†Ñ–ÑÐ¼Ð¸
+ÐµÐºÑ€Ð°Ð½Ñƒ, Ð¿Ñ€Ð¾Ð²Ð¾Ð´Ð¸Ñ‚Ð¸ Ð¿Ð°ÐºÐµÑ‚Ð½Ñƒ Ð¾Ð±Ñ€Ð¾Ð±ÐºÑƒ Ð· Xvfb Ñƒ ÑÐºÐ¾ÑÑ‚Ñ– Ñ„Ð¾Ð½Ð¾Ð²Ð¾Ð³Ð¾ Ñ€ÐµÐ½Ð´ÐµÑ€ÐµÑ€Ð°,
+Ð¿Ñ€Ð¾Ð²Ð¾Ð´Ð¸Ñ‚Ð¸ Ð½Ð°Ð³Ñ€ÑƒÐ·Ð¾Ñ‡Ð½Ñ– Ñ‚ÐµÑÑ‚Ð¸, Ð´Ð»Ñ Ð´Ð¾Ð¿Ð¾Ð¼Ð¾Ð³Ð¸ Ñƒ Ð¿Ð¾Ñ€Ñ‚ÑƒÐ²Ð°Ð½Ð½Ñ– X-ÑÐµÑ€Ð²ÐµÑ€Ð° Ð½Ð°
+Ð½Ð¾Ð²Ñƒ Ð¿Ð»Ð°Ñ‚Ñ„Ð¾Ñ€Ð¼Ñƒ Ñ‚Ð° Ð·Ð°Ð¿ÑƒÑÐºÑƒ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼, ÑÐºÐ¸Ð¼ Ñ€ÐµÐ°Ð»ÑŒÐ½Ð¾ Ð½Ðµ Ð¿Ð¾Ñ‚Ñ€Ñ–Ð±ÐµÐ½ X-ÑÐµÑ€Ð²ÐµÑ€,
+Ð°Ð»Ðµ ÑÐºÑ– Ð½Ð°Ð¿Ð¾Ð»ÑÐ³Ð°ÑŽÑ‚ÑŒ Ð½Ð° Ñ‚Ð¾Ð¼Ñƒ, Ñ‰Ð¾Ð± Ð²Ñ–Ð½ Ð±ÑƒÐ² Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ð¸Ð¹.
 
-ñËÝÏ ×ÁÍ ÐÏÔÒ¦ÂÎÏ ÔÅÓÔÕ×ÁÔÉ ×ÁÛ¦ X-ÓÅÒ×ÅÒÉ ÁÂÏ X-ËÌ¦¤ÎÔÉ, ×É ÍÏÖÅÔÅ
-×ÓÔÁÎÏ×ÉÔÉ ÄÌÑ Ã¦¤§ Ã¦Ì¦ Xvfb.
+Ð¯ÐºÑ‰Ð¾ Ð²Ð°Ð¼ Ð¿Ð¾Ñ‚Ñ€Ñ–Ð±Ð½Ð¾ Ñ‚ÐµÑÑ‚ÑƒÐ²Ð°Ñ‚Ð¸ Ð²Ð°ÑˆÑ– X-ÑÐµÑ€Ð²ÐµÑ€Ð¸ Ð°Ð±Ð¾ X-ÐºÐ»Ñ–Ñ”Ð½Ñ‚Ð¸, Ð²Ð¸ Ð¼Ð¾Ð¶ÐµÑ‚Ðµ
+Ð²ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚Ð¸ Ð´Ð»Ñ Ñ†Ñ–Ñ”Ñ— Ñ†Ñ–Ð»Ñ– Xvfb.
 
 %package devel
 Summary:	X11R6 headers and programming man pages
-Summary(de):	X11R6 Headers und man pages für Programmierer
-Summary(fr):	Pages man de programmation
-Summary(pl):	Pliki nag³ówkowe X11R6
-Summary(ru):	âÉÂÌÉÏÔÅËÉ ÒÁÚÒÁÂÏÔÞÉËÁ, ÈÅÄÅÒÁ É ÄÏËÕÍÅÎÔÁÃÉÑ ÐÏ ÐÒÏÇÒÁÍÍÉÒÏ×ÁÎÉÀ X11R6
-Summary(tr):	X11R6 ile geliþtirme için gerekli dosyalar
-Summary(uk):	â¦ÂÌ¦ÏÔÅËÉ ÐÒÏÇÒÁÍ¦ÓÔÁ, ÈÅÄÅÒÉ ÔÁ ÄÏËÕÍÅÎÔÁÃ¦Ñ ÐÏ ÐÒÏÇÒÁÍÕ×ÁÎÎÀ X11R6
+Summary(de.UTF-8):	X11R6 Headers und man pages fÃ¼r Programmierer
+Summary(fr.UTF-8):	Pages man de programmation
+Summary(pl.UTF-8):	Pliki nagÅ‚Ã³wkowe X11R6
+Summary(ru.UTF-8):	Ð‘Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸ Ñ€Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸ÐºÐ°, Ñ…ÐµÐ´ÐµÑ€Ð° Ð¸ Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð°Ñ†Ð¸Ñ Ð¿Ð¾ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸ÑŽ X11R6
+Summary(tr.UTF-8):	X11R6 ile geliÅŸtirme iÃ§in gerekli dosyalar
+Summary(uk.UTF-8):	Ð‘Ñ–Ð±Ð»Ñ–Ð¾Ñ‚ÐµÐºÐ¸ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ñ–ÑÑ‚Ð°, Ñ…ÐµÐ´ÐµÑ€Ð¸ Ñ‚Ð° Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð°Ñ†Ñ–Ñ Ð¿Ð¾ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼ÑƒÐ²Ð°Ð½Ð½ÑŽ X11R6
 Group:		X11/Development/Libraries
 Requires:	%{name}-imake = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
@@ -718,45 +718,45 @@ Libraries, header files, and documentation for developing programs
 that run as X clients. It includes the base Xlib library as well as
 the Xt and Xaw widget sets.
 
-%description devel -l de
+%description devel -l de.UTF-8
 Libraries, Header-Dateien und Dokumentation zum Entwickeln von
-Programmen, die als X-Clients laufen. Enthält die Xlib-Library und die
-Widget-Sätze Xt und Xaw.
+Programmen, die als X-Clients laufen. EnthÃ¤lt die Xlib-Library und die
+Widget-SÃ¤tze Xt und Xaw.
 
-%description devel -l fr
-Bibliothéques, fichiers d'en-tête, et documentation pour développer
-des programmes s'exécutant en clients X. Cela comprend la Bibliothéque
+%description devel -l fr.UTF-8
+BibliothÃ©ques, fichiers d'en-tÃªte, et documentation pour dÃ©velopper
+des programmes s'exÃ©cutant en clients X. Cela comprend la BibliothÃ©que
 Xlib de base aussi bien que les ensembles de widgets Xt et Xaw.
 
-%description devel -l pl
-Pliki nag³ówkowe, dokumentcja dla programistów rozwijaj±cych aplikacje
-klienckie pod X Window. Zawiera podstawow± bibliotekê Xlib a tak¿e Xt
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe, dokumentcja dla programistÃ³w rozwijajÄ…cych aplikacje
+klienckie pod X Window. Zawiera podstawowÄ… bibliotekÄ™ Xlib a takÅ¼e Xt
 i Xaw.
 
-%description devel -l ru
-X11-devel ×ËÌÀÞÁÅÔ ÂÉÂÌÉÏÔÅËÉ, ÈÅÄÅÒÁ É ÄÏËÕÍÅÎÔÁÃÉÀ, ÎÅÏÂÈÏÄÉÍÙÅ ÄÌÑ
-ÒÁÚÒÁÂÏÔËÉ ÐÒÏÇÒÁÍÍ, ÒÁÂÏÔÁÀÝÉÈ ËÁË X-ËÌÉÅÎÔÙ. X11-devel ×ËÌÀÞÁÅÔ
-ÂÁÚÏ×ÕÀ ÂÉÂÌÉÏÔÅËÕ Xlib É ÎÁÂÏÒÙ ÐÒÉÍÉÔÉ×Ï× Xt É Xaw.
+%description devel -l ru.UTF-8
+X11-devel Ð²ÐºÐ»ÑŽÑ‡Ð°ÐµÑ‚ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸, Ñ…ÐµÐ´ÐµÑ€Ð° Ð¸ Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð°Ñ†Ð¸ÑŽ, Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ñ‹Ðµ Ð´Ð»Ñ
+Ñ€Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ¸ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼, Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÑŽÑ‰Ð¸Ñ… ÐºÐ°Ðº X-ÐºÐ»Ð¸ÐµÐ½Ñ‚Ñ‹. X11-devel Ð²ÐºÐ»ÑŽÑ‡Ð°ÐµÑ‚
+Ð±Ð°Ð·Ð¾Ð²ÑƒÑŽ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÑƒ Xlib Ð¸ Ð½Ð°Ð±Ð¾Ñ€Ñ‹ Ð¿Ñ€Ð¸Ð¼Ð¸Ñ‚Ð¸Ð²Ð¾Ð² Xt Ð¸ Xaw.
 
-õÓÔÁÎÏ×ÉÔÅ X11-devel ÅÓÌÉ ×Ù ÓÏÂÉÒÁÅÔÅÓØ ÒÁÚÒÁÂÁÔÙ×ÁÔØ ÐÒÏÇÒÁÍÍÙ,
-ËÏÔÏÒÙÅ ÂÕÄÕÔ ÒÁÂÏÔÁÔØ ËÁË X-ËÌÉÅÎÔÙ.
+Ð£ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚Ðµ X11-devel ÐµÑÐ»Ð¸ Ð²Ñ‹ ÑÐ¾Ð±Ð¸Ñ€Ð°ÐµÑ‚ÐµÑÑŒ Ñ€Ð°Ð·Ñ€Ð°Ð±Ð°Ñ‚Ñ‹Ð²Ð°Ñ‚ÑŒ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹,
+ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð±ÑƒÐ´ÑƒÑ‚ Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ñ‚ÑŒ ÐºÐ°Ðº X-ÐºÐ»Ð¸ÐµÐ½Ñ‚Ñ‹.
 
-%description devel -l tr
-X istemcisi olarak çalýþacak programlar geliþtirmek için gereken
-statik kitaplýklar, baþlýk dosyalarý ve belgeler. Xlib kitaplýðýnýn
-yanýsýra Xt ve Xaw arayüz kitaplýklarýný da içerir.
+%description devel -l tr.UTF-8
+X istemcisi olarak Ã§alÄ±ÅŸacak programlar geliÅŸtirmek iÃ§in gereken
+statik kitaplÄ±klar, baÅŸlÄ±k dosyalarÄ± ve belgeler. Xlib kitaplÄ±ÄŸÄ±nÄ±n
+yanÄ±sÄ±ra Xt ve Xaw arayÃ¼z kitaplÄ±klarÄ±nÄ± da iÃ§erir.
 
-%description devel -l uk
-X11-devel Í¦ÓÔÉÔØ Â¦ÂÌ¦ÏÔÅËÉ, ÈÅÄÅÒÉ ÔÁ ÄÏËÕÍÅÎÔÁÃ¦À, ÎÅÏÂÈ¦ÄÎ¦ ÄÌÑ
-ÒÏÚÒÏÂËÉ ÐÒÏÇÒÁÍ, ÑË¦ ÐÒÁÃÀÀÔØ ÑË X-ËÌ¦¤ÎÔÉ. X11-devel Í¦ÓÔÉÔØ ÂÁÚÏ×Õ
-Â¦ÂÌ¦ÏÔÅËÕ Xlib ÔÁ ÎÁÂÏÒÉ ÐÒÉÍ¦ÔÉ×¦× Xt ÔÁ Xaw.
+%description devel -l uk.UTF-8
+X11-devel Ð¼Ñ–ÑÑ‚Ð¸Ñ‚ÑŒ Ð±Ñ–Ð±Ð»Ñ–Ð¾Ñ‚ÐµÐºÐ¸, Ñ…ÐµÐ´ÐµÑ€Ð¸ Ñ‚Ð° Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð°Ñ†Ñ–ÑŽ, Ð½ÐµÐ¾Ð±Ñ…Ñ–Ð´Ð½Ñ– Ð´Ð»Ñ
+Ñ€Ð¾Ð·Ñ€Ð¾Ð±ÐºÐ¸ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼, ÑÐºÑ– Ð¿Ñ€Ð°Ñ†ÑŽÑŽÑ‚ÑŒ ÑÐº X-ÐºÐ»Ñ–Ñ”Ð½Ñ‚Ð¸. X11-devel Ð¼Ñ–ÑÑ‚Ð¸Ñ‚ÑŒ Ð±Ð°Ð·Ð¾Ð²Ñƒ
+Ð±Ñ–Ð±Ð»Ñ–Ð¾Ñ‚ÐµÐºÑƒ Xlib Ñ‚Ð° Ð½Ð°Ð±Ð¾Ñ€Ð¸ Ð¿Ñ€Ð¸Ð¼Ñ–Ñ‚Ð¸Ð²Ñ–Ð² Xt Ñ‚Ð° Xaw.
 
-÷ÓÔÁÎÏ×¦ÔØ X11-devel ÑËÝÏ ×É ÚÂÉÒÁ¤ÔÅÓØ ÒÏÚÒÏÂÌÑÔÉ ÐÒÏÇÒÁÍÉ, ÑË¦
-ÂÕÄÕÔØ ÐÒÁÃÀ×ÁÔÉ ÑË X-ËÌ¦¤ÎÔÉ.
+Ð’ÑÑ‚Ð°Ð½Ð¾Ð²Ñ–Ñ‚ÑŒ X11-devel ÑÐºÑ‰Ð¾ Ð²Ð¸ Ð·Ð±Ð¸Ñ€Ð°Ñ”Ñ‚ÐµÑÑŒ Ñ€Ð¾Ð·Ñ€Ð¾Ð±Ð»ÑÑ‚Ð¸ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¸, ÑÐºÑ–
+Ð±ÑƒÐ´ÑƒÑ‚ÑŒ Ð¿Ñ€Ð°Ñ†ÑŽÐ²Ð°Ñ‚Ð¸ ÑÐº X-ÐºÐ»Ñ–Ñ”Ð½Ñ‚Ð¸.
 
 %package Xserver-devel
 Summary:	Header files for XOrg X11 Xserver drivers/extensions development
-Summary(pl):	Pliki nag³ówkowe do tworzenia sterowników/rozszerzeñ X serwera XOrg X11
+Summary(pl.UTF-8):	Pliki nagÅ‚Ã³wkowe do tworzenia sterownikÃ³w/rozszerzeÅ„ X serwera XOrg X11
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Provides:	XFree86-Xserver-devel = %{epoch}:%{version}-%{release}
@@ -765,13 +765,13 @@ Obsoletes:	XFree86-Xserver-devel
 %description Xserver-devel
 Header files for XOrg X11 Xserver drivers and extensions development.
 
-%description Xserver-devel -l pl
-Pliki nag³ówkowe do tworzenia sterowników i rozszerzeñ X serwera XOrg
+%description Xserver-devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe do tworzenia sterownikÃ³w i rozszerzeÅ„ X serwera XOrg
 X11.
 
 %package driver-apm
 Summary:	Alliance Promotion video driver
-Summary(pl):	Sterownik do kart Alliance Promotion
+Summary(pl.UTF-8):	Sterownik do kart Alliance Promotion
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -781,12 +781,12 @@ Obsoletes:	XFree86-driver-apm
 %description driver-apm
 Alliance Promotion driver.
 
-%description driver-apm -l pl
+%description driver-apm -l pl.UTF-8
 Sterownik do kart Alliance Promotion.
 
 %package driver-ark
 Summary:	Ark Logic video driver
-Summary(pl):	Sterownik do kart Ark Logic
+Summary(pl.UTF-8):	Sterownik do kart Ark Logic
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -795,12 +795,12 @@ Obsoletes:	XFree86-driver-ark
 %description driver-ark
 Ark Logic driver.
 
-%description driver-ark -l pl
+%description driver-ark -l pl.UTF-8
 Sterownik do kart Ark Logic.
 
 %package driver-ati
 Summary:	ATI video driver
-Summary(pl):	Sterownik do kart ATI
+Summary(pl.UTF-8):	Sterownik do kart ATI
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-driver-i2c = %{epoch}:%{version}-%{release}
@@ -813,12 +813,12 @@ Obsoletes:	XFree86-driver-ati
 %description driver-ati
 ATI video driver.
 
-%description driver-ati -l pl
+%description driver-ati -l pl.UTF-8
 Sterownik do kart ATI.
 
 %package driver-r128
 Summary:	ATI Rage 128 video driver
-Summary(pl):	Sterownik do kart ATI Rage 128
+Summary(pl.UTF-8):	Sterownik do kart ATI Rage 128
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -828,12 +828,12 @@ Obsoletes:	XFree86-driver-r128
 %description driver-r128
 ATI Rage 128 video driver.
 
-%description driver-r128 -l pl
+%description driver-r128 -l pl.UTF-8
 Sterownik do kart ATI Rage 128.
 
 %package driver-r128-dri
 Summary:	DRI modules for ATI Rage 128 video driver
-Summary(pl):	Modu³y DRI dla sterownika do kart ATI Rage 128
+Summary(pl.UTF-8):	ModuÅ‚y DRI dla sterownika do kart ATI Rage 128
 Group:		X11/Servers
 Requires:	%{name}-driver-r128 = %{epoch}:%{version}-%{release}
 %ifarch %{ix86} ia64 %{x8664} alpha ppc arm
@@ -846,12 +846,12 @@ Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
 %description driver-r128-dri
 DRI modules for ATI Rage 128 video driver.
 
-%description driver-r128-dri -l pl
-Modu³y DRI dla sterownika do kart ATI Rage 128.
+%description driver-r128-dri -l pl.UTF-8
+ModuÅ‚y DRI dla sterownika do kart ATI Rage 128.
 
 %package driver-radeon
 Summary:	ATI Radeon video driver
-Summary(pl):	Sterownik do kart ATI Radeon
+Summary(pl.UTF-8):	Sterownik do kart ATI Radeon
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-driver-ati = %{epoch}:%{version}-%{release}
@@ -861,12 +861,12 @@ Obsoletes:	XFree86-driver-radeon
 %description driver-radeon
 ATI Radeon video driver.
 
-%description driver-radeon -l pl
+%description driver-radeon -l pl.UTF-8
 Sterownik do kart ATI Radeon.
 
 %package driver-radeon-dri
 Summary:	DRI modules for ATI Radeon video driver
-Summary(pl):	Modu³y DRI dla sterownika do kart ATI Radeon
+Summary(pl.UTF-8):	ModuÅ‚y DRI dla sterownika do kart ATI Radeon
 Group:		X11/Servers
 Requires:	%{name}-driver-radeon = %{epoch}:%{version}-%{release}
 %ifarch %{ix86} ia64 %{x8664} alpha ppc arm
@@ -879,12 +879,12 @@ Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
 %description driver-radeon-dri
 DRI modules for ATI Radeon video driver.
 
-%description driver-radeon-dri -l pl
-Modu³y DRI dla sterownika do kart ATI Radeon.
+%description driver-radeon-dri -l pl.UTF-8
+ModuÅ‚y DRI dla sterownika do kart ATI Radeon.
 
 %package driver-chips
 Summary:	Chips and Technologies video driver
-Summary(pl):	Sterownik do kart na uk³adach Chips and Technologies
+Summary(pl.UTF-8):	Sterownik do kart na ukÅ‚adach Chips and Technologies
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -894,12 +894,12 @@ Obsoletes:	XFree86-driver-chips
 %description driver-chips
 Chips and Technologies video driver.
 
-%description driver-chips -l pl
-Sterownik do kart na uk³adach Chips and Technologies.
+%description driver-chips -l pl.UTF-8
+Sterownik do kart na ukÅ‚adach Chips and Technologies.
 
 %package driver-cirrus
 Summary:	Cirrus Logic video driver
-Summary(pl):	Sterownik do kart Cirrus Logic
+Summary(pl.UTF-8):	Sterownik do kart Cirrus Logic
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -909,12 +909,12 @@ Obsoletes:	XFree86-driver-cirrus
 %description driver-cirrus
 Cirrus Logic video driver.
 
-%description driver-cirrus -l pl
+%description driver-cirrus -l pl.UTF-8
 Sterownik do kart Cirrus Logic.
 
 %package driver-cyrix
 Summary:	Cyrix video driver
-Summary(pl):	Sterownik do grafiki na uk³adzie Cyrix MediaGX
+Summary(pl.UTF-8):	Sterownik do grafiki na ukÅ‚adzie Cyrix MediaGX
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -924,12 +924,12 @@ Obsoletes:	XFree86-driver-cyrix
 %description driver-cyrix
 Cyrix video driver.
 
-%description driver-cyrix -l pl
-Sterownik do grafiki na uk³adzie Cyrix MediaGX.
+%description driver-cyrix -l pl.UTF-8
+Sterownik do grafiki na ukÅ‚adzie Cyrix MediaGX.
 
 %package driver-fbdev
 Summary:	Video driver for framebuffer device
-Summary(pl):	Sterownik korzystaj±cy z framebuffera
+Summary(pl.UTF-8):	Sterownik korzystajÄ…cy z framebuffera
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -939,12 +939,12 @@ Obsoletes:	XFree86-driver-fbdev
 %description driver-fbdev
 Non-accelerated video driver for framebuffer device.
 
-%description driver-fbdev -l pl
-Nieakcelerowany sterownik korzystaj±cy z framebuffera.
+%description driver-fbdev -l pl.UTF-8
+Nieakcelerowany sterownik korzystajÄ…cy z framebuffera.
 
 %package driver-glide
 Summary:	3Dfx Voodoo1 and Voodoo2 video driver
-Summary(pl):	Sterownik do kart 3Dfx Voodoo1 i Voodoo2
+Summary(pl.UTF-8):	Sterownik do kart 3Dfx Voodoo1 i Voodoo2
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -955,12 +955,12 @@ Obsoletes:	XFree86-driver-glide
 %description driver-glide
 Voodoo1 and Voodoo2 video driver.
 
-%description driver-glide -l pl
+%description driver-glide -l pl.UTF-8
 Sterownik do kart Voodoo1 i Voodoo2 firmy 3Dfx.
 
 %package driver-glint
 Summary:	GLINT/Permedia video driver
-Summary(pl):	Sterownik do kart GLINT i Permedia
+Summary(pl.UTF-8):	Sterownik do kart GLINT i Permedia
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -970,12 +970,12 @@ Obsoletes:	XFree86-driver-glint
 %description driver-glint
 GLINT/Permedia video driver.
 
-%description driver-glint -l pl
+%description driver-glint -l pl.UTF-8
 Sterownik do kart GLINT i Permedia.
 
 %package driver-glint-dri
 Summary:	DRI modules for GLINT/Permedia video driver
-Summary(pl):	Modu³y DRI dla sterownika do kart GLINT i Permedia
+Summary(pl.UTF-8):	ModuÅ‚y DRI dla sterownika do kart GLINT i Permedia
 Group:		X11/Servers
 Requires:	%{name}-driver-glint = %{epoch}:%{version}-%{release}
 %ifarch %{ix86} ia64 %{x8664} alpha ppc arm
@@ -988,12 +988,12 @@ Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
 %description driver-glint-dri
 DRI modules for GLINT/Permedia video driver.
 
-%description driver-glint-dri -l pl
-Modu³y DRI dla sterownika do kart GLINT i Permedia.
+%description driver-glint-dri -l pl.UTF-8
+ModuÅ‚y DRI dla sterownika do kart GLINT i Permedia.
 
 %package driver-i128
 Summary:	Number 9 I128 video driver
-Summary(pl):	Sterownik do kart Number 9 I128
+Summary(pl.UTF-8):	Sterownik do kart Number 9 I128
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1003,12 +1003,12 @@ Obsoletes:	XFree86-driver-i128
 %description driver-i128
 Number 9 I128 video driver.
 
-%description driver-i128 -l pl
+%description driver-i128 -l pl.UTF-8
 Sterownik do kart Number 9 I128.
 
 %package driver-i2c
 Summary:	I2C drivers
-Summary(pl):	Sterowniki I2C
+Summary(pl.UTF-8):	Sterowniki I2C
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1016,12 +1016,12 @@ Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
 %description driver-i2c
 I2C drivers.
 
-%description driver-i2c -l pl
+%description driver-i2c -l pl.UTF-8
 Sterowniki I2C.
 
 %package driver-i740
 Summary:	Intel i740 video driver
-Summary(pl):	Sterownik do kart na uk³adzie Intel i740
+Summary(pl.UTF-8):	Sterownik do kart na ukÅ‚adzie Intel i740
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1031,12 +1031,12 @@ Obsoletes:	XFree86-i740
 %description driver-i740
 Intel i740 video driver.
 
-%description driver-i740 -l pl
-Sterownik do kart na uk³adzie Intel i740.
+%description driver-i740 -l pl.UTF-8
+Sterownik do kart na ukÅ‚adzie Intel i740.
 
 %package driver-i810
 Summary:	Intel i810/i815/i830 video driver
-Summary(pl):	Sterownik do grafiki na uk³adach Intel i810/i815/i830
+Summary(pl.UTF-8):	Sterownik do grafiki na ukÅ‚adach Intel i810/i815/i830
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1046,12 +1046,12 @@ Obsoletes:	XFree86-i810
 %description driver-i810
 Intel i810/i815/i830 video driver.
 
-%description driver-i810 -l pl
-Sterownik do grafiki na uk³adach Intel i810/i815/i830.
+%description driver-i810 -l pl.UTF-8
+Sterownik do grafiki na ukÅ‚adach Intel i810/i815/i830.
 
 %package driver-i810-dri
 Summary:	DRI modules dor Intel i810/i815/i830 video driver
-Summary(pl):	Modu³y DRI dla sterownika do grafiki na uk³adach Intel i810/i815/i830
+Summary(pl.UTF-8):	ModuÅ‚y DRI dla sterownika do grafiki na ukÅ‚adach Intel i810/i815/i830
 Group:		X11/Servers
 Requires:	%{name}-driver-i810 = %{epoch}:%{version}-%{release}
 %ifarch %{ix86} ia64
@@ -1064,12 +1064,12 @@ Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
 %description driver-i810-dri
 DRI modules dor Intel i810/i815/i830 video driver.
 
-%description driver-i810-dri -l pl
-Modu³y DRI dla sterownika do grafiki na uk³adach Intel i810/i815/i830.
+%description driver-i810-dri -l pl.UTF-8
+ModuÅ‚y DRI dla sterownika do grafiki na ukÅ‚adach Intel i810/i815/i830.
 
 %package driver-imstt
 Summary:	Integrated Micro Solutions Twin Turbo 128 driver
-Summary(pl):	Sterownik do kart Integrated Micro Solutions Twin Turbo 128
+Summary(pl.UTF-8):	Sterownik do kart Integrated Micro Solutions Twin Turbo 128
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1078,12 +1078,12 @@ Obsoletes:	XFree86-driver-imstt
 %description driver-imstt
 Integrated Micro Solutions Twin Turbo 128 driver.
 
-%description driver-imstt -l pl
+%description driver-imstt -l pl.UTF-8
 Sterownik do kart Integrated Micro Solutions Twin Turbo 128.
 
 %package driver-mga
 Summary:	Matrox video driver
-Summary(pl):	Sterownik do kart Matrox
+Summary(pl.UTF-8):	Sterownik do kart Matrox
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1093,12 +1093,12 @@ Obsoletes:	XFree86-mga
 %description driver-mga
 Matrox video driver.
 
-%description driver-mga -l pl
+%description driver-mga -l pl.UTF-8
 Sterownik do kart Matrox.
 
 %package driver-mga-dri
 Summary:	DRI modules for Matrox video driver
-Summary(pl):	Moduly DRI dla sterownika do kart Matrox
+Summary(pl.UTF-8):	Moduly DRI dla sterownika do kart Matrox
 Group:		X11/Servers
 Requires:	%{name}-driver-mga = %{epoch}:%{version}-%{release}
 %ifarch %{ix86} ia64 %{x8664} alpha ppc arm
@@ -1111,12 +1111,12 @@ Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
 %description driver-mga-dri
 DRI modules for Matrox video driver.
 
-%description driver-mga-dri -l pl
+%description driver-mga-dri -l pl.UTF-8
 Moduly DRI dla sterownika do kart Matrox.
 
 %package driver-neomagic
 Summary:	NeoMagic video driver
-Summary(pl):	Sterownik do kart NeoMagic
+Summary(pl.UTF-8):	Sterownik do kart NeoMagic
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1126,12 +1126,12 @@ Obsoletes:	XFree86-driver-neomagic
 %description driver-neomagic
 NeoMagic video driver.
 
-%description driver-neomagic -l pl
+%description driver-neomagic -l pl.UTF-8
 Sterownik do kart NeoMagic.
 
 %package driver-newport
 Summary:	Newport (XL) adapters video driver
-Summary(pl):	Sterownik do kart Newport (XL)
+Summary(pl.UTF-8):	Sterownik do kart Newport (XL)
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1141,13 +1141,13 @@ Obsoletes:	XFree86-driver-newport
 Newport (XL) adapters video driver (found primarily in SGI Indy and
 Indigo2 machines).
 
-%description driver-newport -l pl
-Sterownik do kart Newport (XL) (wystêpuj±cych g³ównie w komputerach
+%description driver-newport -l pl.UTF-8
+Sterownik do kart Newport (XL) (wystÄ™pujÄ…cych gÅ‚Ã³wnie w komputerach
 SGI Indy i Indigo).
 
 %package driver-nsc
 Summary:	National Semiconductors GEODE family video driver
-Summary(pl):	Sterownik dla kart na uk³adach z rodziny GEODE firmy National Semiconductors
+Summary(pl.UTF-8):	Sterownik dla kart na ukÅ‚adach z rodziny GEODE firmy National Semiconductors
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1157,14 +1157,14 @@ Obsoletes:	XFree86-driver-nsc
 National Semiconductors GEODE family video driver. Supports GXLV (5530
 companion chip), SC1200, SC1400 and GX2 (5535 companion chip).
 
-%description driver-nsc -l pl
-Sterownik dla kart na uk³adach z rodziny GEODE firmy National
-Semiconductors. Obs³uguje GXLV (uk³ad towarzysz±cy 5530), SC1200,
-SC1400 oraz GX2 (uk³ad towarzysz±cy 5535).
+%description driver-nsc -l pl.UTF-8
+Sterownik dla kart na ukÅ‚adach z rodziny GEODE firmy National
+Semiconductors. ObsÅ‚uguje GXLV (ukÅ‚ad towarzyszÄ…cy 5530), SC1200,
+SC1400 oraz GX2 (ukÅ‚ad towarzyszÄ…cy 5535).
 
 %package driver-nv
 Summary:	nVidia video driver
-Summary(pl):	Sterownik do kart na uk³adach firmy nVidia
+Summary(pl.UTF-8):	Sterownik do kart na ukÅ‚adach firmy nVidia
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1174,12 +1174,12 @@ Obsoletes:	XFree86-driver-nv
 %description driver-nv
 nVidia video driver. Supports Riva128, RivaTNT, GeForce.
 
-%description driver-nv -l pl
-Sterownik do kart na uk³adach firmy nVidia: Riva128, RivaTNT, GeForce.
+%description driver-nv -l pl.UTF-8
+Sterownik do kart na ukÅ‚adach firmy nVidia: Riva128, RivaTNT, GeForce.
 
 %package driver-rendition
 Summary:	Rendition video driver
-Summary(pl):	Sterownik do kart Rendition
+Summary(pl.UTF-8):	Sterownik do kart Rendition
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1189,12 +1189,12 @@ Obsoletes:	XFree86-driver-rendition
 %description driver-rendition
 Rendition/Micron video driver.
 
-%description driver-rendition -l pl
+%description driver-rendition -l pl.UTF-8
 Sterownik do kart Verite firmowanych przez Rendition/Micron.
 
 %package driver-s3virge
 Summary:	S3 ViRGE/Trio3D video driver
-Summary(pl):	Sterownik do kart na uk³adach S3 ViRGE i Trio3D
+Summary(pl.UTF-8):	Sterownik do kart na ukÅ‚adach S3 ViRGE i Trio3D
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1204,12 +1204,12 @@ Obsoletes:	XFree86-driver-s3virge
 %description driver-s3virge
 S3 ViRGE/Trio3D video driver.
 
-%description driver-s3virge -l pl
-Sterownik do kart na uk³adach S3 ViRGE i Trio3D.
+%description driver-s3virge -l pl.UTF-8
+Sterownik do kart na ukÅ‚adach S3 ViRGE i Trio3D.
 
 %package driver-s3
 Summary:	S3 Trio video driver
-Summary(pl):	Sterownik do kart na uk³adach S3 Trio
+Summary(pl.UTF-8):	Sterownik do kart na ukÅ‚adach S3 Trio
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1219,12 +1219,12 @@ Obsoletes:	XFree86-driver-s3
 %description driver-s3
 S3 Trio video driver.
 
-%description driver-s3 -l pl
-Sterownik do kart na uk³adach S3 Trio.
+%description driver-s3 -l pl.UTF-8
+Sterownik do kart na ukÅ‚adach S3 Trio.
 
 %package driver-savage
 Summary:	S3 Savage video driver
-Summary(pl):	Sterownik do kart na uk³adach S3 Savage
+Summary(pl.UTF-8):	Sterownik do kart na ukÅ‚adach S3 Savage
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1233,12 +1233,12 @@ Obsoletes:	XFree86-driver-savage
 %description driver-savage
 S3 Savage video driver.
 
-%description driver-savage -l pl
-Sterownik do kart na uk³adach S3 Savage.
+%description driver-savage -l pl.UTF-8
+Sterownik do kart na ukÅ‚adach S3 Savage.
 
 %package driver-siliconmotion
 Summary:	Silicon Motion video driver
-Summary(pl):	Sterownik do kart na uk³adach Silicon Motion
+Summary(pl.UTF-8):	Sterownik do kart na ukÅ‚adach Silicon Motion
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1247,12 +1247,12 @@ Obsoletes:	XFree86-driver-siliconmotion
 %description driver-siliconmotion
 Silicon Motion video driver.
 
-%description driver-siliconmotion -l pl
-Sterownik do kart na uk³adach Lynx firmy Silicon Motion.
+%description driver-siliconmotion -l pl.UTF-8
+Sterownik do kart na ukÅ‚adach Lynx firmy Silicon Motion.
 
 %package driver-sis
 Summary:	SiS video driver
-Summary(pl):	Sterownik do kart na uk³adach SiS
+Summary(pl.UTF-8):	Sterownik do kart na ukÅ‚adach SiS
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1262,12 +1262,12 @@ Obsoletes:	XFree86-driver-sis
 %description driver-sis
 SiS video driver.
 
-%description driver-sis -l pl
-Sterownik do kart na uk³adach SiS.
+%description driver-sis -l pl.UTF-8
+Sterownik do kart na ukÅ‚adach SiS.
 
 %package driver-sis-dri
 Summary:	DRI modules for SiS video driver
-Summary(pl):	Modu³y DRI dla sterownika do kart na uk³adach SiS
+Summary(pl.UTF-8):	ModuÅ‚y DRI dla sterownika do kart na ukÅ‚adach SiS
 Group:		X11/Servers
 Requires:	%{name}-driver-sis = %{epoch}:%{version}-%{release}
 %ifarch %{ix86} ia64
@@ -1280,12 +1280,12 @@ Requires:	%{name}-OpenGL-libGL = %{epoch}:%{version}-%{release}
 %description driver-sis-dri
 DRI modules for SiS video driver.
 
-%description driver-sis-dri -l pl
-Modu³y DRI dla sterownika do kart na uk³adach SiS.
+%description driver-sis-dri -l pl.UTF-8
+ModuÅ‚y DRI dla sterownika do kart na ukÅ‚adach SiS.
 
 %package driver-sisusb
 Summary:	Video driver for SiS video chips connected via a Net2280-based USB dongle
-Summary(pl):	Sterownik obrazu dla uk³adów SiS pod³±czonych poprzez przej¶ciówkê USB Net2280
+Summary(pl.UTF-8):	Sterownik obrazu dla ukÅ‚adÃ³w SiS podÅ‚Ä…czonych poprzez przejÅ›ciÃ³wkÄ™ USB Net2280
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1297,16 +1297,16 @@ dongle. It supports SiS315E/PRO video chipset.
 Note: it requires a Linux kernel driver (included in Linux 2.6.12 and
 later).
 
-%description driver-sisusb -l pl
-Sterownik obrazu dla uk³adów SiS pod³±czonych poprzez przej¶ciówkê USB
-opart± na uk³adzie Net2280. Obs³uguje uk³ad graficzny SiS315E/PRO.
+%description driver-sisusb -l pl.UTF-8
+Sterownik obrazu dla ukÅ‚adÃ³w SiS podÅ‚Ä…czonych poprzez przejÅ›ciÃ³wkÄ™ USB
+opartÄ… na ukÅ‚adzie Net2280. ObsÅ‚uguje ukÅ‚ad graficzny SiS315E/PRO.
 
-Uwaga: wymaga sterownika j±dra Linuksa (za³±czonego w wersji Linuksa
-2.6.12 i pó¼niejszych).
+Uwaga: wymaga sterownika jÄ…dra Linuksa (zaÅ‚Ä…czonego w wersji Linuksa
+2.6.12 i pÃ³Åºniejszych).
 
 %package driver-sunbw2
 Summary:	sunbw2 - Sun BW2 video driver
-Summary(pl):	Sterownik do monochromatycznego framebuffera BW2 na Sunie
+Summary(pl.UTF-8):	Sterownik do monochromatycznego framebuffera BW2 na Sunie
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1316,12 +1316,12 @@ Obsoletes:	XFree86-driver-sunbw2
 %description driver-sunbw2
 sunbw2 - Sun BW2 video driver.
 
-%description driver-sunbw2 -l pl
+%description driver-sunbw2 -l pl.UTF-8
 Sterownik do monochromatycznego framebuffera BW2 na Sunie.
 
 %package driver-suncg14
 Summary:	suncg14 - Sun CG14 video driver
-Summary(pl):	Sterownik do kolorowego framebuffera CG14 na Sunie
+Summary(pl.UTF-8):	Sterownik do kolorowego framebuffera CG14 na Sunie
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1330,12 +1330,12 @@ Obsoletes:	XFree86-driver-suncg14
 %description driver-suncg14
 suncg14 - Sun CG14 video driver.
 
-%description driver-suncg14 -l pl
+%description driver-suncg14 -l pl.UTF-8
 Sterownik do kolorowego framebuffera CG14 na Sunie.
 
 %package driver-suncg3
 Summary:	suncg3 - Sun CG3 video cards driver
-Summary(pl):	Sterownik do kolorowego framebuffera CG3 na Sunie
+Summary(pl.UTF-8):	Sterownik do kolorowego framebuffera CG3 na Sunie
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1344,12 +1344,12 @@ Obsoletes:	XFree86-driver-suncg3
 %description driver-suncg3
 suncg3 - Sun CG3 video cards driver.
 
-%description driver-suncg3 -l pl
+%description driver-suncg3 -l pl.UTF-8
 Sterownik do kolorowego framebuffera CG3 na Sunie.
 
 %package driver-suncg6
 Summary:	suncg6 - Sun GX and Turbo GX video driver
-Summary(pl):	Sterownik do grafiki GX i Turbo GX na Sunie
+Summary(pl.UTF-8):	Sterownik do grafiki GX i Turbo GX na Sunie
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1358,12 +1358,12 @@ Obsoletes:	XFree86-driver-suncg6
 %description driver-suncg6
 suncg6 - Sun GX and Turbo GX video driver.
 
-%description driver-suncg6 -l pl
+%description driver-suncg6 -l pl.UTF-8
 Sterownik do grafiki GX i Turbo GX na Sunie.
 
 %package driver-sunffb
 Summary:	sunffb - Sun Creator, Creator 3D and Elite 3D video cards driver
-Summary(pl):	Sterownik do kart Sun Creator, Creator 3D, Elite 3D
+Summary(pl.UTF-8):	Sterownik do kart Sun Creator, Creator 3D, Elite 3D
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1372,12 +1372,12 @@ Obsoletes:	XFree86-driver-sunffb
 %description driver-sunffb
 sunffb - Sun Creator, Creator 3D and Elite 3D video cards driver.
 
-%description driver-sunffb -l pl
+%description driver-sunffb -l pl.UTF-8
 Sterownik do kart Sun Creator, Creator 3D, Elite 3D.
 
 %package driver-sunleo
 Summary:	sunleo - Sun Leo (ZX) video cards driver
-Summary(pl):	Sterownik do kart Sun Leo (ZX)
+Summary(pl.UTF-8):	Sterownik do kart Sun Leo (ZX)
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1386,12 +1386,12 @@ Obsoletes:	XFree86-driver-sunleo
 %description driver-sunleo
 sunleo - Sun Leo (ZX) video cards driver.
 
-%description driver-sunleo -l pl
+%description driver-sunleo -l pl.UTF-8
 Sterownik do kart Sun Leo (ZX).
 
 %package driver-suntcx
 Summary:	suntcx - Sun TCX video cards driver
-Summary(pl):	Sterownik do kart Sun TCX
+Summary(pl.UTF-8):	Sterownik do kart Sun TCX
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1400,12 +1400,12 @@ Obsoletes:	XFree86-driver-suntcx
 %description driver-suntcx
 suntcx - Sun TCX video cards driver.
 
-%description driver-suntcx -l pl
+%description driver-suntcx -l pl.UTF-8
 Sterownik do kart Sun TCX.
 
 %package driver-tdfx
 Summary:	3Dfx video driver
-Summary(pl):	Sterownik do kart 3Dfx
+Summary(pl.UTF-8):	Sterownik do kart 3Dfx
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1417,14 +1417,14 @@ Obsoletes:	XFree86-driver-tdfx
 For Banshee or Voodoo3, DRI driver requires Glide_V3-DRI package, for
 Voodoo4 or Voodoo5 it requires Glide_V5-DRI package.
 
-%description driver-tdfx -l pl
+%description driver-tdfx -l pl.UTF-8
 Sterownik do kart 3Dfx: Voodoo Banshee, Voodoo3, Voodoo4, Voodoo5.
 Sterownik DRI wymaga pakietu Glide_V3-DRI do kart Banshee lub Voodoo3,
 a Glide_V5-DRI do kart Voodoo4 lub Voodoo5.
 
 %package driver-tdfx-dri
 Summary:	DRI modules for 3Dfx video driver
-Summary(pl):	Modu³y DRI dla sterownika do kart 3Dfx
+Summary(pl.UTF-8):	ModuÅ‚y DRI dla sterownika do kart 3Dfx
 Group:		X11/Servers
 Requires:	%{name}-driver-tdfx = %{epoch}:%{version}-%{release}
 %ifarch %{ix86} ia64 alpha arm ppc
@@ -1439,12 +1439,12 @@ Requires:	Glide3-DRI
 %description driver-tdfx-dri
 DRI modules for 3Dfx video driver.
 
-%description driver-tdfx-dri -l pl
-Modu³y DRI dla sterownika do kart 3Dfx.
+%description driver-tdfx-dri -l pl.UTF-8
+ModuÅ‚y DRI dla sterownika do kart 3Dfx.
 
 %package driver-tga
 Summary:	TGA video driver
-Summary(pl):	Sterownik do kart TGA
+Summary(pl.UTF-8):	Sterownik do kart TGA
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1454,12 +1454,12 @@ Obsoletes:	XFree86-driver-tga
 %description driver-tga
 TGA video driver.
 
-%description driver-tga -l pl
+%description driver-tga -l pl.UTF-8
 Sterownik do kart TGA.
 
 %package driver-trident
 Summary:	Trident video driver
-Summary(pl):	Sterownik do kart Trident
+Summary(pl.UTF-8):	Sterownik do kart Trident
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1469,12 +1469,12 @@ Obsoletes:	XFree86-driver-trident
 %description driver-trident
 Trident video driver.
 
-%description driver-trident -l pl
+%description driver-trident -l pl.UTF-8
 Sterownik do kart Trident.
 
 %package driver-tseng
 Summary:	Tseng Labs video driver
-Summary(pl):	Sterownik do kart Tseng Labs
+Summary(pl.UTF-8):	Sterownik do kart Tseng Labs
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1485,12 +1485,12 @@ Obsoletes:	XFree86-driver-tseng
 %description driver-tseng
 Tseng Labs video driver.
 
-%description driver-tseng -l pl
+%description driver-tseng -l pl.UTF-8
 Sterownik do kart firmy Tseng Labs.
 
 %package driver-via
 Summary:	VIA CLE266 driver
-Summary(pl):	Sterownik do kart VIA CLE266
+Summary(pl.UTF-8):	Sterownik do kart VIA CLE266
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1499,12 +1499,12 @@ Obsoletes:	XFree86-driver-via
 %description driver-via
 VIA CLE266 driver.
 
-%description driver-via -l pl
+%description driver-via -l pl.UTF-8
 Sterownik do kart VIA CLE266.
 
 %package driver-vmware
 Summary:	VMWare SVGA emulated video driver
-Summary(pl):	Sterownik do emulacji karty SVGA dostêpnej pod VMware
+Summary(pl.UTF-8):	Sterownik do emulacji karty SVGA dostÄ™pnej pod VMware
 Group:		X11/Servers
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Requires:	%{name}-modules = %{epoch}:%{version}-%{release}
@@ -1514,19 +1514,19 @@ Obsoletes:	XFree86-driver-vmware
 VMware emulated SVGA video driver. Necessary if you run Linux on
 VMware virtual machine.
 
-%description driver-vmware -l pl
-Sterownik do emulacji karty SVGA dostêpnej pod VMware. Przydatny,
-je¶li uruchamiasz Linuksa na wirtualnej maszynie VMware.
+%description driver-vmware -l pl.UTF-8
+Sterownik do emulacji karty SVGA dostÄ™pnej pod VMware. Przydatny,
+jeÅ›li uruchamiasz Linuksa na wirtualnej maszynie VMware.
 
 %package libs
 Summary:	X11R6 shared libraries
-Summary(de):	X11R6 shared Libraries
-Summary(es):	Bibliotecas compartidas X11R6
-Summary(fr):	Bibliothèques partagées X11R6
-Summary(pl):	Biblioteki dzielone dla X11R6
-Summary(pt_BR):	Bibliotecas compartilhadas X11R6
-Summary(ru):	òÁÚÄÅÌÑÅÍÙÅ ÂÉÂÌÉÏÔÅËÉ ÄÌÑ X Window System (X11R6.4)
-Summary(uk):	â¦ÂÌ¦ÏÔÅËÉ ÓÐ¦ÌØÎÏÇÏ ×ÉËÏÒÉÓÔÁÎÎÑ ÄÌÑ X Window System (X11R6.4)
+Summary(de.UTF-8):	X11R6 shared Libraries
+Summary(es.UTF-8):	Bibliotecas compartidas X11R6
+Summary(fr.UTF-8):	BibliothÃ¨ques partagÃ©es X11R6
+Summary(pl.UTF-8):	Biblioteki dzielone dla X11R6
+Summary(pt_BR.UTF-8):	Bibliotecas compartilhadas X11R6
+Summary(ru.UTF-8):	Ð Ð°Ð·Ð´ÐµÐ»ÑÐµÐ¼Ñ‹Ðµ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸ Ð´Ð»Ñ X Window System (X11R6.4)
+Summary(uk.UTF-8):	Ð‘Ñ–Ð±Ð»Ñ–Ð¾Ñ‚ÐµÐºÐ¸ ÑÐ¿Ñ–Ð»ÑŒÐ½Ð¾Ð³Ð¾ Ð²Ð¸ÐºÐ¾Ñ€Ð¸ÑÑ‚Ð°Ð½Ð½Ñ Ð´Ð»Ñ X Window System (X11R6.4)
 Group:		X11/Libraries
 Requires(post,postun):	/sbin/ldconfig
 Requires(triggerpostun):	sed >= 4.0
@@ -1573,75 +1573,75 @@ the X11-tools. And, finally, if you are going to be developing
 applications that run as X clients, you will also need to install
 X11-devel.
 
-%description libs -l de
-Dieses Paket enthält die zur gemeinsamen Nutzung vorgesehenen
-Libraries, die die meisten X-Programme für den einwandfreien Betrieb
-benötigen. Sie wurden in einem separaten Paket untergebracht, um den
+%description libs -l de.UTF-8
+Dieses Paket enthÃ¤lt die zur gemeinsamen Nutzung vorgesehenen
+Libraries, die die meisten X-Programme fÃ¼r den einwandfreien Betrieb
+benÃ¶tigen. Sie wurden in einem separaten Paket untergebracht, um den
 Festplattenspeicherplatz auf Computern zu reduzieren, die ohne einen
-X- Server (über ein Netz) arbeiten.
+X- Server (Ã¼ber ein Netz) arbeiten.
 
-%description libs -l es
-Este paquete contiene bibliotecas compartidas que la mayoría de los
-programas X necesitan para ejecutarse correctamente. Están en un
+%description libs -l es.UTF-8
+Este paquete contiene bibliotecas compartidas que la mayorÃ­a de los
+programas X necesitan para ejecutarse correctamente. EstÃ¡n en un
 paquete a parte, para reducir el espacio en disco necesario para
-ejecutar aplicaciones X en una máquina sin un servidor X (a través de
+ejecutar aplicaciones X en una mÃ¡quina sin un servidor X (a travÃ©s de
 la red).
 
-%description libs -l fr
-Ce paquetage contient les bibliothèques partagées nécessaires à de
-nombreux programmes X. Elles se trouvent dans un paquetage séparé afin
-de réduire l'espace disque nécessaire à l'exécution des applications X
-sur une machine sans serveur X (en réseau).
+%description libs -l fr.UTF-8
+Ce paquetage contient les bibliothÃ¨ques partagÃ©es nÃ©cessaires Ã  de
+nombreux programmes X. Elles se trouvent dans un paquetage sÃ©parÃ© afin
+de rÃ©duire l'espace disque nÃ©cessaire Ã  l'exÃ©cution des applications X
+sur une machine sans serveur X (en rÃ©seau).
 
-%description libs -l pl
-Pakiet zawieraj±cy podstawowe biblioteki potrzebne wiêkszo¶ci
-programów korzystaj±cych z systemu X Window. Wydzielony w celu
-oszczêdno¶ci miejsca potrzebnego do uruchamiania aplikacji X Window na
-komputerach bez X serwera (np. przez sieæ).
+%description libs -l pl.UTF-8
+Pakiet zawierajÄ…cy podstawowe biblioteki potrzebne wiÄ™kszoÅ›ci
+programÃ³w korzystajÄ…cych z systemu X Window. Wydzielony w celu
+oszczÄ™dnoÅ›ci miejsca potrzebnego do uruchamiania aplikacji X Window na
+komputerach bez X serwera (np. przez sieÄ‡).
 
-%description libs -l pt_BR
-Este pacote contém bibliotecas compartilhadas que a maioria dos
-programas X precisam para rodar corretamente. Eles estão em um pacote
-separado para reduzir o espaço em disco necessário para rodar
-aplicações X em uma máquina sem um servidor X (através da rede).
+%description libs -l pt_BR.UTF-8
+Este pacote contÃ©m bibliotecas compartilhadas que a maioria dos
+programas X precisam para rodar corretamente. Eles estÃ£o em um pacote
+separado para reduzir o espaÃ§o em disco necessÃ¡rio para rodar
+aplicaÃ§Ãµes X em uma mÃ¡quina sem um servidor X (atravÃ©s da rede).
 
-%description libs -l tr
-Bu paket X programlarýnýn düzgün çalýþabilmeleri için gereken
-kitaplýklarý içerir. Bunlar, X programlarýný (sunucu olsun olmasýn)
-çalýþtýrmak için gerekli disk alanýný azaltmak için ayrý bir paket
-olarak sunulmuþtur.
+%description libs -l tr.UTF-8
+Bu paket X programlarÄ±nÄ±n dÃ¼zgÃ¼n Ã§alÄ±ÅŸabilmeleri iÃ§in gereken
+kitaplÄ±klarÄ± iÃ§erir. Bunlar, X programlarÄ±nÄ± (sunucu olsun olmasÄ±n)
+Ã§alÄ±ÅŸtÄ±rmak iÃ§in gerekli disk alanÄ±nÄ± azaltmak iÃ§in ayrÄ± bir paket
+olarak sunulmuÅŸtur.
 
-%description libs -l ru
-X11-libs ÓÏÄÅÒÖÉÔ ÒÁÚÄÅÌÑÅÍÙÅ ÂÉÂÌÉÏÔÅËÉ, ËÏÔÏÒÙÅ ÎÅÏÂÈÏÄÉÍÙ ÄÌÑ
-ÒÁÂÏÔÙ ÂÏÌØÛÉÎÓÔ×Õ ÐÒÏÇÒÁÍÍ ÄÌÑ X. üÔÉ ÂÉÂÌÉÏÔÅËÉ ×ÙÎÅÓÅÎÙ × ÏÔÄÅÌØÎÙÊ
-ÐÁËÅÔ ÞÔÏÂÙ ÓÜËÏÎÏÍÉÔØ ÄÉÓËÏ×ÏÅ ÐÒÏÓÔÒÁÎÓÔ×Ï, ÎÅÏÂÈÏÄÉÍÏÅ ÄÌÑ ÚÁÐÕÓËÁ
-ÐÒÉÌÏÖÅÎÉÊ X ÎÁ ÍÁÛÉÎÁÈ ÂÅÚ X-ÓÅÒ×ÅÒÁ (ÎÁÐÒÉÍÅÒ, ÐÏ ÓÅÔÉ).
+%description libs -l ru.UTF-8
+X11-libs ÑÐ¾Ð´ÐµÑ€Ð¶Ð¸Ñ‚ Ñ€Ð°Ð·Ð´ÐµÐ»ÑÐµÐ¼Ñ‹Ðµ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ñ‹ Ð´Ð»Ñ
+Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ Ð±Ð¾Ð»ÑŒÑˆÐ¸Ð½ÑÑ‚Ð²Ñƒ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼ Ð´Ð»Ñ X. Ð­Ñ‚Ð¸ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸ Ð²Ñ‹Ð½ÐµÑÐµÐ½Ñ‹ Ð² Ð¾Ñ‚Ð´ÐµÐ»ÑŒÐ½Ñ‹Ð¹
+Ð¿Ð°ÐºÐµÑ‚ Ñ‡Ñ‚Ð¾Ð±Ñ‹ ÑÑÐºÐ¾Ð½Ð¾Ð¼Ð¸Ñ‚ÑŒ Ð´Ð¸ÑÐºÐ¾Ð²Ð¾Ðµ Ð¿Ñ€Ð¾ÑÑ‚Ñ€Ð°Ð½ÑÑ‚Ð²Ð¾, Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾Ðµ Ð´Ð»Ñ Ð·Ð°Ð¿ÑƒÑÐºÐ°
+Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ð¹ X Ð½Ð° Ð¼Ð°ÑˆÐ¸Ð½Ð°Ñ… Ð±ÐµÐ· X-ÑÐµÑ€Ð²ÐµÑ€Ð° (Ð½Ð°Ð¿Ñ€Ð¸Ð¼ÐµÑ€, Ð¿Ð¾ ÑÐµÑ‚Ð¸).
 
-åÓÌÉ ×Ù ÕÓÔÁÎÁ×ÌÉ×ÁÅÔÅ X Window System ÎÁ ×ÁÛÅÊ ÍÁÛÉÎÅ, ×ÁÍ ÎÅÏÂÈÏÄÉÍÏ
-ÕÓÔÁÎÏ×ÉÔØ X11-libs. ôÁËÖÅ ÎÅÏÂÈÏÄÉÍÏ ÕÓÔÁÎÏ×ÉÔØ ÓÌÅÄÕÀÝÉÅ ÐÁËÅÔÙ:
-XOrg X11, ÏÄÉÎ ÉÌÉ ÎÅÓËÏÌØËÏ ÐÁËÅÔÏ× ÛÒÉÆÔÏ× XOrg X11, Xconfigurator,
+Ð•ÑÐ»Ð¸ Ð²Ñ‹ ÑƒÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÑ‚Ðµ X Window System Ð½Ð° Ð²Ð°ÑˆÐµÐ¹ Ð¼Ð°ÑˆÐ¸Ð½Ðµ, Ð²Ð°Ð¼ Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾
+ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ X11-libs. Ð¢Ð°ÐºÐ¶Ðµ Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ ÑÐ»ÐµÐ´ÑƒÑŽÑ‰Ð¸Ðµ Ð¿Ð°ÐºÐµÑ‚Ñ‹:
+XOrg X11, Ð¾Ð´Ð¸Ð½ Ð¸Ð»Ð¸ Ð½ÐµÑÐºÐ¾Ð»ÑŒÐºÐ¾ Ð¿Ð°ÐºÐµÑ‚Ð¾Ð² ÑˆÑ€Ð¸Ñ„Ñ‚Ð¾Ð² XOrg X11, Xconfigurator,
 X11-xfs.
 
-åÓÌÉ ×Ù ÓÏÂÉÒÁÅÔÅÓØ ÒÁÚÒÁÂÁÔÙ×ÁÔØ ÐÒÏÇÒÁÍÍÙ, ÒÁÂÏÔÁÀÝÉÅ ËÁË X-ËÌÉÅÎÔÙ,
-×ÁÍ ÔÁËÖÅ ÎÁÄÏ ÕÓÔÁÎÏ×ÉÔØ X11-devel.
+Ð•ÑÐ»Ð¸ Ð²Ñ‹ ÑÐ¾Ð±Ð¸Ñ€Ð°ÐµÑ‚ÐµÑÑŒ Ñ€Ð°Ð·Ñ€Ð°Ð±Ð°Ñ‚Ñ‹Ð²Ð°Ñ‚ÑŒ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹, Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÑŽÑ‰Ð¸Ðµ ÐºÐ°Ðº X-ÐºÐ»Ð¸ÐµÐ½Ñ‚Ñ‹,
+Ð²Ð°Ð¼ Ñ‚Ð°ÐºÐ¶Ðµ Ð½Ð°Ð´Ð¾ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ X11-devel.
 
-%description libs -l uk
-X11-libs Í¦ÓÔÉÔØ Â¦ÂÌ¦ÏÔÅËÉ ÓÐ¦ÌØÎÏÇÏ ×ÉËÏÒÉÓÔÁÎÎÑ, ËÏÔÒ¦ ÎÅÏÂÈ¦ÄÎ¦
-ÄÌÑ ÒÏÂÏÔÉ Â¦ÌØÛÏÓÔ¦ ÐÒÉËÌÁÄÎÉÈ ÐÒÏÇÒÁÍ ÄÌÑ X. ã¦ Â¦ÂÌ¦ÏÔÅËÉ ×ÉÎÅÓÅÎ¦
-× ÏËÒÅÍÉÊ ÐÁËÅÔ ÄÌÑ ÅËÏÎÏÍ¦§ ÄÉÓËÏ×ÏÇÏ ÐÒÏÓÔÏÒÕ, ÎÅÏÂÈ¦ÄÎÏÇÏ ÄÌÑ
-ÚÁÐÕÓËÕ ÐÒÉËÌÁÄÎÉÈ ÐÒÏÇÒÁÍ X ÎÁ ÍÁÛÉÎÁÈ ÂÅÚ X-ÓÅÒ×ÅÒÕ (ÎÁÐÒÉËÌÁÄ, ÐÏ
-ÍÅÒÅÖ¦).
+%description libs -l uk.UTF-8
+X11-libs Ð¼Ñ–ÑÑ‚Ð¸Ñ‚ÑŒ Ð±Ñ–Ð±Ð»Ñ–Ð¾Ñ‚ÐµÐºÐ¸ ÑÐ¿Ñ–Ð»ÑŒÐ½Ð¾Ð³Ð¾ Ð²Ð¸ÐºÐ¾Ñ€Ð¸ÑÑ‚Ð°Ð½Ð½Ñ, ÐºÐ¾Ñ‚Ñ€Ñ– Ð½ÐµÐ¾Ð±Ñ…Ñ–Ð´Ð½Ñ–
+Ð´Ð»Ñ Ñ€Ð¾Ð±Ð¾Ñ‚Ð¸ Ð±Ñ–Ð»ÑŒÑˆÐ¾ÑÑ‚Ñ– Ð¿Ñ€Ð¸ÐºÐ»Ð°Ð´Ð½Ð¸Ñ… Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼ Ð´Ð»Ñ X. Ð¦Ñ– Ð±Ñ–Ð±Ð»Ñ–Ð¾Ñ‚ÐµÐºÐ¸ Ð²Ð¸Ð½ÐµÑÐµÐ½Ñ–
+Ð² Ð¾ÐºÑ€ÐµÐ¼Ð¸Ð¹ Ð¿Ð°ÐºÐµÑ‚ Ð´Ð»Ñ ÐµÐºÐ¾Ð½Ð¾Ð¼Ñ–Ñ— Ð´Ð¸ÑÐºÐ¾Ð²Ð¾Ð³Ð¾ Ð¿Ñ€Ð¾ÑÑ‚Ð¾Ñ€Ñƒ, Ð½ÐµÐ¾Ð±Ñ…Ñ–Ð´Ð½Ð¾Ð³Ð¾ Ð´Ð»Ñ
+Ð·Ð°Ð¿ÑƒÑÐºÑƒ Ð¿Ñ€Ð¸ÐºÐ»Ð°Ð´Ð½Ð¸Ñ… Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼ X Ð½Ð° Ð¼Ð°ÑˆÐ¸Ð½Ð°Ñ… Ð±ÐµÐ· X-ÑÐµÑ€Ð²ÐµÑ€Ñƒ (Ð½Ð°Ð¿Ñ€Ð¸ÐºÐ»Ð°Ð´, Ð¿Ð¾
+Ð¼ÐµÑ€ÐµÐ¶Ñ–).
 
-ñËÝÏ ×É ×ÓÔÁÎÏ×ÌÀ¤ÔÅ X Window System ÎÁ ×ÁÛ¦Ê ÍÁÛÉÎ¦, ×ÁÍ ÎÅÏÂÈ¦ÄÎÏ
-×ÓÔÁÎÏ×ÉÔÉ X11-libs. ôÁËÏÖ ÎÅÏÂÈ¦ÄÎÏ ×ÓÔÁÎÏ×ÉÔÉ ÔÁË¦ ÐÁËÅÔÉ: XOrg X11,
-ÏÄÉÎ ÁÂÏ ÄÅË¦ÌØËÁ ÐÁËÅÔ¦× ÛÒÉÆÔ¦× XOrg X11, Xconfigurator, X11-xfs.
+Ð¯ÐºÑ‰Ð¾ Ð²Ð¸ Ð²ÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÑŽÑ”Ñ‚Ðµ X Window System Ð½Ð° Ð²Ð°ÑˆÑ–Ð¹ Ð¼Ð°ÑˆÐ¸Ð½Ñ–, Ð²Ð°Ð¼ Ð½ÐµÐ¾Ð±Ñ…Ñ–Ð´Ð½Ð¾
+Ð²ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚Ð¸ X11-libs. Ð¢Ð°ÐºÐ¾Ð¶ Ð½ÐµÐ¾Ð±Ñ…Ñ–Ð´Ð½Ð¾ Ð²ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚Ð¸ Ñ‚Ð°ÐºÑ– Ð¿Ð°ÐºÐµÑ‚Ð¸: XOrg X11,
+Ð¾Ð´Ð¸Ð½ Ð°Ð±Ð¾ Ð´ÐµÐºÑ–Ð»ÑŒÐºÐ° Ð¿Ð°ÐºÐµÑ‚Ñ–Ð² ÑˆÑ€Ð¸Ñ„Ñ‚Ñ–Ð² XOrg X11, Xconfigurator, X11-xfs.
 
-ñËÝÏ ×É ÚÂÉÒÁ¤ÔÅÓØ ÒÏÚÒÏÂÌÑÔÉ ÐÒÏÇÒÁÍÉ, ÑË¦ ÐÒÁÃÀÀÔØ ÑË X-ËÌ¦¤ÎÔÉ, ×ÁÍ
-ÔÁËÏÖ ÎÅÏÂÈ¦ÄÎÏ ×ÓÔÁÎÏ×ÉÔÉ X11-devel.
+Ð¯ÐºÑ‰Ð¾ Ð²Ð¸ Ð·Ð±Ð¸Ñ€Ð°Ñ”Ñ‚ÐµÑÑŒ Ñ€Ð¾Ð·Ñ€Ð¾Ð±Ð»ÑÑ‚Ð¸ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¸, ÑÐºÑ– Ð¿Ñ€Ð°Ñ†ÑŽÑŽÑ‚ÑŒ ÑÐº X-ÐºÐ»Ñ–Ñ”Ð½Ñ‚Ð¸, Ð²Ð°Ð¼
+Ñ‚Ð°ÐºÐ¾Ð¶ Ð½ÐµÐ¾Ð±Ñ…Ñ–Ð´Ð½Ð¾ Ð²ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚Ð¸ X11-devel.
 
 %package modules
 Summary:	Modules with X servers extensions
-Summary(pl):	Wspólne dla wszystkich X serwerów modu³y rozszerzeñ
+Summary(pl.UTF-8):	WspÃ³lne dla wszystkich X serwerÃ³w moduÅ‚y rozszerzeÅ„
 Group:		X11/Servers
 Provides:	XFree86-modules = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-module-PEX
@@ -1651,14 +1651,14 @@ Obsoletes:	XFree86-modules
 %description modules
 Modules with X servers extensions.
 
-%description modules -l pl
-Wspólne dla wszystkich X serwerów modu³y rozszerzeñ.
+%description modules -l pl.UTF-8
+WspÃ³lne dla wszystkich X serwerÃ³w moduÅ‚y rozszerzeÅ„.
 
 %package setup
 Summary:	Graphical configuration tool for XOrg X11
-Summary(pl):	Graficzny konfigurator dla XOrg X11
-Summary(ru):	õÔÉÌÉÔÁ ÄÌÑ ËÏÎÆÉÇÕÒÁÃÉÉ XOrg X11
-Summary(uk):	õÔÉÌ¦ÔÁ ÄÌÑ ËÏÎÆ¦ÇÕÒÕ×ÁÎÎÑ XOrg X11
+Summary(pl.UTF-8):	Graficzny konfigurator dla XOrg X11
+Summary(ru.UTF-8):	Ð£Ñ‚Ð¸Ð»Ð¸Ñ‚Ð° Ð´Ð»Ñ ÐºÐ¾Ð½Ñ„Ð¸Ð³ÑƒÑ€Ð°Ñ†Ð¸Ð¸ XOrg X11
+Summary(uk.UTF-8):	Ð£Ñ‚Ð¸Ð»Ñ–Ñ‚Ð° Ð´Ð»Ñ ÐºÐ¾Ð½Ñ„Ñ–Ð³ÑƒÑ€ÑƒÐ²Ð°Ð½Ð½Ñ XOrg X11
 Group:		X11
 Requires:	%{name}-Xserver = %{epoch}:%{version}-%{release}
 Provides:	XFree86-setup = %{epoch}:%{version}-%{release}
@@ -1671,23 +1671,23 @@ servers. It allows you to configure video settings, keyboard layouts,
 mouse type, and other miscellaneous options. It is slow however, and
 requires the generic VGA 16 color server be available.
 
-%description setup -l pl
-Pakiet setup zawiera narzêdzia do konfiguracji XOrg X11. Pozwala na
-skonfigurowanie ustawieñ obrazu, klawiatury, typu myszki i innych
-ró¿nych rzeczy. Jednak¿e jest wolny i wymaga dostêpno¶ci serwera do
+%description setup -l pl.UTF-8
+Pakiet setup zawiera narzÄ™dzia do konfiguracji XOrg X11. Pozwala na
+skonfigurowanie ustawieÅ„ obrazu, klawiatury, typu myszki i innych
+rÃ³Å¼nych rzeczy. JednakÅ¼e jest wolny i wymaga dostÄ™pnoÅ›ci serwera do
 standardowej 16-kolorowej VGA.
 
-%description setup -l ru
-õÔÉÌÉÔÁ ÄÌÑ ËÏÎÆÉÇÕÒÁÃÉÉ XOrg X11.
+%description setup -l ru.UTF-8
+Ð£Ñ‚Ð¸Ð»Ð¸Ñ‚Ð° Ð´Ð»Ñ ÐºÐ¾Ð½Ñ„Ð¸Ð³ÑƒÑ€Ð°Ñ†Ð¸Ð¸ XOrg X11.
 
-%description setup -l uk
-õÔÉÌ¦ÔÁ ÄÌÑ ËÏÎÆ¦ÇÕÒÕ×ÁÎÎÑ XOrg X11.
+%description setup -l uk.UTF-8
+Ð£Ñ‚Ð¸Ð»Ñ–Ñ‚Ð° Ð´Ð»Ñ ÐºÐ¾Ð½Ñ„Ñ–Ð³ÑƒÑ€ÑƒÐ²Ð°Ð½Ð½Ñ XOrg X11.
 
 %package static
 Summary:	X11R6 static libraries
-Summary(pl):	Biblioteki statyczne X11R6
-Summary(ru):	óÔÁÔÉÞÅÓËÉÅ ÂÉÂÌÉÏÔÅËÉ X11R6
-Summary(uk):	óÔÁÔÉÞÎ¦ Â¦ÂÌ¦ÏÔÅËÉ X11R6
+Summary(pl.UTF-8):	Biblioteki statyczne X11R6
+Summary(ru.UTF-8):	Ð¡Ñ‚Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ðµ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸ X11R6
+Summary(uk.UTF-8):	Ð¡Ñ‚Ð°Ñ‚Ð¸Ñ‡Ð½Ñ– Ð±Ñ–Ð±Ð»Ñ–Ð¾Ñ‚ÐµÐºÐ¸ X11R6
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Provides:	XFree86-static = %{epoch}:%{version}-%{release}
@@ -1711,23 +1711,23 @@ Obsoletes:	xrender-static
 %description static
 X11R6 static libraries.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteki statyczne X11R6.
 
-%description static -l ru
-X11-static ×ËÌÀÞÁÅÔ ÓÔÁÔÉÞÅÓËÉÅ ÂÉÂÌÉÏÔÅËÉ, ÎÅÏÂÈÏÄÉÍÙÅ ÄÌÑ ÒÁÚÒÁÂÏÔËÉ
-ÐÒÏÇÒÁÍÍ, ÒÁÂÏÔÁÀÝÉÈ ËÁË X-ËÌÉÅÎÔÙ. ÓÏÂÒÁÎÎÙÅ ÐÒÏÇÒÁÍÍÙ, ËÏÔÏÒÙÅ ÂÕÄÕÔ
-ÒÁÂÏÔÁÔØ ËÁË X-ËÌÉÅÎÔÙ.
+%description static -l ru.UTF-8
+X11-static Ð²ÐºÐ»ÑŽÑ‡Ð°ÐµÑ‚ ÑÑ‚Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ðµ Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐºÐ¸, Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ñ‹Ðµ Ð´Ð»Ñ Ñ€Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ¸
+Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼, Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÑŽÑ‰Ð¸Ñ… ÐºÐ°Ðº X-ÐºÐ»Ð¸ÐµÐ½Ñ‚Ñ‹. ÑÐ¾Ð±Ñ€Ð°Ð½Ð½Ñ‹Ðµ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð±ÑƒÐ´ÑƒÑ‚
+Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ñ‚ÑŒ ÐºÐ°Ðº X-ÐºÐ»Ð¸ÐµÐ½Ñ‚Ñ‹.
 
-%description static -l uk
-X11-static Í¦ÓÔÉÔØ ÓÔÁÔÉÞÎ¦ Â¦ÂÌ¦ÏÔÅËÉ, ÎÅÏÂÈ¦ÄÎ¦ ÄÌÑ ÒÏÚÒÏÂËÉ
-ÐÒÏÇÒÁÍ, ÑË¦ ÐÒÁÃÀÀÔØ ÑË X-ËÌ¦¤ÎÔÉ.
+%description static -l uk.UTF-8
+X11-static Ð¼Ñ–ÑÑ‚Ð¸Ñ‚ÑŒ ÑÑ‚Ð°Ñ‚Ð¸Ñ‡Ð½Ñ– Ð±Ñ–Ð±Ð»Ñ–Ð¾Ñ‚ÐµÐºÐ¸, Ð½ÐµÐ¾Ð±Ñ…Ñ–Ð´Ð½Ñ– Ð´Ð»Ñ Ñ€Ð¾Ð·Ñ€Ð¾Ð±ÐºÐ¸
+Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼, ÑÐºÑ– Ð¿Ñ€Ð°Ñ†ÑŽÑŽÑ‚ÑŒ ÑÐº X-ÐºÐ»Ñ–Ñ”Ð½Ñ‚Ð¸.
 
 %package tools
 Summary:	Various tools for XOrg X11
-Summary(pl):	Ró¿ne narzêdzia dla XOrg X11
-Summary(ru):	òÁÚÎÏÏÂÒÁÚÎÙÅ ÕÔÉÌÉÔÙ ÄÌÑ XOrg X11
-Summary(uk):	ò¦ÚÎÏÍÁÎ¦ÔÎ¦ ÕÔÉÌ¦ÔÉ ÄÌÑ XOrg X11
+Summary(pl.UTF-8):	RÃ³Å¼ne narzÄ™dzia dla XOrg X11
+Summary(ru.UTF-8):	Ð Ð°Ð·Ð½Ð¾Ð¾Ð±Ñ€Ð°Ð·Ð½Ñ‹Ðµ ÑƒÑ‚Ð¸Ð»Ð¸Ñ‚Ñ‹ Ð´Ð»Ñ XOrg X11
+Summary(uk.UTF-8):	Ð Ñ–Ð·Ð½Ð¾Ð¼Ð°Ð½Ñ–Ñ‚Ð½Ñ– ÑƒÑ‚Ð¸Ð»Ñ–Ñ‚Ð¸ Ð´Ð»Ñ XOrg X11
 Group:		X11
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
@@ -1751,53 +1751,53 @@ clients, you will also need to install X11-devel.
 This package contains all applications that used to be in
 X11R6-contrib in older releases.
 
-%description tools -l pl
-Ró¿ne narzêdzia dla X, w tym listres, xbiff, xedit, xeyes, xcalc,
+%description tools -l pl.UTF-8
+RÃ³Å¼ne narzÄ™dzia dla X, w tym listres, xbiff, xedit, xeyes, xcalc,
 xload, xman i inne.
 
-Je¶li u¿ywasz Xów powiniene¶ zainstalowaæ X11-tools. Bêdziesz równie¿
-musia³ zainstalowaæ pakiet XOrg X11, pakiet odpowiadaj±cy Twojej
-karcie graficznej, jeden z pakietów z fontami, pakiet Xconfigurator
+JeÅ›li uÅ¼ywasz XÃ³w powinieneÅ› zainstalowaÄ‡ X11-tools. BÄ™dziesz rÃ³wnieÅ¼
+musiaÅ‚ zainstalowaÄ‡ pakiet XOrg X11, pakiet odpowiadajÄ…cy Twojej
+karcie graficznej, jeden z pakietÃ³w z fontami, pakiet Xconfigurator
 oraz X11-libs.
 
-Wreszcie, je¶li zamierzasz tworzyæ aplikacje, które dzia³aj± jako
-klienci X, bêdziesz musia³ zainstalowaæ równie¿ X11-devel.
+Wreszcie, jeÅ›li zamierzasz tworzyÄ‡ aplikacje, ktÃ³re dziaÅ‚ajÄ… jako
+klienci X, bÄ™dziesz musiaÅ‚ zainstalowaÄ‡ rÃ³wnieÅ¼ X11-devel.
 
-Ten pakiet zawiera aplikacje, które by³y w X11R6-contrib w starszych
+Ten pakiet zawiera aplikacje, ktÃ³re byÅ‚y w X11R6-contrib w starszych
 wersjach X.
 
-%description tools -l ru
-òÁÚÎÏÏÂÒÁÚÎÙÅ ÕÔÉÌÉÔÙ ÄÌÑ X, ×ËÌÀÞÁÑ listres, xbiff, xedit, xeyes,
-xcalc, xload, xman É ÄÒÕÇÉÅ.
+%description tools -l ru.UTF-8
+Ð Ð°Ð·Ð½Ð¾Ð¾Ð±Ñ€Ð°Ð·Ð½Ñ‹Ðµ ÑƒÑ‚Ð¸Ð»Ð¸Ñ‚Ñ‹ Ð´Ð»Ñ X, Ð²ÐºÐ»ÑŽÑ‡Ð°Ñ listres, xbiff, xedit, xeyes,
+xcalc, xload, xman Ð¸ Ð´Ñ€ÑƒÐ³Ð¸Ðµ.
 
-åÓÌÉ ×Ù ÕÓÔÁÎÁ×ÌÉ×ÁÅÔÅ X Window System, ×ÁÍ ÎÁÄÏ ÕÓÔÁÎÏ×ÉÔØ X11-tools.
-ôÁËÖÅ ×ÁÍ ÔÁËÖÅ ÎÅÏÂÈÏÄÉÍÏ ÕÓÔÁÎÏ×ÉÔØ ÔÁËÉÅ ÐÁËÅÔÙ: XOrg X11,
-Xconfigurator, X11-xfs É X11-libs. ÷ÏÚÍÏÖÎÏ, ×ÁÍ ÎÁÄÏ ÕÓÔÁÎÏ×ÉÔØ É
-ÄÒÕÇÉÅ ÐÁËÅÔÙ ÛÒÉÆÔÏ× XOrg X11.
+Ð•ÑÐ»Ð¸ Ð²Ñ‹ ÑƒÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÑ‚Ðµ X Window System, Ð²Ð°Ð¼ Ð½Ð°Ð´Ð¾ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ X11-tools.
+Ð¢Ð°ÐºÐ¶Ðµ Ð²Ð°Ð¼ Ñ‚Ð°ÐºÐ¶Ðµ Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ Ñ‚Ð°ÐºÐ¸Ðµ Ð¿Ð°ÐºÐµÑ‚Ñ‹: XOrg X11,
+Xconfigurator, X11-xfs Ð¸ X11-libs. Ð’Ð¾Ð·Ð¼Ð¾Ð¶Ð½Ð¾, Ð²Ð°Ð¼ Ð½Ð°Ð´Ð¾ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ Ð¸
+Ð´Ñ€ÑƒÐ³Ð¸Ðµ Ð¿Ð°ÐºÐµÑ‚Ñ‹ ÑˆÑ€Ð¸Ñ„Ñ‚Ð¾Ð² XOrg X11.
 
-åÓÌÉ ×Ù ÓÏÂÉÒÁÅÔÅÓØ ÒÁÚÒÁÂÁÔÙ×ÁÔØ ÐÒÏÇÒÁÍÍÙ, ÒÁÂÏÔÁÀÝÉÅ ËÁË X-ËÌÉÅÎÔÙ,
-×ÁÍ ÔÁËÖÅ ÎÁÄÏ ÕÓÔÁÎÏ×ÉÔØ X11-devel.
+Ð•ÑÐ»Ð¸ Ð²Ñ‹ ÑÐ¾Ð±Ð¸Ñ€Ð°ÐµÑ‚ÐµÑÑŒ Ñ€Ð°Ð·Ñ€Ð°Ð±Ð°Ñ‚Ñ‹Ð²Ð°Ñ‚ÑŒ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹, Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÑŽÑ‰Ð¸Ðµ ÐºÐ°Ðº X-ÐºÐ»Ð¸ÐµÐ½Ñ‚Ñ‹,
+Ð²Ð°Ð¼ Ñ‚Ð°ÐºÐ¶Ðµ Ð½Ð°Ð´Ð¾ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ X11-devel.
 
-üÔÏÔ ÐÁËÅÔ ÓÏÄÅÒÖÉÔ ×ÓÅ ÐÒÏÇÒÁÍÍÙ, ËÏÔÏÒÙÅ ÒÁÎØÛÅ ×ËÌÀÞÁÌÉÓØ ×
+Ð­Ñ‚Ð¾Ñ‚ Ð¿Ð°ÐºÐµÑ‚ ÑÐ¾Ð´ÐµÑ€Ð¶Ð¸Ñ‚ Ð²ÑÐµ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ñ€Ð°Ð½ÑŒÑˆÐµ Ð²ÐºÐ»ÑŽÑ‡Ð°Ð»Ð¸ÑÑŒ Ð²
 X11R6-contrib.
 
-%description tools -l uk
-ò¦ÚÎÏÍÁÎ¦ÔÎ¦ ÕÔÉÌ¦ÔÉ ÄÌÑ X, ×ËÌÀÞÁÀÞÉ listres, xbiff, xedit, xeyes,
-xcalc, xload, xman ÔÁ ¦ÎÛ¦.
+%description tools -l uk.UTF-8
+Ð Ñ–Ð·Ð½Ð¾Ð¼Ð°Ð½Ñ–Ñ‚Ð½Ñ– ÑƒÑ‚Ð¸Ð»Ñ–Ñ‚Ð¸ Ð´Ð»Ñ X, Ð²ÐºÐ»ÑŽÑ‡Ð°ÑŽÑ‡Ð¸ listres, xbiff, xedit, xeyes,
+xcalc, xload, xman Ñ‚Ð° Ñ–Ð½ÑˆÑ–.
 
-ñËÝÏ ×É ×ÓÔÁÎÏ×ÌÀ¤ÔÅ X Window System, ×ÁÍ ÎÅÏÂÈ¦ÄÎÏ ×ÓÔÁÎÏ×ÉÔÉ
-X11-tools. ôÁËÏÖ ÔÒÅÂÁ ×ÓÔÁÎÏ×ÉÔÉ ÔÁË¦ ÐÁËÅÔÉ: XOrg X11,
-Xconfigurator, X11-xfs ÔÁ X11-libs. íÏÖÌÉ×Ï, ×ÁÍ ÔÒÅÂÁ ×ÓÔÁÎÏ×ÉÔÉ Ê
-¦ÎÛ¦ ÐÁËÅÔÉ ÛÒÉÆÔ¦× XOrg X11.
+Ð¯ÐºÑ‰Ð¾ Ð²Ð¸ Ð²ÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÑŽÑ”Ñ‚Ðµ X Window System, Ð²Ð°Ð¼ Ð½ÐµÐ¾Ð±Ñ…Ñ–Ð´Ð½Ð¾ Ð²ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚Ð¸
+X11-tools. Ð¢Ð°ÐºÐ¾Ð¶ Ñ‚Ñ€ÐµÐ±Ð° Ð²ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚Ð¸ Ñ‚Ð°ÐºÑ– Ð¿Ð°ÐºÐµÑ‚Ð¸: XOrg X11,
+Xconfigurator, X11-xfs Ñ‚Ð° X11-libs. ÐœÐ¾Ð¶Ð»Ð¸Ð²Ð¾, Ð²Ð°Ð¼ Ñ‚Ñ€ÐµÐ±Ð° Ð²ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚Ð¸ Ð¹
+Ñ–Ð½ÑˆÑ– Ð¿Ð°ÐºÐµÑ‚Ð¸ ÑˆÑ€Ð¸Ñ„Ñ‚Ñ–Ð² XOrg X11.
 
-ñËÝÏ ×É ÚÂÉÒÁ¤ÔÅÓØ ÒÏÚÒÏÂÌÑÔÉ ÐÒÏÇÒÁÍÉ, ÑË¦ ÐÒÁÃÀÀÔØ ÑË X-ËÌ¦¤ÎÔÉ, ×ÁÍ
-ÔÁËÏÖ ÎÅÏÂÈ¦ÄÎÏ ×ÓÔÁÎÏ×ÉÔÉ X11-devel.
+Ð¯ÐºÑ‰Ð¾ Ð²Ð¸ Ð·Ð±Ð¸Ñ€Ð°Ñ”Ñ‚ÐµÑÑŒ Ñ€Ð¾Ð·Ñ€Ð¾Ð±Ð»ÑÑ‚Ð¸ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¸, ÑÐºÑ– Ð¿Ñ€Ð°Ñ†ÑŽÑŽÑ‚ÑŒ ÑÐº X-ÐºÐ»Ñ–Ñ”Ð½Ñ‚Ð¸, Ð²Ð°Ð¼
+Ñ‚Ð°ÐºÐ¾Ð¶ Ð½ÐµÐ¾Ð±Ñ…Ñ–Ð´Ð½Ð¾ Ð²ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚Ð¸ X11-devel.
 
-ãÅÊ ÐÁËÅÔ Í¦ÓÔÉÔØ ÕÓ¦ ÐÒÏÇÒÁÍÉ, ÑË¦ ÒÁÎ¦ÛÅ ×ÈÏÄÉÌÉ ÄÏ X11R6-contrib.
+Ð¦ÐµÐ¹ Ð¿Ð°ÐºÐµÑ‚ Ð¼Ñ–ÑÑ‚Ð¸Ñ‚ÑŒ ÑƒÑÑ– Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¸, ÑÐºÑ– Ñ€Ð°Ð½Ñ–ÑˆÐµ Ð²Ñ…Ð¾Ð´Ð¸Ð»Ð¸ Ð´Ð¾ X11R6-contrib.
 
 %package -n XcursorTheme-handhelds
 Summary:	Cursors Theme "handhelds"
-Summary(pl):	Motyw kursorów "handhelds"
+Summary(pl.UTF-8):	Motyw kursorÃ³w "handhelds"
 Group:		Themes
 #Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	XFree86-libs
@@ -1806,12 +1806,12 @@ Obsoletes:	XFree86-Xcursor-packs-handhelds
 %description -n XcursorTheme-handhelds
 Cursors theme "handhelds" for X11.
 
-%description -n XcursorTheme-handhelds -l pl
-Motyw kursorów "handhelds" dla X11.
+%description -n XcursorTheme-handhelds -l pl.UTF-8
+Motyw kursorÃ³w "handhelds" dla X11.
 
 %package -n XcursorTheme-redglass
 Summary:	Cursors theme "redglass"
-Summary(pl):	Motyw kursorów "redglass"
+Summary(pl.UTF-8):	Motyw kursorÃ³w "redglass"
 Group:		Themes
 #Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	XFree86-libs
@@ -1820,12 +1820,12 @@ Obsoletes:	XFree86-Xcursor-packs-redglass
 %description -n XcursorTheme-redglass
 Cursors theme "redglass" for X11.
 
-%description -n XcursorTheme-redglass -l pl
-Motyw kursorów "redglass" dla X11.
+%description -n XcursorTheme-redglass -l pl.UTF-8
+Motyw kursorÃ³w "redglass" dla X11.
 
 %package -n XcursorTheme-whiteglass
 Summary:	Cursors theme "whiteglass"
-Summary(pl):	Motyw kursorów "whiteglass"
+Summary(pl.UTF-8):	Motyw kursorÃ³w "whiteglass"
 Group:		Themes
 #Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	XFree86-libs
@@ -1834,12 +1834,12 @@ Obsoletes:	XFree86-Xcursor-packs-whiteglass
 %description -n XcursorTheme-whiteglass
 Cursors theme "whiteglass" for X11.
 
-%description -n XcursorTheme-whiteglass -l pl
-Motyw kursorów "whiteglass" dla X11.
+%description -n XcursorTheme-whiteglass -l pl.UTF-8
+Motyw kursorÃ³w "whiteglass" dla X11.
 
 %package imake
 Summary:	C preprocessor interface to the make utility
-Summary(pl):	Miedzymordzie do make oparte o preprocesor C
+Summary(pl.UTF-8):	Miedzymordzie do make oparte o preprocesor C
 Group:		Development/Building
 Provides:	imake = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-imake
@@ -1852,17 +1852,17 @@ This allows machine dependencies (such as compiler options, alternate
 command names, and special make rules) to be kept separate from the
 descriptions of the various items to be built.
 
-%description imake -l pl
-Imake jest u¿ywany do generowania plików Makefile na bazie szablonu,
-zbioru makr preprocesora C oraz (dla ka¿dego podkatalogu) pliku
-wej¶ciowego Imakefile. Pozwala to na oddzielenie informacji zale¿nych
-od ¶rodowiska kompilacji (takich jak opcje kompilatora, alternatywne
-nazwy komend i regu³y specjalne) od opisu ró¿nych elementów które maj±
-byæ kompilowane.
+%description imake -l pl.UTF-8
+Imake jest uÅ¼ywany do generowania plikÃ³w Makefile na bazie szablonu,
+zbioru makr preprocesora C oraz (dla kaÅ¼dego podkatalogu) pliku
+wejÅ›ciowego Imakefile. Pozwala to na oddzielenie informacji zaleÅ¼nych
+od Å›rodowiska kompilacji (takich jak opcje kompilatora, alternatywne
+nazwy komend i reguÅ‚y specjalne) od opisu rÃ³Å¼nych elementÃ³w ktÃ³re majÄ…
+byÄ‡ kompilowane.
 
 %package sessreg
 Summary:	sessreg - manage utmp/wtmp entries for non-init clients
-Summary(pl):	Program do zarz±dzania wpisami w utmp/wtmp
+Summary(pl.UTF-8):	Program do zarzÄ…dzania wpisami w utmp/wtmp
 Group:		X11
 Provides:	sessreg = %{epoch}:%{version}-%{release}
 Obsoletes:	XFree86-sessreg
@@ -1876,19 +1876,19 @@ System V has a better interface to /var/run/utmp than BSD; it
 dynamically allocates entries in the file, instead of writing them at
 fixed positions indexed by position in /etc/ttys.
 
-%description sessreg -l pl
-sessreg jest prostym programem do zarz±dzania wpisami w utmp/wtmp dla
+%description sessreg -l pl.UTF-8
+sessreg jest prostym programem do zarzÄ…dzania wpisami w utmp/wtmp dla
 sesji xdm.
 
-System V ma lepszy ni¿ BSD interfejs do /var/run/utmp; dynamicznie
+System V ma lepszy niÅ¼ BSD interfejs do /var/run/utmp; dynamicznie
 alokuje wpisy w pliku, zamiast zapisywania ich na ustalonych pozycjach
-indeksowanych po³o¿eniem w /etc/ttys.
+indeksowanych poÅ‚oÅ¼eniem w /etc/ttys.
 
 %package twm
 Summary:	Tab Window Manager for the X Window System
-Summary(pl):	Twm - podstawowy zarz±dca okien dla X Window System
-Summary(ru):	ðÒÏÓÔÏÊ ÏËÏÎÎÙÊ ÍÅÎÅÄÖÅÒ
-Summary(uk):	ðÒÏÓÔÉÊ ×¦ËÏÎÎÉÊ ÍÅÎÅÄÖÅÒ
+Summary(pl.UTF-8):	Twm - podstawowy zarzÄ…dca okien dla X Window System
+Summary(ru.UTF-8):	ÐŸÑ€Ð¾ÑÑ‚Ð¾Ð¹ Ð¾ÐºÐ¾Ð½Ð½Ñ‹Ð¹ Ð¼ÐµÐ½ÐµÐ´Ð¶ÐµÑ€
+Summary(uk.UTF-8):	ÐŸÑ€Ð¾ÑÑ‚Ð¸Ð¹ Ð²Ñ–ÐºÐ¾Ð½Ð½Ð¸Ð¹ Ð¼ÐµÐ½ÐµÐ´Ð¶ÐµÑ€
 Group:		X11/Window Managers
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	filesystem >= 2.0-1
@@ -1902,21 +1902,21 @@ titlebars, shaped windows, several forms of icon management,
 user-defined macro functions, click-to-type and pointerdriven keyboard
 focus, and user-specified key and pointer button bindings.
 
-%description twm -l pl
-Twm jest zarz±dc± okien dla X Window System. Daje belki tytu³owe,
-ramki okien, parê form zarz±dzania ikonami, definiowalne makra,
-ustawianie focusu klikniêciem lub po³o¿eniem wska¼nika myszy,
-definiowalne przypisania klawiszy i przycisków myszy.
+%description twm -l pl.UTF-8
+Twm jest zarzÄ…dcÄ… okien dla X Window System. Daje belki tytuÅ‚owe,
+ramki okien, parÄ™ form zarzÄ…dzania ikonami, definiowalne makra,
+ustawianie focusu klikniÄ™ciem lub poÅ‚oÅ¼eniem wskaÅºnika myszy,
+definiowalne przypisania klawiszy i przyciskÃ³w myszy.
 
-%description twm -l ru
-ðÒÏÓÔÏÊ ËÏÍÐÁËÔÎÉÊ ÏËÏÎÎÙÊ ÍÅÎÅÄÖÅÒ.
+%description twm -l ru.UTF-8
+ÐŸÑ€Ð¾ÑÑ‚Ð¾Ð¹ ÐºÐ¾Ð¼Ð¿Ð°ÐºÑ‚Ð½Ð¸Ð¹ Ð¾ÐºÐ¾Ð½Ð½Ñ‹Ð¹ Ð¼ÐµÐ½ÐµÐ´Ð¶ÐµÑ€.
 
-%description twm -l uk
-ðÒÏÓÔÉÊ ËÏÍÐÁËÔÎÉÊ ×¦ËÏÎÎÉÊ ÍÅÎÅÄÖÅÒ.
+%description twm -l uk.UTF-8
+ÐŸÑ€Ð¾ÑÑ‚Ð¸Ð¹ ÐºÐ¾Ð¼Ð¿Ð°ÐºÑ‚Ð½Ð¸Ð¹ Ð²Ñ–ÐºÐ¾Ð½Ð½Ð¸Ð¹ Ð¼ÐµÐ½ÐµÐ´Ð¶ÐµÑ€.
 
 %package xauth
 Summary:	xauth - X authority file utility
-Summary(pl):	xauth - narzêdzie do plików X authority
+Summary(pl.UTF-8):	xauth - narzÄ™dzie do plikÃ³w X authority
 Group:		X11
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Provides:	xauth = %{epoch}:%{version}-%{release}
@@ -1930,18 +1930,18 @@ usually used to extract authorization records from one machine and
 merge them in on another (as is the case when using remote logins or
 granting access to other users).
 
-%description xauth -l pl
-Program xauth s³u¿y do edycji i wy¶wietlania informacji
-autoryzacyjnych u¿ywanych przy ³±czeniu z X serwerem. Ten program
-przewa¿nie jest u¿ywany do wyci±gania rekordów autoryzacji z jednej
-maszyny i do³±czania ich na innej (w celu umo¿liwienia zdalnego
-logowania lub udostêpnienia innym u¿ytkownikom).
+%description xauth -l pl.UTF-8
+Program xauth sÅ‚uÅ¼y do edycji i wyÅ›wietlania informacji
+autoryzacyjnych uÅ¼ywanych przy Å‚Ä…czeniu z X serwerem. Ten program
+przewaÅ¼nie jest uÅ¼ywany do wyciÄ…gania rekordÃ³w autoryzacji z jednej
+maszyny i doÅ‚Ä…czania ich na innej (w celu umoÅ¼liwienia zdalnego
+logowania lub udostÄ™pnienia innym uÅ¼ytkownikom).
 
 %package xdm
 Summary:	xdm - X Display Manager with support for XDMCP, host chooser
-Summary(pl):	XDM - zarz±dca ekranów z obs³ug± XDMCP i wybieraniem hostów
-Summary(ru):	íÅÎÅÄÖÅÒ ÄÉÓÐÌÅÑ X
-Summary(uk):	íÅÎÅÄÖÅÒ ÄÉÓÐÌÅÀ X
+Summary(pl.UTF-8):	XDM - zarzÄ…dca ekranÃ³w z obsÅ‚ugÄ… XDMCP i wybieraniem hostÃ³w
+Summary(ru.UTF-8):	ÐœÐµÐ½ÐµÐ´Ð¶ÐµÑ€ Ð´Ð¸ÑÐ¿Ð»ÐµÑ X
+Summary(uk.UTF-8):	ÐœÐµÐ½ÐµÐ´Ð¶ÐµÑ€ Ð´Ð¸ÑÐ¿Ð»ÐµÑŽ X
 Group:		X11
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{epoch}:%{version}-%{release}
@@ -1966,22 +1966,22 @@ or remote servers. The design of xdm was guided by the needs of X
 terminals as well as the X Consortium standard XDMCP, the X Display
 Manager Control Protocol.
 
-%description xdm -l pl
-Xdm zarz±dza zestawem ekranów X, które mog± byæ lokalne lub na
-zdalnych serwerach. Zosta³ zaprojektowany zgodnie z potrzebami X
+%description xdm -l pl.UTF-8
+Xdm zarzÄ…dza zestawem ekranÃ³w X, ktÃ³re mogÄ… byÄ‡ lokalne lub na
+zdalnych serwerach. ZostaÅ‚ zaprojektowany zgodnie z potrzebami X
 terminali oraz standardem X Consortium XDMCP.
 
-%description xdm -l ru
-íÅÎÅÄÖÅÒ ÄÉÓÐÌÅÑ X.
+%description xdm -l ru.UTF-8
+ÐœÐµÐ½ÐµÐ´Ð¶ÐµÑ€ Ð´Ð¸ÑÐ¿Ð»ÐµÑ X.
 
-%description xdm -l uk
-íÅÎÅÄÖÅÒ ÄÉÓÐÌÅÀ X.
+%description xdm -l uk.UTF-8
+ÐœÐµÐ½ÐµÐ´Ð¶ÐµÑ€ Ð´Ð¸ÑÐ¿Ð»ÐµÑŽ X.
 
 %package xfs
 Summary:	Font server for XOrg X11
-Summary(pl):	Serwer fontów dla XOrg X11
-Summary(ru):	æÏÎÔÓÅÒ×ÅÒ ÄÌÑ X Window System
-Summary(uk):	æÏÎÔÓÅÒ×ÅÒ ÄÌÑ X Window System
+Summary(pl.UTF-8):	Serwer fontÃ³w dla XOrg X11
+Summary(ru.UTF-8):	Ð¤Ð¾Ð½Ñ‚ÑÐµÑ€Ð²ÐµÑ€ Ð´Ð»Ñ X Window System
+Summary(uk.UTF-8):	Ð¤Ð¾Ð½Ñ‚ÑÐµÑ€Ð²ÐµÑ€ Ð´Ð»Ñ X Window System
 Group:		X11
 Requires(post,preun):	/sbin/chkconfig
 Requires(postun):	/usr/sbin/groupdel
@@ -2007,30 +2007,30 @@ servers remotely with this package, and the remote system will be able
 to use all fonts installed on the font server, even if they are not
 installed on the remote computer.
 
-%description xfs -l pl
-Pakiet zawiera serwer fontów dla XOrg X11. Mo¿e udostêpniaæ fonty dla
-X serwerów lokalnych lub zdalnych.
+%description xfs -l pl.UTF-8
+Pakiet zawiera serwer fontÃ³w dla XOrg X11. MoÅ¼e udostÄ™pniaÄ‡ fonty dla
+X serwerÃ³w lokalnych lub zdalnych.
 
-%description xfs -l ru
-X11-xfs ÓÏÄÅÒÖÉÔ ÓÅÒ×ÅÒ ÛÒÉÆÔÏ× ÄÌÑ XOrg X11. Xfs ÔÁËÖÅ ÍÏÖÅÔ
-ÐÒÅÄÏÓÔÁ×ÌÑÔØ ÛÒÉÆÔÙ ÕÄÁÌÅÎÎÙÍ X-ÓÅÒ×ÅÒÁÍ. õÄÁÌÅÎÎÁÑ ÓÉÓÔÅÍÁ ÂÕÄÅÔ
-ÓÐÏÓÏÂÎÁ ÉÓÐÏÌØÚÏ×ÁÔØ ×ÓÅ ÛÒÉÆÔÙ, ÕÓÔÁÎÏ×ÌÅÎÎÙÅ ÎÁ ÓÅÒ×ÅÒÅ ÛÒÉÆÔÏ×,
-ÄÁÖÅ ÅÓÌÉ ÏÎÉ ÎÅ ÕÓÔÁÎÏ×ÌÅÎÙ ÎÁ ÕÄÁÌÅÎÎÏÍ ËÏÍÐØÀÔÅÒÅ.
+%description xfs -l ru.UTF-8
+X11-xfs ÑÐ¾Ð´ÐµÑ€Ð¶Ð¸Ñ‚ ÑÐµÑ€Ð²ÐµÑ€ ÑˆÑ€Ð¸Ñ„Ñ‚Ð¾Ð² Ð´Ð»Ñ XOrg X11. Xfs Ñ‚Ð°ÐºÐ¶Ðµ Ð¼Ð¾Ð¶ÐµÑ‚
+Ð¿Ñ€ÐµÐ´Ð¾ÑÑ‚Ð°Ð²Ð»ÑÑ‚ÑŒ ÑˆÑ€Ð¸Ñ„Ñ‚Ñ‹ ÑƒÐ´Ð°Ð»ÐµÐ½Ð½Ñ‹Ð¼ X-ÑÐµÑ€Ð²ÐµÑ€Ð°Ð¼. Ð£Ð´Ð°Ð»ÐµÐ½Ð½Ð°Ñ ÑÐ¸ÑÑ‚ÐµÐ¼Ð° Ð±ÑƒÐ´ÐµÑ‚
+ÑÐ¿Ð¾ÑÐ¾Ð±Ð½Ð° Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ Ð²ÑÐµ ÑˆÑ€Ð¸Ñ„Ñ‚Ñ‹, ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ð½Ñ‹Ðµ Ð½Ð° ÑÐµÑ€Ð²ÐµÑ€Ðµ ÑˆÑ€Ð¸Ñ„Ñ‚Ð¾Ð²,
+Ð´Ð°Ð¶Ðµ ÐµÑÐ»Ð¸ Ð¾Ð½Ð¸ Ð½Ðµ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ñ‹ Ð½Ð° ÑƒÐ´Ð°Ð»ÐµÐ½Ð½Ð¾Ð¼ ÐºÐ¾Ð¼Ð¿ÑŒÑŽÑ‚ÐµÑ€Ðµ.
 
-÷Ù ÄÏÌÖÎÙ ÕÓÔÁÎÏ×ÉÔØ X11-xfs ÅÓÌÉ ×Ù ÕÓÔÁÎÁ×ÌÉ×ÁÅÔÅ X Window System.
-ôÁËÖÅ ×ÁÍ ÐÒÉÄÅÔÓÑ ÕÓÔÁÎÏ×ÉÔØ ÓÌÅÄÕÀÝÉÅ ÐÁËÅÔÙ: XOrg X11, ÐÁËÅÔ(Ù)
-ÛÒÉÆÔÏ× XOrg X11, ÎÅÏÂÈÏÄÉÍÙÅ ÄÌÑ ×ÁÛÅÊ ÓÉÓÔÅÍÙ, Xconfigurator É
+Ð’Ñ‹ Ð´Ð¾Ð»Ð¶Ð½Ñ‹ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ X11-xfs ÐµÑÐ»Ð¸ Ð²Ñ‹ ÑƒÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÑ‚Ðµ X Window System.
+Ð¢Ð°ÐºÐ¶Ðµ Ð²Ð°Ð¼ Ð¿Ñ€Ð¸Ð´ÐµÑ‚ÑÑ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ ÑÐ»ÐµÐ´ÑƒÑŽÑ‰Ð¸Ðµ Ð¿Ð°ÐºÐµÑ‚Ñ‹: XOrg X11, Ð¿Ð°ÐºÐµÑ‚(Ñ‹)
+ÑˆÑ€Ð¸Ñ„Ñ‚Ð¾Ð² XOrg X11, Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ñ‹Ðµ Ð´Ð»Ñ Ð²Ð°ÑˆÐµÐ¹ ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹, Xconfigurator Ð¸
 X11-libs.
 
-%description xfs -l uk
-X11-xfs Í¦ÓÔÉÔØ ÓÅÒ×ÅÒ ÛÒÉÆÔ¦× ÄÌÑ XOrg X11. Xfs ÔÁËÏÖ ÍÏÖÅ ÎÁÄÁ×ÁÔÉ
-ÛÒÉÆÔÉ ×¦ÄÄÁÌÅÎÉÍ X-ÓÅÒ×ÅÒÁÍ. ÷¦ÄÄÁÌÅÎÁ ÓÉÓÔÅÍÁ ÚÍÏÖÅ ×ÉËÏÒÉÓÔÏ×Õ×ÁÔÉ
-ÕÓ¦ ÛÒÉÆÔÉ, ÑË¦ ×ÓÔÁÎÏ×ÌÅÎ¦ ÎÁ ÓÅÒ×ÅÒ¦ ÛÒÉÆÔ¦×, ÎÁ×¦ÔØ ÑËÝÏ ×ÏÎÉ ÎÅ
-×ÓÔÁÎÏ×ÌÅÎ¦ ÎÁ ×¦ÄÄÁÌÅÎÏÍÕ ËÏÍÐ'ÀÔÅÒ¦.
+%description xfs -l uk.UTF-8
+X11-xfs Ð¼Ñ–ÑÑ‚Ð¸Ñ‚ÑŒ ÑÐµÑ€Ð²ÐµÑ€ ÑˆÑ€Ð¸Ñ„Ñ‚Ñ–Ð² Ð´Ð»Ñ XOrg X11. Xfs Ñ‚Ð°ÐºÐ¾Ð¶ Ð¼Ð¾Ð¶Ðµ Ð½Ð°Ð´Ð°Ð²Ð°Ñ‚Ð¸
+ÑˆÑ€Ð¸Ñ„Ñ‚Ð¸ Ð²Ñ–Ð´Ð´Ð°Ð»ÐµÐ½Ð¸Ð¼ X-ÑÐµÑ€Ð²ÐµÑ€Ð°Ð¼. Ð’Ñ–Ð´Ð´Ð°Ð»ÐµÐ½Ð° ÑÐ¸ÑÑ‚ÐµÐ¼Ð° Ð·Ð¼Ð¾Ð¶Ðµ Ð²Ð¸ÐºÐ¾Ñ€Ð¸ÑÑ‚Ð¾Ð²ÑƒÐ²Ð°Ñ‚Ð¸
+ÑƒÑÑ– ÑˆÑ€Ð¸Ñ„Ñ‚Ð¸, ÑÐºÑ– Ð²ÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ñ– Ð½Ð° ÑÐµÑ€Ð²ÐµÑ€Ñ– ÑˆÑ€Ð¸Ñ„Ñ‚Ñ–Ð², Ð½Ð°Ð²Ñ–Ñ‚ÑŒ ÑÐºÑ‰Ð¾ Ð²Ð¾Ð½Ð¸ Ð½Ðµ
+Ð²ÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ñ– Ð½Ð° Ð²Ñ–Ð´Ð´Ð°Ð»ÐµÐ½Ð¾Ð¼Ñƒ ÐºÐ¾Ð¼Ð¿'ÑŽÑ‚ÐµÑ€Ñ–.
 
-÷É ÐÏ×ÉÎÎ¦ ×ÓÔÁÎÏ×ÉÔÉ X11-xfs ÑËÝÏ ×É ×ÓÔÁÎÏ×ÌÀ¤ÔÅ X Window System.
-ôÁËÏÖ ×ÁÍ ÐÒÉÊÄÅÔØÓÑ ×ÓÔÁÎÏ×ÉÔÉ ÎÁÓÔÕÐÎ¦ ÐÁËÅÔÉ: XOrg X11, ÐÁËÅÔ(É)
-ÛÒÉÆÔ¦× XOrg X11, ÎÅÏÂÈ¦ÄÎ¦ ÄÌÑ ×ÁÛÏ§ ÓÉÓÔÅÍÉ, Xconfigurator ÔÁ
+Ð’Ð¸ Ð¿Ð¾Ð²Ð¸Ð½Ð½Ñ– Ð²ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚Ð¸ X11-xfs ÑÐºÑ‰Ð¾ Ð²Ð¸ Ð²ÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÑŽÑ”Ñ‚Ðµ X Window System.
+Ð¢Ð°ÐºÐ¾Ð¶ Ð²Ð°Ð¼ Ð¿Ñ€Ð¸Ð¹Ð´ÐµÑ‚ÑŒÑÑ Ð²ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚Ð¸ Ð½Ð°ÑÑ‚ÑƒÐ¿Ð½Ñ– Ð¿Ð°ÐºÐµÑ‚Ð¸: XOrg X11, Ð¿Ð°ÐºÐµÑ‚(Ð¸)
+ÑˆÑ€Ð¸Ñ„Ñ‚Ñ–Ð² XOrg X11, Ð½ÐµÐ¾Ð±Ñ…Ñ–Ð´Ð½Ñ– Ð´Ð»Ñ Ð²Ð°ÑˆÐ¾Ñ— ÑÐ¸ÑÑ‚ÐµÐ¼Ð¸, Xconfigurator Ñ‚Ð°
 X11-libs.
 
 %prep
@@ -2333,7 +2333,7 @@ fi
 %groupadd -P %{name}-xfs -g 56 -r -f xfs
 %useradd -P %{name}-xfs -u 56 -r -d /etc/X11/fs -s /bin/false -c "X Font Server" -g xfs xfs
 /sbin/chkconfig --add xfs
-/sbin/service xfs start >&2
+/sbin/service xfs start
 
 %triggerpostun Xserver -- XFree86-Xserver
 if [ -s /etc/X11/XF86Config.rpmsave ]; then
@@ -2889,6 +2889,7 @@ fi
 %{_mandir}/man4/i810.4*
 
 %files driver-i810-dri
+%defattr(644,root,root,755)
 %ifarch %{ix86} ia64
 %attr(755,root,root) %{_libdir}/modules/dri/i810_dri.so
 %endif
@@ -2911,6 +2912,7 @@ fi
 
 %ifarch %{ix86} ia64 %{x8664} alpha ppc arm
 %files driver-mga-dri
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/dri/mga_dri.so
 %endif
 %endif
@@ -2959,6 +2961,7 @@ fi
 
 %ifarch %{ix86} ia64 %{x8664} alpha ppc arm
 %files driver-r128-dri
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/dri/r128_dri.so
 %endif
 
@@ -2969,6 +2972,7 @@ fi
 
 %ifarch %{ix86} ia64 %{x8664} alpha ppc arm
 %files driver-radeon-dri
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/dri/radeon_dri.so
 %attr(755,root,root) %{_libdir}/modules/dri/r200_dri.so
 %if %{with r300}
@@ -3024,6 +3028,7 @@ fi
 
 %ifarch %{ix86} ia64
 %files driver-sis-dri
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/dri/sis_dri.so
 %endif
 %endif
@@ -3092,6 +3097,7 @@ fi
 
 %ifarch %{ix86} ia64 alpha arm
 %files driver-tdfx-dri
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/modules/dri/tdfx_dri.so
 %endif
 %endif
